@@ -19,10 +19,10 @@ public class abc extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Connection conn = new JDBCTemplate().getConnection();
+		Connection conn = JDBCTemplate.getConnection();
    
 		
-		
+
         String query = "select 1 from dual";
         PreparedStatement pstmt;
 		try {
