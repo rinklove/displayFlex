@@ -15,27 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import test.JDBCTemplate;
 
 @WebServlet("/home")
-public class abc extends HttpServlet{
+public class HomeServlet extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Connection conn = JDBCTemplate.getConnection();
    
-		
+		req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req, resp);
 
-        String query = "select 1 from dual";
-        PreparedStatement pstmt;
-		try {
-			pstmt = conn.prepareStatement(query);
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				int result = rs.getInt(1);
-				System.out.println(result);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        
 
 	}
 }
