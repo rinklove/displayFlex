@@ -1,12 +1,12 @@
 body {
-	padding: 0px;
+    padding: 0px;
     margin: 0%;
     background-image: url("../image/background/newtroBackground.png");
     background-repeat: repeat;
 }
 
 header{
-    width: 100%;
+    width: 100VW;
     height: 215px;
 }
 header > div:first-child {
@@ -23,12 +23,10 @@ header > div:first-child > img{
 
 .topMenu{
     margin: 0px;
-    border: 1px solid black;
     height: 180px;
     display: grid;
-    grid-template-columns: 200px 350px 200px 250px;
-    box-sizing: border-box;
-    border: 1px solid black;
+    grid-template-columns: 400px 600px 400px 300px;
+    place-items: center;
 }
 
 .topMenu > div:first-child > a img{
@@ -48,4 +46,52 @@ nav > div{
     font-size: 24px;
     box-sizing: border-box;
     border: 2px solid red;
+}
+
+.search{
+    position: relative;
+    display: flex;
+    width: 400px;
+    height: 180px;
+    justify-content: center;
+    align-items: center;
+}
+
+.search > div > button{
+    cursor: pointer;
+    position: absolute;
+    top: 67px;
+    left: 330px;
+    width: 45px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: #0C4667;
+    height: 45px;
+    margin: 0px;
+}
+
+#search{
+    outline: none;
+    width: 380px;
+    height: 50px;
+    padding-left: 25px;
+    font-size: 18px;
+    border: 3px solid #0C4667;
+    border-radius: 25px;
+}
+
+.icon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
+}
+.icon > button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding-bottom: 10px;
+    color: #0C4667;
+    font-size: 40px;
 }
