@@ -15,43 +15,43 @@
 <body>
     <header>
         <nav>    
-<%--             	<%@ include file="/WEB-INF/views/common/header.jsp" %> --%>
-            <img src="../resources/image/ticketing/nav.png" alt="짭nav" style="height: 220px; width: 100%;">
+            <%@ include file="/WEB-INF/views/common/header.jsp" %>
+            <!-- <img src="../resources/image/ticketing/nav.png" alt="짭nav" style="height: 220px; width: 100%;"> -->
         </nav>
     </header>
     <main>
         <section id="section1">
             <div id="ticketing1">
                 <div id="movie">
-                    <div>
+                    <div class="menuName">
                         <span>영화</span>
                     </div>
                     <div class="ticketingMovie">
-                        <div>이용가</div>
+                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
                         <div>영화제목dddddddddddd</div>
                     </div>
                     <div class="ticketingMovie">
-                        <div>이용가</div>
+                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
                         <div>영화제목</div>
                     </div>
                     <div class="ticketingMovie">
-                        <div>이용가</div>
+                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
                         <div>영화제목</div>
                     </div>
                     <div class="ticketingMovie">
-                        <div>이용가</div>
+                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
                         <div>영화제목</div>
                     </div>
                     <div class="ticketingMovie">
-                        <div>이용가</div>
+                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
                         <div>영화제목</div>
                     </div>
                     <div class="ticketingMovie">
-                        <div>이용가</div>
+                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
                         <div>영화제목</div>
                     </div>
                     <div class="ticketingMovie">
-                        <div>이용가</div>
+                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
                         <div>영화제목</div>
                     </div>
                 </div>
@@ -62,16 +62,18 @@
                     </svg>
                 </div>
                 <div id="date">
-                    <div>
+                    <div class="menuName">
                         <span>날짜</span>
                     </div>
-                    <div class="ticketingDate">1</div>
-                    <div class="ticketingDate">2</div>
-                    <div class="ticketingDate">3</div>
-                    <div class="ticketingDate">4</div>
-                    <div class="ticketingDate">5</div>
-                    <div class="ticketingDate">6</div>
-                    <div class="ticketingDate">7</div>
+                    <!-- <div id="dateList"> -->
+                        <div class="ticketingDate">1</div>
+                        <div class="ticketingDate">2</div>
+                        <div class="ticketingDate">3</div>
+                        <div class="ticketingDate">4</div>
+                        <div class="ticketingDate">5</div>
+                        <div class="ticketingDate">6</div>
+                        <div class="ticketingDate">7</div>
+                    <!-- </div> -->
                 </div>
                 <div class="arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -80,8 +82,8 @@
                     </svg>
                 </div>
                 <div id="time">
-                    <div>
-                        상영관
+                    <div class="menuName">
+                        <span>상영관</span>
                     </div>
                     <div id="theater1">
                         <div>상영관1</div>
@@ -129,17 +131,17 @@
             <div id="ticketing2">
                 <div id="ticketing2_screen"><span>SCREEN</span></div>
                 <div id="ticketing2_seat">
-                    <div id="seatRow">
+                    <!-- <div id="seatRow">
                         <div>A</div>
                         <div>B</div>
                         <div>C</div>
                         <div>D</div>
-                    </div>
+                    </div> -->
                     <div id="seat_area">
                         <div class="seat" id="seat_A">
+                            <div class="seatRow" id="A">A</div>
                             <div class="seat_A" id="seat01">01</div>
                             <div class="seat_A" id="seat02">02</div>
-                            <div></div>
                             <div></div>
                             <div class="seat_A" id="seat03">03</div>
                             <div class="seat_A" id="seat04">04</div>
@@ -148,14 +150,13 @@
                             <div class="seat_A" id="seat07">07</div>
                             <div class="seat_A" id="seat08">08</div>
                             <div></div>
-                            <div></div>
                             <div class="seat_A" id="seat09">09</div>
                             <div class="seat_A" id="seat10">10</div>
                         </div>
                         <div class="seat" id="seat_B">
+                            <div class="seatRow" id="B">B</div>
                             <div class="seat_B" id="seat01">01</div>
                             <div class="seat_B" id="seat02">02</div>
-                            <div></div>
                             <div></div>
                             <div class="seat_B" id="seat03">03</div>
                             <div class="seat_B" id="seat04">04</div>
@@ -164,14 +165,13 @@
                             <div class="seat_B" id="seat07">07</div>
                             <div class="seat_B" id="seat08">08</div>
                             <div></div>
-                            <div></div>
                             <div class="seat_B" id="seat09">09</div>
                             <div class="seat_B" id="seat10">10</div>
                         </div>
                         <div class="seat" id="seat_C">
+                            <div class="seatRow" id="C">C</div>
                             <div class="seat_C" id="seat01">01</div>
                             <div class="seat_C" id="seat02">02</div>
-                            <div></div>
                             <div></div>
                             <div class="seat_C" id="seat03">03</div>
                             <div class="seat_C" id="seat04">04</div>
@@ -180,14 +180,13 @@
                             <div class="seat_C" id="seat07">07</div>
                             <div class="seat_C" id="seat08">08</div>
                             <div></div>
-                            <div></div>
                             <div class="seat_C" id="seat09">09</div>
                             <div class="seat_C" id="seat10">10</div>
                         </div>
                         <div class="seat" id="seat_D">
+                            <div class="seatRow" id="D">D</div>
                             <div class="seat_D" id="seat01">01</div>
                             <div class="seat_D" id="seat02">02</div>
-                            <div></div>
                             <div></div>
                             <div class="seat_D" id="seat03">03</div>
                             <div class="seat_D" id="seat04">04</div>
@@ -195,7 +194,6 @@
                             <div class="seat_D" id="seat06">06</div>
                             <div class="seat_D" id="seat07">07</div>
                             <div class="seat_D" id="seat08">08</div>
-                            <div></div>
                             <div></div>
                             <div class="seat_D" id="seat09">09</div>
                             <div class="seat_D" id="seat10">10</div>
@@ -212,7 +210,7 @@
 
     <aside></aside>
     
-    <footer>
+    <div id="selectInfo">
         <div id="ticket-posterImg">
 			<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" id="posterImg">
 		</div>
@@ -267,6 +265,11 @@
                 <span>결제하기</span>
             </button>
         </div>
+    </div>
+
+    <footer>
+        푸터영역
+
     </footer>
 </body>
 </html>

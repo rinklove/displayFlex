@@ -2,6 +2,7 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
 }
 body{
     margin: 0;
@@ -35,15 +36,19 @@ header > nav {
     grid-template-columns: 1.5fr 5fr;
     position: relative;
     align-items: center;
+    height: 36px;
+    background-color: #D9D9D9;
 }
 
 .ticketingMovie > div {
     position: relative;
     cursor: pointer;
     height: 100%;
-    display: flex;
+    display: grid;
     align-items: center;
+    justify-content: center;
 }
+
 .ticketingMovie:hover::before{
     content: '';    
     position: absolute;
@@ -60,14 +65,28 @@ header > nav {
     margin-left: 30px;
 }
 
+.ticketingMovie > div > img{
+    height: 36px;
+
+}
+
+.ticketingMovie > div:nth-of-type(2){
+    justify-content: start;
+}
+
+
+.ticketingDate {
+    height: 36px;
+    background-color: #D9D9D9;
+}
 #movie{
     display: grid;
     grid-row-gap: 10px;
 }
 
-#movie > div {
-    background-color: bisque;
-}
+/* #dateList {
+    background-color: #D9D9D9;
+} */
 
 #movie > div:nth-of-type(1), #date > div:nth-of-type(1), #time > div:nth-of-type(1){
     border-radius: 15px;
@@ -81,10 +100,6 @@ header > nav {
     grid-row-gap: 10px;
 }
 
-#date > div {
-    background-color: gray;
-}
-
 #time{
     display: grid;
     grid-template-rows: 41.25px 1fr 1fr 1fr;
@@ -92,11 +107,7 @@ header > nav {
 } 
 
 #time > div {
-    background-color: goldenrod;
-}
-
-#movie, #date, #time {
-    
+    background-color: #D9D9D9;
 }
 
 .arrow{
@@ -115,7 +126,17 @@ header > nav {
 }
 
 #movie > div:first-child, #date > div:first-child, #time > div:first-child{
-    background-color: #B73232;
+    background-color: #333333;
+    height: 41.25px;
+}
+#movie > div:first-child > span, #date > div:first-child > span, #time > div:first-child > span{
+    color: white;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
 }
 
 #theater1, #theater2, #theater3{
@@ -124,8 +145,9 @@ header > nav {
 }
 
 #theater1 > div:first-child, #theater2 > div:first-child, #theater3 > div:first-child {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid red;
     text-align: center;
+    font-weight: bold;
 }
 
 #theater1 > div:nth-of-type(2), #theater2 > div:nth-of-type(2), #theater3 > div:nth-of-type(2) {
@@ -168,44 +190,59 @@ header > nav {
     height: 400px;
     margin-top: 100px;
     background-color: white;
+    border-radius: 10px;
     /* flex-shrink: 0; */
 }
 
 #ticketing2_screen{
-    height: 45px;
-    border: 3px solid black;
-    background-color: gray;
-    align-items: center;
     display: flex;
+    align-items: center;
     justify-content: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 70%;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step2/screen_bg.png) repeat-x left;
 }
 
 #ticketing2_screen > span {
-	font-size: 30px;
-    font-style: italic;
+	font-size: 20px;
 }
 
 #ticketing2_seat{
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-columns: 6fr 1fr;
     height: 355px;
-}
-
-#ticketing2_seat > div {
-    /* border: 1px solid black; */
 }
 
 #seat_area{
     display: grid;
     grid-template-rows: repeat(4, 1fr);
-    margin: 40px 40px 40px 40px;
-    border: 1px solid black;
+    margin: 40px 85px 40px 221px;
+    /* border: 1px solid black; */
     align-items: center;
     grid-gap: 10px;
 }
 
-#seatRow {
+.seatRow{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.seat_A, .seat_B, .seat_C, .seat_D {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+    font-weight: bold;
+}
+/* #seatRow {
     display: grid;
     grid-template-rows: repeat(4, 1fr);
     grid-gap: 10px;
@@ -213,43 +250,47 @@ header > nav {
     padding-top: 50px;
     padding-bottom: 50px;
     height: 355px;
-}
+} */
 
 #seat_description {
-	
 	display: flex;
     align-items: flex-end;
 }
 
+#seat_description > img {
+    width: 70%;
+    margin: auto;
+}
 .seat{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40px, 40px));
+    /* grid-template-columns: repeat(auto-fill, minmax(40px, 40px)); */
+    grid-template-columns: repeat(13, 1fr);
     grid-gap: 10px;
     height: 40px;
 }
 
-.seat > div{
-    background-color: red;
-}
 
-footer{
-    height: 200px;
-    background-color: black;
+
+#selectInfo{
     display: grid;
     grid-auto-flow : column;
     grid-template-columns: 2fr 1fr 2fr 1fr 1fr 2fr;
+    position: relative;
+    width: 100%;
+    min-width: 996px;
+    height: 128px;
+    background-color: #1d1d1c;
 }
 
-footer > div{
-    border: 1px solid #B73232;
+#selectInfo > div{
+    /* border: 1px solid #B73232; */
     color: white;
-    height: 200px;
+    height: 128px;
 }
-
 
 #posterImg {
-    height: 100%;
-    margin-left: 200px;
+    height: 100%;C
+    margin-left: 300px;
 }
 
 #ticket-movieName {
@@ -258,8 +299,7 @@ footer > div{
     justify-content: center;
 }
 
-
-footer > div:last-child {
+#selectInfo > div:last-child {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -278,12 +318,13 @@ footer > div:last-child {
 
 #ticket-payButton {
 	border: none;
+    margin-right: 200px;
 }
 
 #ticket-payButton > button {
     border: none;
-    width: 204px;
-    height: 155px;
+    width: 154px;
+    height: 105px;
     border-radius: 50px;
     background: #625F5F;
     display: flex;
@@ -303,7 +344,13 @@ footer > div:last-child {
 }
 
 .bi bi-arrow-right-circle-fill, .bi-arrow-right-circle-fill::before{
-	font-size: 90px;
+	font-size: 50px;
 	margin-bottom: 5px;
 
+}
+
+footer {
+    width: 100%;
+    height: 350px;
+    background-color: #f8f8f8;
 }
