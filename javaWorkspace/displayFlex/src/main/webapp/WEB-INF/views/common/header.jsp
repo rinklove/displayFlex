@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="/cinema/resources/css/header.css"> 
-<script src="/cinema/resources/js/home.js"></script>
+<link rel="stylesheet" href="/cinema/resources/css/common/header.css">
+<script src="/cinema/resources/js/common/header.js"></script>
 <script src="https://kit.fontawesome.com/08e9cd3338.js" crossorigin="anonymous"></script>
 
 <header-area>
@@ -34,13 +34,15 @@
             <li>영화검색</li>
             <li>영화예매</li>
             <li>이벤트</li>
-            <li>스토어</li>
+            <li><a href="/cinema/store/list">스토어</a></li>
             <li>공지사항</li>
             <li>고객센터</li>
             <li>우대사항</li>
         </ul>
     </div>
 </header-area>
+
+
 
     
     
