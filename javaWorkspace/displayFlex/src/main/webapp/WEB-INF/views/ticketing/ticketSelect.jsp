@@ -1,0 +1,272 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../resources/css/ticketing/ticketSelect.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+
+    <title>예매페이지</title>
+  
+</head>
+<body>
+    <header>
+        <nav>    
+<%--             	<%@ include file="/WEB-INF/views/common/header.jsp" %> --%>
+            <img src="../resources/image/ticketing/nav.png" alt="짭nav" style="height: 220px; width: 100%;">
+        </nav>
+    </header>
+    <main>
+        <section id="section1">
+            <div id="ticketing1">
+                <div id="movie">
+                    <div>
+                        <span>영화</span>
+                    </div>
+                    <div class="ticketingMovie">
+                        <div>이용가</div>
+                        <div>영화제목dddddddddddd</div>
+                    </div>
+                    <div class="ticketingMovie">
+                        <div>이용가</div>
+                        <div>영화제목</div>
+                    </div>
+                    <div class="ticketingMovie">
+                        <div>이용가</div>
+                        <div>영화제목</div>
+                    </div>
+                    <div class="ticketingMovie">
+                        <div>이용가</div>
+                        <div>영화제목</div>
+                    </div>
+                    <div class="ticketingMovie">
+                        <div>이용가</div>
+                        <div>영화제목</div>
+                    </div>
+                    <div class="ticketingMovie">
+                        <div>이용가</div>
+                        <div>영화제목</div>
+                    </div>
+                    <div class="ticketingMovie">
+                        <div>이용가</div>
+                        <div>영화제목</div>
+                    </div>
+                </div>
+                <div class="arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </div>
+                <div id="date">
+                    <div>
+                        <span>날짜</span>
+                    </div>
+                    <div class="ticketingDate">1</div>
+                    <div class="ticketingDate">2</div>
+                    <div class="ticketingDate">3</div>
+                    <div class="ticketingDate">4</div>
+                    <div class="ticketingDate">5</div>
+                    <div class="ticketingDate">6</div>
+                    <div class="ticketingDate">7</div>
+                </div>
+                <div class="arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </div>
+                <div id="time">
+                    <div>
+                        상영관
+                    </div>
+                    <div id="theater1">
+                        <div>상영관1</div>
+                        <div class="theater1_time">
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                        </div>
+                        <div class="theater1_time">
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                        </div>
+                    </div>
+                    <div id="theater2">
+                        <div>상영관2</div>
+                        <div class="theater2_time">
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                        </div>
+                        <div class="theater2_time">
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                        </div>
+                    </div>
+                    <div id="theater3">
+                        <div>상영관3</div>
+                        <div class="theater3_time">
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                        </div>
+                        <div class="theater3_time">
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                            <div><div>시간</div></div>
+                        </div>
+                    </div>
+                </div>   
+            </div>  
+        </section>
+        <section id="section2">
+            <div id="ticketing2">
+                <div id="ticketing2_screen"><span>SCREEN</span></div>
+                <div id="ticketing2_seat">
+                    <div id="seatRow">
+                        <div>A</div>
+                        <div>B</div>
+                        <div>C</div>
+                        <div>D</div>
+                    </div>
+                    <div id="seat_area">
+                        <div class="seat" id="seat_A">
+                            <div class="seat_A" id="seat01">01</div>
+                            <div class="seat_A" id="seat02">02</div>
+                            <div></div>
+                            <div></div>
+                            <div class="seat_A" id="seat03">03</div>
+                            <div class="seat_A" id="seat04">04</div>
+                            <div class="seat_A" id="seat05">05</div>
+                            <div class="seat_A" id="seat06">06</div>
+                            <div class="seat_A" id="seat07">07</div>
+                            <div class="seat_A" id="seat08">08</div>
+                            <div></div>
+                            <div></div>
+                            <div class="seat_A" id="seat09">09</div>
+                            <div class="seat_A" id="seat10">10</div>
+                        </div>
+                        <div class="seat" id="seat_B">
+                            <div class="seat_B" id="seat01">01</div>
+                            <div class="seat_B" id="seat02">02</div>
+                            <div></div>
+                            <div></div>
+                            <div class="seat_B" id="seat03">03</div>
+                            <div class="seat_B" id="seat04">04</div>
+                            <div class="seat_B" id="seat05">05</div>
+                            <div class="seat_B" id="seat06">06</div>
+                            <div class="seat_B" id="seat07">07</div>
+                            <div class="seat_B" id="seat08">08</div>
+                            <div></div>
+                            <div></div>
+                            <div class="seat_B" id="seat09">09</div>
+                            <div class="seat_B" id="seat10">10</div>
+                        </div>
+                        <div class="seat" id="seat_C">
+                            <div class="seat_C" id="seat01">01</div>
+                            <div class="seat_C" id="seat02">02</div>
+                            <div></div>
+                            <div></div>
+                            <div class="seat_C" id="seat03">03</div>
+                            <div class="seat_C" id="seat04">04</div>
+                            <div class="seat_C" id="seat05">05</div>
+                            <div class="seat_C" id="seat06">06</div>
+                            <div class="seat_C" id="seat07">07</div>
+                            <div class="seat_C" id="seat08">08</div>
+                            <div></div>
+                            <div></div>
+                            <div class="seat_C" id="seat09">09</div>
+                            <div class="seat_C" id="seat10">10</div>
+                        </div>
+                        <div class="seat" id="seat_D">
+                            <div class="seat_D" id="seat01">01</div>
+                            <div class="seat_D" id="seat02">02</div>
+                            <div></div>
+                            <div></div>
+                            <div class="seat_D" id="seat03">03</div>
+                            <div class="seat_D" id="seat04">04</div>
+                            <div class="seat_D" id="seat05">05</div>
+                            <div class="seat_D" id="seat06">06</div>
+                            <div class="seat_D" id="seat07">07</div>
+                            <div class="seat_D" id="seat08">08</div>
+                            <div></div>
+                            <div></div>
+                            <div class="seat_D" id="seat09">09</div>
+                            <div class="seat_D" id="seat10">10</div>
+                        </div>
+                    </div>
+                    <div id="seat_description">
+                    	<img src="../resources/image/ticketing/description.png" alt="선택설명" id="descriptionImg">
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <aside></aside>
+    
+    <footer>
+        <div id="ticket-posterImg">
+			<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" id="posterImg">
+		</div>
+        <div id="ticket-movieName">
+            <span>벼랑 위의 포뇨</span>
+        </div>
+        <div id="ticket-movieInfo">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>일시</td>
+                        <td>2023년 11월 10일(금) 10:00</td>
+                    </tr>
+                    <tr>
+                        <td>상영관</td>
+                        <td>2관</td>
+                    </tr>
+                    <tr>
+                        <td>인원</td>
+                        <td>2명</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="ticket-seatInfo">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>좌석명</td>
+                        <td>일반석</td>
+                    </tr>
+                    <tr>
+                        <td>좌석번호</td>
+                        <td>C1, C2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="ticket-payInfo">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>총금액</td>
+                        <td>24000원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="ticket-payButton">
+            <button type="button" onclick="window.location.href='/cinema/ticket/payment'">
+                <i class="bi bi-arrow-right-circle-fill"></i>
+                <span>결제하기</span>
+            </button>
+        </div>
+    </footer>
+</body>
+</html>

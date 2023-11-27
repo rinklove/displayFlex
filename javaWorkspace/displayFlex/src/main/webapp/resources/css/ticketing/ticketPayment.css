@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.ticketAccord{
+    width: 800px;
+}
+input[id*="step"] {
+    display: none;
+}
+
+input[id*="step"] + label {
+    display: block;
+    padding: 20px;
+    border: 1px solid burlywood;
+    border-bottom: 0;
+    color: #fff;
+    font-weight: 900;
+    background-color: #B73131;   
+    cursor: pointer;      
+}
+
+input[id*="step"] + label em {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    display: inline-block;
+    /* background: url('./arrow.png') 0 0 no-repeat; */
+}
+
+input[id*="step"] + label + div{
+    max-height: 0;
+    transition: all .15s;
+    overflow: hidden;
+    background-color: #ebf8ff;
+    font-size: 11px;
+}
+
+input[id*="step"] + label + div p {
+    display: inline-block;
+    padding: 20px;
+}
+
+input[id*="step"]:checked + label + div {
+    height: 300px;
+    max-height: 300px;
+}
+
+input[id*="step"]:checked + label em {
+    background-position: 0px -30px;
+}
+
+input[id*="step"] + label{
+    height: 100px;
+}
