@@ -1,0 +1,31 @@
+#store{
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 200px 1310px 200px;
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+
+#store > div{
+    border: 1px solid red;
+	box-sizing: border-box;
+}
+
+.store-main{
+    width: 1310px;
+    background-color: white;
+    margin: auto;
+    border-radius: 40px;
+	padding: 1.3em;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-rows: 1fr 1fr 4fr 2fr;
+	border: 1px dashed greenyellow;
+	box-sizing: border-box;
+}
+	
+h1{
+	color: #0C4667;
+}
