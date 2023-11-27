@@ -1,21 +1,26 @@
 body {
+    height: 100vh;
+    width: 100vw;
     padding: 0px;
     margin: 0%;
     background-image: url("../image/background/newtroBackground.png");
     background-repeat: repeat;
 }
 
-header{
+header-area{
+    position: sticky;
+    z-index: 10;
+    top: 0px;
     width: 100VW;
     height: 215px;
 }
-header > div:first-child {
+header-area > div:first-child {
     margin: opx;
     width: 100vw;
     height: 40px;
 }
 
-header > div:first-child > img{
+header-area > div:first-child > img{
     margin: opx;
     width: 100vw;
     height: 40px;
@@ -34,18 +39,40 @@ header > div:first-child > img{
     height: 180px; 
 }
 
-nav{
+.sideMenu{
     width: 300px;
     height: 900px;
+    z-index: 30;
+    position: fixed;
+    top: 0px;
+    right: -1000px; /* Initially off-screen */
+    transition: right 1s ease-in-out; /* Transition for smooth animation */
     box-sizing: border-box;
-    border: 2px dashed blue;
+    background-color: white;
+    border: 1px solid lightgray;
 }
-nav > div{
+.sideMenu ul{
+    width: 300px;
+    height: 900px;
+    top: 0px;
+    box-sizing: border-box;
+}
+
+.sideMenu li{
+    text-align: center;
+    list-style: none;
     width: 300px;
     height: 100px;
     font-size: 24px;
-    box-sizing: border-box;
-    border: 2px solid red;
+}
+
+.sideMenu li > button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding-bottom: 10px;
+    color: #0C4667;
+    font-size: 40px;
 }
 
 .search{
@@ -95,3 +122,4 @@ nav > div{
     color: #0C4667;
     font-size: 40px;
 }
+
