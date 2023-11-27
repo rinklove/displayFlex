@@ -1,0 +1,40 @@
+/* vip.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.vip_container {
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px; /* Adjust as needed */
+    width: 400px; /* Adjust as needed */
+    text-align: center;
+    position: relative;
+}
+
+#vip_top {
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#jul1, #jul2 {
+    border: 0;
+    height: 1px;
+    background-color: black;
+    margin: 10px 0; /* Adjust as needed */
+}
+
+#vip_leftMid {
+    /* Add styles for the left side */
+}
+
+#vip_rightMid {
+    /* Add styles for the right side */
+}
