@@ -10,10 +10,8 @@
 
 </head>
 <body>
-
-	<header>
-        <div id="wrap"></div>
-    </header>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	
     <main>
         <div id="contents">
             <div id="title_top">
@@ -21,16 +19,16 @@
             </div>
             <div id="tab_tit">
                 <nav>
-                    <a href="">FAQ</a>
-                    <a href="">공지사항</a>
-                    <a href="">1:1 문의</a>
-                    <a href="">상영요청</a>
+                    <a href="/cinema/serviceCenter/faq">FAQ</a>
+                    <a href="/cinema/serviceCenter/notice">공지사항</a>
+                    <a href="/cinema/serviceCenter/inquiry">1:1 문의</a>
+                    <a href="/cinema/serviceCenter/recommend">상영요청</a>
                 </nav>
             </div>
             <div id="tab_con">
                 <div id="faq_icon_wrap">
-                    <button id="icon_01">영화관 이용</button>
-                    <button id="icon_02">회원</button>
+                    <button id="icon_01"><img src="emoji_cinema_.png" alt="영화관 이용">영화관 이용</button>
+                    <button id="icon_02"><img src="" alt="">회원</button>
                     <button id="icon_03">등급</button>
                     <button id="icon_04">쿠폰</button>
                     <button id="icon_05">스토어</button>
@@ -40,7 +38,71 @@
                     <legend>영화관 FAQ 검색하기</legend>
                     <input type="text" placeholder="검색어를 입력해주세요." id="seachKeyword" title="검색어를 입력해주세요">
                     <button type="button" id="btn_col1">검색</button>
+                    <div id="help_wrap">
+                        <p>더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면?</p>
+                        <a href="">1:1문의 바로가기</a>
+                    </div>
                 </fieldset>
+                <div id="acc">
+                    <table id="tb_acc_wrap"
+                        summary="FAQ 표입니다. 구분, 질문 순서로 행이 구성되어 있습니다." >
+                        <colgroup>
+                            <col style="width: 20%;">
+                            <col style="width: auto">
+                            <col style="width: 20%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th id="thead1">번호</th>
+                                <th id="thread2">제목</th>
+                                <th id="thread3">등록일</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tab">
+                            <tr>
+                                <td>8</td>
+                                <td>제목8</td>
+                                <td>등록일8</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>제목7</td>
+                                <td>등록일7</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>제목6</td>
+                                <td>등록일6</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>제목5</td>
+                                <td>등록일5</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>제목4</td>
+                                <td>등록일4</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>제목3</td>
+                                <td>등록일3</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>제목2</td>
+                                <td>등록일2</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>제목1</td>
+                                <td>등록일1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
         </div>
