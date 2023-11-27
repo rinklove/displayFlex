@@ -24,7 +24,7 @@
                         <td class="normal_text">제목<span class="star">*</span></td>
                         <td>
                             <input type="text" name="title" onchange="">
-                        	<div id="search-result">검색 결과</div>
+                        	<ul id="search-result">검색 결과</ul>
                         </td>
                         <td class="normal_text">감독</td>
                         <td><input type="text" name="director"></td>
