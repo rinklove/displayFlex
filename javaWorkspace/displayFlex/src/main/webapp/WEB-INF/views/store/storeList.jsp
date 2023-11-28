@@ -18,7 +18,14 @@
 		
 		<div class="store-main">
 			<div><h1>스토어</h1></div>
-			<div>2-2</div>
+			<div id="smallMenu">
+				<div>베스트</div>
+				<div>포토카드</div>
+				<div>콤보</div>
+				<div>팝콘</div>
+				<div>음료</div>
+				<div>스낵</div>
+			</div>
 			<div>2-3</div>
 			<div>2-4</div>
 
