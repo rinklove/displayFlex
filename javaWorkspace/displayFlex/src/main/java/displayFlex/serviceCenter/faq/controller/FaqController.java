@@ -1,4 +1,4 @@
-package displayFlex.serviceCenter.controller;
+package displayFlex.serviceCenter.faq.controller;
 
 import java.io.IOException;
 
