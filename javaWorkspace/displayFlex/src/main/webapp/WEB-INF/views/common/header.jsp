@@ -5,7 +5,7 @@
 <script src="/cinema/resources/js/common/header.js"></script>
 <script src="https://kit.fontawesome.com/08e9cd3338.js" crossorigin="anonymous"></script>
 
-<header-area>
+<header-area id="header-area">
     <div>
        <img src="/cinema/resources/image/background/topbar.png" alt="topbar">
     </div>
@@ -23,21 +23,21 @@
             </div>
         </div>
         <div class="icon">
-            <button><i class="fa-solid fa-ticket"></i></button>
-            <button><i class="fa-regular fa-user"></i></button>
+            <button onclick="location.href='/cinema/ticket/select'"><i class="fa-solid fa-ticket"></i></button>
+            <button onclick="location.href='/cinema/mypage/main'"><i class="fa-regular fa-user"></i></button>
             <button onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
         </div>
     </div>
     <div class="sideMenu">
         <ul>
-            <li><button onclick="toggleMenuEnd()"><i class="fa-solid fa-bars"></i></button>마이페이지</li>
-            <li>영화검색</li>
-            <li>영화예매</li>
-            <li>이벤트</li>
+            <li><button onclick="toggleMenuEnd()"><i class="fa-solid fa-bars"></i></button><a href="/cinema/mypage/main">마이페이지</a></li>
+            <li><a href="/cinema/movie/list">영화검색</a></li>
+            <li><a href="/cinema/ticket/select">영화예매</a></li>
+            <li><a href="/cinema/event/event">이벤트</a></li>
             <li><a href="/cinema/store/list">스토어</a></li>
-            <li>공지사항</li>
-            <li>고객센터</li>
-            <li>우대사항</li>
+            <li><a href="/cinema/serviceCenter/notice">공지사항</a></li>
+            <li><a href="/cinema/serviceCenter/inquiry/add">고객센터</a></li>
+            <li><a href="/cinema/vip/vip">우대사항</a></li>
         </ul>
     </div>
 </header-area>

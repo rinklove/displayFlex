@@ -7,20 +7,22 @@ body {
     background-repeat: repeat;
 }
 
-header-area{
+#header-area{
     position: sticky;
     z-index: 10;
     top: 0px;
     width: 100VW;
     height: 215px;
+    
 }
-header-area > div:first-child {
+
+#header-area > div:first-child {
     margin: opx;
     width: 100vw;
     height: 40px;
 }
 
-header-area > div:first-child > img{
+#header-area > div:first-child > img{
     margin: opx;
     width: 100vw;
     height: 40px;
@@ -33,6 +35,7 @@ header-area > div:first-child > img{
     grid-template-columns: 4em 6em 4em 3em;
     place-items: center;
 }
+
 
 .topMenu > div:first-child > a img{
     width: 180px;
