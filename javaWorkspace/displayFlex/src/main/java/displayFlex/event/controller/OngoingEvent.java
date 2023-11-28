@@ -1,4 +1,4 @@
-package displayFlex.saleinfo.controller;
+package displayFlex.event.controller;
 
 import java.io.IOException;
 
@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/sale/saleinfo")
-public class SaleInfoController extends HttpServlet {
+@WebServlet("/event/ongoingevent")
+public class OngoingEvent extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/sale/saleinfo.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/event/ongoingevent.jsp").forward(req, resp);
 		
 	}
 
