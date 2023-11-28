@@ -81,6 +81,15 @@
                 <td><div><a href="${pageContext.request.contextPath}/admin/screen-info/delete">X</a></div></td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button type="button" class="btn bg-1a " onclick="location.href='${pageContext.request.contextPath}/'">등록</button></td>
+            </tr>
+        </tfoot>
     </table>
 </div>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
