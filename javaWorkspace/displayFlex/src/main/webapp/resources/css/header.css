@@ -9,11 +9,10 @@ body {
 
 #header-area{
     position: sticky;
-    z-index: 10;
+    z-index: 100;
     top: 0px;
     width: 100VW;
     height: 215px;
-    
 }
 
 #header-area > div:first-child {

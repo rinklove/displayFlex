@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>스토어</title>
 </head>
 <body>
 		<%@ include file="/WEB-INF/views/common/header.jsp" %>
