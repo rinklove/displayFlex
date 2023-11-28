@@ -1,16 +1,9 @@
-#store{
+.store{
     margin: 0px;
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 13em 81em 13em;
-    box-sizing: border-box;
-    border: 1px solid red;
-}
-
-#store > div{
-    border: 1px solid blue;
-	box-sizing: border-box;
+    grid-template-columns: 13em 74em 13em;
 }
 
 .store-main{
@@ -24,7 +17,7 @@
 	padding-right: 5em;
 	display: grid;
 	align-items: center;
-	grid-template-rows: 100px 50px 250px 160px;
+	grid-template-rows: 100px 50px 3fr;
 }
 .store-main > div:first-child{
 	border-bottom: 3px solid #0C4667;
@@ -36,7 +29,9 @@ h1 {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
-
+#smallMenu > div > span:hover{
+	cursor: pointer;
+}
 .store-main > div:nth-child(2){
 	border-bottom: 2px solid #0C4667;
 	display: grid;
@@ -47,3 +42,39 @@ h1 {
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
+
+.itemPoto{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	place-items: center;
+}
+.itemPoto> div{
+	margin-top: 60px;
+	margin-bottom: 30px;
+	padding-right: 50px;
+	padding-left: 50px;
+}
+.itemPoto > div >a> img {
+	width: 100%;
+	transition: filter 0.3s ease;
+}
+.itemPoto > div > a> img:hover {
+	cursor: pointer;
+	color: rgb(214, 214, 214);
+	filter: brightness(80%);
+}
+.itemPoto > div > a {
+	text-decoration: none;
+}
+#first{
+	font-size: 22px;
+}
+#first:hover{
+	cursor: pointer;
+}
+
+#third{
+	font-size: 21px;
+}
+
