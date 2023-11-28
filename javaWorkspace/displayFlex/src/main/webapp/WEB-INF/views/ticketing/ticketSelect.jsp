@@ -24,36 +24,18 @@
             <div id="ticketing1">
                 <div id="movie">
                     <div class="menuName">
-                        <span>영화</span>
+                        <span class="text">영화</span>
                     </div>
-                    <div class="ticketingMovie">
-                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
-                        <div>영화제목dddddddddddd</div>
-                    </div>
-                    <div class="ticketingMovie">
-                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
-                        <div>영화제목</div>
-                    </div>
-                    <div class="ticketingMovie">
-                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
-                        <div>영화제목</div>
-                    </div>
-                    <div class="ticketingMovie">
-                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
-                        <div>영화제목</div>
-                    </div>
-                    <div class="ticketingMovie">
-                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
-                        <div>영화제목</div>
-                    </div>
-                    <div class="ticketingMovie">
-                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
-                        <div>영화제목</div>
-                    </div>
-                    <div class="ticketingMovie">
-                        <div><img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가"></div>
-                        <div>영화제목</div>
-                    </div>
+                    <ul id="movieList">
+                        <% for(int i = 0; i < 100; i++){%>
+                        <li class="ticketingMovie">
+                            <a href="#">
+                                <img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가">
+                                <span class="text">영화제목<%=i%></span>
+                            </a>
+                        </li>
+                        <% } %>
+                    </ul>
                 </div>
                 <div class="arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -63,17 +45,17 @@
                 </div>
                 <div id="date">
                     <div class="menuName">
-                        <span>날짜</span>
+                        <span class="text">날짜</span>
                     </div>
-                    <!-- <div id="dateList"> -->
-                        <div class="ticketingDate">1</div>
-                        <div class="ticketingDate">2</div>
-                        <div class="ticketingDate">3</div>
-                        <div class="ticketingDate">4</div>
-                        <div class="ticketingDate">5</div>
-                        <div class="ticketingDate">6</div>
-                        <div class="ticketingDate">7</div>
-                    <!-- </div> -->
+                    <ul id="dateList">
+                        <% for(int i = 0; i < 100; i++){ %>
+                        <li class="ticketingDate">
+                            <a href="#">
+                                <span class="text">날짜<%= i %></span>
+                            </a>
+                        </li>               
+                        <% } %>
+                    </ul>
                 </div>
                 <div class="arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
@@ -131,12 +113,6 @@
             <div id="ticketing2">
                 <div id="ticketing2_screen"><span>SCREEN</span></div>
                 <div id="ticketing2_seat">
-                    <!-- <div id="seatRow">
-                        <div>A</div>
-                        <div>B</div>
-                        <div>C</div>
-                        <div>D</div>
-                    </div> -->
                     <div id="seat_area">
                         <div class="seat" id="seat_A">
                             <div class="seatRow" id="A">A</div>

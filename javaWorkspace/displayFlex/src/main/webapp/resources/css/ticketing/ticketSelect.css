@@ -1,5 +1,41 @@
 @charset "UTF-8";
 
+
+body {
+    overflow-y: overlay; 
+}
+a {
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    outline: none;
+    border-radius: 10px;
+    border: 4px solid transparent;
+    box-shadow: inset 6px 6px 0 rgba(34, 34, 34, 0.15);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border: 4px solid transparent;
+    box-shadow: inset 6px 6px 0 rgba(34, 34, 34, 0.3);
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+
+ul, li {
+    padding: 0;
+    list-style: none;
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
@@ -26,20 +62,60 @@ header > nav {
 #ticketing1{
     display: grid;
     width: 1150px;
-    height: 400px;
+    height: 100%;
     grid-template-columns: 380px 70px 250px 70px 380px;
     /* background-color: lightcoral; */
 }
 
-.ticketingMovie{
-    display: grid;
-    grid-template-columns: 1.5fr 5fr;
-    position: relative;
-    align-items: center;
-    height: 36px;
+#movieList, #dateList{
     background-color: #D9D9D9;
+    height: 400px;
+    display: grid;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: start;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
+#movieList > .ticketingMovie > a{
+    position: relative;
+    height: 36px;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 380px;
+}
+
+.ticketingDate > a{
+    position: relative;
+    height: 36px;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 250px;
+}
+
+
+
+/* .ticketingDate > a {
+    display: block;
+    height: 100%;
+    width: 100%;
+} */
+
+.ticketingMovie > a > img {
+
+    padding-left: 40px;
+}
+
+.text:visited, .text:link{
+    color: black;
+    text-decoration: none;
+}
+/* 
 .ticketingMovie > div {
     position: relative;
     cursor: pointer;
@@ -47,46 +123,46 @@ header > nav {
     display: grid;
     align-items: center;
     justify-content: center;
+} */
+
+.ticketingMovie:hover, .ticketingDate:hover{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.ticketingMovie:hover::before{
-    content: '';    
-    position: absolute;
-    width: 90%;
-    height: 90%;
-    background-color: yellow;
-    border-radius: 40px;
-    top: 50%;  /* 50% 수직 위치 (부모 요소 기준) */
-    left: 50%; /* 50% 수평 위치 (부모 요소 기준) */
-    transform: translate(-50%, -50%); /* 요소의 가로 및 세로의 50%만큼 이동시켜 가운데로 정렬 */
-}
+/* .ticketingMovie:selected {
+    background-color: #333;
+    width: 242px;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #000;
+} */
 
 .ticketingMovie > div:first-child{
     margin-left: 30px;
 }
 
-.ticketingMovie > div > img{
+.ticketingMovie > a > img{
     height: 36px;
-
 }
 
-.ticketingMovie > div:nth-of-type(2){
-    justify-content: start;
+.ticketingMovie > a > span, .ticketingDate > a > span{
+    vertical-align: 11px;
 }
 
 
 .ticketingDate {
     height: 36px;
+    width: 250px;
     background-color: #D9D9D9;
-}
-#movie{
-    display: grid;
-    grid-row-gap: 10px;
 }
 
-/* #dateList {
-    background-color: #D9D9D9;
-} */
+
+#movie, #date{
+    display: grid;
+    grid-row-gap: 10px;
+    grid-template-rows: 41.25px 1fr;
+}
+
 
 #movie > div:nth-of-type(1), #date > div:nth-of-type(1), #time > div:nth-of-type(1){
     border-radius: 15px;
@@ -95,18 +171,13 @@ header > nav {
     justify-content: center;
 }
 
-#date{
-    display: grid;
-    grid-row-gap: 10px;
-}
-
 #time{
     display: grid;
     grid-template-rows: 41.25px 1fr 1fr 1fr;
     grid-row-gap: 10px;
 } 
 
-#time > div {
+#theater1, #theater2, #theater3 {
     background-color: #D9D9D9;
 }
 
@@ -125,7 +196,7 @@ header > nav {
 /*    background-color: lightblue;*/
 }
 
-#movie > div:first-child, #date > div:first-child, #time > div:first-child{
+.menuName {
     background-color: #333333;
     height: 41.25px;
 }
@@ -242,15 +313,7 @@ header > nav {
     background-color: #D9D9D9;
     font-weight: bold;
 }
-/* #seatRow {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    grid-gap: 10px;
-    justify-items: end;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    height: 355px;
-} */
+
 
 #seat_description {
 	display: flex;
@@ -289,7 +352,7 @@ header > nav {
 }
 
 #posterImg {
-    height: 100%;C
+    height: 100%;
     margin-left: 300px;
 }
 
