@@ -113,3 +113,11 @@ div.info-list-container > table > tbody > tr:nth-child(2n) > td {
     background-color: #FBF0E7;
     border: 1px solid #FBF0E7;
 }
+
+.bg-1a {
+	background-color: #1a1a1a;
+}
+
+/* div.info-list-container > table > tfoot > tr button {
+
+} */
