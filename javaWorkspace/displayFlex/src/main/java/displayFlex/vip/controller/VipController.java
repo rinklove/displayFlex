@@ -1,4 +1,4 @@
-package event.controller;
+package displayFlex.vip.controller;
 
 import java.io.IOException;
 
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/evevt/event")
-public class EventController extends HttpServlet {
+@WebServlet("/vip/vip")
+public class VipController extends HttpServlet {
+	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	req.getRequestDispatcher("/WEB-INF/views/event/event.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/vip/vip.jsp").forward(req, resp);
+		
 	}
-
 }
