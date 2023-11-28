@@ -1,6 +1,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       flatpickr(document.getElementById('dateInput'), {
         dateFormat: "Y-m-d",
+        minDate: "today",
         locale: 'ko', // 한국어로 설정
       });
     });
