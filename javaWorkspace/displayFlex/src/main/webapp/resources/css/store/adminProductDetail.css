@@ -1,0 +1,84 @@
+.product{
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 13em 74em 13em;
+}
+
+.product-main{
+    width: 100%;
+    background-color: white;
+    margin: 0px;
+    border-radius: 40px;
+	padding-top: 1.3em;
+	padding-bottom: 1.3em;
+	padding-left: 5em;
+	padding-right: 5em;
+	display: grid;
+	align-items: center;
+	grid-template-rows: 100px 1fr;
+}
+
+.product-main > div:first-child{
+	border-bottom: 3px solid #0C4667;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+#enroll > button{
+	cursor: pointer;
+    background-color: #010101;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+	width: 100px;
+	height: 35px;
+	margin-left: 20px;
+}
+
+#delete > button{
+	cursor: pointer;
+    background-color: #B73232;
+    border: none;
+    border-radius: 5px;
+    color: #010101;
+    font-size: 20px;
+	width: 100px;
+	height: 35px;
+	margin-left: 20px;
+}
+
+h1 {
+	color: #0C4667;
+	font-size: 45px;
+	margin: 0px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#product-detail{
+	width: 100%;
+	display: grid;
+	grid-template-columns: 3fr 4fr;
+}
+
+#detail{
+	display: grid;
+	grid-template-rows: 1fr 7fr;
+}
+
+#description{
+	border-top: 2px solid lightgray;
+	display: grid;
+	align-items: center;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: 1fr 1fr 3fr;
+	padding-top: 50px;
+	padding-bottom: 250px;
+}
+
+#detail > div{
+	font-size: 25px;
+}
