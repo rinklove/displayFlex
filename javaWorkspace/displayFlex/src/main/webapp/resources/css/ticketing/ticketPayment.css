@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+.empty{
+    border: 1px solid black;
+}
+
+body {
+	box-sizing: border-box;
+}
+
+main {
+    display: grid;
+    height: 1000px;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
+}
+
 .ticketAccord{
     width: 800px;
 }
@@ -52,5 +66,165 @@ input[id*="step"]:checked + label em {
 }
 
 input[id*="step"] + label{
-    height: 100px;
+    height: 50px;
+}
+
+
+#stepMenu_area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+/*---------------------------- 우측 결제정보 시작 */
+
+#paymentInfo_area{
+    border-left: 1px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+#paymentInfo {
+    display: grid;
+    width: 250px;
+    height: 650px;
+    grid-row-gap: 10px;
+}
+
+#payment {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#payment > div {
+    display: grid;
+    grid-template-rows: 0.7fr 2fr;
+    height: 40%;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#payment > div > div:first-child{
+    border-bottom: 1px solid black;
+    background-color: white;
+}
+
+#discount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#discount > div {
+    display: grid;
+    height: 80%;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#totalPayment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#totalPayment > div {
+    height: 100%;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+
+
+
+/* -------------------------------우측 결제 정보 끝 */
+
+/*-------------------------------------------- 하단 결제 바 */
+#selectInfo{
+    display: grid;
+    grid-auto-flow : column;
+    grid-template-columns: 2fr 1fr 2fr 1fr 1fr 2fr;
+    position: relative;
+    width: 100%;
+    min-width: 996px;
+    height: 128px;
+    background-color: #1d1d1c;
+}
+
+#selectInfo > div{
+    /* border: 1px solid #B73232; */
+    color: white;
+    height: 128px;
+}
+
+#posterImg {
+    height: 100%;
+    margin-left: 300px;
+}
+
+#ticket-movieName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#selectInfo > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#ticket-movieInfo, #ticket-seatInfo, #ticket-payInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+#ticket-movieName > span, #ticket-payInfo > table > tbody > tr > td:last-child, #ticket-seatInfo > table > tbody > tr > td:last-child, #ticket-movieInfo > table > tbody > tr > td:last-child{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#ticket-payButton {
+	border: none;
+    margin-right: 200px;
+}
+
+#ticket-payButton > button {
+    border: none;
+    width: 154px;
+    height: 105px;
+    border-radius: 30px;
+    background: #625F5F;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#ticket-payButton > button:hover{
+	cursor: pointer;
+}
+
+#ticket-payButton > button > span {
+	font-weight: bold;
+	font-size: 15px;
+	color: white;
+}
+
+/*------------------------------------ 하단 결제바 끝 */
+
+
+/* 푸터 */
+
+footer {
+    width: 100%;
+    height: 350px;
+    background-color: #f8f8f8;
 }
