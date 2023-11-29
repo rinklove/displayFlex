@@ -36,14 +36,14 @@
 
         #vip_content {
             float: right;
-            width: 50%;
+            width: 60%;
             padding: 20px; /* Adjust as needed */
-            font-size: xx-large;
+            font-size: 50px;
             text-align: left; /* Align the text to the left */
         }
 
         #vip_j {
-            font-size: small;
+            font-size: larger;
             color: grey;
         }
 
@@ -59,14 +59,14 @@
     <div class="vip_container">
         <div class="white_background">
             <hr id="vip_hr_top">
-            <h1 id="vip_top">VIP 혜택</h1>
+            <h1 id="vip_top">&nbsp;&nbsp;&nbsp;VIP 혜택</h1>
             <hr id="vip_hr_bottom">
         </div>
     </div>
 
     <div class="white_background">
         <div id="vip_content">
-            <br><br><br>
+            <br><br>
             - 생일 축하 쿠폰 발급(무료 영화 관람권)
             <br><br>
             - 생일 축하 쿠폰 발급(스위트 콤보 쿠폰)
@@ -83,7 +83,7 @@
             <h1>
                 <img src="/cinema/resources/image/vip/vip.png" alt="vip이미지">
             </h1>
-            <p id="vip_j">- 연 12회 이상 관람시 VIP혜택 적용 가능</p>
+            <p id="vip_j">* 연 12회 이상 관람시 VIP혜택 적용 가능</p>
         </div>
     </div>
 </body>
