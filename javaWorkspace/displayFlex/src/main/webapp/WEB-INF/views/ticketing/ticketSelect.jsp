@@ -236,8 +236,8 @@
         </div>
         <div id="ticket-payButton">
             <button type="button" onclick="window.location.href='/cinema/ticket/payment'">
-                <i class="bi bi-arrow-right-circle-fill"></i>
-                <span>결제하기</span>
+                <i class="bi bi-check-circle-fill"></i>
+                <span>결제 완료</span>
             </button>
         </div>
     </div>
