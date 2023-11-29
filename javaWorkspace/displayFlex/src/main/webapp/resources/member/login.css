@@ -1,0 +1,88 @@
+body{
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 13em 74em 13em;
+}
+
+form{
+    width: 100%;
+    background-color: white;
+    margin: 0px;
+    border-radius: 40px;
+	padding-top: 1.3em;
+	padding-bottom: 1.3em;
+	padding-left: 5em;
+	padding-right: 5em;
+	display: grid;
+	align-items: center;
+	grid-template-rows: 100px 25px 1fr;
+}
+
+#wrap{
+    width : 60%;
+    height : 500px;
+    display: flex;
+    margin: auto;
+    text-align: center;
+    margin-top : 100px;
+}
+
+form{
+    width : 80%;
+    padding: 20px;
+    height : 400px;
+    background-color: white;
+    margin: auto;
+}
+
+#loginArea{
+    display: grid;
+    margin-top:300px;
+    align-content: space-around;
+    height : 300px;
+}
+
+input{
+    width : 80%;
+    height : 50px;
+    font-size: 30px;
+}
+
+input::placeholder {
+    font-size : 20px;
+    color: black;
+}
+
+#loginPage{
+    background-color: #800020;
+}
+#loginPage::placeholder{
+    color: white;
+    text-align: center;
+    font-size: 30px;
+}
+
+.check-box{
+    display: flex;
+    margin-left : 100px;
+    width : 100%;
+    height: 100%;
+}
+
+.form-check-input {
+    width: 30px;
+    height: 30px;
+}
+
+.form-check-label{
+    text-align: center;
+    place-content: center;
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+input[type=submit] {
+    background-color: lightgray;
+}
