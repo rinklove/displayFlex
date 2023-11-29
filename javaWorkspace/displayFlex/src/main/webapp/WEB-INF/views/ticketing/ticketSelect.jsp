@@ -7,26 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../resources/css/ticketing/ticketSelect.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <!-- <script defer src="../resources/js/ticketing/select.js"></script> -->
+
 
     <title>예매페이지</title>
-    <script>
-
-        const click = document.querySelectorAll(".ticketingMovie > a");
-
-        boxs.forEach(el => {
-            el.onclick = (e) => {
-                e.target.style.backgroundColor = '#EDD711';
-            };
-        });
-
-    </script>
+  
 </head>
 <body>
     <header>
         <nav>    
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
-            <!-- <img src="../resources/image/ticketing/nav.png" alt="짭nav" style="height: 220px; width: 100%;"> -->
         </nav>
     </header>
     <main>
@@ -38,10 +27,10 @@
                     </div>
                     <ul id="movieList">
                         <% for(int i = 0; i < 100; i++){%>
-                        <li class="ticketingMovie" onclick="changeColor()">
-                            <a href="#" >
+                        <li class="ticketingMovie">
+                            <a href="#">
                                 <img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가">
-                                <span class="movieName">영화제목<%=i%></span>
+                                <span class="text">영화제목<%=i%></span>
                             </a>
                         </li>
                         <% } %>
@@ -78,42 +67,42 @@
                         <span>상영관</span>
                     </div>
                     <div id="theater1">
-                        <div><span>상영관1</span></div>
+                        <div>상영관1</div>
                         <div class="theater1_time">
-                            <div><a href="#">시간1</a></div>
-                            <div><a href="#">시간2</a></div>
-                            <div><a href="#">시간3</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
                         </div>
                         <div class="theater1_time">
-                            <div><a href="#">시간4</a></div>
-                            <div><a href="#">시간5</a></div>
-                            <div><a href="#">시간6</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
                         </div>
                     </div>
                     <div id="theater2">
-                        <div><span>상영관2</span></div>
+                        <div>상영관2</div>
                         <div class="theater2_time">
-                            <div><a href="#">시간1</a></div>
-                            <div><a href="#">시간2</a></div>
-                            <div><a href="#">시간3</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
                         </div>
                         <div class="theater2_time">
-                            <div><a href="#">시간4</a></div>
-                            <div><a href="#">시간5</a></div>
-                            <div><a href="#">시간6</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
                         </div>
                     </div>
                     <div id="theater3">
-                        <div><span>상영관3</span></div>
+                        <div>상영관3</div>
                         <div class="theater3_time">
-                            <div><a href="#">시간1</a></div>
-                            <div><a href="#">시간2</a></div>
-                            <div><a href="#">시간3</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
                         </div>
                         <div class="theater3_time">
-                            <div><a href="#">시간4</a></div>
-                            <div><a href="#">시간5</a></div>
-                            <div><a href="#">시간6</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간</a></div>
                         </div>
                     </div>
                 </div>   
