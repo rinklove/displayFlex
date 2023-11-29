@@ -1,13 +1,18 @@
 @charset "UTF-8";
 
-.title {
+.title:first-child {	
 	font-size: 20px;
 	font-weight: 500;
 }
 
+.title:not(:first-child) {
+	margin-left: 51.8125px;
+}
+
+
 .add-form {
 	padding: 100px;
-	width: 1000px;
+	width: 84em;
 	margin: auto;
 }
 
@@ -24,9 +29,22 @@
 	color: orangered;
 }
 
+form {
+	width: 65em;	
+}
+
+.custom-form:focus {
+	border: 0.1em solid #1a1a1a;
+	box-shadow: none;
+}
+
  table {
 	margin: auto;
-	width: 60%
+	width: 100%;
+}
+
+.w-55 {
+	width: 55%;
 }
 
 td {
@@ -35,19 +53,23 @@ td {
 
 
 #search-result {
-	
-	width: 223px;
-	height: 100px;
+	width: 280.27px;
 	position: absolute;
 	z-index: 1;
 	background-color: white;
-	box-shadow: 1px 1px black;
+	border-end-start-radius: 5px;
+	border-end-end-radius: 5px;
+}
+
+.list-group-item:hover {
+	background-color: #dedede;
+	cursor: pointer;
 }
 
 input {
 	padding: 15px;
 	width: 80%;
-	height: 30px;
+	height: 2em;
 	border-radius: 40px;
 }
 
@@ -59,57 +81,35 @@ input[type=submit] {
 	background-color: #abc95f;
 }
 input[name=actor] {
-	width: 92%;
+	width: 100%;
 }
 
+input[name=rate] {
+	width: 80%;
+}
 
 .story {
-	padding: 20px;
+	padding: 1.5em;
 	background-color: #fffbdc;
+	width: 90%;
 }
 
-.still-image {
-	text-align: center;	
+.still-image > div {
+	width: 90%;
 }
 
-.filebox {
-	margin: 10px;
-}
-
-.filebox .upload-name {
-    display: inline-block;
-    height: 40px;
-    padding: 0 10px;
-    vertical-align: middle;
-    border: 1px solid #dddddd;
-    width: 78%;
-    color: #999999;
-}
-
-.filebox label {
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    vertical-align: middle;
-    background-color: #999999;
-    cursor: pointer;
-    height: 40px;
-    margin-left: 10px;
-}
-
-.filebox input[type="file"] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
-}
-
-.df {
-	display: flex;
-}
 
 .fd-cr {
 	flex-direction: column-reverse;
+}
+
+.btn-success {
+	background-color: #abc95f;
+	border-color: #abc95f;
+}
+
+.btn-success:hover {
+	background-color: #84a533;
+	border-color: #84a533;
+	transform: scale(1.01);
 }
