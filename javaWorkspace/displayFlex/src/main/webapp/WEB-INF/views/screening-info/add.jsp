@@ -25,7 +25,7 @@
     <div class="input-container row g-3 m-auto">
         <div class="col-9 m-auto w-75 m-1">
             <label for="title" class="form-label">등록할 영화 검색하기</label>
-            <input type="text" class="form-control w-100" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="영화 제목을 입력하새요" name="title" id="title">
+            <input type="text" class="form-control w-100" placeholder="영화 제목을 입력하새요" name="title" id="title">
             <div class="bg-white form-control d-none position-absolute z-1 result-container"></div>
         </div>
         <div class="col-3 m-auto">
