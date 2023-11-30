@@ -123,12 +123,14 @@ a, a:link {
     background-position: 100% 54%;
     margin-right: 30px;
     padding-right: 24px;
+    font-size: 15px;
 }
 
 #tb1_dtl tr#tb_link>td a .tb_back{
     background-position: 100% 54%;
     margin-right: 30px;
     padding-right: 24px;
+    font-size: 15px;
 }
 
 

@@ -40,7 +40,7 @@
                     <button type="button" id="btn_col1">검색</button>
                     <div id="help_wrap">
                         <p>더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면?</p>
-                        <a href="/cinema//serviceCenter/inquiry/add">1:1문의 바로가기</a>
+                        <a href="/cinema/serviceCenter/inquiryWrite" style="font-weight: bold; color: #000000;">1:1문의 바로가기</a>
                     </div>
                 </fieldset>
                 <div id="acc">
