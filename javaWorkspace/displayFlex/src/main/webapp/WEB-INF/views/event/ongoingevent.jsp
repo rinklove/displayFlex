@@ -24,13 +24,14 @@
             </div>
         </div>
         <div id="main_content">
-            <div class="content_area">
+            <a href="/cinema/event/ongoingeventdetail"><div class="content_area">
                 <h1>이벤트 게시글1</h1>
                 <div>
                     <div class="content_title" >이벤트 게시글 제목1</div>
                     
                 </div>
             </div>
+            </a>
 
             <div class="content_area">
                 <h1>이벤트 게시글 사진2</h1>
