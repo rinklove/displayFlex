@@ -15,51 +15,68 @@
 		return data.sort((a, b) => Number(a["prdtYear"]) - Number(b["prdtYear"]));
 	}
 
-	const getMoviePoster = async (list) => {
-		const posterList = [];
-		const url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=y';
+	const getMoviePoster = async (value) => {
+		const url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=y&listCount=100';
 		const key = '9Z10BL3097X14RC40FSC';
-		for (let index = 0; index < list.length; index++) {
-			const element = list[index];
-			const res = await fetch(`${url}&title=${element.movieNm}&ServiceKey=${key}`);
-			const result = await res.json();
-			if(result["Data"] !== undefined) {
-				posterList.push(result["Data"][0]["Result"]);			
-			}
-		}
-		return posterList;
+		const res = await fetch(`${url}&title=${value}&ServiceKey=${key}`);
+		
+		const result = await res.json();
+		console.log(result.Data[0].Result);
+		return result.Data[0].Result[0];
+		
 	}
 
 	const title = document.getElementById("title");
-	title.addEventListener("keyup", async () => {
+	title.addEventListener("input", async () => {
+		const searchResult = document.getElementById("search-result");
+		
+		searchResult.innerHTML = '';
+		
 		let content = title.value;
 	    //전체 조회 리스트 가져오기
 		const searchList = await getMovieList(content);
-		let searchPoster = await getMoviePoster(searchList);
+		
 		console.log(searchList);
-		console.log(searchPoster)
-		//최대 5개로 설정
+		
+
+		let movieCode;
+		
+		//검색 결과 리스트 보여주기
 		for (let index = 0; index < searchList.length; index++) {
 
 			const element = searchList[index];
 			const itemTitle = document.createElement("span");
 			itemTitle.innerText = element["movieNm"];
 			const itemYear = document.createElement("span");
-			itemYear.innerText = element["prdtYear"];
-			const firstDiv = document.createElement("div");
-
-			firstDiv.appendChild(itemTitle);
-			firstDiv.appendChild(itemYear);
-			const poster = document.createElement("img");
-			if(searchPoster[index] !== undefined) {
-				const same = searchPoster[index].map(el => el["Codes"]["Code"]).filter(code => code[0]?.CodeNo !== '' && code[0]?.CodeNo === element["movieCd"]);
-				console.log(`${index} =` + same);
-			}
-			const secondDiv = document.createElement("div");
-		}
-		const listItem = document.createElement("li");
-		const searchResult = document.getElementById("search-result");
+			itemYear.innerText = '(' + element["prdtYear"] + ')';
+			
+			const listItem = document.createElement("option");
+			listItem.innerHTML = element["movieNm"] + ' (' + element["prdtYear"] + ')';
+			listItem.value = element["movieNm"];
+			
+			listItem.addEventListener("click", () => {
+				movieCode = element["movieCd"];
+			});
+			
+			searchResult.appendChild(listItem);
 		
+		}
+		
+		
+		
+		title.addEventListener("change", async () => {
+				
+		let searchMovie = await getMoviePoster(title.value);
+		console.log(searchMovie)
+		const directorInput = document.getElementById("director");
+		directorInput.value = searchMovie.directors.director[0].directorNm;
+		const genreInput = document.getElementById("genre");
+		genreInput.value = searchMovie.genre;
+		console.log(element);
+		const posterImg = document.getElementById("poster-img");
+		posterImg.innerHTML = '';
+
+	});
 	})
 	
 	

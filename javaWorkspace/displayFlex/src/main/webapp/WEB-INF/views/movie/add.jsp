@@ -25,8 +25,8 @@
                     <tr>
                         <td class="normal_text">제목<span class="star">*</span></td>
                         <td>
-                            <input type="text" class="form-control custom-form" placeholder="영화 제목을 입력하새요" name="title" id="title" >
-                        	<ul class="list-group list-group-flush border-dark shadow" id="search-result">
+                            <input list="search-result" type="text" class="form-control custom-form" placeholder="영화 제목을 입력하새요" name="title" id="title" >
+                        	<dataList class="list-group-flush border-dark shadow" id="search-result">
                         		<!-- <li class="list-group-item d-flex align-items-center justify-content-between flex-row">
 								    <div>
 								        <span>벼랑 위의 포뇨</span><span>(2008)</span>
@@ -43,11 +43,11 @@
 								        <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg"  width="60" alt="" class="search-poster">
 								    </div>
 								</li> -->
-                        	</ul>
+                        	</dataList>
                         </td>
                         <td class="normal_text">감독</td>
                         <td><input type="text" class="form-control custom-form" name="director" id="director"></td>
-                        <td rowspan="4"><img src="" alt=""  id="poster-img"></td>
+                        <td rowspan="4" id="poster-img"></td>
                     </tr>
                     <tr>
                         <td class="normal_text">장르</td>
