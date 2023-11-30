@@ -14,8 +14,28 @@
         margin: auto;
     }
 
-    #sale_child,
-    #sale_old,
+    
+    
+
+    #sale_child {
+        border: 1px solid white;
+        float: left;
+        width: 33%;
+        padding: auto;
+        text-align: center;
+        font-size: xx-large;
+    }
+
+    #sale_old {
+        border: 1px solid white;
+        float: left;
+        width: 33%;
+        padding: auto;
+        text-align: center;
+        font-size: xx-large;
+    }
+
+
     #sale_jang {
         border: 1px solid white;
         float: left;
@@ -23,8 +43,13 @@
         padding: auto;
         text-align: center;
         font-size: xx-large;
+
         margin-right: 30px; /* Increased margin for more spacing */
+   
+
     }
+    
+
 
     #jul1 {
         border-top: 4px solid black; 
@@ -37,6 +62,11 @@
         margin: 0 auto;
     }
 
+
+       
+       
+
+   
 </style>
 
 </head>

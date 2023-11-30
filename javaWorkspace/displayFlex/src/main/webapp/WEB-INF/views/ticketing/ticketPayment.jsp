@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="../resources/css/ticketing/ticketPayment.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     
+
     <title>예매페이지-결제</title>
 
 </head>
@@ -51,21 +53,21 @@
                 <div id="payment">
                     <div>
                         <div><span>결제 금액</span></div>
-                        <div></div>
+                        <div><span>14000</span><span>원</span></div>
                     </div>
                 </div>
                 <div id="discount">
                     <div>
                         <div><span>할인 내역</span></div>
-                        <div><span>쿠폰 이름</span></div>
-                        <div><span>할인 금액</span></div>                            
+                        <div><span>무슨무슨 쿠폰</span></div>
+                        <div><span>1000</span><span>원</span></div>                            
                     </div>
                 </div>
                 <div id="totalPayment">
                     <div>
                         <div><span>최종 결제 금액</span></div>
                         <div></div>
-                        <div></div>
+                        <div><span>13000</span><span>원</span></div>
                     </div>
                 </div>
             </div>
@@ -116,15 +118,15 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>총금액</td>
-                        <td>24000원</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div id="ticket-payButton">
             <button type="button" onclick="window.location.href='/cinema/ticket/payment'">
-                <i class="bi bi-arrow-right-circle-fill"></i>
+                <i class="bi bi-check-circle-fill"></i>
                 <span>결제하기</span>
             </button>
         </div>

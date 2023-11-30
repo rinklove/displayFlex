@@ -34,7 +34,7 @@
             <li><a href="/cinema/movie/list">영화검색</a></li>
             <li><a href="/cinema/ticket/select">영화예매</a></li>
             <li><a href="/cinema/event/event">이벤트</a></li>
-            <li><a href="/cinema/store/list">스토어</a></li>
+            <li><a href="/cinema/store">스토어</a></li>
             <li><a href="/cinema/serviceCenter/notice">공지사항</a></li>
             <li><a href="/cinema/serviceCenter/inquiry/add">고객센터</a></li>
             <li><a href="/cinema/vip/vip">우대사항</a></li>

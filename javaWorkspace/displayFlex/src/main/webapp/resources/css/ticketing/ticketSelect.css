@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+button {
+    /* 기본 스타일 초기화 */
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+    /* 필요에 따라 추가적인 스타일을 재정의할 수 있습니다. */
+}
 
 body {
     overflow-y: overlay; 
@@ -81,7 +93,7 @@ header > nav {
     box-shadow: 2px 2px 2px gray;
 }
 
-#movieList > .ticketingMovie > a{
+.ticketingMovie > button{
     position: relative;
     height: 36px;
     display: block;
@@ -111,8 +123,8 @@ header > nav {
     width: 100%;
 } */
 
-.ticketingMovie > a > img {
-
+.ticketingMovie > button > img {
+    height: 36px;
     padding-left: 40px;
 }
 
@@ -146,11 +158,8 @@ header > nav {
     margin-left: 30px;
 }
 
-.ticketingMovie > a > img{
-    height: 36px;
-}
 
-.ticketingMovie > a > span, .ticketingDate > a > span{
+.ticketingMovie > button > span, .ticketingDate > button > span{
     vertical-align: 11px;
 }
 
@@ -439,7 +448,7 @@ header > nav {
 	color: white;
 }
 
-.bi bi-arrow-right-circle-fill, .bi-arrow-right-circle-fill::before{
+.bi bi-arrow-right-circle-fill, .bibi-arrow-right-circle-fill::before{
 	font-size: 50px;
 	margin-bottom: 5px;
 

@@ -7,8 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../resources/css/ticketing/ticketSelect.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<!--     <script defer src="../resources/js/ticketing/ticketSelect.js"></script> -->
 
+	<script defer>
+	    function selectMovie(event) {
+	        const x = event.currentTarget;
+			console.log(x.innerTEXT);
+	        
+			fetch("http://localhost:9002/cinema/ticket/select")
+			.then( (resp) => { return resp.json() } ) 
+			.then( (x) => { 
+				console.log(x);
+			} )
 
+	    }
+	</script>
     <title>예매페이지</title>
   
 </head>
@@ -28,10 +41,10 @@
                     <ul id="movieList">
                         <% for(int i = 0; i < 100; i++){%>
                         <li class="ticketingMovie">
-                            <a href="#">
+                            <button type="button" onclick="selectMovie(event);">
                                 <img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가">
-                                <span class="text">영화제목<%=i%></span>
-                            </a>
+                                <span class="text" id="movieName<%=i%>" value="영화제목<%=i%>">영화제목<%=i%></span>
+                            </button>
                         </li>
                         <% } %>
                     </ul>
@@ -236,8 +249,8 @@
         </div>
         <div id="ticket-payButton">
             <button type="button" onclick="window.location.href='/cinema/ticket/payment'">
-                <i class="bi bi-arrow-right-circle-fill"></i>
-                <span>결제하기</span>
+                <i class="bi bi-check-circle-fill"></i>
+                <span>결제 완료</span>
             </button>
         </div>
     </div>

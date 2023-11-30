@@ -2,7 +2,7 @@
  * 
  */
 
-const click = document.querySelectorAll(".ticketingMovie> a");
+const click = document.querySelectorAll(".ticketingMovie > a");
 
 boxs.forEach(el => {
     el.onclick = (e) => {

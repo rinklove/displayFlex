@@ -13,7 +13,6 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-    <nav></nav>
     <div id="wrap">
         <form action="/cinema/views/home">
             <div id="loginArea">
