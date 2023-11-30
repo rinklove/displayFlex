@@ -1,4 +1,4 @@
-package displayFlex.serviceCenter.faq.controller;
+package displayFlex.serviceCenter.inquiry.controller;
 
 import java.io.IOException;
 
@@ -8,12 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/faqAdd")
-public class FaqAddController extends HttpServlet {
-	
+@WebServlet("/serviceCenter/inquiryWrite")
+public class InquiryWriteController extends HttpServlet {
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/faq/faqAdd.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/inquiry/inquiryWrite.jsp").forward(req, resp);
 	}
-
 }

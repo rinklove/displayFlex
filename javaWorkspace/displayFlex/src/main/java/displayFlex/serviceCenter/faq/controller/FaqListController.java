@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/serviceCenter/faq")
-public class FaqController extends HttpServlet {
+@WebServlet("/serviceCenter/faqList")
+public class FaqListController extends HttpServlet {
 	
 	//faq 화면
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/faq.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/faq/faqList.jsp").forward(req, resp);
 	}
 
 	//faq 로직
