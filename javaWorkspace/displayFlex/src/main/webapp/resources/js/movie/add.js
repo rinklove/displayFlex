@@ -21,8 +21,7 @@
 		const res = await fetch(`${url}&title=${value}&ServiceKey=${key}`);
 		
 		const result = await res.json();
-		console.log(result.Data[0].Result);
-		return result.Data[0].Result[0];
+		return result.Data[0].Result;
 		
 	}
 
@@ -36,10 +35,6 @@
 	    //전체 조회 리스트 가져오기
 		const searchList = await getMovieList(content);
 		
-		console.log(searchList);
-		
-
-		let movieCode;
 		
 		//검색 결과 리스트 보여주기
 		for (let index = 0; index < searchList.length; index++) {
@@ -51,33 +46,36 @@
 			itemYear.innerText = '(' + element["prdtYear"] + ')';
 			
 			const listItem = document.createElement("option");
-			listItem.innerHTML = element["movieNm"] + ' (' + element["prdtYear"] + ')';
-			listItem.value = element["movieNm"];
-			
-			listItem.addEventListener("click", () => {
-				movieCode = element["movieCd"];
-			});
+			listItem.innerHTML = element["movieNm"] + ' (개봉년도: ' + element["prdtYear"] + ')';
+			listItem.value = element["movieNm"]+'/'+element["movieCd"];
 			
 			searchResult.appendChild(listItem);
-		
+			
 		}
-		
-		
-		
-		title.addEventListener("change", async () => {
-				
-		let searchMovie = await getMoviePoster(title.value);
-		console.log(searchMovie)
-		const directorInput = document.getElementById("director");
-		directorInput.value = searchMovie.directors.director[0].directorNm;
-		const genreInput = document.getElementById("genre");
-		genreInput.value = searchMovie.genre;
-		console.log(element);
-		const posterImg = document.getElementById("poster-img");
-		posterImg.innerHTML = '';
-
 	});
-	})
+	
+	title.addEventListener("change", async () => {
+			const selectedMovie = title.value.split("/");
+			title.value = selectedMovie[0];
+			let searchMovie = await getMoviePoster(title.value);
+
+			searchMovie = searchMovie.filter(el => el.Codes.Code[0].CodeNo !== '' && el.Codes.Code[0].CodeNo === selectedMovie[1]).shift();
+			
+			const directorInput = document.getElementById("director");
+			directorInput.value = searchMovie.directors.director[0].directorNm;
+			const genreInput = document.getElementById("genre");
+			genreInput.value = searchMovie.genre;
+
+			const poster = document.createElement("img");
+			const posterSrc = searchMovie.posters;
+			poster.src = posterSrc !== '' ? searchMovie.posters.split("|")[0] : '';
+			poster.alt = searchMovie.title;
+			
+			const posterImg = document.getElementById("poster-img");
+			posterImg.innerHTML = ''
+			posterImg.appendChild(poster);
+		
+		});
 	
 	
 	
