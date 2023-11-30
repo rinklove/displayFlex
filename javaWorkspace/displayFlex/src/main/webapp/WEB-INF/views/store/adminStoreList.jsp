@@ -21,7 +21,7 @@
 			</div>
 			<div id="smallMenu">
 				<div><span>베스트</span></div>
-				<div><span>포토카드</span></div>
+				<div><span>기프트카드</span></div>
 				<div><span>콤보</span></div>
 				<div><span>팝콘</span></div>
 				<div><span>음료</span></div>

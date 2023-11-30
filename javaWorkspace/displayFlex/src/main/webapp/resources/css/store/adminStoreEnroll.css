@@ -3,7 +3,7 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 13em 74em 13em;
+    grid-template-columns: 12vw 70vw 12vw;
 }
 
 .product-main{
@@ -27,7 +27,7 @@
 	align-items: center;
 }
 
-#enroll > button{
+#enroll > input[type="submit"]{
 	cursor: pointer;
     background-color: #010101;
     border: none;
@@ -69,11 +69,23 @@
 	font-size: 250px;
 	margin-top: 120px;
 	color: white;
+	cursor: pointer;
 }
 
 #detail{
 	display: grid;
 	grid-template-rows: 1fr 7fr;
+}
+
+#detail > div:first-child > input{
+	border: none;
+	border-radius: 7px;
+	background-color: #D9D9D9;
+	width: 200px;
+	height: 80%;
+	font-size: 25px;
+	padding-right: 20px;
+	padding-left: 20px;
 }
 
 #description{
@@ -114,6 +126,7 @@
 	font-size: 25px;
 	padding-right: 20px;
 	padding-left: 20px;
+	padding-top: 10px;
 }
 #description > div:nth-child(8) > input{
 	border: none;
@@ -122,9 +135,13 @@
 	width: 450px;
 	height: 95%;
 	font-size: 25px;
-	padding-top: 10px;
 	padding-right: 20px;
 	padding-left: 20px;
+}
+
+span{
+	font-size: 25px;
+	text-align: center;
 }
 
 #detail > div{

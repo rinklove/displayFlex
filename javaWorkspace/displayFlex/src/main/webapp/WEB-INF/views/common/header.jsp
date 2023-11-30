@@ -37,7 +37,7 @@
             <li><a href="/cinema/store">스토어</a></li>
             <li><a href="/cinema/serviceCenter/notice">공지사항</a></li>
             <li><a href="/cinema/serviceCenter/inquiry/add">고객센터</a></li>
-            <li><a href="/cinema/vip/vip">우대사항</a></li>
+            <li><a href="/cinema/sale/saleinfo">우대사항</a></li>
         </ul>
     </div>
 </header-area>

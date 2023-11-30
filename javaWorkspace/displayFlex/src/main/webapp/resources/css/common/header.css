@@ -3,24 +3,28 @@ body {
     width: 100vw;
     padding: 0px;
     margin: 0%;
-    background-image: url("/cinema/resources/image/background/newtroBackground.png");
+    background-image: url("/cinema/resources/image/background/retroBackgroundLast.png");
     background-repeat: repeat;
 }
 
-header-area{
-    position: sticky;
+#header-area{
     z-index: 10;
     top: 0px;
     width: 100VW;
-    height: 215px;
+    height: 200px;
+    background-color: transparent;
+    position: sticky;
+    display: block;
+    transition: background-color 0.3s ease;
 }
-header-area > div:first-child {
+
+#header-area > div:first-child {
     margin: opx;
     width: 100vw;
     height: 40px;
 }
 
-header-area > div:first-child > img{
+#header-area > div:first-child > img{
     margin: opx;
     width: 100vw;
     height: 40px;
@@ -28,15 +32,16 @@ header-area > div:first-child > img{
 
 .topMenu{
     margin: 0px;
-    height: 180px;
+    height: 150px;
     display: grid;
     grid-template-columns: 400px 600px 400px 300px;
     place-items: center;
 }
 
 .topMenu > div:first-child > a img{
-    width: 180px;
-    height: 180px; 
+	margin: 0;
+    width: 150px;
+    height: 150px; 
 }
 
 .sideMenu{
@@ -81,7 +86,7 @@ header-area > div:first-child > img{
     position: relative;
     display: flex;
     width: 400px;
-    height: 180px;
+    height: 150px;
     justify-content: center;
     align-items: center;
 }
@@ -89,7 +94,7 @@ header-area > div:first-child > img{
 .search > div > button{
     cursor: pointer;
     position: absolute;
-    top: 67px;
+    top: 53px;
     left: 330px;
     width: 45px;
     background-color: transparent;
@@ -103,7 +108,7 @@ header-area > div:first-child > img{
 #search{
     outline: none;
     width: 380px;
-    height: 50px;
+    height: 42px;
     padding-left: 25px;
     font-size: 18px;
     border: 3px solid #0C4667;

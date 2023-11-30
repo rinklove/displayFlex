@@ -3,7 +3,7 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 13em 74em 13em;
+    grid-template-columns: 12vw 70vw 12vw;
 }
 
 .product-main{
@@ -17,7 +17,7 @@
 	padding-right: 5em;
 	display: grid;
 	align-items: center;
-	grid-template-rows: 100px 1fr;
+	grid-template-rows: 100px 7fr 1fr;
 }
 
 .product-main > div:first-child{
@@ -36,6 +36,7 @@ h1 {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 3fr 4fr;
+	padding-top: 34px;
 }
 
 #detail{
@@ -55,4 +56,18 @@ h1 {
 
 #detail > div{
 	font-size: 25px;
+}
+
+.product-main > button{
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #abc95f;
+	color: white;
+}
+.product-main > button:hover{
+	filter: brightness(80%);
 }

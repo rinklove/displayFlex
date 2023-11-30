@@ -12,15 +12,19 @@
 
 	<div class="product">
 		<div></div>
-		
+
 		<div class="product-main">
-			<div><h1>스토어</h1></div>
+			<div>
+				<h1>스토어</h1>
+			</div>
 			<div id="product-detail">
 				<div>
 					<img src="/cinema/resources/image/store/item.png" alt="item">
 				</div>
 				<div id="detail">
-					<h1><b>우리 패키지</b></h1>
+					<h1>
+						<b>우리 패키지</b>
+					</h1>
 					<div id="description">
 						<div>가격</div>
 						<div>61,000원</div>
@@ -31,9 +35,10 @@
 					</div>
 				</div>
 			</div>
-		
+			<button onclick="location.href='/cinema/store'">목록으로</button>
+
 		</div>
-	
+
 		<div></div>
 	</div>
 

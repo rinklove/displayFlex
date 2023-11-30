@@ -3,7 +3,7 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: 13em 74em 13em;
+    grid-template-columns: 12vw 70vw 12vw;
 }
 
 .product-main{
