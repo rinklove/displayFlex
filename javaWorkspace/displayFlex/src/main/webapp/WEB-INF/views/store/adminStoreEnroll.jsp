@@ -11,13 +11,13 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+	<form action="/cinema/admin/store/enroll" method="post"></form>
 	<div class="product">
 		<div></div>
-		
 		<div class="product-main">
 			<div id="top">
 				<div><h1>스토어 - 제품등록</h1></div>
-				<div id="enroll"><button>수정</button></div>
+				<div id="enroll"><input type="submit" value="수정"></div>
 				<div id="delete"><button>취소</button></div>
 			</div>
 			<div id="product-detail">
@@ -34,7 +34,14 @@
 						<div>제품설명</div>
 						<div><textarea id="productDetail" cols="20" rows="5" placeholder="일반 영화를 관람할 수 있는 영화 관람권 4매와 맛있는 팝콘과 콜라를 먹을 수 있는 우리 패키지"></textarea></div>
 						<div>분류</div>
-						<div><input type="checkbox" ></div>
+						<span>
+							<input type="radio" value="snack" name="type"> 스낵
+							<input type="radio" value="photocard" name="type"> 포토카드
+							<input type="radio" value="combo" name="type"> 콤보
+							<br>
+							<input type="radio" value="popcorn" name="type"> 팝콘
+							<input type="radio" value="drink" name="type"> 음료
+						</span>
 					</div>
 				</div>
 			</div>
@@ -43,5 +50,6 @@
 	
 		<div></div>
 	</div>
+    </form>
 </body>
 </html>
