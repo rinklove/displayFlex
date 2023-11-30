@@ -95,9 +95,9 @@
                                 <td>등록일2</td>
                             </tr>
                             <tr>
-                                <td>1</td>
-                                <td>제목1</td>
-                                <td>등록일1</td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">1</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">제목1</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">등록일1</a></td>
                             </tr>
                         </tbody>
                     </table>

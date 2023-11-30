@@ -72,8 +72,8 @@
                             </th>
                             <td>
                                 <div class="bx_textarea">
-                                    <textarea name="ty2" id="iDcontents" cols="10" rows="10" title="문의내용을 입력해주세요" 
-                                    placeholder="내용에 개인정보(개인번호, 계좌번호, 주민번호)가 포함되지 않도록 유의하여 입력해주세요"></textarea>
+                                    <input type="text" class="ty2" id="iDcontents" cols="10" rows="10" title="문의내용을 입력해주세요" 
+                                    placeholder="내용에 개인정보(개인번호, 계좌번호, 주민번호)가 포함되지 않도록 유의하여 입력해주세요"></input>
                                     <br>
                                     <div class="txt_red txt_color01">
                                         현재 페이지 내 '클릭/타이핑' 없이 머무르는 경우,
@@ -92,8 +92,8 @@
                     </tbody>
                 </table>
                 <div id="btn_wrap">
-                    <button>취소</button>
-                    <button>확인</button>
+                    <button class="cancle">취소</button>
+                    <button class="ok">확인</button>
                 </div>
             </div>
             
