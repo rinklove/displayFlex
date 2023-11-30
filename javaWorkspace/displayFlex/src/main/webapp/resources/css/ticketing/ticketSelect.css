@@ -448,7 +448,7 @@ header > nav {
 	color: white;
 }
 
-.bi bi-arrow-right-circle-fill, .bibi-arrow-right-circle-fill::before{
+.bi-check-circle-fill, .bi-check-circle-fill::before{
 	font-size: 50px;
 	margin-bottom: 5px;
 

@@ -6,20 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script src="../resources/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
     <link rel="stylesheet" href="../resources/css/ticketing/ticketPayment.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../resources/bootstrap-5.3.2-dist/css/bootstrap.css">
-    <script src="../resources/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
 
     <title>예매페이지-결제</title>
 
 </head>
 <body>
-    <header>
-        <nav>    
+<!--     <header> -->
+<!--         <nav>     -->
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
-        </nav>
-    </header>
+<!--         </nav> -->
+<!--     </header> -->
     <main>
         <div class="empty">빈공간</div>
         <div id="stepMenu_area">
@@ -29,11 +29,11 @@
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                       <div class="step-name">
                         <p>STEP1</p>
-                        <p>할인쿠폰</p>
+                        <span>할인쿠폰</span>
                       </div>
                     </button>
                   </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
                       <div id="coupon-table">
                         <p>FLEX 할인쿠폰</p>
@@ -46,9 +46,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% for(int i = 0; i < 10; i++){%>
+                                <% for(int i = 0; i < 20; i++){%>
                                 <tr>
-                                    <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">쿠폰....</td>
+                                    <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">    쿠폰....</td>
                                     <td>쿠폰번호...</td>
                                     <td>2010-11-10</td>
                                 </tr>
@@ -65,13 +65,13 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                       <div class="step-name">
                         <p>STEP2</p>
-                        <p>등급할인</p>
+                        <span>등급할인</span>
                       </div>
                     </button>
                   </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
-                      <strong>dd</strong> ?? 
+                    
                     </div>
                   </div>
                 </div>
@@ -80,11 +80,11 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                       <div class="step-name">
                         <p>STEP3</p>
-                        <p>우대사항</p>
+                        <span>우대사항</span>
                       </div>
                     </button>
                   </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
                       <strong>dd</strong> ?? 
                     </div>
@@ -95,11 +95,11 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                       <div class="step-name">
                         <p>STEP4</p>
-                        <p>결제수단</p>
+                        <span>결제수단</span>
                       </div>
                     </button>
                   </h2>
-                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
                       <strong>dd</strong> ?? 
                     </div>
@@ -185,7 +185,7 @@
         </div>
         <div id="ticket-payButton">
             <button type="button" onclick="window.location.href='/cinema/ticket/payment'">
-                <i class="bi bi-check-circle-fill"></i>
+                <i class="bi bi-arrow-right-circle-fill"></i>
                 <span>결제하기</span>
             </button>
         </div>

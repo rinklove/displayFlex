@@ -13,11 +13,11 @@
   
 </head>
 <body>
-    <header>
-        <nav>    
+<!--     <header> -->
+<!--         <nav>     -->
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
-        </nav>
-    </header>
+<!--         </nav> -->
+<!--     </header> -->
     <main>
         <section id="section1">
             <div id="ticketing1">
