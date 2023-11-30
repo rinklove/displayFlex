@@ -15,10 +15,10 @@
         <div class="title-container df jc-sb">
             <div class="title"><strong>영화 정보</strong></div>
             <div class="admin-container">
-                <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
+                 <c:if test="${loginMember.adminYn eq 'Y'}">
                     <button class="bg-abc95f admin-btn" onclick="location.href='${pageContext.request.contextPath}/'">수정</button>
                     <button class="bg-b73232 admin-btn" onclick="location.href='${pageContext.request.contextPath}/'">삭제</button>
-                <%-- </c:if> --%>
+                  </c:if>
             </div>
         </div>
         <hr class="jh-hr">
@@ -61,9 +61,9 @@
                     <td></td>
                     <td></td>
                     <td id="reserve-td">
-                    	<%-- <c:if test="${movie.isScreening eq 'Y'  && loginMember.adminYn eq 'N'}"> --%>
+                    	<c:if test="${movie.isScreening eq 'Y'  && loginMember.adminYn eq 'N'}">
                     		<button class="bg-abc95f"  onclick="location.href='${pageContext.request.contextPath}/'">예매하기→</button>
-                    	<%-- </c:if> --%>
+                    	</c:if>
                     </td>
                 </tr>
 
