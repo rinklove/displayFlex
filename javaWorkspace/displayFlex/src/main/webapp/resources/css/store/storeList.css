@@ -21,7 +21,35 @@
 }
 .store-main > div:first-child{
 	border-bottom: 3px solid #0C4667;
+	width: 100%;
+	display: flex;
+	align-items: center;
 }
+
+#enroll > button{
+	cursor: pointer;
+    background-color: #010101;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+	width: 100px;
+	height: 35px;
+	margin-left: 20px;
+}
+
+#delete > button{
+	cursor: pointer;
+    background-color: #B73232;
+    border: none;
+    border-radius: 5px;
+    color: #010101;
+    font-size: 20px;
+	width: 100px;
+	height: 35px;
+	margin-left: 20px;
+}
+
 h1 {
 	color: #0C4667;
 	font-size: 45px;
