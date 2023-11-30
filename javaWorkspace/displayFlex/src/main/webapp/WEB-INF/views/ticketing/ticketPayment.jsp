@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="../resources/css/ticketing/ticketPayment.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    
 
     <title>예매페이지-결제</title>
 
