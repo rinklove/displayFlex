@@ -1,0 +1,56 @@
+.bw {
+    width: 90%;
+    height: 70%;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+}
+#coupon_title{
+    font-size: 30px;
+    font-weight: bolder;
+    padding: 
+}
+#jul1 {
+    border: none;
+    height: 3px; 
+    background-color: black;
+}
+#main_title {
+    display: flex;
+    padding: 3%;
+    margin: auto;
+    background-color: rgba(141, 1, 1, 0.952);;
+    
+    gap: 20px; /* Add this line to set the gap between the child elements */
+}
+
+#main_title > div {
+    flex: 1; /* Add this line to make each column take equal space */
+    text-align: center; /* Center the text within each column */
+}
+#coupon_title2 {
+    display: flex;
+    font-weight: bold;
+    font-size: 30px;
+    justify-content: flex-start; /* Align to the left */
+    gap: 20px; /* Reduce the gap between child elements */
+    margin-left: auto;
+    padding-left: 20px; /* Add padding to the left for better spacing */
+}
+
+.coupon_info {
+    display: flex;
+    justify-content: center; /* Center the child elements horizontally */
+}
+
+#info_one, #info_two, #info_three, #info_four {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the child elements vertically */
+    margin: 5% 10%; /* Adjust the margin for spacing between columns */
+    text-align: center; /* Center text within each column */
+   
+}
+

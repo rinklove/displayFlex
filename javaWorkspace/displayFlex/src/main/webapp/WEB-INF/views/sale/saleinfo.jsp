@@ -44,7 +44,7 @@
         text-align: center;
         font-size: xx-large;
 
-        margin-right: 30px; /* Increased margin for more spacing */
+        
    
 
     }
