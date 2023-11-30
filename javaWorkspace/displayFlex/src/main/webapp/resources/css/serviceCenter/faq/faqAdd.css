@@ -1,11 +1,17 @@
+body, textarea {
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
 main {
     width: 75em;
     margin: auto;
-    padding: 100px;
+    /* padding: 100px; */
 }
 
 #contents {
     height: auto;
+    padding: 10px 60px 60px 60px;
     background-color: white;
     /* text-align: center;  */
 }
@@ -26,8 +32,10 @@ div#title_top {
     font-weight: normal;
 }
 
-#contents > #tab_tit {
-    grid-column: span 3;
+#contents #tab_tit #ty1 {
+    /* grid-column: span 3; */
+    width: ;
+    height: auto;
 }
 
 #contents > #tab_tit nav{
@@ -54,25 +62,42 @@ nav a {
     margin: 20px 0;
 }
 
+h2 {
+    font-size: 24px;
+}
+
+
 #tbl_form{
-    border-top: 1px solid #BBBBBB;
-    margin-bottom: 60px;
+    /* margin: 0 auto; 가로 중앙 정렬을 위해 추가 */
+    background-color: white;
+    padding: 20px; /* 내부 여백 추가 */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 그림자 효과 추가 */
 }
 
 table {
-    width: 100px;
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     border: 0;
     display: table;
     box-sizing: border-box;
-    text-indent: inherit;   /* 수정*/
+    text-indent: inherit;   수정
 }
 
 th{
     font-size:  normal;
     display: table-cell;
-    vertical-align: inherit;
+    /* vertical-align: inherit; */
+}
+
+th.req {
+    font-size: 14px;
+    padding: 7px 4px;
+}
+
+select#iDdivisionCode {
+    width: 130px;
+    height: 30px;
 }
 
 #tbl_form th.req::after {
@@ -93,9 +118,84 @@ th{
     font-size: 15px;
 }
 
+.bx_textarea {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
 
+input[type="text"].ty2{
+    background-color: #F8F8F8;
+    border-color: #DDD;
+}
 
+input[type="text"] {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 18px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid #DDD;
+    /* padding-block: 1px; */
+    /* padding-inline: 2px; */
+}
 
+input#iDtitle.ty2 {
+    width: 100%;
+    height: 50px;
+}
+
+.ty {
+    width: 100%;
+}
+
+input, select, button {
+    /* vertical-align: middle; */
+    display: flex;
+    justify-content: center;
+}
+
+textarea#iDcontents {
+    width: 100%;
+    height: 200px;
+}
+
+.bx_textarea .txt_count {
+    float: right;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #666666;
+}
+
+.bx_textarea [class^="txt_"] {
+    display: inline-block;
+}
+
+.txt_red {
+    line-height: 1.4;
+    padding-left: 20px;
+    font-size: 13px;
+}
+
+.txt_color01 {
+    color: #FF243E;
+}
+
+#btn_wrap{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#btn_wrap button {
+    /* height: 45px;
+    line-height: 43px;
+    padding: 0 18px;
+    margin: 0 3px; */
+    min-width: 160px;
+    cursor: pointer;
+}
 
 
 

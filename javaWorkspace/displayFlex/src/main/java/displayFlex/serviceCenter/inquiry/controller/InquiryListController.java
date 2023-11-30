@@ -1,4 +1,4 @@
-package displayFlex.serviceCenter.notice.controller;
+package displayFlex.serviceCenter.inquiry.controller;
 
 import java.io.IOException;
 
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/serviceCenter/notice")
-public class NoticeController extends HttpServlet {
+@WebServlet("/admin/inquiryList")
+public class InquiryListController extends HttpServlet {
 	
-	//공지사항 화면
+	//1:1 문의 화면
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/notice.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/inquiry/inquiry.jsp").forward(req, resp);
 	}
 	
-	//공지사항 로직
+	//1:1 문의 로직
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

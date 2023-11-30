@@ -1,4 +1,4 @@
-package displayFlex.serviceCenter.recommend.controller;
+package displayFlex.serviceCenter.notice.controller;
 
 import java.io.IOException;
 
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/serviceCenter/recommend")
-public class RecommendController extends HttpServlet {
+@WebServlet("/serviceCenter/noticeList")
+public class NoticeListController extends HttpServlet {
 	
-	//상영요청 목록 화면
+	//공지사항 화면
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/recommend.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/notice/noticeList.jsp").forward(req, resp);
 	}
 	
-	//상영요청 로직
+	//공지사항 로직
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

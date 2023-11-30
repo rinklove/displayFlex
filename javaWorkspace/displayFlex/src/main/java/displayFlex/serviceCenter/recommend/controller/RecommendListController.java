@@ -1,4 +1,4 @@
-package displayFlex.serviceCenter.inquiry.controller;
+package displayFlex.serviceCenter.recommend.controller;
 
 import java.io.IOException;
 
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/inquiry")
-public class InquiryController extends HttpServlet {
+@WebServlet("/serviceCenter/recommendList")
+public class RecommendListController extends HttpServlet {
 	
-	//1:1 문의 화면
+	//상영요청 목록 화면
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/inquiry.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/serviceCenter/recommend/recommendList.jsp").forward(req, resp);
 	}
 	
-	//1:1 문의 로직
+	//상영요청 로직
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
