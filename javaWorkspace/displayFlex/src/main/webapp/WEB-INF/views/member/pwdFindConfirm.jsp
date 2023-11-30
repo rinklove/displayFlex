@@ -10,6 +10,9 @@
 
 </head>
 <body>
+
+  <%@ include file="/WEB-INF/views/common/header.jsp" %>
+  
   <div class="container">
         <div class="main">
             <div class="main-first-font">비밀번호 찾기 결과</div>
