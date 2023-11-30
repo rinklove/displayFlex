@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/saleinfo/saleinfo.css">
-
 
 <style>
     .sale_container {
@@ -15,6 +13,9 @@
         background-color: white;
         margin: auto;
     }
+
+    
+    
 
     #sale_child {
         border: 1px solid white;
@@ -34,6 +35,7 @@
         font-size: xx-large;
     }
 
+
     #sale_jang {
         border: 1px solid white;
         float: left;
@@ -41,8 +43,13 @@
         padding: auto;
         text-align: center;
         font-size: xx-large;
+
+        margin-right: 30px; /* Increased margin for more spacing */
+   
+
     }
     
+
 
     #jul1 {
         border-top: 4px solid black; 
@@ -53,13 +60,13 @@
     #sale_jang img {
         display: block;
         margin: 0 auto;
-       
-        
-
     }
 
-    
 
+       
+       
+
+   
 </style>
 
 </head>
