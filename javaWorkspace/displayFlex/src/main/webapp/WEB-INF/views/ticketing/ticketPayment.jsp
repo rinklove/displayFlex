@@ -8,7 +8,8 @@
     
     <link rel="stylesheet" href="../resources/css/ticketing/ticketPayment.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    
+    <link rel="stylesheet" href="../resources/bootstrap-5.3.2-dist/css/bootstrap.css">
+    <script src="../resources/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
 
     <title>예매페이지-결제</title>
 
@@ -22,31 +23,89 @@
     <main>
         <div class="empty">빈공간</div>
         <div id="stepMenu_area">
-            <div class="ticketAccord">
-                <input type="checkbox" id="step01">
-                <label for="step01">STEP1<em></em></label>
-                <div>
-                    <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
-                    <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
-                    <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
-                    <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>   
+            <div class="accordion" id="step-accordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <div class="step-name">
+                        <p>STEP1</p>
+                        <p>할인쿠폰</p>
+                      </div>
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <div id="coupon-table">
+                        <p>FLEX 할인쿠폰</p>
+                        <table id="couponList">
+                            <thead>
+                                <tr>
+                                    <th>사용가능 쿠폰</th>
+                                    <th>쿠폰 번호</th>
+                                    <th>유효 기간</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(int i = 0; i < 10; i++){%>
+                                <tr>
+                                    <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">쿠폰....</td>
+                                    <td>쿠폰번호...</td>
+                                    <td>2010-11-10</td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="ticketAccord">
-                <input type="checkbox" id="step02">
-                <label for="step02">STEP2<em></em></label>
-                <div><p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p></div>
-            </div>
-            <div class="ticketAccord">
-                <input type="checkbox" id="step03">
-                <label for="step03">STEP3<em></em></label>
-                <div><p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p></div>
-            </div>
-            <div class="ticketAccord">
-                <input type="checkbox" id="step04">
-                <label for="step04">STEP4<em></em></label>
-                <div><p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p></div>
-            </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      <div class="step-name">
+                        <p>STEP2</p>
+                        <p>등급할인</p>
+                      </div>
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>dd</strong> ?? 
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      <div class="step-name">
+                        <p>STEP3</p>
+                        <p>우대사항</p>
+                      </div>
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>dd</strong> ?? 
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      <div class="step-name">
+                        <p>STEP4</p>
+                        <p>결제수단</p>
+                      </div>
+                    </button>
+                  </h2>
+                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>dd</strong> ?? 
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
         <div id="paymentInfo_area">
             <div id="paymentInfo">

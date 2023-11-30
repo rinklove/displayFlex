@@ -5,9 +5,9 @@
     background-color: #FFE56B;
 }
 
-body {
+/* body {
 	box-sizing: border-box;
-}
+} */
 
 main {
     display: grid;
@@ -18,59 +18,7 @@ main {
 .ticketAccord{
     width: 800px;
 }
-input[id*="step"] {
-    display: none;
-}
-
-input[id*="step"] + label {
-    display: block;
-    padding: 20px;
-    border: 1px solid burlywood;
-    border-bottom: 0;
-    color: #fff;
-    font-weight: 900;
-    background-color: #B73131;   
-    cursor: pointer;      
-}
-
-input[id*="step"] + label em {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    margin-top: -15px;
-    display: inline-block;
-    /* background: url('./arrow.png') 0 0 no-repeat; */
-}
-
-input[id*="step"] + label + div{
-    max-height: 0;
-    transition: all .15s;
-    overflow: hidden;
-    background-color: #ebf8ff;
-    font-size: 11px;
-}
-
-input[id*="step"] + label + div p {
-    display: inline-block;
-    padding: 20px;
-}
-
-input[id*="step"]:checked + label + div {
-    height: 300px;
-    max-height: 300px;
-}
-
-input[id*="step"]:checked + label em {
-    background-position: 0px -30px;
-}
-
-input[id*="step"] + label{
-    height: 50px;
-}
-
-
+/* ---------------------------------STEP 메뉴 */
 #stepMenu_area{
     display: flex;
     flex-direction: column;
@@ -78,6 +26,38 @@ input[id*="step"] + label{
     margin-top: 100px;
 }
 
+#couponList {
+    width: 100%;
+}
+
+#couponList > thead {
+    border-bottom: 1px solid black;
+}
+
+#coupon-table > p {
+    margin-top: 30px;
+    font-size: 25px;
+    color: #306791;
+    font-weight: bold;   
+}
+
+.step-name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.step-name > p:first-child{
+    font-size: 25px;
+    margin: 0;
+    color: white;
+    font-weight: bold;
+}
+
+.step-name > p:last-child{
+    margin-top: 20px;
+}
+/* --------------------------------------STEP 메뉴 끝 */
 /*---------------------------- 우측 결제정보 시작 */
 
 #payment > div > div:nth-of-type(1), #discount > div > div:nth-of-type(1), #totalPayment > div > div:nth-of-type(1) {
