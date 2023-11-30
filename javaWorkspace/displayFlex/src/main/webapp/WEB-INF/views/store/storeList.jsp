@@ -1,23 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<link rel="stylesheet" href="/cinema/resources/css/store/storeList.css">
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="/cinema/resources/css/store/adminStoreList.css">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>스토어</title>
+<title>Insert title here</title>
 </head>
 <body>
-		<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="store">
 		
 		<div></div>
 		
 		<div class="store-main">
-			<div><h1>스토어</h1></div>
+			<div id="top">
+				<div><h1>스토어</h1></div>
+				<%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
+				<div id="enroll"><button onclick="location.href='/cinema/admin/store/enroll'">등록</button></div>
+				<div id="delete"><button>삭제</button></div>
+				<%-- </c:if> --%>
+			</div>
 			<div id="smallMenu">
 				<div><span>베스트</span></div>
 				<div><span>기프트카드</span></div>
@@ -28,7 +32,7 @@
 			</div>
 			<div class="itemPoto">
 				<div>
-					<a href="/cinema/store/product">
+					<a href="/cinema/admin/store/product">
 					<img src="/cinema/resources/image/store/item.png" alt="item">
 					<span id="first"><b>우리 패키지</b></span>
 					</a>
@@ -80,5 +84,6 @@
 		<div></div>
 	
 	</div>
+
 </body>
 </html>
