@@ -19,20 +19,28 @@
             </div>
             <div id="tab_tit">
                 <nav>
-                    <a href="/cinema/serviceCenter/faqList">FAQ</a>
-                    <a href="/cinema/serviceCenter/noticeList">공지사항</a>
-                    <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>
-                    <a href="/cinema/serviceCenter/recommendList">상영요청</a>
+                    <div id="top_tab1">
+                        <a href="/cinema/serviceCenter/faqList">FAQ</a>
+                    </div>
+                    <div id="top_tab2">
+                        <a href="/cinema/serviceCenter/noticeList">공지사항</a>
+                    </div>
+                    <div id="top_tab3">
+                        <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>
+                    </div>
+                    <div id="top_tab4">
+                        <a href="/cinema/serviceCenter/recommendList">상영요청</a>
+                    </div>
                 </nav>
             </div>
             <div id="tab_con">
                 <div id="faq_icon_wrap">
-                    <button id="icon_01"><img src="/cinema/resources/image/icon/cinema_2yong.png" alt="영화관 이용">영화관 이용</button>
-                    <button id="icon_02"><img src="/cinema/resources/image/icon/member.png" alt="사람 아이콘">회원</button>
-                    <button id="icon_03"><img src="/cinema/resources/image/icon/star.png" alt="별 아이콘">등급</button>
-                    <button id="icon_04"><img src="/cinema/resources/image/icon/ticket.png" alt="티켓 아이콘">쿠폰</button>
-                    <button id="icon_05"><img src="/cinema/resources/image/icon/popcorn.png" alt="팝콘 아이콘">스토어</button>
-                    <button id="icon_06"><img src="/cinema/resources/image/icon/ribbon.png" alt="리본 아이콘">이벤트</button>
+                    <button id="icon_01"><img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">영화관 이용</button>
+                    <button id="icon_02"><img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">회원</button>
+                    <button id="icon_03"><img src="/cinema/resources/image/faqIcon/star.png" alt="별 아이콘">등급</button>
+                    <button id="icon_04"><img src="/cinema/resources/image/faqIcon/ticket.png" alt="티켓 아이콘">쿠폰</button>
+                    <button id="icon_05"><img src="/cinema/resources/image/faqIcon/popcorn.png" alt="팝콘 아이콘">스토어</button>
+                    <button id="icon_06"><img src="/cinema/resources/image/faqIcon/ribbon.png" alt="리본 아이콘">이벤트</button>
                 </div>
                 <fieldset id="search_wrap">
                     <legend>영화관 FAQ 검색하기</legend>

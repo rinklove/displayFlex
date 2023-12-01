@@ -12,12 +12,12 @@ main {
 }
 
 div#title_top {
-    margin: 0px 0px 20px;
+    /* margin: 0px 0px 20px; */
     padding: 10px 0 2px;
 }
 
 #contents > #title_top {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     border-bottom: 1px solid #EEE;
 }
 
@@ -40,8 +40,12 @@ div#title_top {
     align-items: center;
     font-size: 24px;
     border-bottom: 1px solid #EEE;
-    padding: 3px 0px 17px;
+    padding: 17px 0px 17px;
     margin-bottom: 15px
+}
+
+#contents > #tab_tit nav:focus {
+    border-bottom: 2px solid #000;
 }
 
 nav a {
@@ -101,9 +105,20 @@ button {
     text-align: center;
 }
 
-/* #tab_tit button:focus {
-    border-bottom: 2px solid #000
+/* #faq_icon_wrap button img {
+    padding: 3px;
 } */
+
+#faq_cate button:focus{
+    border: 2px solid pink;
+    border-bottom: 1.5px;
+}
+
+#top_tab1:focus {
+    width: 15px;
+    height: 15px;
+    border-bottom: 2px solid #000
+}
 
 #faq_icon_wrap #icon_01 img {
     width: 45px;
@@ -198,6 +213,10 @@ input[type="text"] {
 a {
     cursor: pointer;
 }
+
+/* #tab> td a {
+    border-bottom: none;
+} */
 
 /* tr{
     display: table-row;

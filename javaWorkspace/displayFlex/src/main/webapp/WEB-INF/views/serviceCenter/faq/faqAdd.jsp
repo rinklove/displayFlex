@@ -76,9 +76,10 @@
                                     placeholder="내용에 개인정보(개인번호, 계좌번호, 주민번호)가 포함되지 않도록 유의하여 입력해주세요"></input>
                                     <br>
                                     <div class="txt_red txt_color01">
+                                        <img src="/cinema/resources/image/faqIcon/caution_.png" alt="주의 아이콘" width="14px">
                                         현재 페이지 내 '클릭/타이핑' 없이 머무르는 경우,
                                         <br>
-                                         20분 후 접속이 자동 종료되며 작업한 내용은 저장이 되지 않습니다.
+                                        <p style="margin: 0;">20분 후 접속이 자동 종료되며 작업한 내용은 저장이 되지 않습니다.</p>
                                     </div>
                                     <span class="txt_count">
                                         <em id="strongContentsCount">0</em>
