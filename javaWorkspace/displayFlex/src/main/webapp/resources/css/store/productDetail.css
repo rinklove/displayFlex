@@ -17,7 +17,7 @@
 	padding-right: 5em;
 	display: grid;
 	align-items: center;
-	grid-template-rows: 100px 1fr;
+	grid-template-rows: 100px 7fr 1fr;
 }
 
 .product-main > div:first-child{
@@ -43,7 +43,7 @@
     background-color: #B73232;
     border: none;
     border-radius: 5px;
-    color: #010101;
+    color: white;
     font-size: 20px;
 	width: 100px;
 	height: 35px;
@@ -81,4 +81,18 @@ h1 {
 
 #detail > div{
 	font-size: 25px;
+}
+
+.product-main > button{
+	width: 100px;
+	height: 50px;
+	font-size: 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #abc95f;
+	color: white;
+}
+.product-main > button:hover{
+	filter: brightness(80%);
 }
