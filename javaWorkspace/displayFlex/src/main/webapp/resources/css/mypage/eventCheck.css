@@ -9,10 +9,18 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 1000px;
-    height: 600px;
+    height: 800px;
     text-align: center;
     position: relative;
     display: grid;
     align-items: center;
     justify-content: center;
   }
+
+  .main {
+    display: grid;
+    grid-template-rows: 50px 50px 100px 450px;
+    width: 900px;
+  }
+
+
