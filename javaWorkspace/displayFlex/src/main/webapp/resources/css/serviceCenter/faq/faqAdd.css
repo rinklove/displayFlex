@@ -48,7 +48,7 @@ div#title_top {
     font-size: 24px;
     border-bottom: 1px solid #EEE;
     padding: 3px 0px 17px;
-    margin-bottom: 15px
+    margin-bottom: 30px
 }
 
 nav a {
@@ -63,7 +63,13 @@ nav a {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 22px;
+    font-weight: 1200;
+    margin: 0;
+    margin-left: 20px;
+    padding-bottom: 25px;
+    /* border-bottom: 1px solid #EEE; */
+    /* padding-left: 5px; */
 }
 
 
@@ -85,7 +91,7 @@ table {
 }
 
 th{
-    font-size:  normal;
+    font-size: normal;
     display: table-cell;
     /* vertical-align: inherit; */
 }
@@ -208,6 +214,8 @@ input#iDcontents {
     border-radius: 4px;
     font-size: 14px;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
 }
 
 .cancle {
@@ -219,5 +227,6 @@ input#iDcontents {
 .ok {
     background-color: #880000;
     color: white;
-
 }
+
+p {padding-left: 20px;}
