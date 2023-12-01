@@ -15,7 +15,11 @@
 
 		<div class="product-main">
 			<div>
-				<h1>스토어</h1>
+				<div><h1>스토어</h1></div>
+				<%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
+				<div id="enroll"><button onclick="location.href='/cinema/admin/store/enroll'">등록</button></div>
+				<div id="delete"><button>삭제</button></div>
+				<%-- </c:if> --%>
 			</div>
 			<div id="product-detail">
 				<div>
