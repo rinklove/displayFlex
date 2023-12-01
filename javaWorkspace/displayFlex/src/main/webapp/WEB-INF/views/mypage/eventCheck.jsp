@@ -10,8 +10,20 @@
 
 </head>
 <body>
-
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <div class="container">
+        <div class="main">
+            <div>box1</div>
+            <div>box2</div>
+            <div>box3</div>
+            <div>box4</div>
+        </div>
+       
+    </div>
+
+
+
+    
 
 </body>
 </html>
