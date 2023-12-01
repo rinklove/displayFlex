@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="/cinema/resources/css/store/adminStoreList.css">
+<link rel="stylesheet" href="/cinema/resources/css/store/storeList.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,7 @@
 		<div class="store-main">
 			<div id="top">
 				<div><h1>스토어</h1></div>
-				<%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
+				<%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
 				<div id="enroll"><button onclick="location.href='/cinema/admin/store/enroll'">등록</button></div>
 				<div id="delete"><button>삭제</button></div>
 				<%-- </c:if> --%>
@@ -32,7 +32,7 @@
 			</div>
 			<div class="itemPoto">
 				<div>
-					<a href="/cinema/admin/store/product">
+					<a href="/cinema/store/product">
 					<img src="/cinema/resources/image/store/item.png" alt="item">
 					<span id="first"><b>우리 패키지</b></span>
 					</a>
