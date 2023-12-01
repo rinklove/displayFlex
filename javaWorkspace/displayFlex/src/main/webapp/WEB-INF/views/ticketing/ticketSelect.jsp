@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../resources/css/ticketing/ticketSelect.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-<!--     <script defer src="../resources/js/ticketing/ticketSelect.js"></script> -->
-
+    <script defer type="text/javascript" src="../resources/js/ticketing/ticketSelect.js"></script>
     <title>예매페이지</title>
-  
+    
 </head>
 <body>
 <!--     <header> -->
@@ -28,9 +27,9 @@
                     <ul id="movieList">
                         <% for(int i = 0; i < 100; i++){%>
                         <li class="ticketingMovie">
-                            <button type="button" onclick="selectMovie(event);">
+                            <button type="button" id="movieSelect" onclick="changeMovieInfo('<%=i%>');">
                                 <img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가">
-                                <span class="text" id="movieName<%=i%>" value="영화제목<%=i%>">영화제목<%=i%></span>
+                                <span class="text" id="movieName<%=i%>">영화제목<%=i%></span>
                             </button>
                         </li>
                         <% } %>
@@ -49,9 +48,10 @@
                     <ul id="dateList">
                         <% for(int i = 0; i < 100; i++){ %>
                         <li class="ticketingDate">
-                            <a href="#">
-                                <span class="text">날짜<%= i %></span>
-                            </a>
+                            <button type="button" onclick="changeDateInfo('<%=i%>')">
+                                <span class="text" id="movieDate<%=i%>">날짜<%= i %></span>
+                            </button>
+                
                         </li>               
                         <% } %>
                     </ul>
@@ -69,40 +69,40 @@
                     <div id="theater1">
                         <div>상영관1</div>
                         <div class="theater1_time">
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간1</a></div>
+                            <div><a href="#">시간2</a></div>
+                            <div><a href="#">시간3</a></div>
                         </div>
                         <div class="theater1_time">
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간4</a></div>
+                            <div><a href="#">시간5</a></div>
+                            <div><a href="#">시간6</a></div>
                         </div>
                     </div>
                     <div id="theater2">
                         <div>상영관2</div>
                         <div class="theater2_time">
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간1</a></div>
+                            <div><a href="#">시간2</a></div>
+                            <div><a href="#">시간3</a></div>
                         </div>
                         <div class="theater2_time">
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간4</a></div>
+                            <div><a href="#">시간5</a></div>
+                            <div><a href="#">시간6</a></div>
                         </div>
                     </div>
                     <div id="theater3">
                         <div>상영관3</div>
                         <div class="theater3_time">
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간1</a></div>
+                            <div><a href="#">시간2</a></div>
+                            <div><a href="#">시간3</a></div>
                         </div>
                         <div class="theater3_time">
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
-                            <div><a href="#">시간</a></div>
+                            <div><a href="#">시간4</a></div>
+                            <div><a href="#">시간5</a></div>
+                            <div><a href="#">시간6</a></div>
                         </div>
                     </div>
                 </div>   
@@ -190,14 +190,14 @@
 			<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" id="posterImg">
 		</div>
         <div id="ticket-movieName">
-            <span>벼랑 위의 포뇨</span>
+            <span id="movieInfo"></span>
         </div>
         <div id="ticket-movieInfo">
             <table>
                 <tbody>
                     <tr>
                         <td>일시</td>
-                        <td>2023년 11월 10일(금) 10:00</td>
+                        <td><span id="dateInfo"></span><span></span></td>
                     </tr>
                     <tr>
                         <td>상영관</td>
