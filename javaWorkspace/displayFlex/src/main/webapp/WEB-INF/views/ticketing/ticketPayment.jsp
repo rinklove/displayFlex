@@ -21,7 +21,7 @@
 <!--         </nav> -->
 <!--     </header> -->
     <main>
-        <div class="empty">빈공간</div>
+        <div class="empty"></div>
         <div id="stepMenu_area">
             <div class="accordion" id="step-accordion">
                 <div class="accordion-item">
@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <div class="empty">빈공간</div>
+        <div class="empty"></div>
     </main>
 
     <div id="selectInfo">
