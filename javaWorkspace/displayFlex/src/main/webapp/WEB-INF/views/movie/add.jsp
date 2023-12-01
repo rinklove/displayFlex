@@ -47,7 +47,10 @@
                         </td>
                         <td class="normal_text">감독</td>
                         <td><input type="text" class="form-control custom-form" name="director" id="director"></td>
-                        <td rowspan="4" id="poster-img"><input type="text" name="poster" id="poster-url" hidden></td>
+                         <td rowspan="4">
+                        	<img alt="" src="" id="poster">
+                        	<input type="text" name="poster" id="poster-url" hidden>
+                        </td>
                     </tr>
                     <tr>
                         <td class="normal_text">장르</td>
@@ -72,7 +75,7 @@
                     </tr>
                     <tr>
                         <td class="normal_text">출연 배우</td>
-                        <td colspan="3"><input type="text" class="form-control custom-form" name="actor" id="actor" placeholder="최대 3명까지 저장 가능(','로 구분 해주세요)"></td>
+                        <td colspan="3"><textarea type="text" class="form-control custom-form" name="actor" id="actor" placeholder="최대 3명까지 저장 가능(','로 구분 해주세요)" ></textarea>
                     </tr>
                     <tr>
                         <td class="normal_text">별점<span class="star">*</span></td>
@@ -88,19 +91,37 @@
                         <td colspan="5"><textarea class="story form-control m-auto custom-form" id="story" name="story" rows="15"></textarea></td>
                     </tr>
                     <tr>
+                        <td class="normal_text"><span class="title"><strong>대표 이미지</strong></span></td>
+                    </tr>
+                    <tr>
+                        <td class="still-image"  colspan="5">
+                        <div class="m-auto">
+							<div class="mb-3">
+							  <input class="form-control custom-form" type="file" id="mainImage" name="mainImage">
+							</div>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="normal_text"><span class="title"><strong>스틸컷</strong></span></td>
                     </tr>
                     <tr>
                         <td class="still-image"  colspan="5">
                         <div class="m-auto">
 							<div class="mb-3">
-							  <input class="form-control custom-form" type="file" id="formFile">
+							<img alt="" src=""  name="still">
+							  <input class="form-control custom-form" type="file" id="stillImage1" name="stillImage">
+							  <input type="text" name="stillImageUrl" id="still-url1" hidden>
 							</div>
 							<div class="mb-3">
-							  <input class="form-control custom-form" type="file" id="formFile">
+							<img alt="" src=""  name="still">
+							  <input class="form-control custom-form" type="file" id="stillImage2" name="stillImage">
+							  <input type="text" name="stillImageUrl" id="still-url2" hidden>
 							</div>
 							<div class="mb-3">
-							  <input class="form-control custom-form" type="file" id="formFile">
+							<img alt="" src=""  name="still">
+							  <input class="form-control custom-form" type="file" id="stillImage3" name="stillImage">
+							  <input type="text" name="stillImageUrl" id="still-url3" hidden>
 							</div>
                         </div>
                         </td>

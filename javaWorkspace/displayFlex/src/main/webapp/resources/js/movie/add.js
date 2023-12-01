@@ -1,10 +1,4 @@
-
-/**
- * 
- */
-    
-    
-    const getMovieList = async (value) => {
+ const getMovieList = async (value) => {
 		
 		const url = "http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json";
 		const key = 'afac623fe11d16bd6e9bd798babc2d7b';
@@ -82,17 +76,16 @@
 				genreInput.value = searchMovie.genre;
 				
 				//포스터
-				const poster = document.createElement("img");
-				const posterSrc = searchMovie.posters;
+				
+				let posterSrc = searchMovie.posters;
 				const posterUrlInput = document.getElementById("poster-url");
-	
-				poster.src = posterSrc !== '' ? searchMovie.posters.split("|")[0] : '';
-				posterUrlInput.value = poster.src;
+				const poster = document.getElementById("poster");
+				posterUrlInput.value = '';
+				let inputPoster = posterSrc !== '' ? posterSrc.split("|")[0] : ''
+				poster.src = inputPoster;
+				posterUrlInput.value = inputPoster;
 				poster.alt = "포스터가 없습니다";
 				
-				const posterImg = document.getElementById("poster-img");
-				posterImg.innerHTML = ''
-				posterImg.appendChild(poster);
 				
 				//관람 등급
 				const gradeArray = document.querySelectorAll("#screen-grade > option");
@@ -121,35 +114,40 @@
 				
 				//출연 배우
 				const actorInput = document.getElementById("actor");
+				actorInput.innerHTML =''; 
 				let actors = detailMovieInfo["actors"];
-				
-				for(let index = 0; index < (actors.length > 9 ? 9 : actors.length); index++) {
-					actorInput.value += actors[index].peopleNm + '(' + actors[index].cast +'), ';
-					
+				let length = actors.length > 9 ? 9 : actors.length;
+				for(let index = 0; index < length; index++) {
+					actorInput.innerHTML += actors[index].peopleNm + '(' + actors[index].cast +')';
+					if(index !== length-1) {
+						actorInput.innerHTML += ', ';
+					}
 				}
+				
+				const storyInput = document.getElementById("story");
+				storyInput.innerText = searchMovie.plots.plot[0].plotText;
+				
+				//스틸 이미지 경로 담는 input file 태그 배열
+				const stillImageFileArr = document.querySelectorAll("input[name=stillImage]");
+				//스틸 이미지 보여주는 태그 배열
+				const stillImageArr = document.querySelectorAll("img[name=still]");
+				for(let index = 0; index < 3; index++) {
+					stillImageArr[index].src = '';
+					stillImageArr[index].alt = '';
+					stillImageFileArr[index].disabled = false;
+				}
+			if(searchMovie.stlls !== "") {
+				let stillSrcArr = searchMovie.stlls.split("|", 3);
+				for(let index = 0; index < stillSrcArr.length; index++) {
+					stillImageArr[index].width = 300
+					stillImageArr[index].src = stillSrcArr[index];
+					stillImageArr[index].alt = "스틸 이미지가 없습니다.";
+					stillImageFileArr[index].disabled = true;
+				}				
+			}
+				
 			} else {
 				alert('입력한 영화에 대한 정보가 없습니다.');
 			}
 		
 		});
-	
-	
-	
-   /* let xhr = new XMLHttpRequest(); 
-    URL 
-    let url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2'; 
-    상영년도 
-    let queryParams = '&' + encodeURIComponent('detail') + '=' + encodeURIComponent('y'); 
-    상영월 
-    queryParams += '&' + encodeURIComponent('title') + '=' + encodeURIComponent(content); 
-    Service Key 
-    queryParams += '&' + encodeURIComponent('ServiceKey')+'='+ encodeURIComponent('9Z10BL3097X14RC40FSC'); 
-    xhr.open('GET', url + queryParams); 
-    xhr.onreadystatechange = function () { 
-        if (this.readyState == 4) { 
-            alert('Status: '+this.status+
-                'Headers: '+JSON.stringify(this.getAllResponseHeaders())+
-                'Body: '+this.responseText); 
-            } 
-        }; 
-    xhr.send('');*/
