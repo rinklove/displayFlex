@@ -101,6 +101,10 @@ button {
     text-align: center;
 }
 
+/* #tab_tit button:focus {
+    border-bottom: 2px solid #000
+} */
+
 #faq_icon_wrap #icon_01 img {
     width: 45px;
     height: 45px;
@@ -254,8 +258,8 @@ tbody {
 }
 
 
-#icon_01:focus {
-    background-color: red;
+#faq_icon_wrap button:focus {
+    background-color: rgba(255, 221, 200, 0.909);
 }
 
 

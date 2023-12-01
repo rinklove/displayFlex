@@ -38,7 +38,7 @@
                     <legend>영화관 FAQ 검색하기</legend>
                     <input type="text" placeholder="검색어를 입력해주세요." id="seachKeyword" title="검색어를 입력해주세요">
                     <button type="button" id="btn_col1">검색</button>
-                    <div id="help_wrap">
+                    <div id="help_wrap" style="text-align: left;">
                         <p>더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면?</p>
                         <a href="/cinema/serviceCenter/inquiryWrite" style="font-weight: bold; color: #000000;">1:1문의 바로가기</a>
                     </div>
