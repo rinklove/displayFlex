@@ -44,7 +44,7 @@
     background-color: #B73232;
     border: none;
     border-radius: 5px;
-    color: #010101;
+    color: white;
     font-size: 20px;
 	width: 100px;
 	height: 35px;
@@ -146,4 +146,9 @@ span{
 
 #detail > div{
 	font-size: 25px;
+}
+
+#adminButton{
+	display: flex;
+	justify-content: center;
 }
