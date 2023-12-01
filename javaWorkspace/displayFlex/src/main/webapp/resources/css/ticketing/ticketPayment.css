@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 .empty{
-    border: 1px solid black;
-    background-color: #FFE56B;
+    /* border: 1px solid black;
+    background-color: #FFE56B; */
 }
 
 /* body {
@@ -273,7 +273,8 @@ main {
     display: grid;
     grid-auto-flow : column;
     grid-template-columns: 2fr 1fr 2fr 1fr 1fr 2fr;
-    position: relative;
+    position: sticky;
+    bottom: 0;
     width: 100%;
     min-width: 996px;
     height: 128px;

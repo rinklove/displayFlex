@@ -380,7 +380,8 @@ header > nav {
     display: grid;
     grid-auto-flow : column;
     grid-template-columns: 2fr 1fr 2fr 1fr 1fr 2fr;
-    position: relative;
+    position: sticky;
+    bottom: 0;
     width: 100%;
     min-width: 996px;
     height: 128px;
