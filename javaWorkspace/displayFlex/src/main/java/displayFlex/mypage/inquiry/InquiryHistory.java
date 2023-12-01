@@ -1,8 +1,19 @@
 package displayFlex.mypage.inquiry;
 
-import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
 
-@WebServlet
-public class InquiryHistory {
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/mypage/inquiry")
+public class InquiryHistory extends HttpServlet {
+	
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/views/mypage/inquiry.jsp").forward(req, resp);
+	}
 
 }
