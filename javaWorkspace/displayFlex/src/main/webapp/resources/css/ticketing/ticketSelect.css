@@ -103,7 +103,7 @@ header > nav {
     width: 380px;
 }
 
-.ticketingDate > a{
+.ticketingDate > button{
     position: relative;
     height: 36px;
     white-space: nowrap;
