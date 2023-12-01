@@ -14,7 +14,7 @@
     <div class="add-form bg-w">
         <div class="title-container">
             <span class="title"><strong>영화 등록</strong></span>
-            <span>- 공백으로 저장할 경우 api에서 값을 가져옵니다.</span><br>
+            <span>- 영화제목을 입력하면 api에서 나머지 입력란의 정보를 가져옵니다.</span><br>
             <span ><span class="star">*</span>표시가 붙은 부분은 필수 입력란입니다.</span>
         </div>
         <hr>
@@ -47,36 +47,38 @@
                         </td>
                         <td class="normal_text">감독</td>
                         <td><input type="text" class="form-control custom-form" name="director" id="director"></td>
-                        <td rowspan="4" id="poster-img"></td>
+                        <td rowspan="4" id="poster-img"><input type="text" name="poster" id="poster-url" hidden></td>
                     </tr>
                     <tr>
                         <td class="normal_text">장르</td>
                         <td><input type="text" class="form-control custom-form" name="genre" id="genre"></td>
                         <td class="normal_text">개봉일</td>
-                        <td><input type="text" class="form-control custom-form" name="releaseDate" id="releaseDate"></td>
+                        <td><input type="text" class="form-control custom-form" name="releaseDate" id="releaseDate" placeholder='"YYYYMMDD"형식으로 입력하세요'></td>
                     </tr>
                     <tr>
                         <td class="normal_text">관람 등급</td>
                         <td>
-                            <select class="w-55 form-select custom-form" name="screenGrade" aria-label="관람 등급 선택" >
-                                <option value="">선택하세요</option>
-                                <option value="">전체 관람가</option>
-                                <option value="">12세 이상 관람가</option>
-                                <option value="">15세 이상 관람가</option>
-                                <option value="">청소년 관람 불가</option>
-                                <option value="">제한 상영가</option>
+                            <select id="screen-grade" class="w-60 form-select custom-form" name="screenGrade" aria-label="관람 등급 선택" >
+                                <option value="0">선택하세요</option>
+                                <option value="1">전체 관람가</option>
+                                <option value="2">12세 이상 관람가</option>
+                                <option value="3">15세 이상 관람가</option>
+                                <option value="4">청소년 관람 불가</option>
+                                <option value="5">제한 상영가</option>
                             </select>
                         </td>
                         <td class="normal_text">상영 시간</td>
                         <td><input type="text" class="form-control custom-form" name="runningTime" id="runningTime" placeholder="(단위: 분)"></td>
                     </tr>
                     <tr>
-                        <td class="normal_text">출연</td>
+                        <td class="normal_text">출연 배우</td>
                         <td colspan="3"><input type="text" class="form-control custom-form" name="actor" id="actor" placeholder="최대 3명까지 저장 가능(','로 구분 해주세요)"></td>
                     </tr>
                     <tr>
                         <td class="normal_text">별점<span class="star">*</span></td>
                         <td><input type="number" class="w-50 form-control custom-form" name="rate" id="rate"  min="1" max="10"></td>
+                        <td>제작 국가</td>
+                        <td><input type="text" class="form-control custom-form" name="nation" id="nation" placeholder="2개 이상의 국가는', '로 작성"></td>
                     </tr>
 
                     <tr>

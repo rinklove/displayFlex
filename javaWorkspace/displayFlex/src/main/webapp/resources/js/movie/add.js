@@ -25,6 +25,15 @@
 		
 	}
 
+	const getDetailInfo = async (movieCd) => {
+		const url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json";
+		const key = 'afac623fe11d16bd6e9bd798babc2d7b';
+	
+		const res = await fetch(`${url}?key=${key}&movieCd=${movieCd}`);
+		let result = await res.json();
+		return result.movieInfoResult.movieInfo
+	}
+
 	const title = document.getElementById("title");
 	title.addEventListener("input", async () => {
 		const searchResult = document.getElementById("search-result");
@@ -60,20 +69,67 @@
 			let searchMovie = await getMoviePoster(title.value);
 
 			searchMovie = searchMovie.filter(el => el.Codes.Code[0].CodeNo !== '' && el.Codes.Code[0].CodeNo === selectedMovie[1]).shift();
+			console.log(searchMovie);
 			
-			const directorInput = document.getElementById("director");
-			directorInput.value = searchMovie.directors.director[0].directorNm;
-			const genreInput = document.getElementById("genre");
-			genreInput.value = searchMovie.genre;
+			//데이터가 존재하면 input 값에 값 채워넣기
+			if(searchMovie !== undefined) {
+				//감독
+				const directorInput = document.getElementById("director");
+				directorInput.value = searchMovie.directors.director[0].directorNm;
 
-			const poster = document.createElement("img");
-			const posterSrc = searchMovie.posters;
-			poster.src = posterSrc !== '' ? searchMovie.posters.split("|")[0] : '';
-			poster.alt = searchMovie.title;
-			
-			const posterImg = document.getElementById("poster-img");
-			posterImg.innerHTML = ''
-			posterImg.appendChild(poster);
+				//장르
+				const genreInput = document.getElementById("genre");
+				genreInput.value = searchMovie.genre;
+				
+				//포스터
+				const poster = document.createElement("img");
+				const posterSrc = searchMovie.posters;
+				const posterUrlInput = document.getElementById("poster-url");
+	
+				poster.src = posterSrc !== '' ? searchMovie.posters.split("|")[0] : '';
+				posterUrlInput.value = poster.src;
+				poster.alt = "포스터가 없습니다";
+				
+				const posterImg = document.getElementById("poster-img");
+				posterImg.innerHTML = ''
+				posterImg.appendChild(poster);
+				
+				//관람 등급
+				const gradeArray = document.querySelectorAll("#screen-grade > option");
+				
+				for (index = 0; index < gradeArray.length ;index++) {
+					if(gradeArray[index].innerHTML.substr(0,2) === searchMovie["rating"].substr(0,2)) {
+						gradeArray[index].selected = true;
+						break;
+					}
+				}
+				
+				const detailMovieInfo = await getDetailInfo(selectedMovie[1]);
+				
+				console.log(detailMovieInfo);
+				
+				//개봉일
+				const releaseDateInput = document.getElementById("releaseDate");
+				releaseDateInput.value = detailMovieInfo.openDt;
+				//상영 시간
+				const runningTimeInput = document.getElementById("runningTime");
+				runningTimeInput.value = detailMovieInfo.showTm;
+				
+				//제작 국가
+				const nationInput = document.getElementById("nation");
+				nationInput.value = searchMovie.nation;
+				
+				//출연 배우
+				const actorInput = document.getElementById("actor");
+				let actors = detailMovieInfo["actors"];
+				
+				for(let index = 0; index < (actors.length > 9 ? 9 : actors.length); index++) {
+					actorInput.value += actors[index].peopleNm + '(' + actors[index].cast +'), ';
+					
+				}
+			} else {
+				alert('입력한 영화에 대한 정보가 없습니다.');
+			}
 		
 		});
 	

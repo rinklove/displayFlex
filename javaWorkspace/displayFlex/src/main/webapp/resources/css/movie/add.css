@@ -43,8 +43,8 @@ form {
 	width: 100%;
 }
 
-.w-55 {
-	width: 55%;
+.w-60 {
+	width: 60%;
 }
 
 td {
@@ -70,7 +70,7 @@ td {
 
 input {
 	padding: 15px;
-	width: 80%;
+	width: 75%;
 	height: 2em;
 	border-radius: 40px;
 }
