@@ -15,5 +15,4 @@ public class CouponHistory extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/views/mypage/coupon.jsp").forward(req, resp);
 	}
-
 }
