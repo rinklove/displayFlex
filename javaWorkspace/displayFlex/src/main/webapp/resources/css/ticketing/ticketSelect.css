@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 button {
-    /* 기본 스타일 초기화 */
     padding: 0;
     margin: 0;
     border: none;
@@ -10,7 +9,6 @@ button {
     font: inherit;
     text-align: inherit;
     cursor: pointer;
-    /* 필요에 따라 추가적인 스타일을 재정의할 수 있습니다. */
 }
 
 body {
@@ -93,6 +91,10 @@ header > nav {
     box-shadow: 2px 2px 2px gray;
 }
 
+.ticketingMovie {
+    width: 365px;
+}
+
 .ticketingMovie > button{
     position: relative;
     height: 36px;
@@ -100,7 +102,7 @@ header > nav {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 380px;
+    width: 100%;
 }
 
 .ticketingDate > button{
@@ -109,19 +111,11 @@ header > nav {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 250px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-
-
-/* .ticketingDate > a {
-    display: block;
-    height: 100%;
-    width: 100%;
-} */
 
 .ticketingMovie > button > img {
     height: 36px;
@@ -132,27 +126,10 @@ header > nav {
     color: black;
     text-decoration: none;
 }
-/* 
-.ticketingMovie > div {
-    position: relative;
-    cursor: pointer;
-    height: 100%;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-} */
 
 .ticketingMovie:hover, .ticketingDate:hover{
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-
-/* .ticketingMovie:selected {
-    background-color: #333;
-    width: 242px;
-    height: 33px;
-    line-height: 33px;
-    border: 1px solid #000;
-} */
 
 .ticketingMovie > div:first-child{
     margin-left: 30px;
@@ -166,7 +143,7 @@ header > nav {
 
 .ticketingDate {
     height: 36px;
-    width: 250px;
+    width: 235px;
     background-color: #D9D9D9;
 }
 
@@ -255,6 +232,12 @@ header > nav {
     grid-gap: 10px;
 } 
 
+.selectTime{
+	width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
 .theater1_time > div, .theater2_time > div, .theater3_time > div {
     background-color: #dac1c1;
     position: relative;
@@ -264,23 +247,13 @@ header > nav {
     justify-content: center;
 } 
 
-.theater1_time > div:hover::before, .theater2_time > div:hover::before, .theater3_time > div:hover::before{
-    content: '';    
-    position: absolute;
-    width: 90%;
-    height: 90%;
-    background-color: #EDD711;
-    border-radius: 40px;
-    top: 50%;  /* 50% 수직 위치 (부모 요소 기준) */
-    left: 50%; /* 50% 수평 위치 (부모 요소 기준) */
-    transform: translate(-50%, -50%); /* 요소의 가로 및 세로의 50%만큼 이동시켜 가운데로 정렬 */
-}
+
 
 .theater1_time > div:hover, .theater2_time > div:hover, .theater3_time > div:hover {
     font-weight: bold;
 }
 
-.theater1_time > div > a, .theater2_time > div > a, .theater3_time > div > a {
+.theater1_time > div > button, .theater2_time > div > button, .theater3_time > div > button {
     position: relative;
 }
 
@@ -349,7 +322,7 @@ header > nav {
     background-color: #EDD711
 }
 
-.seat_A > a, .seat_B > a, .seat_C > a,  .seat_D > a   {
+.seat_A > button, .seat_B > button, .seat_C > button,  .seat_D > button   {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -447,6 +420,10 @@ header > nav {
 	font-weight: bold;
 	font-size: 15px;
 	color: white;
+}
+
+#timeInfo {
+	margin-left: 10px;
 }
 
 .bi-check-circle-fill, .bi-check-circle-fill::before{

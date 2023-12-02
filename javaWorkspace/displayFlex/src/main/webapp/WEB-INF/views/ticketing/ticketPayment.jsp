@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../resources/css/ticketing/ticketPayment.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../resources/bootstrap-5.3.2-dist/css/bootstrap.css">
+    <script defer src="../resources/js/ticketing/ticketPayment.js"> </script>
 
     <title>예매페이지-결제</title>
 
@@ -65,13 +66,18 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                       <div class="step-name">
                         <p>STEP2</p>
-                        <span>등급할인</span>
+                        <span>할인혜택</span>
                       </div>
                     </button>
                   </h2>
                   <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
-                    
+                      <div>
+                        <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">VIP 할인</span>
+                        <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">어린이</span>
+                        <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">경로할인</span>
+                        <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">장애인</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -80,17 +86,19 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                       <div class="step-name">
                         <p>STEP3</p>
-                        <span>우대사항</span>
+                        <span>결제수단</span>
                       </div>
                     </button>
                   </h2>
                   <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
-                      <strong>dd</strong> ?? 
+                      <div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
+                <!-- <div class="accordion-item">
                   <h2 class="accordion-header" id="headingFour">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                       <div class="step-name">
@@ -104,7 +112,7 @@
                       <strong>dd</strong> ?? 
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
         </div>
         <div id="paymentInfo_area">
@@ -184,7 +192,7 @@
             </table>
         </div>
         <div id="ticket-payButton">
-            <button type="button" onclick="window.location.href='/cinema/ticket/payment'">
+            <button type="button" onclick="openPopup('/cinema/ticket/popup');">
                 <i class="bi bi-arrow-right-circle-fill"></i>
                 <span>결제하기</span>
             </button>

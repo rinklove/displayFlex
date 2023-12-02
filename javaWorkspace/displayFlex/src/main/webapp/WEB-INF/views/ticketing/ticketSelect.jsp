@@ -49,7 +49,7 @@
                         <% for(int i = 0; i < 100; i++){ %>
                         <li class="ticketingDate">
                             <button type="button" onclick="changeDateInfo('<%=i%>')">
-                                <span class="text" id="movieDate<%=i%>">날짜<%= i %></span>
+                                <span class="text" id="movieDate<%=i%>">2023-12-<%= i %></span>
                             </button>
                 
                         </li>               
@@ -67,42 +67,42 @@
                         <span>상영관</span>
                     </div>
                     <div id="theater1">
-                        <div>상영관1</div>
+                        <div>1관</div>
                         <div class="theater1_time">
-                            <div><a href="#">시간1</a></div>
-                            <div><a href="#">시간2</a></div>
-                            <div><a href="#">시간3</a></div>
+                            <div><button class="selectTime">시간1</button></div>
+                            <div><button class="selectTime">시간2</button></div>
+                            <div><button class="selectTime">시간3</button></div>
                         </div>
                         <div class="theater1_time">
-                            <div><a href="#">시간4</a></div>
-                            <div><a href="#">시간5</a></div>
-                            <div><a href="#">시간6</a></div>
+                            <div><button class="selectTime">시간4</button></div>
+                            <div><button class="selectTime">시간5</button></div>
+                            <div><button class="selectTime">시간6</button></div>
                         </div>
                     </div>
                     <div id="theater2">
-                        <div>상영관2</div>
+                        <div>2관</div>
                         <div class="theater2_time">
-                            <div><a href="#">시간1</a></div>
-                            <div><a href="#">시간2</a></div>
-                            <div><a href="#">시간3</a></div>
+                            <div><button class="selectTime">시간1</button></div>
+                            <div><button class="selectTime">시간2</button></div>
+                            <div><button class="selectTime">시간3</button></div>
                         </div>
                         <div class="theater2_time">
-                            <div><a href="#">시간4</a></div>
-                            <div><a href="#">시간5</a></div>
-                            <div><a href="#">시간6</a></div>
+                            <div><button class="selectTime">시간4</button></div>
+                            <div><button class="selectTime">시간5</button></div>
+                            <div><button class="selectTime">시간6</button></div>
                         </div>
                     </div>
                     <div id="theater3">
-                        <div>상영관3</div>
+                        <div>3관</div>
                         <div class="theater3_time">
-                            <div><a href="#">시간1</a></div>
-                            <div><a href="#">시간2</a></div>
-                            <div><a href="#">시간3</a></div>
+                            <div><button class="selectTime">시간4</button></div>
+                            <div><button class="selectTime">시간5</button></div>
+                            <div><button class="selectTime">시간6</button></div>
                         </div>
                         <div class="theater3_time">
-                            <div><a href="#">시간4</a></div>
-                            <div><a href="#">시간5</a></div>
-                            <div><a href="#">시간6</a></div>
+                            <div><button class="selectTime">시간4</button></div>
+                            <div><button class="selectTime">시간5</button></div>
+                            <div><button class="selectTime">시간6</button></div>
                         </div>
                     </div>
                 </div>   
@@ -115,63 +115,63 @@
                     <div id="seat_area">
                         <div class="seat" id="seat_A">
                             <div class="seatRow" id="A">A</div>
-                            <div class="seat_A" id="seat01"><a href="#">1</a></div>
-                            <div class="seat_A" id="seat02"><a href="#">2</a></div>
+                            <div class="seat_A" id="seat01"><button>1</button></div>
+                            <div class="seat_A" id="seat02"><button>2</button></div>
                             <div></div>
-                            <div class="seat_A" id="seat03"><a href="#">3</a></div>
-                            <div class="seat_A" id="seat04"><a href="#">4</a></div>
-                            <div class="seat_A" id="seat05"><a href="#">5</a></div>
-                            <div class="seat_A" id="seat06"><a href="#">6</a></div>
-                            <div class="seat_A" id="seat07"><a href="#">7</a></div>
-                            <div class="seat_A" id="seat08"><a href="#">8</a></div>
+                            <div class="seat_A" id="seat03"><button>3</button></div>
+                            <div class="seat_A" id="seat04"><button>4</button></div>
+                            <div class="seat_A" id="seat05"><button>5</button></div>
+                            <div class="seat_A" id="seat06"><button>6</button></div>
+                            <div class="seat_A" id="seat07"><button>7</button></div>
+                            <div class="seat_A" id="seat08"><button>8</button></div>
                             <div></div>
-                            <div class="seat_A" id="seat09"><a href="#">9</a></div>
-                            <div class="seat_A" id="seat10"><a href="#">10</a></div>
+                            <div class="seat_A" id="seat09"><button>9</button></div>
+                            <div class="seat_A" id="seat10"><button>10</button></div>
                         </div>
                         <div class="seat" id="seat_B">
                             <div class="seatRow" id="B">B</div>
-                            <div class="seat_B" id="seat01"><a href="#">1</a></div>
-                            <div class="seat_B" id="seat02"><a href="#">2</a></div>
+                            <div class="seat_B" id="seat01"><button>1</button></div>
+                            <div class="seat_B" id="seat02"><button>2</button></div>
                             <div></div>
-                            <div class="seat_B" id="seat03"><a href="#">3</a></div>
-                            <div class="seat_B" id="seat04"><a href="#">4</a></div>
-                            <div class="seat_B" id="seat05"><a href="#">5</a></div>
-                            <div class="seat_B" id="seat06"><a href="#">6</a></div>
-                            <div class="seat_B" id="seat07"><a href="#">7</a></div>
-                            <div class="seat_B" id="seat08"><a href="#">8</a></div>
+                            <div class="seat_B" id="seat03"><button>3</button></div>
+                            <div class="seat_B" id="seat04"><button>4</button></div>
+                            <div class="seat_B" id="seat05"><button>5</button></div>
+                            <div class="seat_B" id="seat06"><button>6</button></div>
+                            <div class="seat_B" id="seat07"><button>7</button></div>
+                            <div class="seat_B" id="seat08"><button>8</button></div>
                             <div></div>
-                            <div class="seat_B" id="seat09"><a href="#">9</a></div>
-                            <div class="seat_B" id="seat10"><a href="#">10</a></div>
+                            <div class="seat_B" id="seat09"><button>9</button></div>
+                            <div class="seat_B" id="seat10"><button>10</button></div>
                         </div>
                         <div class="seat" id="seat_C">
                             <div class="seatRow" id="C">C</div>
-                            <div class="seat_C" id="seat01"><a href="#">1</a></div>
-                            <div class="seat_C" id="seat02"><a href="#">2</a></div>
+                            <div class="seat_C" id="seat01"><button>1</button></div>
+                            <div class="seat_C" id="seat02"><button>2</button></div>
                             <div></div>
-                            <div class="seat_C" id="seat03"><a href="#">3</a></div>
-                            <div class="seat_C" id="seat04"><a href="#">4</a></div>
-                            <div class="seat_C" id="seat05"><a href="#">5</a></div>
-                            <div class="seat_C" id="seat06"><a href="#">6</a></div>
-                            <div class="seat_C" id="seat07"><a href="#">7</a></div>
-                            <div class="seat_C" id="seat08"><a href="#">8</a></div>
+                            <div class="seat_C" id="seat03"><button>3</button></div>
+                            <div class="seat_C" id="seat04"><button>4</button></div>
+                            <div class="seat_C" id="seat05"><button>5</button></div>
+                            <div class="seat_C" id="seat06"><button>6</button></div>
+                            <div class="seat_C" id="seat07"><button>7</button></div>
+                            <div class="seat_C" id="seat08"><button>8</button></div>
                             <div></div>
-                            <div class="seat_C" id="seat09"><a href="#">9</a></div>
-                            <div class="seat_C" id="seat10"><a href="#">10</a></div>
+                            <div class="seat_C" id="seat09"><button>9</button></div>
+                            <div class="seat_C" id="seat10"><button>10</button></div>
                         </div>
                         <div class="seat" id="seat_D">
                             <div class="seatRow" id="D">D</div>
-                            <div class="seat_D" id="seat01"><a href="#">1</a></div>
-                            <div class="seat_D" id="seat02"><a href="#">2</a></div>
+                            <div class="seat_D" id="seat01"><button>1</button></div>
+                            <div class="seat_D" id="seat02"><button>2</button></div>
                             <div></div>
-                            <div class="seat_D" id="seat03"><a href="#">3</a></div>
-                            <div class="seat_D" id="seat04"><a href="#">4</a></div>
-                            <div class="seat_D" id="seat05"><a href="#">5</a></div>
-                            <div class="seat_D" id="seat06"><a href="#">6</a></div>
-                            <div class="seat_D" id="seat07"><a href="#">7</a></div>
-                            <div class="seat_D" id="seat08"><a href="#">8</a></div>
+                            <div class="seat_D" id="seat03"><button>3</button></div>
+                            <div class="seat_D" id="seat04"><button>4</button></div>
+                            <div class="seat_D" id="seat05"><button>5</button></div>
+                            <div class="seat_D" id="seat06"><button>6</button></div>
+                            <div class="seat_D" id="seat07"><button>7</button></div>
+                            <div class="seat_D" id="seat08"><button>8</button></div>
                             <div></div>
-                            <div class="seat_D" id="seat09"><a href="#">9</a></div>
-                            <div class="seat_D" id="seat10"><a href="#">10</a></div>
+                            <div class="seat_D" id="seat09"><button>9</button></div>
+                            <div class="seat_D" id="seat10"><button>10</button></div>
                         </div>
                     </div>
                     <div id="seat_description">
@@ -197,15 +197,15 @@
                 <tbody>
                     <tr>
                         <td>일시</td>
-                        <td><span id="dateInfo"></span><span></span></td>
+                        <td><span id="dateInfo"></span><span id="timeInfo"></span></td>
                     </tr>
                     <tr>
                         <td>상영관</td>
-                        <td>2관</td>
+                        <td><span id="theaterInfo"></span></td>
                     </tr>
                     <tr>
                         <td>인원</td>
-                        <td>2명</td>
+                        <td id="reservedInfo"></td>
                     </tr>
                 </tbody>
             </table>
@@ -219,7 +219,7 @@
                     </tr>
                     <tr>
                         <td>좌석번호</td>
-                        <td>C1, C2</td>
+                        <td id="seatInfo"></td>
                     </tr>
                 </tbody>
             </table>
@@ -229,7 +229,7 @@
                 <tbody>
                     <tr>
                         <td>총금액</td>
-                        <td>24000원</td>
+                        <td id="payInfo">0</td>
                     </tr>
                 </tbody>
             </table>
@@ -237,7 +237,7 @@
         <div id="ticket-payButton">
             <button type="button" onclick="window.location.href='/cinema/ticket/payment'">
                 <i class="bi bi-check-circle-fill"></i>
-                <span>결제 완료</span>
+                <span>선택 완료</span>
             </button>
         </div>
     </div>
