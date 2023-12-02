@@ -27,13 +27,16 @@
                 </nav>
             </div>
             <div id="con_tit ty1">
-                <h2  class="tit">1:1 문의 작성</h2>
                 <table id="tbl_form" summary="문의내용작성 테이블">
                     <colgroup>
                         <col style="width: 15%;">
                         <col style="width: auto;">
                     </colgroup>
                     <tbody>
+                        <div id=inquiry_cont>
+                            <h2>문의내용</h2>
+                            <h3>* 필수입력</h3>
+                        </div>
                         <tr>
                             <th scope="row" class="req">
                                 분류

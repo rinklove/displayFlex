@@ -16,6 +16,7 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
+                <a href="/cinema/admin/noticeAdd">등록</a>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -50,46 +51,46 @@
                             <th id="thread3">등록일</th>
                         </tr>
                     </thead>
-                    <tbody id="tab1">
+                    <tbody id="tab">
                         <tr>
-                            <td>8</td>
-                            <td>제목8</td>
-                            <td>등록일8</td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">8</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">제목8</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일8</a></td>
                         </tr>
                         <tr>
-                            <td>7</td>
-                            <td>제목7</td>
-                            <td>등록일7</td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">7</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">제목7</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일7</a></td>
                         </tr>
                         <tr>
-                            <td>6</td>
-                            <td>제목6</td>
-                            <td>등록일6</td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">6</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">제목6</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일6</a></td>
                         </tr>
                         <tr>
-                            <td>5</td>
-                            <td>제목5</td>
-                            <td>등록일5</td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">5</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">제목5</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일5</a></td>
                         </tr>
                         <tr>
-                            <td>4</td>
-                            <td>제목4</td>
-                            <td>등록일4</td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">4</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">제목4</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일4</a></td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td>제목3</td>
-                            <td>등록일3</td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">3</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">제목3</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일3</a></td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>제목2</td>
-                            <td>등록일2</td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">2</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">제목2</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일2</a></td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td>제목1</td>
-                            <td>등록일1</td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">1</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">제목1</a></td>
+                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일1</a></td>
                         </tr>
                     </tbody>
                 </table>

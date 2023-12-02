@@ -62,10 +62,29 @@ nav a {
     margin: 20px 0;
 }
 
-h2 {
-    font-size: 24px;
+/* h2 {
+    font-size: 22px;
+    font-weight: 1000;
+    margin: 0;
+    margin-left: 3px;
+    padding: 5px 0 30px;
+    color: #acacac;
+    /* border-bottom: 1px solid #EEE; */
+    /* padding-left: 5px; */
+
+#inquiry_cont {
+    padding: 25px 0 0 4px;
+    /* margin-bottom: 5px; */
+    display: flex;
+    flex-direction: row;
 }
 
+h2 {
+    font-size: 17px;
+    font-weight: 550;
+}
+
+h3{font-size: 13px; color: #FF243E;}
 
 #tbl_form{
     /* margin: 0 auto; 가로 중앙 정렬을 위해 추가 */
@@ -81,7 +100,7 @@ table {
     border: 0;
     display: table;
     box-sizing: border-box;
-    text-indent: inherit;   수정
+    text-indent: inherit;   
 }
 
 th{
@@ -113,6 +132,7 @@ select#iDdivisionCode {
 }
 
 #tbl_form th, #tbl_form td {
+    border-top: 1px solid #cccccc;
     border-bottom: 1px solid #EEEEEE;
     height: 40px;
     padding: 7px 4px;
@@ -225,5 +245,4 @@ p{
 .ok {
     background-color: #880000;
     color: white;
-
 }

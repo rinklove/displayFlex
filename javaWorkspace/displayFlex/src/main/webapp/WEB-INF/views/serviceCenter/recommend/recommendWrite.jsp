@@ -39,7 +39,10 @@
                                 개봉 년도
                             </th>
                             <td>
-                                <input type="text" name="inputYear" placeholder="년도를 입력해주세요" style="height: 40px; width: 180px;">
+                                <label>
+                                    <input type="text" name="inputYear" placeholder="예: 2011" style="height: 40px; width: 90px;">
+                                    년
+                                </label>
                             </td>
                         </tr>
                         <tr>

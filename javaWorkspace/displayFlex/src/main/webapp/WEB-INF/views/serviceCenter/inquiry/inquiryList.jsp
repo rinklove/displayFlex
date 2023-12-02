@@ -17,6 +17,7 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
+                <a href="/cinema/admin/inquiryWrite">등록</a>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -26,9 +27,9 @@
                     <a href="/cinema/serviceCenter/recommendList">상영요청</a>
                 </nav>
             </div>
-            <div id="acc3">
-                <table id="tb_acc_wrap3"
-                    summary="상영요청 목록 표입니다. 구분, 질문 순서로 행이 구성되어 있습니다." >
+            <div id="acc2">
+                <table id="tb_acc_wrap2"
+                    summary="1:1 문의 표입니다. 구분, 질문 순서로 행이 구성되어 있습니다." >
                     <colgroup>
                         <col style="width: 20%;">
                         <col style="width: auto">
@@ -41,46 +42,46 @@
                             <th id="thread3">등록일</th>
                         </tr>
                     </thead>
-                    <tbody id="tab3">
+                    <tbody id="tab">
                         <tr>
-                            <td>8</td>
-                            <td>제목8</td>
-                            <td>등록일8</td>
+                            <td><a href="/cinema/admin/inquiryDetail">8</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">제목8</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">등록일8</a></td>
                         </tr>
                         <tr>
-                            <td>7</td>
-                            <td>제목7</td>
-                            <td>등록일7</td>
+                            <td><a href="/cinema/admin/inquiryDetail">7</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">제목7</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">등록일7</a></td>
                         </tr>
                         <tr>
-                            <td>6</td>
-                            <td>제목6</td>
-                            <td>등록일6</td>
+                            <td><a href="/cinema/admin/inquiryDetail">6</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">제목6</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">등록일6</a></td>
                         </tr>
                         <tr>
-                            <td>5</td>
-                            <td>제목5</td>
-                            <td>등록일5</td>
+                            <td><a href="/cinema/admin/inquiryDetail">5</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">제목5</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">등록일5</a></td>
                         </tr>
                         <tr>
-                            <td>4</td>
-                            <td>제목4</td>
-                            <td>등록일4</td>
+                            <td><a href="/cinema/admin/inquiryDetail">4</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">제목4</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">등록일4</a></td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td>제목3</td>
-                            <td>등록일3</td>
+                            <td><a href="/cinema/admin/inquiryDetail">3</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">제목3</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">등록일3</a></td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td>제목2</td>
-                            <td>등록일2</td>
+                            <td><a href="/cinema/admin/inquiryDetail">2</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">제목2</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">등록일2</a></td>
                         </tr>
                         <tr>
-                            <td>1</td>
-                            <td>제목1</td>
-                            <td>등록일1</td>
+                            <td><a href="/cinema/admin/inquiryDetail">1</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">제목1</a></td>
+                            <td><a href="/cinema/admin/inquiryDetail">등록일1</a></td>
                         </tr>
                     </tbody>
                 </table>

@@ -14,6 +14,8 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
+                <a href="/cinema/admin/FaqAdd">수정</a>
+                <a href="">삭제</a>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -82,6 +84,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div id="list_btn">
+                        <a href="/cinema/serviceCenter/faqList"">목록</a>
+                    </div>
                 </div>
             </div>
         </div>

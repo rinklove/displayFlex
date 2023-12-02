@@ -24,13 +24,35 @@ div#title_top {
 #contents > #title_top {
     margin-bottom: 20px;
     border-bottom: 1px solid #EEE;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 #contents > #title_top > h1 {
-    margin-left: 20px;
+    margin: 20px;
     font-size: 23px;
     font-weight: normal;
 }
+
+#title_top a {
+    margin-left: 5px;
+    height: 35px;
+    line-height: 33px;
+    /* padding-bottom: 4px; */
+    /* margin: 0 3px; */
+    min-width: 80px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    border: 2px solid #7c0000;
+}
+
+#title_top a:nth-child(2){margin-right: 12px; color: #ffffff; background-color: rgba(121, 0, 0, 0.326);}
+#title_top a:nth-child(3){color: #8c8c8c;}
 
 #contents #tab_tit #ty1 {
     /* grid-column: span 3; */
@@ -101,7 +123,7 @@ th, #tb_info td {
 #tb1_dtl tr#tb_info>td .cont { display: inline; padding-right: 100px;}
 /* span{display: flex; justify-content: space-around;} */
 
-#tb_content>td {padding: 30px 60px; border-bottom: 1px solid #EEEEEE;}
+#tb_content>td {padding: 60px 60px; border-bottom: 1px solid #EEEEEE;}
 /* #tbl_dtl th, #tbl_dtl td {text-align: left; } */
 p{margin: 0; text-align: left;}
 #noticeContents p{font-size: 15px; text-align: left;}
@@ -133,7 +155,27 @@ a, a:link {
     font-size: 15px;
 }
 
+#list_btn {
+    margin: 60px 0;
+    text-align: center;
+}
 
+#list_btn a {
+    height: 45px;
+    line-height: 45px;
+    padding: 0 18px;
+    margin: 0 3px;
+    min-width: 145px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid #790000;
+    font-size: 15.5px;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #790000;
+}
 
 
 
