@@ -22,9 +22,9 @@ function toggleMenuEnd() {
 
 window.addEventListener('scroll', function(){
 	const headerArea = document.querySelector('#header-area');
-	if (window.scrollY > 10){
-		 headerArea.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-	}else{
+	if (window.scrollY < 10){
 		 headerArea.style.backgroundColor = "transparent";
+	}else{
+		 headerArea.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
 	}
 });
