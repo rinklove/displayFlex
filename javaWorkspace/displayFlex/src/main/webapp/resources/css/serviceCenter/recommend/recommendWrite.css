@@ -63,7 +63,14 @@ nav a {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 22px;
+    font-weight: 1000;
+    margin: 0;
+    margin-left: 3px;
+    padding: 5px 0 30px;
+    color: #acacac;
+    border-bottom: 1px solid #cccccc;
+    /* padding-left: 5px; */
 }
 
 
@@ -81,13 +88,21 @@ table {
     border: 0;
     display: table;
     box-sizing: border-box;
-    text-indent: inherit;   수정
+    text-indent: inherit;
 }
 
 th{
-    font-size:  normal;
+    font-size: normal;
     display: table-cell;
-    /* vertical-align: inherit; */
+}
+
+#tbl_form label {
+    display: flex;
+    align-items: center;
+}
+
+#tbl_form input[name="inputYear"] {
+    margin-right: 5px; /* 인풋과 텍스트 사이의 간격을 조절하세요 */
 }
 
 th.req {
@@ -172,6 +187,12 @@ input#iDcontents {
     font-size: 13px;
     color: #666666;
 }
+
+.txt_count {
+    font-style: normal; /* 평범한 텍스트 스타일로 변경 */
+    font-weight: normal;
+}
+
 
 /* .bx_textarea [class^="txt_"] {
     display: inline-block;

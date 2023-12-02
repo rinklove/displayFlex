@@ -16,6 +16,7 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
+                <a href="/cinema/admin/faqAdd">등록</a>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -35,12 +36,30 @@
             </div>
             <div id="tab_con">
                 <div id="faq_icon_wrap">
-                    <button id="icon_01"><img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">영화관 이용</button>
-                    <button id="icon_02"><img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">회원</button>
-                    <button id="icon_03"><img src="/cinema/resources/image/faqIcon/star.png" alt="별 아이콘">등급</button>
-                    <button id="icon_04"><img src="/cinema/resources/image/faqIcon/ticket.png" alt="티켓 아이콘">쿠폰</button>
-                    <button id="icon_05"><img src="/cinema/resources/image/faqIcon/popcorn.png" alt="팝콘 아이콘">스토어</button>
-                    <button id="icon_06"><img src="/cinema/resources/image/faqIcon/ribbon.png" alt="리본 아이콘">이벤트</button>
+                    <button id="icon_01">
+                        <img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">
+                        <a href="">영화관 이용</a>
+                    </button>
+                    <button id="icon_02">
+                        <img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">
+                        <a href="">회원</a>
+                    </button>
+                    <button id="icon_03">
+                        <img src="/cinema/resources/image/faqIcon/star.png" alt="별 아이콘">
+                        <a href="">등급</a>
+                    </button>
+                    <button id="icon_04">
+                        <img src="/cinema/resources/image/faqIcon/ticket.png" alt="티켓 아이콘">
+                        <a href="">쿠폰</a>
+                    </button>
+                    <button id="icon_05">
+                        <img src="/cinema/resources/image/faqIcon/popcorn.png" alt="팝콘 아이콘">
+                        <a href="">스토어</a>
+                    </button>
+                    <button id="icon_06">
+                        <img src="/cinema/resources/image/faqIcon/ribbon.png" alt="리본 아이콘">
+                        <a href="">이벤트</a>
+                    </button>
                 </div>
                 <fieldset id="search_wrap">
                     <legend>영화관 FAQ 검색하기</legend>
@@ -68,39 +87,39 @@
                         </thead>
                         <tbody id="tab">
                             <tr>
-                                <td>8</td>
-                                <td>제목8</td>
-                                <td>등록일8</td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">8</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">제목8</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">등록일8</a></td>
                             </tr>
                             <tr>
-                                <td>7</td>
-                                <td>제목7</td>
-                                <td>등록일7</td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">7</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">제목7</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">등록일7</a></td>
                             </tr>
                             <tr>
-                                <td>6</td>
-                                <td>제목6</td>
-                                <td>등록일6</td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">6</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">제목6</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">등록일6</a></td>
                             </tr>
                             <tr>
-                                <td>5</td>
-                                <td>제목5</td>
-                                <td>등록일5</td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">5</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">제목5</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">등록일5</a></td>
                             </tr>
                             <tr>
-                                <td>4</td>
-                                <td>제목4</td>
-                                <td>등록일4</td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">4</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">제목4</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">등록일4</a></td>
                             </tr>
                             <tr>
-                                <td>3</td>
-                                <td>제목3</td>
-                                <td>등록일3</td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">3</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">제목3</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">등록일3</a></td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>제목2</td>
-                                <td>등록일2</td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">2</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">제목2</a></td>
+                                <td><a href="/cinema/serviceCenter/faqDetail">등록일2</a></td>
                             </tr>
                             <tr>
                                 <td><a href="/cinema/serviceCenter/faqDetail">1</a></td>

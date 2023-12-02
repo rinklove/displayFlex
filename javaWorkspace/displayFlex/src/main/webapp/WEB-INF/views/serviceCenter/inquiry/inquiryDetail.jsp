@@ -26,7 +26,7 @@
             <div id="tab_con">
                 <div id="tab_wrap inner">
                     <!-- <h2></h2> -->
-                    <table id="tb1_dtl" summary="공지사항 상세 내용에 대한 표">
+                    <table id="tb1_dtl" summary="1:1 문의 상세 내용에 대한 표">
                         <colgroup>
                             <col style="width: auto;">
                         </colgroup>
@@ -82,6 +82,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div id="list_btn">
+                        <a href="/cinema/serviceCenter/faqList"">목록</a>
+                    </div>
                 </div>
             </div>
         </div>
