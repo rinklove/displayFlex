@@ -4,8 +4,9 @@
 	padding: 30px;
 	margin: auto;
 	margin-top: 40px; 
-	width: 60%;
-	border: 1px solid black;
+	width: 70em;
+	background-color: white;
+	border-radius: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -16,8 +17,9 @@
 	padding: 30px;
 	margin: auto;
 	margin-top: 40px; 
-	width: 80%;
-	border: 1px solid black;
+	width: 84em;
+	border-radius: 40px;
+	background-color: white;
 }
 
 .result-container hr {
