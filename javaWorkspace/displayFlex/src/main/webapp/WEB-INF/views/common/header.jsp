@@ -30,7 +30,7 @@
     </div>
     <div class="sideMenu">
         <ul>
-            <li><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;<a href="/cinema/ticket/select">영화예매</a></li>
+            <li><i class="fa-solid fa-film"></i>&nbsp;&nbsp;<a href="/cinema/ticket/select">영화예매</a></li>
             <li><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;<a href="/cinema/movie/list">영화검색</a></li>
             <li><i class="fa-solid fa-store"></i>&nbsp;&nbsp;<a href="/cinema/store">스토어</a></li>
             <li><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;<a href="/cinema/event/event">이벤트</a></li>

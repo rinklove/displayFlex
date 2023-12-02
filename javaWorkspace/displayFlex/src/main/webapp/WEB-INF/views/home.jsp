@@ -12,16 +12,25 @@
 </head>
 <body>
 
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div id="wrap">
 
-		<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
-        <main class="poster">
+        <div class="poster">
             <img src="/cinema/resources/image/home/ponyo.jpeg" alt="포뇨사진">
-
-        </main>
+        </div>
+	    <div class="info">
+	    	<div>다시 보고 싶으신 영화가 있으신가요?</div>
+	    	<div><span><a href="/cinema/serviceCenter/recommendWrite">여기를 클릭</a>해서 다시 보고 싶은 영화를 요청하세요!</span></div>
+	    </div>
+	    <div class="event">
+	    	<div></div>
+	    	<div></div>
+	    	<div></div>
+				
+	    	</div>
+	    </div>
 
     </div>
-
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

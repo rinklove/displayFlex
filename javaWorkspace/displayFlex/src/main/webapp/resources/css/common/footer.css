@@ -1,0 +1,13 @@
+footer{
+	width: 100vw;
+	height: 100px;
+	background-color: #f8f8f8;
+	z-index: 1;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+footer > div:first-child{
+	color: #66686b;
+}
