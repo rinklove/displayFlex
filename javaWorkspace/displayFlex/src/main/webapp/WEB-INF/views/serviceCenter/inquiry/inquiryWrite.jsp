@@ -32,27 +32,33 @@
                         <col style="width: 15%;">
                         <col style="width: auto;">
                     </colgroup>
+                    <div id="con_top">
+                        <div id="tit_qus">
+                            <img src="/cinema/resources/image/faqIcon/inquiry.png" alt="">
+                            <div class="list_tit">
+                                FAQ를 이용하시면 궁금증을 더 빠르게 해결하실 수 있습니다.
+                                <p>• 1:1 문의글 답변운영시간 10:00 ~ 17:30</p>
+                                <p>• 접수 후 48시간 안에 답변 드리겠습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="context_type1">
+                        <dt class="tit">
+                            고객님의 문의에
+                            <span class="txt_red" style="padding: 0; font-size: 15.5px;">
+                                답변하는 직원은 고객 여러분의 가족 중 한 사람
+                            </span>
+                            일 수 있습니다
+                        </dt>
+                        <dd class="desc" style="margin: 0;">
+                            고객의 언어폭력(비하, 욕설, 반말, 성희롱 등)으로부터 직원을 보호하기 위해 관련 법에 따라 수사기관에 필요한 조치를 요구할 수 있으며, 형법에 의해 처벌 대상이 될 수 있습니다.
+                        </dd>
+                    </div>
                     <tbody>
                         <div id=inquiry_cont>
                             <h2>문의내용</h2>
                             <h3>* 필수입력</h3>
                         </div>
-                        <tr>
-                            <th scope="row" class="req">
-                                분류
-                            </th>
-                            <td>
-                                <select title="문의내용 분류선택" id="iDdivisionCode">
-                                    <option value="0">분류선택</option>
-                                    <option value="1">영화관 이용</option>
-                                    <option value="2">회원</option>
-                                    <option value="3">등급</option>
-                                    <option value="4">쿠폰</option>
-                                    <option value="5">스토어</option>
-                                    <option value="6">이벤트</option>
-                                </select>
-                            </td>
-                        </tr>
                         <tr>
                             <th scope="row" class="req">
                                 제목

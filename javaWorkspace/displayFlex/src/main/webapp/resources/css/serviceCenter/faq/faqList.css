@@ -304,10 +304,24 @@ tbody {
     background-color: rgba(255, 221, 200, 0.909);
 }
 
+#paging {
+    margin: 40px;
+    font-size: 16px;
+}
 
+#paging a {
+    padding: 5px;
+}
 
+#paging a:hover{
+    border-bottom: 1px solid #000;
+    font-weight: 650;
+}
 
-
+#paging a:focus{
+    border-bottom: 1px solid #000;
+    font-weight: 650;
+}
 
 
 

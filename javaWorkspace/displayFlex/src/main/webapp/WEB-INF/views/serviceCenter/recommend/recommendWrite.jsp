@@ -27,7 +27,14 @@
                 </nav>
             </div>
             <div id="con_tit ty1">
-                <h2  class="tit">상영 요청작 작성</h2>
+                <div id="recommend_cont">
+                    <div>
+                        <h2  class="tit">상영 요청작 작성</h2>
+                    </div>
+                    <div>
+                        <h3>* 필수입력</h3>
+                    </div>
+                </div>
                 <table id="tbl_form" summary="문의내용작성 테이블">
                     <colgroup>
                         <col style="width: 15%;">
