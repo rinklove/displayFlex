@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+
+
 .condition-search-container {
 	padding: 30px;
 	margin: auto;
@@ -14,10 +16,10 @@
 }
 
 .result-container {
-	padding: 30px;
+	padding: 2.6em;
 	margin: auto;
 	margin-top: 40px; 
-	width: 84em;
+	width: 83.4em;
 	border-radius: 40px;
 	background-color: white;
 }
@@ -47,8 +49,7 @@
 }
 
 .poster > img {
-	width: 213.6px;
-	height: 304px;
+	width: 180px;
 }
 
 .title {
@@ -64,9 +65,22 @@ table {
 
 .element {
 	display:  flex;
-	margin: 20px;
+	width: 70em;
+	margin: 1em;
+	padding: 1em;
+	margin-left: 3em;
+}
+
+.element:hover {
+	background-color: #dedede;
+	cursor: pointer;
 }
 
 .simple-info {
 	margin-left: 50px;
+	padding: 1em;
+}
+
+.bg-abc95f {
+	background-color: #abc95f;
 }
