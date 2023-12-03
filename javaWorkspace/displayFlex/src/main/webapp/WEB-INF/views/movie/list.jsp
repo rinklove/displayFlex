@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/movie/list.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/movie/list.js"></script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -66,13 +67,13 @@
         </table>
     </form>
 </div>
-<!-- 페이징 처리 필요 -->
+<!-- 페이징 처리 필요 - 한 페이지당 5개씩-->
 <div class="result-container">
 	<div class="df jc-sb mx-20">
         <span class="title"><strong>검색 결과</strong></span>
         <span class="title"><a href="${pageContext.request.contextPath }/admin/movie/add">영화 등록하기</a></span>
         <c:if test="${loginMember eq 'Y' }">
-	        <span class="title"><a href="${pageContext.request.contextPath }/admin/movie/add">영화 등록하기</a></span>
+	        <span class="title"><a href="${pageContext.request.contextPath }/admin/movie/add" class="text-decoration-none text-black">영화 등록하기</a></span>
         </c:if>
     </div>
 	<hr>
@@ -84,13 +85,14 @@
                 <td>
                     <div class="element">
                         <div class="poster">
-                            <a href="#"><img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨"></a>
+                            <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨">
                         </div>
                         <div class="simple-info">
-                            <h3><a href="#">벼랑 위의 포뇨</a></h3>
-                            <p>개봉일: 2008.12.18</p>
-                            <p>장르: 가족, 어드벤처, 애니메이션</p>
-                            <p>개요: 전체 관람가, 100분</p>
+                            <p class="d-none">영화 번호</p>
+                            <h3 class=" mt-2 mb-2">벼랑 위의 포뇨</h3>
+                            <p class="mb-4 ">개봉일: 2008.12.18</p>
+                            <p class="mb-4">장르: 가족, 어드벤처, 애니메이션</p>
+                            <p class="mb-4">개요: 전체 관람가, 100분</p>
                         </div>
                     </div>
                 </td>
@@ -99,13 +101,14 @@
                 <td>
                     <div class="element">
                         <div class="poster">
-                            <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨">
+                            <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" >
                         </div>
                         <div class="simple-info">
-                            <h3><a href="#">벼랑 위의 포뇨</a></h3>
-                            <p>개봉일: 2008.12.18</p>
-                            <p>장르: 가족, 어드벤처, 애니메이션</p>
-                            <p>개요: 전체 관람가, 100분</p>
+                        	<p class="d-none">>영화 번호</p>
+                            <h3 class=" mt-2 mb-2">벼랑 위의 포뇨</h3>
+                            <p class="mb-4 ">개봉일: 2008.12.18</p>
+                            <p class="mb-4">장르: 가족, 어드벤처, 애니메이션</p>
+                            <p class="mb-4">개요: 전체 관람가, 100분</p>
                         </div>
                     </div>
                 </td>
@@ -114,13 +117,14 @@
                 <td>
                     <div class="element">
                         <div class="poster">
-                            <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨">
+                            <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" >
                         </div>
                         <div class="simple-info">
-                            <h3><a href="#">벼랑 위의 포뇨</a></h3>
-                            <p>개봉일: 2008.12.18</p>
-                            <p>장르: 가족, 어드벤처, 애니메이션</p>
-                            <p>개요: 전체 관람가, 100분</p>
+                        	<p class="d-none">>영화 번호</p>
+                            <h3 class=" mt-2 mb-2">벼랑 위의 포뇨</h3>
+                            <p class="mb-4 ">개봉일: 2008.12.18</p>
+                            <p class="mb-4">장르: 가족, 어드벤처, 애니메이션</p>
+                            <p class="mb-4">개요: 전체 관람가, 100분</p>
                         </div>
                     </div>
                 </td>
@@ -133,7 +137,8 @@
                             <img src="${element.poster }" alt="${element.movieName }">
                         </div>
                         <div class="simple-info">
-                            <h3><a href="#">${element.movieName }</a></h3>
+                        	<p class="d-none">>${element.movieNo}</p>
+                            <h3 class="mt-2 mb-2">${element.movieName }</h3>
                             <p>개봉일: ${element.releaseDate }</p>
                             <p>장르: ${element.genre }</p>
                             <p>개요: ${element.screenGradeName }, ${element.runningTime }</p>
@@ -144,6 +149,29 @@
             </c:forEach> -->    
         </tbody>
     </table>
+    <div class="page-area text-center">
+        <c:if test="${pageVo.startPage gt 1 }">
+            <a href="${pageContext.request.contextPath}/admin/movie/list?pno=${pageVo.startPage-1}" }>이전</a>	            
+        </c:if>
+        <c:forEach var="i"  begin="${pageVo.startPage }" end="${pageVo.endPage }">
+        <c:choose>
+        <c:when test="${pageVo.currentPage eq i}">
+            <span class="bg-success p-2 m-1">${i }</span>                        	
+        </c:when>
+        <c:otherwise>
+            <a href="${pageContext.request.contextPath}/admin/movie/list?pno=${i}" }>${i }</a>            
+        </c:otherwise>
+        </c:choose>
+        </c:forEach>
+        <c:if test="${pageVo.endPage ne pageVo.maxPage }">
+            <a href="${pageContext.request.contextPath}/admin/movie/list?pno=${pageVo.endPage+1}" }>다음</a>	
+        </c:if>
+        <span class="bg-abc95f p-2 m-1">1</span>
+        <a href="#" class="text-decoration-none text-black m-1">2</a>
+        <a href="#" class="text-decoration-none text-black m-1">3</a>
+        <a href="#" class="text-decoration-none text-black m-1">4</a>
+        <a href="#" class="text-decoration-none text-black m-1">5</a>
+    </div>
 </div>
 </body>
 </html>	
