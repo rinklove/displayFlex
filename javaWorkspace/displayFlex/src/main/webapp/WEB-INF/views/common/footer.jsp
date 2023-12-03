@@ -9,5 +9,9 @@
 		<div>대표이사 : 심원용 • 사업자등록번호 : 012-34-56789</div>
 		<div>호스팅사업자 : DisplayFlex</div>
 	</div>
-	<div>2</div>
+	<div>
+		<div>고객센터 1234-5678 (유료)</div>
+		<div>대표이메일 : dispalyFlex@kh.com</div>
+		<div>통신판매업신고번호 제0000호</div>
+	</div>
 </footer>

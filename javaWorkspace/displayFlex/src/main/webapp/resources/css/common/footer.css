@@ -8,6 +8,8 @@ footer{
 	align-items: center;
 }
 
-footer > div:first-child{
+footer > div{
 	color: #66686b;
+	border-left: 1px solid lightgray;
+	padding-left: 40px;
 }

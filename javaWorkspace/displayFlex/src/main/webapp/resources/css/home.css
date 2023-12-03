@@ -3,7 +3,7 @@
     width: 100vw;
     height: 170vh;
     display: grid;
-    grid-template-rows: 80vh 1fr 5fr;
+    grid-template-rows: 80vh 1fr 4fr;
 }
 .poster{
 	display: grid;
@@ -36,5 +36,5 @@
 	margin: 0;
 	background-color: white;
 	display: grid;
-	grid-template-rows: 1.5fr 2fr 1fr;
+	grid-template-rows: 1fr 1fr;
 }
