@@ -9,6 +9,18 @@
 	box-sizing: border-box;
 } */
 
+button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+
+
 main {
     display: grid;
     height: 1200px;
@@ -36,7 +48,7 @@ main {
     border-bottom: 1px solid #A09F9F;
     margin-bottom: 10px;
 }
-#coupon-table > p {
+#step-coupon > p {
     margin-top: 10px;
     font-size: 25px;
     color: #306791;
@@ -79,10 +91,82 @@ main {
     margin-top: 8px;
     font-weight: bold;
 }
+/* 할인혜택 */
+#gradeDiscount > div:first-child > span, #specialDiscount > div:first-child > span {
+    font-size: 25px;
+    margin-top: 10px;
+    color: #306791;
+    font-weight: bold;
+}
+
+#gradeDiscount > div:first-child, #specialDiscount > div:first-child {
+    border-bottom: 1px solid #A09F9F;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+
+/* 결제수단 */
+#step-payment > div:first-child{
+	border-bottom: 1px solid #A09F9F;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+
+#step-payment > div:first-child > h4 {
+    font-size: 25px;
+    margin-top: 10px;
+    color: #306791;
+    font-weight: bold;
+}
+
+
+#paymentMethod {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+}
+
+#paymentMethod > div {
+    padding: 4px;
+    width: 100%;
+    height: 64px;
+}
+
+#paymentMethod > div > button {
+/*	border: 1px solid rgb(229, 232, 235);*/
+	border: 1px solid #306791;
+	border-radius: 10px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#kakaoPay img {
+	width: 60px;
+    object-fit: cover;
+}
+
+#step-payment > div:last-child {
+	display: flex;
+	margin-top: 10px;
+	padding: 5px;
+	height: 75px;
+	background-color: red;
+	border-radius: 10px;
+}
+
+
+
+#paymentMethod > div > button > span {
+}
 /* --------------------------------------STEP 메뉴 끝 */
 /*---------------------------- 우측 결제정보 시작 */
 
-#payment > div > div:nth-of-type(1), #discount > div > div:nth-of-type(1), #totalPayment > div > div:nth-of-type(1) {
+#paymentAmount > div > div:nth-of-type(1), #discount > div > div:nth-of-type(1), #totalPayment > div > div:nth-of-type(1) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -102,14 +186,14 @@ main {
     grid-row-gap: 10px;
 }
 
-#payment {
+#paymentAmount {
     display: flex;
     align-items: flex-end;
     justify-content: center;
     
 }
 
-#payment > div {
+#paymentAmount > div {
     display: grid;
     grid-template-rows: 0.7fr 2fr;
     height: 40%;
@@ -119,12 +203,12 @@ main {
     overflow: hidden;
 }
 
-#payment > div > div:first-child{
+#paymentAmount > div > div:first-child{
     border-bottom: 1px solid black;
     background-color: white;
 }
 
-#payment > div > div:last-child{
+#paymentAmount > div > div:last-child{
     background-color: #474747;
     display: flex;
     align-items: center;
@@ -132,7 +216,7 @@ main {
     padding-right: 15px;
 }
 
-#payment > div > div:nth-of-type(2) > span:nth-of-type(1) {
+#paymentAmount > div > div:nth-of-type(2) > span:nth-of-type(1) {
     color: #FFF;
     text-align: right;
     font-size: 25px;
@@ -141,7 +225,7 @@ main {
     line-height: normal;
 }
 
-#payment > div > div:nth-of-type(2) > span:nth-of-type(2) {
+#paymentAmount > div > div:nth-of-type(2) > span:nth-of-type(2) {
     color: #FFF;
     text-align: right;
     font-size: 16px;
@@ -274,6 +358,7 @@ main {
     grid-auto-flow : column;
     grid-template-columns: 2fr 1fr 2fr 1fr 1fr 2fr;
     position: sticky;
+    z-index: 1000;
     bottom: 0;
     width: 100%;
     min-width: 996px;
@@ -340,6 +425,10 @@ main {
 	font-weight: bold;
 	font-size: 15px;
 	color: white;
+}
+
+#timeInfo{
+    margin-left: 10px;
 }
 
 /*------------------------------------ 하단 결제바 끝 */
