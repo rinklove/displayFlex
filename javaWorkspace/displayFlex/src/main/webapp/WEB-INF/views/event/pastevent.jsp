@@ -12,8 +12,7 @@
     <div class="bw"> 
         <hr id="jul1">
         <div id="event_title"> &nbsp;&nbsp;&nbsp;&nbsp; 지난 이벤트
-            <div id="event_title2">진행중 이벤트 | 지난 이벤트</div>
-        </div>
+            <div id="event_title2"><a href="/cinema/event/event" class="ongoing">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>        </div>
         <hr id="jul2">
         <div id="main_top">
             <div id="main_title">

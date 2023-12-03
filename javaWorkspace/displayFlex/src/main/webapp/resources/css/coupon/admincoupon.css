@@ -1,0 +1,25 @@
+/* admincoupon.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.coupon-container {
+    margin-top: 20px;
+    background-color: white; /* Set the background color to white */
+    padding: 20px; /* Add padding for better readability */
+}
+
+.coupon-info {
+    
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+}
+
+.info-value {
+    margin-top: 5px;
+}
