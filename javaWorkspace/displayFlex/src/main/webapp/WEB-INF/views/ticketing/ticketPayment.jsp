@@ -36,7 +36,8 @@
                   </h2>
                   <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
-                      <div id="coupon-table">
+                      <!-- 할인쿠폰 -->
+                      <div id="step-coupon">
                         <p>FLEX 할인쿠폰</p>
                         <table id="couponList">
                             <thead>
@@ -49,7 +50,7 @@
                             <tbody>
                                 <% for(int i = 0; i < 20; i++){%>
                                 <tr>
-                                    <td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">    쿠폰....</td>
+                                    <td><input class="form-check-input" type="checkbox" value="coupon<%= i %>" id="flexCheckDefault" name ="couponCheck" onclick="checkbox(this);">쿠폰<%= i %></td>
                                     <td>쿠폰번호...</td>
                                     <td>2010-11-10</td>
                                 </tr>
@@ -72,11 +73,18 @@
                   </h2>
                   <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
-                      <div>
-                        <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">VIP 할인</span>
-                        <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">어린이</span>
-                        <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">경로할인</span>
-                        <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">장애인</span>
+                      <!-- 할인 혜택 -->
+                      <div id="step-discount">
+                        <div id="gradeDiscount">
+                          <div><span>등급할인</span></div>
+                          <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">VIP 할인</span>
+                        </div>
+                        <div id="specialDiscount">
+                          <div><span>우대사항</span></div>
+                          <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">어린이</span>
+                          <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">경로할인</span>
+                          <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">장애인</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -92,49 +100,52 @@
                   </h2>
                   <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#step-accordion">
                     <div class="accordion-body">
-                      <div>
-
+                      <!-- 결제수단 -->
+                      <div id="step-payment">
+                        <div><h4>결제 방법</h4></div>
+                        <div id="paymentMethod">
+                          <div id="kakaoPay"><button><span><img src="../resources/image/ticketing/payment_icon_yellow_small.png" alt="카카오페이"></span></button></div>
+                          <div><button><span>결제수단2</span></button></div>
+                          <div><button><span>결제수단3</span></button></div>
+                          <div><button><span>결제수단4</span></button></div>
+                          
+                          <div><button><span>결제수단5</span></button></div>
+                          <div><button><span>결제수단6</span></button></div>
+                          <div><button><span>결제수단7</span></button></div>
+                          <div><button><span>결제수단8</span></button></div>
+                          
+                          <div><button><span>결제수단9</span></button></div>
+                          <div><button><span>결제수단10</span></button></div>
+                          <div><button><span>결제수단11</span></button></div>
+                          <div><button><span>결제수단12</span></button></div>
+                        </div>
+                      	<div>뭘 넣지..........</div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                      <div class="step-name">
-                        <p>STEP4</p>
-                        <span>결제수단</span>
-                      </div>
-                    </button>
-                  </h2>
-                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#step-accordion">
-                    <div class="accordion-body">
-                      <strong>dd</strong> ?? 
-                    </div>
-                  </div>
-                </div> -->
               </div>
         </div>
         <div id="paymentInfo_area">
             <div id="paymentInfo">
-                <div id="payment">
+                <div id="paymentAmount">
                     <div>
                         <div><span>결제 금액</span></div>
-                        <div><span>14000</span><span>원</span></div>
+                        <div><span id="paymentAmount-value">0</span><span>원</span></div>
                     </div>
                 </div>
                 <div id="discount">
                     <div>
                         <div><span>할인 내역</span></div>
-                        <div><span>무슨무슨 쿠폰</span></div>
-                        <div><span>1000</span><span>원</span></div>                            
+                        <div><span id="discountDetails"></span></div>
+                        <div><span id="discount-value">0</span><span>원</span></div>                            
                     </div>
                 </div>
                 <div id="totalPayment">
                     <div>
                         <div><span>최종 결제 금액</span></div>
                         <div></div>
-                        <div><span>13000</span><span>원</span></div>
+                        <div><span id="totalPayment-value">0</span><span>원</span></div>
                     </div>
                 </div>
             </div>
@@ -144,25 +155,25 @@
 
     <div id="selectInfo">
         <div id="ticket-posterImg">
-			<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" id="posterImg">
-		</div>
+			    <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" id="posterImg">
+		    </div>
         <div id="ticket-movieName">
-            <span>벼랑 위의 포뇨</span>
+            <span id="movieInfo">벼랑 위의 포뇨</span>
         </div>
         <div id="ticket-movieInfo">
             <table>
                 <tbody>
                     <tr>
                         <td>일시</td>
-                        <td>2023년 11월 10일(금) 10:00</td>
+                        <td><span id="dateInfo"></span><span id="timeInfo"></span></td>
                     </tr>
                     <tr>
                         <td>상영관</td>
-                        <td>2관</td>
+                        <td><span id="theaterInfo"></span></td>
                     </tr>
                     <tr>
                         <td>인원</td>
-                        <td>2명</td>
+                        <td id="reservedInfo"></td>
                     </tr>
                 </tbody>
             </table>
@@ -176,7 +187,7 @@
                     </tr>
                     <tr>
                         <td>좌석번호</td>
-                        <td>C1, C2</td>
+                        <td id="seatInfo"></td>
                     </tr>
                 </tbody>
             </table>
@@ -192,7 +203,7 @@
             </table>
         </div>
         <div id="ticket-payButton">
-            <button type="button" onclick="openPopup('/cinema/ticket/popup');">
+            <button type="button" onclick="completeSelect();">
                 <i class="bi bi-arrow-right-circle-fill"></i>
                 <span>결제하기</span>
             </button>

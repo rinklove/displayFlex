@@ -13,9 +13,53 @@
 
 <body>
     <div id="ticketPopup">
-        <div></div>
-        <div id="ticketInfo"></div>
-        <div id="logo"><img src="" alt="디스플레이플렉스"></div>
+        <div><span>예매완료</span></div>
+        <div id="ticket">
+            <div id="movieImg">
+            	<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="영화이미지">
+            </div>
+            <div id="ticketInfo">
+            	<table>
+                    <tbody>
+                        <tr>
+                            <th>티켓번호</th>
+                            <td id="ticketNo">1</td>
+                        </tr>
+                        <tr>
+                            <th>영화</th>
+                            <td id="movieName">벼랑 위의 포뇨</td>
+                        </tr>
+                        <tr>
+                            <th>상영관</th>
+                            <td id="theaterNo">FLEX 1관</td>
+                        </tr>
+                        <tr>
+                            <th>일시</th>
+                            <td id="screeningDate">2023년 11월 10일(금) 10:00</td>
+                        </tr>
+                        <tr>
+                            <th>인원</th>
+                            <td id="reservedInfo">2</td>
+                        </tr>
+                        <tr>
+                            <th>좌석</th>
+                            <td id="seatInfo">C1, C2</td>
+                        </tr>
+                        <tr>
+                            <th>결제금액</th>
+                            <td id="payAmount">16000원</td>
+                        </tr>
+                        <tr>
+                            <th>결제수단</th>
+                            <td id="payMethod">신용카드</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="logo">
+        	<img src="../resources/image/ticketing/flexLogo.png" alt="디스플레이플렉스">
+        </div>
     </div>
 </body>
 </html>

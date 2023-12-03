@@ -19,8 +19,10 @@
 <!--     </header> -->
     <main>
         <section id="section1">
-            <div id="ticketing1">
-                <div id="movie">
+            <div id="ticketing1-back">
+                <div id="ticketing1">
+                    <div id="movie">
+                
                     <div class="menuName">
                         <span class="text">영화</span>
                     </div>
@@ -35,7 +37,7 @@
                         <% } %>
                     </ul>
                 </div>
-                <div class="arrow">
+                <div id="arrow1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
                         <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
@@ -56,7 +58,7 @@
                         <% } %>
                     </ul>
                 </div>
-                <div class="arrow">
+                <div id="arrow2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
                         <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
@@ -107,6 +109,7 @@
                     </div>
                 </div>   
             </div>  
+            </div>
         </section>
         <section id="section2">
             <div id="ticketing2">
@@ -190,7 +193,7 @@
 			<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" id="posterImg">
 		</div>
         <div id="ticket-movieName">
-            <span id="movieInfo"></span>
+            <span id="movieInfo">영화를 선택해주세요</span>
         </div>
         <div id="ticket-movieInfo">
             <table>
@@ -235,10 +238,12 @@
             </table>
         </div>
         <div id="ticket-payButton">
-            <button type="button" onclick="window.location.href='/cinema/ticket/payment'">
-                <i class="bi bi-check-circle-fill"></i>
-                <span>선택 완료</span>
-            </button>
+            <form action="/cinema/ticket/payment" method="get">
+                <button type="submit">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>선택 완료</span>
+                </button>
+            </form>
         </div>
     </div>
 
