@@ -12,6 +12,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
+	<form action="/cinema/admin/faqAdd" method="get"></form>
     <main>
         <div id="contents">
             <div id="title_top">
@@ -36,27 +37,27 @@
             </div>
             <div id="tab_con">
                 <div id="faq_icon_wrap">
-                    <button id="icon_01">
+                    <button id="icon_01" onclick="clickIcon">
                         <img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">
                         <a href="">영화관 이용</a>
                     </button>
-                    <button id="icon_02">
+                    <button id="icon_02" onclick="clickIcon">
                         <img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">
                         <a href="">회원</a>
                     </button>
-                    <button id="icon_03">
+                    <button id="icon_03" onclick="clickIcon">
                         <img src="/cinema/resources/image/faqIcon/star.png" alt="별 아이콘">
                         <a href="">등급</a>
                     </button>
-                    <button id="icon_04">
+                    <button id="icon_04" onclick="clickIcon">
                         <img src="/cinema/resources/image/faqIcon/ticket.png" alt="티켓 아이콘">
                         <a href="">쿠폰</a>
                     </button>
-                    <button id="icon_05">
+                    <button id="icon_05" onclick="clickIcon">
                         <img src="/cinema/resources/image/faqIcon/popcorn.png" alt="팝콘 아이콘">
                         <a href="">스토어</a>
                     </button>
-                    <button id="icon_06">
+                    <button id="icon_06" onclick="clickIcon">
                         <img src="/cinema/resources/image/faqIcon/ribbon.png" alt="리본 아이콘">
                         <a href="">이벤트</a>
                     </button>
@@ -128,12 +129,30 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div id="paging">
+                        <a href="">1</a>
+                        <a href="">2</a>
+                        <a href="">3</a>
+                        <a href="">4</a>
+                        <a href="">5</a>
+                    </div>
                 </div>
 
             </div>
 
         </div>
     </main>
+	
 
+    <!-- <script>
+        function clickIcon(button) {
+            const bottons = document.querySelectorAll('#faq_icon_wrap button');
+            bottons.forEach(function (btn) {
+                btn.classList.remove('active');
+            });
+        button.classList.add('active');
+        
+        }
+    </script> -->
 </body>
 </html>

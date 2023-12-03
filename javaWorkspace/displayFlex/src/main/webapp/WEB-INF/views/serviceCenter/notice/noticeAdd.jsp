@@ -27,29 +27,20 @@
                 </nav>
             </div>
             <div id="con_tit ty1">
-                <h2  class="tit">공지사항 등록</h2>
+                <div id="notice_cont">
+                    <div>
+                        <h2  class="tit">공지사항 등록</h2>
+                    </div>
+                    <div>
+                        <h3>* 필수입력</h3>
+                    </div>
+                </div>
                 <table id="tbl_form" summary="문의내용작성 테이블">
                     <colgroup>
                         <col style="width: 15%;">
                         <col style="width: auto;">
                     </colgroup>
                     <tbody>
-                        <tr>
-                            <th scope="row" class="req">
-                                분류
-                            </th>
-                            <td>
-                                <select title="문의내용 분류선택" id="iDdivisionCode">
-                                    <option value="0">분류선택</option>
-                                    <option value="1">영화관 이용</option>
-                                    <option value="2">회원</option>
-                                    <option value="3">등급</option>
-                                    <option value="4">쿠폰</option>
-                                    <option value="5">스토어</option>
-                                    <option value="6">이벤트</option>
-                                </select>
-                            </td>
-                        </tr>
                         <tr>
                             <th scope="row" class="req">
                                 제목
