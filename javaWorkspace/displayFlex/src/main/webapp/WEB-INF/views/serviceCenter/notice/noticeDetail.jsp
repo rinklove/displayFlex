@@ -14,8 +14,10 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
+                <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
                 <a href="/cinema/admin/FaqAdd">수정</a>
                 <a href="">삭제</a>
+                <%-- </c:if> --%>
             </div>
             <div id="tab_tit">
                 <nav>
