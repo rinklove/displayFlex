@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>진행중 이벤트 상세조회</title>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>지난 이벤트 상세조회</title>
 </head>
 <body>
 
@@ -17,7 +17,7 @@
         </div>
         <hr id="jul2">
 
-        <div id="title_name"> &nbsp;&nbsp;&nbsp; [지난 이벤트] ex)종료된 이벤트 어쩌고어쪼고고고 </div>
+        <div id="title_name"> &nbsp;&nbsp;&nbsp; [지난 이벤트] ex)종료된 이벤트 어ㅉ고어쩌고 </div>
 
         <div id="main_content">
 
