@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	String x = (String) session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
 
 <link rel="stylesheet" href="/cinema/resources/css/home.css">
 
@@ -8,6 +13,12 @@
 <head>
 <meta charset="UTF-8">
 <title>DisplayFlex</title>
+
+    <script>
+	<% if( x != null ){ %>
+	    alert('<%= x %>');
+	<% } %>
+	</script>
   
 </head>
 <body>
@@ -29,5 +40,6 @@
 
     </div>
     <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    
 </body>
 </html>

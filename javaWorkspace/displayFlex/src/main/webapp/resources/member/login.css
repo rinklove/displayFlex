@@ -15,17 +15,22 @@ form{
 	padding-right: 5em;
 	display: grid;
 	align-items: center;
-	grid-template-rows: 100px 25px 1fr;
+	grid-template-rows: 200px 100px 25px 1fr;
 }
 
 #wrap{
-    width: 60%;
+    display: grid;
+    width: 1000px;
+    height: 500px;
     align-items: center;
     text-align: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
 }
 
 form{
-    width : 80%;
+    width : 800px;
     padding: 20px;
     height : 400px;
     background-color: white;
@@ -34,9 +39,9 @@ form{
 
 #loginArea{
     display: grid;
-    margin-top:300px;
+    margin-top: 200px;
     align-content: space-around;
-    height : 300px;
+    height: 400px;
 }
 
 input{
@@ -61,7 +66,7 @@ input::placeholder {
 
 .check-box{
     display: flex;
-    margin-left : 100px;
+    margin-left : 55px;
     width : 100%;
     height: 100%;
 }
@@ -80,4 +85,8 @@ input::placeholder {
 
 input[type=submit] {
     background-color: lightgray;
+}
+
+.form-check-confirm{
+    display: grid;
 }

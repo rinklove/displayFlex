@@ -1,5 +1,11 @@
+<%@page import="displayFlex.member.MemberVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+%>  
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,21 +20,52 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
     <div id="wrap">
-        <form action="/cinema/views/home">
+        <form action="/cinema/member/login" method="post">
             <div id="loginArea">
-                <div><label for="loginPage"><input type="text" id="loginPage" placeholder="로그인 페이지"></label></div>
-                <br>
+                <div><label for="loginPage"><input type="text" id="loginPage" placeholder="로그인/회원가입"></label></div>
+                <% if(loginMember == null) { %>
                 <div><input type="text" name="memberId" id="memberId" placeholder="아이디"></div>
-                <br>
                 <div><input type="password" name="memberPwd" id="memberPwd" placeholder="비밀번호"></div>
-                <br>
                 <div class="check-box">
-                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">아이디 저장</label></div>
+                    <input class="form-check-input" type="checkbox" value="rememberMe" id="rememberMe" name="rememberMe">
+                    <label class="form-check-label" for="rememberMe">아이디 저장</label></div>
                   <br>
+                <div class="form-check-confirm"> <div><button type="button" onclick="location.href='/cinema/member/join'">회원가입</button></div>
                   <div><input type="submit" value="로그인" id="logincheck"></div>
+                </div>
+                
+                 <%}else { %>
+                 
+               <% } %>
             </div>
     </div>
 
+    <script>
+
+        //아이디 기억하기
+        function rememberMemberId() {
+            var memberId = document.getElementById('memberId').value;
+            var rembmerMeCheckbox = document.getElementById('rememberMe');
+
+            if(rememberMeCheckbox.checked) {
+                document.cookie = 'memberId' + encodeURIComponent(memberId) + '; expires=Thu, 31 Dec 2037 12:00:00 UTC; path=/';\
+            }else {
+                document.cookie = 'memberId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+            }
+        }
+
+        // 페이지 로드 시 저장된 아이디가 있으면 입력란에 표시
+        window.onload = function() {
+            var MemberIdInput = document.getElementById('memberId');\
+            var rememberMemberId = getCookie('memberId');
+
+            if(rememberMemberId) {
+                MemberIdInput.value = decodeURIComponent(rememberMemberId);
+                document.getElementById('memberId').checked = true;
+            }
+        }
+
+    </script>
+    
 </body>
 </html>
