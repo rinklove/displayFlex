@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>보유 쿠폰 내역</title>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>   

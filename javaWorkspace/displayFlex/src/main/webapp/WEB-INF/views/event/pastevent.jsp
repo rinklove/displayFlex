@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>지난 이벤트</title>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>

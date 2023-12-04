@@ -49,8 +49,17 @@
         <div class="coupon-info">
             <div class="info-label">쿠폰 안내:</div>
             <div class="info-value">
-                <textarea id="couponDescription" name="couponDescription">쿠폰안내내내</textarea>
+                <textarea id="couponDescription" name="couponDescription">쿠폰안내메세지</textarea>
             </div>
+        </div>
+        <div id="">
+        <button onclick="couponAdd">쿠폰 생성</button>
+        <script>
+            function couponAdd() {
+                alert("쿠폰 생성 완료");
+            }
+        </script>
+
         </div>
         
     </div>

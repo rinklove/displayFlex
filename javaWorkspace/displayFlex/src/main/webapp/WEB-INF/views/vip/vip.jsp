@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>VIP 혜택</title>
 
     <style>
         body {
@@ -52,7 +52,8 @@
             height: auto;
         }
         .dd{
-            width: 70%;
+            width: 80em;
+            height: 60em;
             margin: auto;
         }
     </style>
