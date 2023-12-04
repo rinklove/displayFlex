@@ -1,11 +1,20 @@
 package displayFlex.movie.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import displayFlex.movie.dto.MovieDetailDto;
+import displayFlex.movie.dto.ReviewDto;
+import displayFlex.movie.service.MovieService;
+import displayFlex.movie.vo.ReviewVo;
+import displayFlex.movie.vo.StillImageVo;
 
 /**
  * Servlet implementation class MovieDetailController
@@ -13,33 +22,37 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/movie/detail")
 public class MovieDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private final MovieService movieService;
+
     public MovieDetailController() {
         super();
-        // TODO Auto-generated constructor stub
+        movieService = new MovieService();
     }
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		super.service(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			//영화 데이터 가져오기
 			String movieNo = request.getParameter("movieNo");
+			MovieDetailDto moiveDetailDto = movieService.getMovieInfoByNo(movieNo);
+			
+			//해당 영화가 상영 중인지 체크하기
+			
+			
+			//스틸 이미지 가져오기
+			List<StillImageVo> stillImageList = movieService.getStillImageByMovieNo(movieNo);
+			moiveDetailDto.setStillsList(stillImageList);
+			//리뷰 가져오기
+			Map<String, ReviewDto> reviewList = movieService.getReviewListByMovieNo(movieNo);
+			
+			request.setAttribute("movie", moiveDetailDto);
 			request.getRequestDispatcher("/WEB-INF/views/movie/detail.jsp").forward(request, response);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 
