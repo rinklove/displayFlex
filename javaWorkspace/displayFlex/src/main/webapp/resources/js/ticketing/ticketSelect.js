@@ -11,8 +11,9 @@ let seatData = [];
     
     if (window.selectedMovie && window.selectedMovie !== selectedMovie) {
       window.selectedMovie.style.backgroundColor = '';
-      
-//        ticketData = {};
+      console.log(ticketData);
+      ticketData = {};
+      console.log(ticketData);
 //        window.selectedDate = undefined;
 //        window.selectedSeat = undefined;
 //        window.selectedTheater = undefined;
@@ -67,7 +68,10 @@ let seatData = [];
     if(ticketData.selectedDate !== null){
       arrow2.style.cssText = 'display : flex;'
       timeMenu.style.cssText = 'display : grid;'  
-    }
+    } else {
+	  arrow2.style.cssText = 'display : none;'
+      timeMenu.style.cssText = 'display : none;'
+	}
 
     console.log(ticketData);
    }

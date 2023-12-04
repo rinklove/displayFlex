@@ -137,7 +137,7 @@
                 <div id="discount">
                     <div>
                         <div><span>할인 내역</span></div>
-                        <div><span id="discountDetails"></span></div>
+                        <div><span id="discountDetails">쿠폰 또는 혜택을 선택하세요</span></div>
                         <div><span id="discount-value">0</span><span>원</span></div>                            
                     </div>
                 </div>
@@ -203,7 +203,7 @@
             </table>
         </div>
         <div id="ticket-payButton">
-            <button type="button" onclick="completeSelect();">
+            <button type="button" onclick="openPopup('/cinema/ticket/popup');">
                 <i class="bi bi-arrow-right-circle-fill"></i>
                 <span>결제하기</span>
             </button>
