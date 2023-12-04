@@ -87,7 +87,7 @@
         <c:forEach var="i"  begin="${pageVo.startPage }" end="${pageVo.endPage }">
         <c:choose>
         <c:when test="${pageVo.currentPage eq i}">
-            <span class="bg-success p-2 m-1 text-white">${i }</span>                        	
+            <span class="bg-success p-2 m-1 text-white">${i }</span>      	
         </c:when>
         <c:otherwise>
             <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/movie/list?pno=${i}" >${i }</a>            

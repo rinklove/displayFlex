@@ -8,7 +8,6 @@ import java.util.Map;
 import displayFlex.movie.dao.MovieDao;
 import displayFlex.movie.dto.MovieDetailDto;
 import displayFlex.movie.dto.MovieListDto;
-import displayFlex.movie.dto.ReviewDto;
 import displayFlex.movie.vo.GenreCategoryVo;
 import displayFlex.movie.vo.ScreenGradeVo;
 import displayFlex.movie.vo.StillImageVo;
@@ -94,19 +93,7 @@ public class MovieService {
 		return imageList;
 	}
 
-	/**
-	 * 영화에 대한 리뷰 가져오기 
-	 * @param movieNo
-	 * @return
-	 * @throws SQLException 
-	 */
-	public Map<String, ReviewDto> getReviewListByMovieNo(String movieNo) throws SQLException {
-		Connection con = JDBCTemplate.getConnection();
-		
-		Map<String, ReviewDto> reviewList = movieDao.getReviewListByMovieNo(movieNo ,con);
-		JDBCTemplate.close(con);
-		return reviewList;
-	}
+	
 
 	
 	

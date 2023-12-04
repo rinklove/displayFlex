@@ -137,7 +137,11 @@
      <hr class="jh-hr">
      <div class="content-container">
      	<div class="review">
-     		
+     		<div>
+     			<span>사용자닉네임</span>
+     			<span>작성일자</span>
+     			<span>★ 8</span>
+     		</div>
      	</div>
      </div>
     </div>

@@ -1,4 +1,4 @@
-package displayFlex.movie.vo;
+package displayFlex.review.vo;
 
 public class ReviewVo {
 	private String reviewNo;			//리뷰번호

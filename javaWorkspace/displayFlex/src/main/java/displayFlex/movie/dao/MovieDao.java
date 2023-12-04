@@ -11,7 +11,6 @@ import java.util.Map;
 
 import displayFlex.movie.dto.MovieDetailDto;
 import displayFlex.movie.dto.MovieListDto;
-import displayFlex.movie.dto.ReviewDto;
 import displayFlex.movie.vo.GenreCategoryVo;
 import displayFlex.movie.vo.ScreenGradeVo;
 import displayFlex.movie.vo.StillImageVo;
@@ -176,34 +175,7 @@ public class MovieDao {
 		return imageList;
 	}
 
-	/**
-	 * 특정 영화에 대한 리뷰 가져오기
-	 * @param movieNo
-	 * @param con
-	 * @return
-	 * @throws SQLException 
-	 */
-	public Map<String, ReviewDto> getReviewListByMovieNo(String movieNo, Connection con) throws SQLException {
-		query = "SELECT R.REVIEW_NO, M.MEMBER_NICK, R.CONTENT, TO_CHAR(R.WRITE_DATE, 'YYYY-MM-DD') WRITE_DATE, R.RATE FROM REVIEW R INNER JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO WHERE R.MOVIE_NO = ? AND R.DEL_YN = 'N'";
-		
-		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, movieNo);
-		ResultSet rs = pstmt.executeQuery();
-		Map<String, ReviewDto> reviewList = new HashMap();
-		
-		while(rs.next()) {
-			String reviewNo = rs.getString("REVIEW_NO");
-			String memberNick = rs.getString("MEMBER_NICK");
-			String content = rs.getString("CONTENT");
-			String writeDate = rs.getString("WRITE_DATE");
-			String rate = rs.getString("RATE");
-			
-			reviewList.put(reviewNo, new ReviewDto(reviewNo, memberNick, content, writeDate, rate));
-		}
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
-		return reviewList;
-	}
+	
 	
 
 }

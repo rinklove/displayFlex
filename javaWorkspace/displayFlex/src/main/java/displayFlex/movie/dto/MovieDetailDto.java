@@ -19,7 +19,7 @@ public class MovieDetailDto {
 	private String genre;							//장르
 	private String nation;						//제작국가
 	private List<StillImageVo> stillsList;		//스틸 이미지
-	private List<ReviewDto> reviewList;		//리뷰들
+
 	
 	
 	public MovieDetailDto(String movieNo, String movieName, String gradeName, String actors, String story, String rate,
@@ -104,19 +104,12 @@ public class MovieDetailDto {
 		return nation;
 	}
 
-	public List<ReviewDto> getReviewList() {
-		return reviewList;
-	}
-
-	public void setReviewList(List<ReviewDto> reviewList) {
-		this.reviewList = reviewList;
-	}
-
 	@Override
 	public String toString() {
-		return "MoiveDetailDto [movieNo=" + movieNo + ", movieName=" + movieName + ", actors=" + actors + ", story="
-				+ story + ", rate=" + rate + ", mainDirector=" + mainDirector + ", movieImage=" + movieImage
-				+ ", runningTime=" + runningTime + ", genre=" + genre + ", nation=" + nation + ", reviewList="
-				+ reviewList + "]";
+		return "MovieDetailDto [movieNo=" + movieNo + ", movieName=" + movieName + ", gradeName=" + gradeName
+				+ ", actors=" + actors + ", story=" + story + ", rate=" + rate + ", mainDirector=" + mainDirector
+				+ ", movieImage=" + movieImage + ", runningTime=" + runningTime + ", releaseDate=" + releaseDate
+				+ ", isScreening=" + isScreening + ", genre=" + genre + ", nation=" + nation + ", stillsList="
+				+ stillsList + "]";
 	}
 }

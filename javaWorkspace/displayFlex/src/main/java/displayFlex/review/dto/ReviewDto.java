@@ -1,4 +1,4 @@
-package displayFlex.movie.dto;
+package displayFlex.review.dto;
 
 public class ReviewDto {
 	private String reviewNo;			//리뷰번호
