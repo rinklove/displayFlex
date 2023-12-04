@@ -8,7 +8,7 @@ window.onload = () => {
 		el.addEventListener("click", (e) => {
 		const target = e.currentTarget;
 		const movieNo = target.children[1].children[0].innerText;
-		loaction.href = `http://localhost:9002/cinema/movie/detail?movieNo=${moiveNo}`
+		location.href = `http://localhost:9002/cinema/movie/detail?movieNo=${movieNo}`
 	});
 		
 	})

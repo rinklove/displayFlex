@@ -28,13 +28,12 @@
                 <tr>
                     <td class="normal_text">제목</td>
                     <td>
-                        <span>${movie.title}</span>
+                        <span>${movie.movieName}</span>
                     </td>
                     <td class="normal_text">감독</td>
-                    <td><span>${movie.director}</span></td>
+                    <td><span>${movie.mainDirector}</span></td>
                     <td rowspan="4">
-                    	<img src="${movie.poster}" alt="${movie.title}">
-                    	<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="${movie.title}">
+                    	<img src="${movie.movieImage}" alt="${movie.movieName}">
                     </td>
                 </tr>
                 <tr>
@@ -46,24 +45,24 @@
                 <tr>
                     <td class="normal_text">관람 등급</td>
                     <td>
-                        <span>${movie.screeningName}</span>
+                        <span>${movie.gradeName}</span>
                     </td>
                     <td class="normal_text">상영 시간</td>
                     <td><span>${movie.runningTime}분</span></td>
                 </tr>
                 <tr>
                     <td class="normal_text">출연</td>
-                    <td colspan="3"><span>${movie.actor}</span></td>
+                    <td colspan="3"><span>${movie.actors}</span></td>
                 </tr>
                 <tr>
                     <td class="normal_text">별점</td>
                     <td>${movie.rate}</td>
-                    <td></td>
-                    <td></td>
+                    <td>제작 국가</td>
+                    <td>${movie.nation }</td>
                     <td id="reserve-td">
-                    	<c:if test="${movie.isScreening eq 'Y'  && loginMember.adminYn eq 'N'}">
+                    	<%-- <c:if test="${movie.isScreening eq 'Y'  && loginMember.adminYn eq 'N'}">
                     		<button class="bg-abc95f"  onclick="location.href='${pageContext.request.contextPath}/'">예매하기→</button>
-                    	</c:if>
+                    	</c:if> --%>
                     </td>
                 </tr>
 
@@ -79,20 +78,11 @@
                 <tr>
                     <td colspan="5">
                         <div class="df js-sa">
-                        <c:forEach var="element" items="${movie.still }">
-                            <div>
-                                <img src="${element.still}" alt="${movie.title} 스틸이미지" width="300">
-                            </div>                        
-                        </c:forEach>
-         					<div>
-                                <img src="http://file.koreafilm.or.kr/thm/01/copy/00/24/08/tn_DSFT013926.jpg" alt="${movie.title} 스틸이미지"  width="300">
-                            </div>    
-         					<div>
-                                <img src="http://file.koreafilm.or.kr/thm/01/copy/00/24/08/tn_DSFT013926.jpg" alt="${movie.title} 스틸이미지" width="300">
-                            </div>    
-         					<div>
-                                <img src="http://file.koreafilm.or.kr/thm/01/copy/00/24/08/tn_DSFT013926.jpg" alt="${movie.title} 스틸이미지" width="300">
-                            </div>    
+	                        <c:forEach var="element" items="${movie.stillsList }">
+	                            <div>
+	                                <img src="${element.filePath}" alt="${movie.movieName} 스틸이미지" width="300">
+	                            </div>                        
+	                        </c:forEach>    
                         </div>
                     </td>
                 </tr>
@@ -147,10 +137,14 @@
      <hr class="jh-hr">
      <div class="content-container">
      	<div class="review">
-     		
+     		<div>
+     			<span>사용자닉네임</span>
+     			<span>작성일자</span>
+     			<span>★ 8</span>
+     		</div>
      	</div>
      </div>
     </div>
-    <script defer type="text/javascript" src="${pageContext.request.contextPath }/resources/js/movie/detail.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/movie/detail.js"></script>
 </body>
 </html>

@@ -57,8 +57,13 @@
 	font-weight: 500;
 }
 
+div.first-div > span {
+	margin-bottom: 2em;
+}
+
 table {
 	margin: auto;
+	margin-top:  1em;
 	padding: 30px;
 	width: 100%;
 }
