@@ -16,7 +16,9 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <a href="/cinema/serviceCenter/recommendWrite">등록</a>
+                <%-- <c:if test="${loginMember.adminYn eq 'N'}"> --%>
+                <a href="/cinema/serviceCenter/recommendWrite">작성</a>
+                <%-- </c:if> --%>
             </div>
             <div id="tab_tit">
                 <nav>
