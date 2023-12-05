@@ -1,5 +1,11 @@
+<%@page import="displayFlex.ticketing.vo.SelectMovieVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	List<SelectMovieVo> movieList = (List<SelectMovieVo>)request.getAttribute("movieList");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,6 +18,7 @@
     
 </head>
 <body>
+
 <!--     <header> -->
 <!--         <nav>     -->
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -27,11 +34,23 @@
                         <span class="text">영화</span>
                     </div>
                     <ul id="movieList">
-                        <% for(int i = 0; i < 100; i++){%>
+                        <% for(int i = 0; i < movieList.size(); i++){
+                        	String movieName = movieList.get(i).getMovieName();
+                        	int movieNo = Integer.parseInt(movieList.get(i).getMovieNo());
+                        	String movieImage = movieList.get(i).getMovieImage();
+                        	String screenGradeNo = movieList.get(i).getScreenGradeNo();
+                        	String ratedImgSrc = "../resources/image/ticketing/ratedAll.png";
+                        	switch(screenGradeNo){
+                        	case "2" : ratedImgSrc = "../resources/image/ticketing/rated12.png"; break;
+                        	case "3" : ratedImgSrc = "../resources/image/ticketing/rated15.png"; break;
+                        	case "4" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break;
+                        	case "5" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break;
+                        	}
+                        %>
                         <li class="ticketingMovie">
-                            <button type="button" id="movieSelect" onclick="changeMovieInfo('<%=i%>');">
-                                <img src="../resources/image/ticketing/ratedAll.png" alt="전체이용가">
-                                <span class="text" id="movieName<%=i%>">영화제목<%=i%></span>
+                            <button type="button" id="movieSelect" onclick="changeMovieInfo('<%=i+1%>');">
+                        		<img src="<%=ratedImgSrc%>" alt="이용가">
+                       			<span class="text" id="movieNo<%=movieNo%>" value="<%=movieNo%>"><%=movieName%></span>
                             </button>
                         </li>
                         <% } %>
@@ -190,7 +209,7 @@
     
     <div id="selectInfo">
         <div id="ticket-posterImg">
-			<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" id="posterImg">
+			<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="포스터" id="posterImg">
 		</div>
         <div id="ticket-movieName">
             <span id="movieInfo">영화를 선택해주세요</span>
@@ -251,5 +270,6 @@
         푸터영역
 
     </footer>
+
 </body>
 </html>
