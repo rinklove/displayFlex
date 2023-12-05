@@ -22,20 +22,29 @@
     <div id="wrap">
         <form action="/cinema/member/login" method="post">
             <div id="loginArea">
-                <div><label for="loginPage"><input type="text" id="loginPage" placeholder="로그인/회원가입"></label></div>
+                <div class="loginArea-width"><label for="loginPage"><input type="text" id="loginPage" placeholder="로그인 / 회원가입"></label></div>
                 <% if(loginMember == null) { %>
-                <div><input type="text" name="memberId" id="memberId" placeholder="아이디"></div>
-                <div><input type="password" name="memberPwd" id="memberPwd" placeholder="비밀번호"></div>
+                <div class="loginArea-width"><input type="text" name="memberId" id="memberId" placeholder="아이디"></div>
+                <div class="loginArea-width"><input type="password" name="memberPwd" id="memberPwd" placeholder="비밀번호"></div>
                 <div class="check-box">
                     <input class="form-check-input" type="checkbox" value="rememberMe" id="rememberMe" name="rememberMe">
                     <label class="form-check-label" for="rememberMe">아이디 저장</label></div>
-                  <br>
-                <div class="form-check-confirm"> <div><button type="button" onclick="location.href='/cinema/member/join'">회원가입</button></div>
-                  <div><input type="submit" value="로그인" id="logincheck"></div>
+           
+                <div class="form-check-confirm">
+                    <div class="form-check-confirm-b1">
+                        <button type="button" onclick="location.href='/cinema/member/join'">회원가입</button>
+                    </div>
+                    <div class="form-check-confirm-b2">
+                        <input type="submit" value="로그인" id="logincheck"></div>
                 </div>
-                
                  <%}else { %>
-                 
+                 	<h3><%= loginMember.getMemberNick() %></h3>
+            		<br> 
+            		님 환영합니다 ~ !
+            		<br>
+            		 <div class="form-check-confirm-b3">
+                            <button type="button" onclick="location.href='/cinema/member/logout'">로그아웃</button>
+                    </div>
                <% } %>
             </div>
     </div>
@@ -56,7 +65,7 @@
 
         // 페이지 로드 시 저장된 아이디가 있으면 입력란에 표시
         window.onload = function() {
-            var MemberIdInput = document.getElementById('memberId');\
+            var MemberIdInput = document.getElementById('memberId');
             var rememberMemberId = getCookie('memberId');
 
             if(rememberMemberId) {
