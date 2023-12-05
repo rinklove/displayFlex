@@ -7,13 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>진행중 이벤트 상세조회</title>
+<style>
+    a{text-decoration: none; color: black;}
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:focus { text-decoration: none; }
+a:hover, a:active { text-decoration: none; }
+</style>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="bw"> 
         <hr id="jul1">
         <div id="event_title"> &nbsp;&nbsp;&nbsp;&nbsp;진행중 이벤트
-            <div id="event_title2"><a href="/cinema/event/ongoingevent" class="ongoing">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
+            <div id="event_title2"><a href="/cinema/event/event" class="ongoing">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
         </div>
         <hr id="jul2">
 

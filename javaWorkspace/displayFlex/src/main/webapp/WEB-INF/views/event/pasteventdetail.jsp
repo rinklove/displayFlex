@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>지난 이벤트 상세조회</title>
+<style>
+    a{text-decoration: none; color: black;}
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:focus { text-decoration: none; }
+a:hover, a:active { text-decoration: none; }
+</style>
 </head>
 <body>
 
