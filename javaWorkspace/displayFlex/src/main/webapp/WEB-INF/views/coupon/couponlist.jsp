@@ -13,7 +13,7 @@
         <hr id="jul1">
         <div id="coupon_title"> &nbsp;&nbsp;&nbsp;&nbsp;FLEX 할인쿠폰 내역</div>
         <hr id="jul2">
-        <div style="color: blue; font-size: 30px; font-weight: bold; padding: 1%;" > &nbsp;FLEX 할인쿠폰 보유내역</div>
+        <div style="color: blue; font-size: 20px; font-weight: bold; padding: 1%;" > &nbsp;FLEX 할인쿠폰 보유내역</div>
         <div id="coupon_title2">
             &nbsp;&nbsp;<div>영화쿠폰</div>
             <div>스토어쿠폰</div>
@@ -29,15 +29,18 @@
         <div class="coupon_info">
             <div id="info_one">
                 <div>VIP무료 관람쿠폰</div>
+                <hr>
                 <div>VIP 반값 할인 쿠폰</div>
+                <hr>
                 <div>어린이 1000원 할인 쿠폰</div>
+                <hr>
                 <div>VIP무료 관람쿠폰</div>
             </div>
             <div id="info_two">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
+                <div>2023-12-01 ~ 2023-12-31</div>
+                <div>2023-12-01 ~ 2023-12-31</div>
+                <div>2023-12-01 ~ 2023-12-31</div>
+                <div>2023-12-01 ~ 2023-12-31</div>
             </div>
             <div id="info_three">
                 <div>1</div>

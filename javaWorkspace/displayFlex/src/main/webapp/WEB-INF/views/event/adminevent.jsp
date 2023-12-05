@@ -14,24 +14,24 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-	<form action="/cinema/admin/store/enroll" method="post"
+	<form action="/cinema/event/adminevent" method="post"
 		entype="multipart/form-data">
 		<div class="product">
 			<div></div>
 			<div class="product-main">
 				<div id="top">
-					<div>
+					<div>         
 						<h1>이벤트(ADMIN)</h1>
 					</div>
 				</div>
 				<div id="product-detail">
 					<div id="imgPreview">
 						<i class="fa-solid fa-circle-plus"></i>
-						<input type="file" id="upload" accept="image/*" onchange="previewImage(event)">
+						<input type="file" id="upload" accept="image/*" onchange="previewImage(event)">  
 					</div>
 					<div id="detail">
 						<div>
-							<input width="" type="text" size=20% placeholder="ex.감독과의 대화입니다. 대화 대화">
+							<input style="width: 20em;" width="50em" type="text" size=20 placeholder="ex.감독과의 대화입니다. 대화 대화">
 						</div>
 						<div id="description">
 							<div>이벤트기간</div>

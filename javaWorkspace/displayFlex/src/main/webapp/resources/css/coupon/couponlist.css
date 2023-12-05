@@ -10,7 +10,7 @@
 #coupon_title{
     font-size: 30px;
     font-weight: bolder;
-    padding: 
+    
 }
 #jul1 {
     border: none;
@@ -33,9 +33,9 @@
 #coupon_title2 {
     display: flex;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 20px;
     justify-content: flex-start; /* Align to the left */
-    gap: 20px; /* Reduce the gap between child elements */
+    gap: 50px; /* Reduce the gap between child elements */
     margin-left: auto;
     padding-left: 20px; /* Add padding to the left for better spacing */
 }
