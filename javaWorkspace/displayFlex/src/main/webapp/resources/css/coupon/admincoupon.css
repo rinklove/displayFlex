@@ -4,24 +4,26 @@ body {
 }
 
 .coupon-container {
-    width: 100em;
-    height: 50em;
+   
+    
+    width: 70em;
+    height: 35em;
     margin-top: 3em;
     background-color: white; 
     
 }
 
 .coupon-info {
-    
-    display: flex;
     flex-direction: column;
     margin-bottom: 1em;
 }
 
 .info-label {
+    border: 1px; background-color: rgb(119, 12, 12); color: white ;
     font-weight: bold;
+    float: left;
 }
 
 .info-value {
-    margin-top: 5px;
+    margin-top: 1em;
 }
