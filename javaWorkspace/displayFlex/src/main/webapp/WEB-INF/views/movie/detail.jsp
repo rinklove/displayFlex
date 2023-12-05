@@ -91,45 +91,41 @@
         </table>
     </div>
     <div class="review-container bg-w" >
-    <div class="title"><strong>리뷰 작성</strong></div>
-    <hr class="jh-hr">
- 	<div class="title-container">
-        <form id="rating-form" action="${pageContext.request.contextPath}/movie/review/add" method="post" onsubmit="return checkContent()">
-            <input type="text" name="movieNo" value="${movie.movieNo }" hidden>
-            <div>
-            	<div class="rating-container">
-				    <div class="rating">
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
-					    <i class="rating__star far fa-star"></i>
+    	<div class="title mx-3">
+    		<strong>리뷰 작성</strong>
+   		</div>
+    	<hr class="jh-hr">
+	 	<div class="title-container m-auto">
+	        <form id="rating-form" action="${pageContext.request.contextPath}/movie/review/add" method="post" onsubmit="return checkContent();">
+	            <input type="text" name="movieNo" value="${movie.movieNo }" hidden>
+	            <div>
+	            	<div class="rating-container">
+					    <div class="rating">
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						    <i class="rating__star far fa-star"></i>
+						</div>
+						<span>별점: </span><input type="text" id="rating-value" name="rating-value" class="border-0" readonly value="0">
 					</div>
-					<span>별점: </span><input type="text" id="rating-value" name="rating-value" class="border-0" readonly value="0">
-				</div>
-                <textarea name="review-content" id="review-content" name="review-content" cols="60" rows="3" class="form-control w-50"></textarea>
-               	<input class="review-submit btn btn-secondary" type="submit" value="작성하기">
-            </div>
-        </form>
-     </div>
-     <hr class="jh-hr">
-     <div id="review-container" class="review-container">
-     	<div>
-     		<div class="p-2">
-     			<span id ="memberNick" class="'m-2">사용자닉네임</span>
-     			<span id ="reviewWriteDate" class="'m-2">작성일자</span>
-     			<span id ="reviewRate" class="'m-2"><i class="rating__star far fa-star"></i> 8</span>
-     		</div>
-     		<div>
-     			<span id="review-content"></span>
-     		</div>
-     	</div>
-     </div>
+	                <textarea name="review-content" id="review-content" name="review-content" cols="60" rows="3" class="form-control w-50"></textarea>
+	               	<input class="review-submit btn btn-secondary" type="submit" value="작성하기">
+	            </div>
+	        </form>
+	     </div>
+	     <hr class="jh-hr">
+	     <div id="review-container" class="review-list-container">
+	     	
+	     </div>
+	     <div id="button-container" class="p-3 mt-3 text-center">
+		     <button id="show-more" type="button" class="btn btn-link text-decoration-none text-black m-auto fw-bold" onclick="showReviews();">더보기</button>
+	     </div>
     </div>
     <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/movie/detail.js"></script>
 </body>

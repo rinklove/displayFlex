@@ -2,7 +2,10 @@ package displayFlex.review.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map.Entry;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import displayFlex.member.MemberVo;
 import displayFlex.review.dto.ReviewDto;
 import displayFlex.review.service.ReviewService;
+import displayFlex.util.page.vo.PageVo;
 
 
 @WebServlet("/movie/review/list")
@@ -35,19 +40,26 @@ public class ReviewListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		response.setContentType("utf-8");
 		try {
+			int pno = Integer.parseInt(request.getParameter("pno"));
 			String movieNo = request.getParameter("movieNo");
+			MemberVo loginMember = (MemberVo) request.getSession().getAttribute("loginMember");
+			
+			int reviewCount = reviewService.getAllReviewCount(pno);
+			PageVo pageable = setPage(reviewCount, pno, 5, 10);
 			//리뷰 가져오기
-			Map<Integer, ReviewDto> reviewList = reviewService.getReviewListByMovieNo(movieNo);
-
-			out.write(JSONObject.toJSONString(reviewList));
+			List<ReviewDto> reviewList = reviewService.getReviewListByMovieNo(movieNo, pageable, loginMember);
+				
+			out.write(reviewList.toString());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			out.write("리뷰 가져오기 실패");
+
 			e.printStackTrace();
 		}
 	}
 
+	private PageVo setPage(int listCount, int currentPage, int pageLimit, int boardLimit) {
+		return new PageVo(listCount, currentPage, pageLimit, boardLimit);
+	}
 }

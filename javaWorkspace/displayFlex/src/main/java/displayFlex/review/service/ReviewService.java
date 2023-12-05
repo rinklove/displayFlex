@@ -2,11 +2,14 @@ package displayFlex.review.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
+import displayFlex.member.MemberVo;
 import displayFlex.review.dao.ReviewDao;
 import displayFlex.review.dto.ReviewDto;
 import displayFlex.review.vo.ReviewVo;
+import displayFlex.util.page.vo.PageVo;
 import test.JDBCTemplate;
 
 public class ReviewService {
@@ -20,14 +23,26 @@ public class ReviewService {
 	/**
 	 * 영화에 대한 리뷰 가져오기 
 	 * @param movieNo
+	 * @param pageable 
+	 * @param loginMember 
 	 * @return
 	 * @throws SQLException 
 	 */
-	public Map<Integer, ReviewDto> getReviewListByMovieNo(String movieNo) throws SQLException {
+	public List<ReviewDto> getReviewListByMovieNo(String movieNo, PageVo pageable, MemberVo loginMember) throws SQLException {
 		Connection con = JDBCTemplate.getConnection();
 		
-		Map<Integer, ReviewDto> reviewList = reviewDao.getReviewListByMovieNo(movieNo ,con);
+		List<ReviewDto> reviewList = reviewDao.getReviewListByMovieNo(movieNo, pageable, con);
 		JDBCTemplate.close(con);
+		
+		try {
+			for(ReviewDto dto : reviewList) {
+				if(dto.getWriterNo().equals(loginMember.getMemberNo()) || loginMember.getAdminYn().equals("Y")) {
+					dto.setAbleToWatch(true);
+				}
+			}			
+		} catch (Exception e) {
+			
+		}
 		return reviewList;
 	}
 	
@@ -47,5 +62,19 @@ public class ReviewService {
 		
 		JDBCTemplate.close(con);
 		return result;
+	}
+
+	/**
+	 * 모든 리뷰 개수 가져오기
+	 * @param pno
+	 * @return
+	 * @throws SQLException
+	 */
+	public int getAllReviewCount(int pno) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int count = reviewDao.getAllReviewCount(pno, con);
+		JDBCTemplate.close(con);
+		return count;
 	}
 }
