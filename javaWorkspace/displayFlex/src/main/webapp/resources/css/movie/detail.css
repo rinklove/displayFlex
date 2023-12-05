@@ -5,11 +5,12 @@
 	font-weight: 500;
 }
 
-.add-form, .review-container  {
+.add-form  {
 	padding: 100px;
-	width: 60vw;
+	width: 70em;
 	margin: auto;
 	margin-top: 65px;
+	border-radius: 40px;
 }
 
 .bg-w {
@@ -108,8 +109,29 @@ button:hover, .review-submit:hover {
   cursor: pointer;
 }
 
-.title-container, #review-container {
-	width: 100%;
+.title-container {
+	width: 90%;
+}
+
+.review-list-container {
+	margin: auto;
+	width: 90%;
+}
+
+.review-container {
+	width: 70em;
+	margin: auto;
+	margin-top: 3em;
+	padding: 3em;
+	border-radius: 40px;
+}
+
+.review-container > hr.jh-hr {
+	
+	margin:auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 96%;
 }
 
 .content-container {
@@ -121,20 +143,6 @@ button:hover, .review-submit:hover {
     text-align: center;
 }
 
-input[type="radio"] {
-    display: none;
-}
-
-.star {
-    font-size: 1.3em;
-    padding: 0.1em;
-    cursor: pointer;
-}
-
-.star:hover,
-input[type="radio"]:checked + label {
-    color: gold;
-}
 
 .title-container > form >  div {
 	width: 100%;
