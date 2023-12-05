@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="/cinema/resources/css/store/storeList.css">
+<script defer src="/cinema/resources/js/store/storeList.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,12 +24,12 @@
 				<%-- </c:if> --%>
 			</div>
 			<div id="smallMenu">
-				<div><span>베스트</span></div>
-				<div><span>기프트카드</span></div>
-				<div><span>콤보</span></div>
-				<div><span>팝콘</span></div>
-				<div><span>음료</span></div>
-				<div><span>스낵</span></div>
+				<div><button onclick="location.href='/cinema/store'"><span>베스트</span></button></div>
+				<div><button onclick="location.href='/cinema/store/giftcard'"><span>기프트카드</span></button></div>
+				<div><button onclick="location.href='/cinema/store/combo'"><span>콤보</span></button></div>
+				<div><button onclick="location.href='/cinema/store/popcorn'"><span>팝콘</span></button></div>
+				<div><button onclick="location.href='/cinema/store/drink'"><span>음료</span></button></div>
+				<div><button onclick="location.href='/cinema/store/snack'"><span>스낵</span></button></div>
 			</div>
 			<div class="itemPoto">
 				<div>
