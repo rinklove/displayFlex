@@ -15,6 +15,7 @@ public class TicketSelectDao {
 	public List<SelectMovieVo> getMovieList(Connection conn) throws Exception {
 		
 		String sql ="SELECT MOVIE_NO, MOVIE_NAME, MOVIE_IMAGE, SCREEN_GRADE_NO FROM MOVIE ORDER BY MOVIE_NO";
+		String x = "SELECT * FROM SCREENING_INFO ";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -35,5 +36,16 @@ public class TicketSelectDao {
 		
 		return movieList;
 	}
+
+//	public List<SelectMovieVo> getScreenDateList(Connection conn) throws Exception {
+//		
+//		String sql = "";
+//		PreparedStatement pstmt = conn.prepareStatement(sql);
+//		ResultSet rs = pstmt.executeQuery();
+//		
+//		List<SelectMovieVo> movieList = new ArrayList<SelectMovieVo>();
+//		
+//		return null;
+//	}
 
 }

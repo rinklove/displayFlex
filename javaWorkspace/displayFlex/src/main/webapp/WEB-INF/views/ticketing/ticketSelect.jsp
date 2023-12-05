@@ -5,6 +5,7 @@
     
 <%
 	List<SelectMovieVo> movieList = (List<SelectMovieVo>)request.getAttribute("movieList");
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">

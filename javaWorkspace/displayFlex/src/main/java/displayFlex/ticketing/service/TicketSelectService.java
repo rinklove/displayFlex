@@ -22,4 +22,18 @@ public class TicketSelectService {
 		return movieList;
 	}
 
+//	public List<SelectMovieVo> getScreenDateList() throws Exception {
+//		Connection conn = JDBCTemplate.getConnection();
+//		
+//		TicketSelectDao dao = new TicketSelectDao();
+//		
+//		List<SelectMovieVo> screenDateList = (List<SelectMovieVo>) dao.getScreenDateList(conn); 
+//		
+//		JDBCTemplate.close(conn);
+//		
+//		return screenDateList;
+//	}
+
+	
+	
 }
