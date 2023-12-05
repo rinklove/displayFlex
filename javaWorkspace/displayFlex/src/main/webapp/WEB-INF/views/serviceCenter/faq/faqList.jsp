@@ -1,8 +1,12 @@
+<%@page import="displayFlex.util.page.vo.PageVo"%>
+<%@page import="displayFlex.serviceCenter.faq.vo.FaqVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
      <%
-    	/* List<FaqVo> boardVoList = (List<FaqVo>) request.getAttribute("faqVoList"); */
+    	List<FaqVo> faqVoList = (List<FaqVo>) request.getAttribute("faqVoList");
+     	PageVo pvo = (PageVo)request.getAttribute("pvo");
 	 %>
     
 <!DOCTYPE html>
@@ -23,7 +27,9 @@
             <div id="title_top">
                 <h1>고객센터</h1>
                 <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
-                <a href="/cinema/admin/faqAdd">등록</a>
+                <%-- <% if(loginMember != null) { %> --%>
+	                <a href="/cinema/admin/faqAdd">등록</a>
+                <%-- <% } %> --%>
                 <%-- </c:if> --%>
             </div>
             <div id="tab_tit">
@@ -94,54 +100,33 @@
                             </tr>
                         </thead>
                         <tbody id="tab">
-                            <tr>
-                                <td><a href="/cinema/serviceCenter/faqDetail">8</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">제목8</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">등록일8</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/cinema/serviceCenter/faqDetail">7</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">제목7</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">등록일7</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/cinema/serviceCenter/faqDetail">6</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">제목6</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">등록일6</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/cinema/serviceCenter/faqDetail">5</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">제목5</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">등록일5</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/cinema/serviceCenter/faqDetail">4</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">제목4</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">등록일4</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/cinema/serviceCenter/faqDetail">3</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">제목3</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">등록일3</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/cinema/serviceCenter/faqDetail">2</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">제목2</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">등록일2</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="/cinema/serviceCenter/faqDetail">1</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">제목1</a></td>
-                                <td><a href="/cinema/serviceCenter/faqDetail">등록일1</a></td>
-                            </tr>
+                        <% for(FaqVo vo : faqVoList){ %>
+                        	<tr>
+                        		<td><%= vo.getFaqNo() %></td>
+                        		<td><%= vo.getTitle() %></td>
+                        		<td><%= vo.getEnrollDate() %></td>
+                        	</tr>
+                        <% } %>
                         </tbody>
                     </table>
                     <div id="paging">
-                        <a href="">1</a>
-                        <a href="">2</a>
-                        <a href="">3</a>
-                        <a href="">4</a>
-                        <a href="">5</a>
+                    	<% if(pvo.getStartPage() != 1){ %>
+                    		<a href="/cinema/serviceCenter/faqList?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+                    	<% } %>
+                    	
+                    	<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
+							<% if( i == pvo.getCurrentPage() ){ %>
+								<span><%= i %></span>
+							<% } else { %>
+								<a href="/cinema/serviceCenter/faqList?pno=<%= i %>"><%= i %></a>
+							<% } %>
+						<% } %>
+						
+						<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
+							<a href="/cinema/serviceCenter/faqList?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+						<% } %>
+                    	
+                        
                     </div>
                 </div>
 
@@ -150,6 +135,7 @@
         </div>
     </main>
 	
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
     <!-- <script>
         function clickIcon(button) {
