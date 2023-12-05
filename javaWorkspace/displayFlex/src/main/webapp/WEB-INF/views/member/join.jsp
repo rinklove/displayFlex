@@ -16,53 +16,52 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="container">
-<form id="signupForm">
-<h1>DISPLAY FLEX 회원가입</h1>
+    <h1>DISPLAY FLEX 회원가입</h1>
+  
+    <form action="/cinema/member/join" method="post" onsubmit="return validateForm();">
     <table>
         <tbody>
+        	<tr>
+                <td><label for="gradeNo">회원등급</label></td>
+                <td><input type="text" id="gradeNo" name="gradeNo" required></td>
+            </tr>
             <tr>
                 <td><label for="userid">아이디</label></td>
-                <td><input type="text" id="username" name="username" placeholder="영문, 숫자 조합(6~12자)" required></td>
-                <td><input type="submit" value="중복확인"></td>
+                <td><input type="text" id="memberId" name="memberId" placeholder="영문, 숫자 조합(6~12자)" required></td>
             </tr>
             <tr>
                 <td><label for="password">비밀번호</label></td>
-                <td><input type="password" id="password" name="password" placeholder="영문, 숫자, 특수문자 조합(10~16자)" required></td>
+                <td><input type="password" id="memberPwd" name="memberPwd" placeholder="영문, 숫자, 특수문자 조합(10~16자)" required></td>
                 <td></td>
             </tr>
             <tr>
-                <td><label for="confirmPassword">비밀번호 확인</label></td>
-                <td><input type="password" id="confirmPassword" name="confirmPassword" placeholder="영문, 숫자, 특수문자 조합(10~16자)" required></td>
+                <td><label for="MemberPwd2">비밀번호 확인</label></td>
+                <td><input type="password" id="memberPwd2" name="memberPwd2" placeholder="영문, 숫자, 특수문자 조합(10~16자)" required></td>
                 <td></td>
             </tr>
             <tr>
                 <td><label for="nickname">닉네임</label></td>
-                <td><input type="text" id="usernick" name="usernick" placeholder="한글, 영문, 숫자 가능(2~8자)" required></td>
+                <td><input type="text" id="memberNick" name="memberNick" placeholder="한글, 영문, 숫자 가능(2~8자)" required></td>
                 <td></td>
             </tr>
             <tr>
-                <td><label for="username">이름</label></td>
-                <td><input type="text" id="username" name="username" required></td>
+                <td><label for="memberName">이름</label></td>
+                <td><input type="text" id="memberName" name="memberName" required></td>
                 <td></td>
             </tr>
             <tr>
-                <td><label for="userBornNumber">주민등록번호</label></td>
-                <td><input type="text" id="userBornNumber" name="userBornNumber" required></td>
+                <td><label for="registerNo">주민등록번호</label></td>
+                <td><input type="text" id="registerNo" name="registerNo" required></td>
                 <td></td>
             </tr>
             <tr>
-                <td><label for="phoneNumber">핸드폰번호</label></td>
-                <td><input type="phone" id="phoneNumber" name="phoneNumber"></td>
+                <td><label for="memberPhoneNum">핸드폰번호</label></td>
+                <td><input type="text" id="memberPhoneNum" name="memberPhoneNum"></td>
                 <td></td>
             </tr>
             <tr>
-                <td><label for="addr">주소</label></td>
-                <td><input type="text" id="addr" name="addr"></td>
-                <td><input type="submit" value="주소검색"></td>
-            </tr>
-            <tr>
-                <td><label for="email">이메일 주소</label></td>
-                <td><input type="email" id="email" name="email"></td>
+                <td><label for="memberEmail">이메일 주소</label></td>
+                <td><input type="text" id="memberEmail" name="memberEmail"></td>
                 <td></td>
             </tr>
         </tbody>
@@ -78,14 +77,13 @@
         </ul>
     </div>
     <br>
-    <button type="button" onclick="validateForm()">회원가입</button>
+    <input type="submit" value="회원가입">
 </form>
 </div>
    <footer></footer>
 <script>
 function validateForm() {
-    var password = document.getElementById("password");
-    var confirmPassword = document.getElementById("confirmPassword");
+    var password = document.getElementById("memberPwd");
     var message = document.getElementById("message");
 
     // 비밀번호 길이 체크
@@ -94,17 +92,17 @@ function validateForm() {
     document.getElementById("length").classList.toggle("invalid", !length);
 
     // 대문자 포함 여부 체크
-    var uppercase = /[A-Z]/.test(password.value);
+    var uppercase = /[A-Z]/.test(memberPwd.value);
     document.getElementById("uppercase").classList.toggle("valid", uppercase);
     document.getElementById("uppercase").classList.toggle("invalid", !uppercase);
 
     // 숫자 포함 여부 체크
-    var number = /\d/.test(password.value);
+    var number = /\d/.test(memberPwd.value);
     document.getElementById("number").classList.toggle("valid", number);
     document.getElementById("number").classList.toggle("invalid", !number);
 
     // 비밀번호 일치 여부 체크
-    var match = password.value === confirmPassword.value;
+    var match = memberPwd.value === memberPwd.value;
     document.getElementById("match").classList.toggle("valid", match);
     document.getElementById("match").classList.toggle("invalid", !match);
 

@@ -57,4 +57,24 @@ public class MemberDao {
 		return loginMember;
 	}
 
+	public int join(Connection conn, MemberVo vo) throws Exception {
+		
+		//sql
+		String sql = "INSERT INTO MEMBER ( MEMBER_NO ,GRADE_NO, MEMBER_ID ,MEMBER_PWD ,MEMBER_NICK ,MEMBER_NAME, REGISTER_NO, MEMBER_PHONENUM ,MEMBER_EMAIL ) VALUES ( SEQ_MEMBER_NO.NEXTVAL , ?, ?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getGradeNo());
+		pstmt.setString(2, vo.getMemberId());
+		pstmt.setString(3, vo.getMemberPwd());
+		pstmt.setString(4, vo.getMemberNick());
+		pstmt.setString(5, vo.getMemberName());
+		pstmt.setString(6, vo.getRegisterNo());
+		pstmt.setString(7, vo.getMemberPhoneNum());
+		pstmt.setString(8, vo.getMemberEmail());
+		int result = pstmt.executeUpdate();
+
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
 }
