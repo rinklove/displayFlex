@@ -22,6 +22,8 @@ paymentAmount.innerText = ticketData.totalAmount;
 
 totalPayment.innerText = ticketData.totalAmount;
 
+sessionStorage.clear();
+
 function openPopup(url){
     const ticketPopup = window.open(url, '티켓','width=600, height=569');
 }

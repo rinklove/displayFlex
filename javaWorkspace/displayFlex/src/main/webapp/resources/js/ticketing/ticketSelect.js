@@ -6,7 +6,7 @@ let ticketData = {};
 let seatData = [];
 // 예매 - 영화 선택
   function changeMovieInfo(index) {
-    const selectedMovie = document.getElementById('movieName' + index).parentNode;
+    const selectedMovie = document.getElementById('movieNo' + index).parentNode;
     selectedMovie.style.cssText = 'background-color: #EDD711; border-radius: 10px;';
     
     if (window.selectedMovie && window.selectedMovie !== selectedMovie) {
@@ -21,10 +21,9 @@ let seatData = [];
 //        window.totalReserved = undefined;
 			
     }
-
-    const movieName = document.getElementById('movieName' + index);
+    const movieNo = document.getElementById('movieNo' + index);
     const movieInfo = document.getElementById('movieInfo');
-    const content = movieName.innerText;
+    const content = movieNo.innerText;
     movieInfo.innerText = content;
 
     window.selectedMovie = selectedMovie;
@@ -42,6 +41,8 @@ let seatData = [];
 	}
 
     console.log(ticketData);
+ 
+   	sessionStorage.setItem("movieInfo", movieInfo.innerText);
   }
 
 // 예매 - 날짜 선택
