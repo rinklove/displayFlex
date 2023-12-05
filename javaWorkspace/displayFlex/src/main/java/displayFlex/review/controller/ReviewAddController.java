@@ -53,9 +53,9 @@ public class ReviewAddController extends HttpServlet {
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			out.write(e.getMessage());
 			e.printStackTrace();
-			//에러 페이지로 이동
+			request.setAttribute("errorMsg", "리뷰 삭제 실패");
+			request.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(request, response);
 		}
 	}
 

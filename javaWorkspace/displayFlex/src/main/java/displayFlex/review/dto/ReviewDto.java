@@ -54,8 +54,7 @@ public class ReviewDto {
 
 	@Override
 	public String toString() {
-		return " {\"reviewNo\": \"" + reviewNo + "\", \"writerNo\": \""+ writerNo +"\", \"memberNick\": \"" + memberNick + "\", \"content\": \"" + content
-				+ "\", \"writeDate\": \"" + writeDate + "\", \"rate\": \"" + rate + "\", \"ableToWatch\": "+ableToWatch +"}";
+		return " {\"reviewNo\": \"" + reviewNo + "\", \"writerNo\": \""+ writerNo +"\", \"memberNick\": \"" + memberNick + "\", \"content\": \"" + content+ "\", \"writeDate\": \"" + writeDate + "\", \"rate\": \"" + rate + "\", \"ableToWatch\": "+ableToWatch +"}";
 	}
 	
 }

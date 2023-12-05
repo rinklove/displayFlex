@@ -2,19 +2,14 @@ package displayFlex.review.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map.Entry;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.simple.JSONObject;
 
 import displayFlex.member.MemberVo;
 import displayFlex.review.dto.ReviewDto;
@@ -36,9 +31,6 @@ public class ReviewListController extends HttpServlet {
 		super.service(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
@@ -51,7 +43,7 @@ public class ReviewListController extends HttpServlet {
 			PageVo pageable = setPage(reviewCount, pno, 5, 10);
 			//리뷰 가져오기
 			List<ReviewDto> reviewList = reviewService.getReviewListByMovieNo(movieNo, pageable, loginMember);
-				
+			System.out.println(reviewList);
 			out.write(reviewList.toString());
 		} catch (SQLException e) {
 

@@ -90,4 +90,46 @@ public class ReviewDao {
 		JDBCTemplate.close(pstmt);
 		return count;
 	}
+
+	/**
+	 * 리뷰 작성자 찾기
+	 * @param reviewNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public ReviewVo findWriterByNo(String reviewNo, Connection con) throws SQLException {
+		query ="SELECT MEMBER_NO, MOVIE_NO FROM REVIEW WHERE REVIEW_NO = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		
+		pstmt.setString(1, reviewNo);
+		ResultSet rs = pstmt.executeQuery();
+		ReviewVo findReview = null;
+		if(rs.next()) {
+			String memberNo = rs.getString("MEMBER_NO");
+			String movieNo = rs.getString("MOVIE_NO");
+			 
+			findReview = new ReviewVo(memberNo, movieNo);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return findReview;
+	}
+
+	/**
+	 * 리뷰 삭제
+	 * @param reviewNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteReview(String reviewNo, Connection con) throws SQLException {
+		query = "UPDATE REVIEW SET DEL_YN = 'Y' WHERE REVIEW_NO = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, reviewNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
 }

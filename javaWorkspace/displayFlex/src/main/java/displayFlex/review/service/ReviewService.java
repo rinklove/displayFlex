@@ -77,4 +77,36 @@ public class ReviewService {
 		JDBCTemplate.close(con);
 		return count;
 	}
+
+	/**
+	 * 리뷰 작성자 찾기
+	 * @param reviewNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public ReviewVo findWriterByNo(String reviewNo) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		ReviewVo findReview = reviewDao.findWriterByNo(reviewNo, con);
+		JDBCTemplate.close(con);
+		return findReview;
+	}
+
+	/**
+	 * 리뷰 삭제(del_yn 변경)
+	 * @param reviewNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteReview(String reviewNo) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = reviewDao.deleteReview(reviewNo, con);
+		
+		if(result == 1) JDBCTemplate.commit(con);
+		else JDBCTemplate.rollback(con);
+		
+		JDBCTemplate.close(con);
+		return result;
+	}
 }

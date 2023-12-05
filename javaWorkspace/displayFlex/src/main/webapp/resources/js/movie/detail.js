@@ -45,9 +45,9 @@ function getReviews(page) {
 	
 	return fetch(`http://localhost:9002/cinema/movie/review/list?movieNo=${paramNameValue}&pno=${page}`)
 	.then((res) => res.json())
-	.then(data => data)
+	.then((data) => data)
 	.catch((err) => {
-		alert(err);
+		console.log(err);
 	});
 }
 
@@ -76,22 +76,22 @@ function renderData(data) {
 		       	firstDiv.classList.add('p-2');
 		       	
 		       	 const reviewNoSpan = document.createElement('span');
-		        reviewNoSpan.classList.add('m-2');
+		        reviewNoSpan.classList.add('m-1');
 		        reviewNoSpan.innerHTML = '리뷰번호: '+ item.reviewNo;
 		        firstDiv.appendChild(reviewNoSpan);
 		        
 		        const memberNickSpan = document.createElement('span');
-		        memberNickSpan.classList.add('m-2');
+		        memberNickSpan.classList.add('m-1');
 		        memberNickSpan.innerHTML = '<strong>'+ item.memberNick +'</strong>';
 		        firstDiv.appendChild(memberNickSpan);
 		        
 		        const writeDateSpan = document.createElement('span');
-		        writeDateSpan.classList.add('m-2');
+		        writeDateSpan.classList.add('m-1');
 		        writeDateSpan.innerHTML = '작성일자: ' + item.writeDate;
 		        firstDiv.appendChild(writeDateSpan);
 		        
 		        const rateSpan = document.createElement('span');
-		        rateSpan.classList.add('m-2');
+		        rateSpan.classList.add('m-1');
 		        rateSpan.innerHTML = '<i class="rating__star far fa-star"></i> '+ item.rate;
 		        firstDiv.appendChild(rateSpan);
 		        
@@ -101,7 +101,7 @@ function renderData(data) {
 					deleteTag.classList.add('btn-link');
 					deleteTag.classList.add('text-decoration-none');
 					deleteTag.classList.add('text-black');
-					deleteTag.classList.add('m-auto');
+					deleteTag.classList.add('m-1');
 					deleteTag.innerHTML = '삭제';
 					deleteTag.addEventListener("click", () => {
 						location.href = `http://localhost:9002/cinema/movie/review/delete?reviewNo=${item.reviewNo}`
@@ -117,7 +117,7 @@ function renderData(data) {
 
 		       	
 		       	const contentSpan = document.createElement('span');
-		        contentSpan.classList.add('m-2');
+		        contentSpan.classList.add('m-1');
 		        contentSpan.innerHTML = item.content;
 		        secondDiv.appendChild(contentSpan);
 		        
@@ -144,10 +144,12 @@ const checkContent =()=> {
 	}
 	
 	const reviewContent = document.getElementById('review-content');
-	if(reviewContent.value.trim() === '') {
+	if(reviewContent.innerText.innerText.trim() === 0) {
 		alert('리뷰 내용을 입력해주세요');
 		reviewContent.focus();
 		return false;
+	} else {
+		reviewContent.innerText = reviewContent.innerText.replace(/\\/g, "\\\\");
 	}
 	
 	const check = confirm('리뷰를 등록하시겠습니까?');
