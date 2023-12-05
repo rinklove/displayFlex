@@ -42,6 +42,34 @@ public class FaqService {
 		return cnt;
 		
 	}
+
+	//게시글 상세조회 (조회수 증가)
+	public FaqVo selectFaqByNo(String no) throws Exception {
+		
+		// conn
+				Connection conn = JDBCTemplate.getConnection();
+				
+				// dao
+				FaqDao dao = new FaqDao();
+				int result = dao.increaseHit(conn, no);
+				FaqVo vo = null;
+				if(result == 1) {
+					vo = dao.selectFaqByNo(conn , no);
+				}
+				
+				// tx
+				if(result == 1) {
+					JDBCTemplate.commit(conn);
+				}else {
+					JDBCTemplate.rollback(conn);
+				}
+				
+				// close
+				JDBCTemplate.close(conn);
+				
+				return vo;
+				
+	}
 	
 	
 

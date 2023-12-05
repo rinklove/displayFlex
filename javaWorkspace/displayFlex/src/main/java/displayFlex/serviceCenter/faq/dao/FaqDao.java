@@ -24,7 +24,7 @@ public class FaqDao {
 		//rs
 		List<FaqVo> faqVoList = new ArrayList<FaqVo>();
 		while(rs.next()) {
-			String no = rs.getString("no");
+			String FaqNo = rs.getString("FAQ_NO");
 			String categoryNo = rs.getString("CATEGORY_NO");
 			String title = rs.getString("TITLE");
 			String content = rs.getString("CONTENT");
@@ -34,7 +34,7 @@ public class FaqDao {
 			String deleteYn = rs.getString("DELETE_YN");
 			
 			FaqVo vo = new FaqVo();
-			vo.setNo(no);
+			vo.setFaqNo(FaqNo);
 			vo.setCategoryNo(categoryNo);
 			vo.setTitle(title);
 			vo.setContent(content);
@@ -59,7 +59,7 @@ public class FaqDao {
 	public int selectFaqCount(Connection conn) throws Exception {
 		
 		//SQL
-		String sql = "SELECT COUNT(*) as cnt FROM BOARD WHERE STATUS = 'O'";
+		String sql = "SELECT COUNT(*) as cnt FROM FAQ WHERE DELETE_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 	      
 		ResultSet rs = pstmt.executeQuery();
@@ -79,4 +79,68 @@ public class FaqDao {
 	
 	}
 
+
+	//게시글 번호로 게시글 1개 조회
+	public FaqVo selectFaqByNo(Connection conn, String no) throws Exception {
+
+		//SQL
+	    String sql = "SELECT B.NO ,B.CATEGORY_NO ,B.TITLE ,B.CONTENT ,B.WRITER_NO ,B.HIT ,B.ENROLL_DATE ,B.MODIFY_DATE ,B.STATUS ,M.NICK AS WRITER_NICK ,C.NAME AS CATEGORY_NAME FROM BOARD B JOIN MEMBER M ON B.WRITER_NO = M.NO JOIN CATEGORY C ON B.CATEGORY_NO = C.NO WHERE B.NO = ? AND B.STATUS = 'O'";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+//	    pstmt.setString(1, no);
+	    ResultSet rs = pstmt.executeQuery();
+	      
+	    //rs
+	    FaqVo vo = null;
+	    if(rs.next()) {
+			String title = rs.getString("TITLE");
+			String faqNo = rs.getString("FAQ_NO");
+			String content = rs.getString("CONTENT");
+			String hit = rs.getString("HIT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String status = rs.getString("STATUS");
+			String categoryName = rs.getString("CATEGORY_NAME");
+	         
+			vo = new BoardVo();
+			vo.setNo(no);
+			vo.setTitle(title);
+			vo.setCategoryNo(categoryNo);
+			vo.setContent(content);
+			vo.setWriterNo(writerNo);
+			vo.setWriterNick(writerNick);
+			vo.setHit(hit);
+			vo.setEnrollDate(enrollDate);
+			vo.setModifyDate(modifyDate);
+			vo.setStatus(status);
+			vo.setCategoryName(categoryName);
+		         
+	    }
+	    
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return vo;
+		
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
