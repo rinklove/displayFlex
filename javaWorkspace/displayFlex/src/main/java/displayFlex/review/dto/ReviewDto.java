@@ -38,8 +38,8 @@ public class ReviewDto {
 
 	@Override
 	public String toString() {
-		return "ReviewDto [reviewNo=" + reviewNo + ", memberNick=" + memberNick + ", content=" + content
-				+ ", writeDate=" + writeDate + ", rate=" + rate + "]";
+		return " {\"reviewNo\": \"" + reviewNo + "\", \"memberNick\": \"" + memberNick + "\", \"content\": \"" + content
+				+ "\", \"writeDate\": \"" + writeDate + "\", \"rate\": \"" + rate + "\"}";
 	}
 	
 }
