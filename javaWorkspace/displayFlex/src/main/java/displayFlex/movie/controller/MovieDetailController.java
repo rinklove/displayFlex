@@ -16,9 +16,6 @@ import displayFlex.movie.service.MovieService;
 
 import displayFlex.movie.vo.StillImageVo;
 
-/**
- * Servlet implementation class MovieDetailController
- */
 @WebServlet("/movie/detail")
 public class MovieDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,7 +43,7 @@ public class MovieDetailController extends HttpServlet {
 			//스틸 이미지 가져오기
 			List<StillImageVo> stillImageList = movieService.getStillImageByMovieNo(movieNo);
 			moiveDetailDto.setStillsList(stillImageList);
-			
+			request.setAttribute("movie", moiveDetailDto);
 			request.getRequestDispatcher("/WEB-INF/views/movie/detail.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

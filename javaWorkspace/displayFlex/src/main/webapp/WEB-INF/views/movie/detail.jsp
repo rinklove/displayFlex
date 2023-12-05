@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/movie/detail.css">
 </head>
 <body>
@@ -22,7 +23,7 @@
             </div>
         </div>
         <hr class="jh-hr">
-        <table border="1">
+        <table>
             <thead></thead>
             <tbody>
                 <tr>
@@ -90,57 +91,42 @@
         </table>
     </div>
     <div class="review-container bg-w" >
-    <div class="title"><strong>영화 정보</strong></div>
+    <div class="title"><strong>리뷰 작성</strong></div>
     <hr class="jh-hr">
  	<div class="title-container">
-        <form id="rating-form" action="${pageContext.request.contextPath}/movie/detail" method="post" onsubmit="return checkContent()">
+        <form id="rating-form" action="${pageContext.request.contextPath}/movie/review/add" method="post" onsubmit="return checkContent()">
+            <input type="text" name="movieNo" value="${movie.movieNo }" hidden>
             <div>
             	<div class="rating-container">
-				    <div class="stars" id="stars">
-				        <input type="radio" id="star10" name="rating" value="1">
-				        <label for="star10" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star9.5" name="rating" value="2">
-				        <label for="star9.5" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star9" name="rating" value="3">
-				        <label for="star9" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star8.5" name="rating" value="4">
-				        <label for="star8.5" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star8" name="rating" value="5">
-				        <label for="star8" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star7.5" name="rating" value="6">
-				        <label for="star7.5" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star7" name="rating" value="7">
-				        <label for="star7" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star6.5" name="rating" value="8">
-				        <label for="star6.5" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star6" name="rating" value="9">
-				        <label for="star6" class="star">&#9733;</label>
-				        
-				        <input type="radio" id="star5.5" name="rating" value="10">
-				        <label for="star5.5" class="star">&#9733;</label>
-				    </div>
-				    <p id="rating-value">별점: 0</p>
+				    <div class="rating">
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					    <i class="rating__star far fa-star"></i>
+					</div>
+					<span>별점: </span><input type="text" id="rating-value" name="rating-value" class="border-0" readonly value="0">
 				</div>
-                <textarea name="review-content" id="review-content" cols="60" rows="5"></textarea>
-               	<input class="review-submit" type="submit" value="작성하기">
+                <textarea name="review-content" id="review-content" name="review-content" cols="60" rows="3" class="form-control w-50"></textarea>
+               	<input class="review-submit btn btn-secondary" type="submit" value="작성하기">
             </div>
         </form>
      </div>
      <hr class="jh-hr">
-     <div class="content-container">
-     	<div class="review">
+     <div id="review-container" class="review-container">
+     	<div>
+     		<div class="p-2">
+     			<span id ="memberNick" class="'m-2">사용자닉네임</span>
+     			<span id ="reviewWriteDate" class="'m-2">작성일자</span>
+     			<span id ="reviewRate" class="'m-2"><i class="rating__star far fa-star"></i> 8</span>
+     		</div>
      		<div>
-     			<span>사용자닉네임</span>
-     			<span>작성일자</span>
-     			<span>★ 8</span>
+     			<span id="review-content"></span>
      		</div>
      	</div>
      </div>
