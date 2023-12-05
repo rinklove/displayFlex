@@ -25,9 +25,13 @@
 					</div>
 				</div>
 				<div id="product-detail">
-					<div id="imgPreview">
-						<i class="fa-solid fa-circle-plus"></i>
-						<input type="file" id="upload" accept="image/*" onchange="previewImage(event)">
+					<div>
+						<div id="imgPreview">
+							<i class="fa-solid fa-circle-plus"></i>
+						</div>
+						<div>
+							<input type="file" id="upload" accept="image/*" onchange="previewImage(event)">
+						</div>
 					</div>
 					<div id="detail">
 						<div>
