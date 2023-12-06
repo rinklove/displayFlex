@@ -47,7 +47,7 @@ public class MovieSearchController extends HttpServlet {
 			
 			//관람 등급 가져오기
 			List<ScreenGradeVo> screenGradeList = movieService.getAllScreenGrade();
-			String[] genres = request.getParameterValues("genre");
+			String[] genres = request.getParameterValues("genres");
 			String grade = request.getParameter("grade");
 			
 			//영화 리스트 가져오기(페이징 처리 5개씩)
@@ -58,12 +58,21 @@ public class MovieSearchController extends HttpServlet {
 			PageVo page = setPage(movieCount , pno, 5, 5);
 			List<MovieListDto> movieList = movieService.findMoiveListByCondition(genres, grade, page);
 			
+			String selectedQuery = request.getQueryString();
+			//쿼리 스트링 중복 생성 방지
+			if(selectedQuery.contains("&pno")) {
+				selectedQuery = request.getQueryString().substring(0, selectedQuery.lastIndexOf("&"));				
+			}
+			genres = genres == null ? new String[1]  : genres;
+			request.setAttribute("genreList", genreList);
+			request.setAttribute("selectGenre", genres);	
+			request.setAttribute("selectGrade", grade);
 			request.setAttribute("genreList", genreList);
 			request.setAttribute("screenGradeList", screenGradeList);
 			request.setAttribute("pageVo", page);
 			request.setAttribute("movieList", movieList);
-			
-			request.getRequestDispatcher("/WEB-INF/views/movie/list.jsp").forward(request, response);
+			request.setAttribute("queryString", selectedQuery);
+			request.getRequestDispatcher("/WEB-INF/views/movie/search-list.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
