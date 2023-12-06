@@ -175,6 +175,148 @@ public class MovieDao {
 		return imageList;
 	}
 
+	/**
+	 * 조건에 맞는 영화 개수 가져오기
+	 * @param genres
+	 * @param grade
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getAllMovieCountByCondition(String[] genres, String grade, Connection con) throws SQLException {
+		StringBuilder dynamicQuery = new StringBuilder("SELECT COUNT(M.MOVIE_NO) FROM MOVIE M INNER JOIN MOVIE_CATE MC ON M.MOVIE_NO = MC.MOVIE_NO ");
+		int index = 1;
+		
+		
+		//조건에 따라 쿼리문 동적 생성
+		if(genres != null || grade != null) {
+			dynamicQuery.append("WHERE ");
+			
+			if(grade != null) {
+				dynamicQuery.append("M.SCREEN_GRADE_NO = ? ");
+			}
+			
+			if(genres != null) {
+				// 체크박스 값에 따라 파라미터 설정 및 동적 쿼리 생성
+				if(genres != null && grade != null) {
+					dynamicQuery.append("AND MC.GENRE_CATE_NO IN (");
+				} else {
+					dynamicQuery.append("MC.GENRE_CATE_NO IN(");					
+				}
+				
+		        for (int i = 0; i < genres.length; i++) {
+		            dynamicQuery.append("?");
+//		            pstmt.setString(index, genres[i]);
+		            if (i < genres.length - 1) {
+		                dynamicQuery.append(", ");
+		            } else {
+		            	dynamicQuery.append(")");
+		            }
+		        }
+			}
+		}
+		
+		PreparedStatement pstmt = con.prepareStatement(dynamicQuery.toString());
+		System.out.println("dynamicQuery = " + dynamicQuery.toString());
+		if(grade != null) {
+			pstmt.setString(index, grade);
+			index++;
+		}
+		for(int count = 0; count <genres.length; count++) {
+			pstmt.setString(index, genres[count]);
+			index++;
+		}
+
+		int count = 0;
+		ResultSet rs = pstmt.executeQuery();
+
+		while(rs.next()) {
+			count = rs.getInt(1);
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return count;
+	}
+
+	/**
+	 * 조건에 맞는 영화 리스트 가져오기
+	 * @param genres
+	 * @param grade
+	 * @param page
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<MovieListDto> findMoiveListByCondition(String[] genres, String grade, PageVo page, Connection con) throws SQLException {
+		StringBuilder dynamicQuery = new StringBuilder("SELECT  A.*, SG.NAME FROM ( SELECT ROW_NUMBER() OVER(ORDER BY M.WRITE_DATE DESC) RNUM , M.MOVIE_NO , M.MOVIE_NAME , M.SCREEN_GRADE_NO , TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE , M.MOVIE_IMAGE , M.RUNNING_TIME , M.RATE , M.GENRE FROM MOVIE M INNER JOIN MOVIE_CATE MC ON M.MOVIE_NO = MC.MOVIE_NO");
+		int index = 1;
+		
+		//조건에 따라 쿼리문 동적 생성
+		if(genres != null || grade != null) {
+			dynamicQuery.append("WHERE ");
+			
+			if(grade != null) {
+				dynamicQuery.append("M.SCREEN_GRADE_NO = ? ");
+			}
+			
+			if(genres != null) {
+				// 체크박스 값에 따라 파라미터 설정 및 동적 쿼리 생성
+				if(genres != null && grade != null) {
+					dynamicQuery.append("AND MC.GENRE_CATE_NO IN (");
+				} else {
+					dynamicQuery.append("MC.GENRE_CATE_NO IN(");					
+				}
+				
+		        for (int i = 0; i < genres.length; i++) {
+		            dynamicQuery.append("?");
+//		            pstmt.setString(index, genres[i]);
+		            if (i < genres.length - 1) {
+		                dynamicQuery.append(", ");
+		            } else {
+		            	dynamicQuery.append(")");
+		            }
+		        }
+			}
+		}
+		
+		dynamicQuery.append(" A INNER JOIN SCREEN_GRADE SG ON A.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO WHERE A.RNUM BETWEEN ? AND ?");
+		
+		PreparedStatement pstmt = con.prepareStatement(dynamicQuery.toString());
+		if(grade != null) {
+			pstmt.setString(index, grade);
+			index++;
+		}
+		
+		for(int count = 0; count <genres.length; count++) {
+			pstmt.setString(index, genres[count]);
+			index++;
+		}
+		
+		pstmt.setInt(index, page.getStartRow());
+		index++;
+		pstmt.setInt(index, page.getLastRow());
+		
+		ResultSet rs = pstmt.executeQuery();
+		List<MovieListDto> movieList = new ArrayList<MovieListDto>();
+		while(rs.next()) {
+			String movieNo = rs.getString("MOVIE_NO");
+			String movieName = rs.getString("MOVIE_NAME");
+			String name = rs.getString("NAME");
+			String movieImage = rs.getString("MOVIE_IMAGE");
+			String releaseDate = rs.getString("RELEASE_DATE");
+			String runningTime = rs.getString("RUNNING_TIME");
+			String rate = rs.getString("RATE");
+			String genre = rs.getString("GENRE");
+			
+			movieList.add(new MovieListDto(movieNo, movieName, name, movieImage, releaseDate, runningTime, rate, genre));
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return movieList;
+	}
+
 	
 	
 

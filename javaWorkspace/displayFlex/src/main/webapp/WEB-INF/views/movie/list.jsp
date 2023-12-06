@@ -16,7 +16,7 @@
     <div class="first-div">
         <span class="title"><strong>조건검색</strong></span>
     </div>
-    <form action="${pageContext.request.contextPath}/movie/list/search" method="get">
+    <form action="${pageContext.request.contextPath}/movie/list/search?pno=1" method="get">
         <table>
             <thead></thead>
             <tbody>
