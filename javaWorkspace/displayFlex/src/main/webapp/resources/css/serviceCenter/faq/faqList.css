@@ -30,7 +30,7 @@ div#title_top {
     font-weight: normal;
 }
 
-#title_top a {
+#title_top button {
     margin-right: 20px;
     height: 40px;
     line-height: 35px;
@@ -239,7 +239,7 @@ a {
 
 /* #tab> td a {
     border-bottom: none;
-} */
+} */ 
 
 /* tr{
     display: table-row;

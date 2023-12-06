@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.*;
 
 import displayFlex.serviceCenter.faq.dao.FaqDao;
+import displayFlex.serviceCenter.faq.vo.CategoryVo;
 import displayFlex.serviceCenter.faq.vo.FaqVo;
 import displayFlex.util.page.vo.PageVo;
 import test.JDBCTemplate;
@@ -26,6 +27,47 @@ public class FaqService {
 		return FaqVoList;
 	}
 
+	
+	// 카테고리 목록 조회
+    public List<CategoryVo> selectCategoryList() throws Exception {
+    	
+        Connection conn = JDBCTemplate.getConnection();
+        
+        CategoryService categoryService = new CategoryService();
+        List<CategoryVo> categoryList = categoryService.selectAllCategoryList();
+        
+        JDBCTemplate.close(conn);
+        
+        return categoryList;
+    }
+
+    // 카테고리에 따른 FAQ 목록 조회
+    public List<FaqVo> selectFaqListByCategory(String categoryNo) throws Exception {
+        
+    	Connection conn = JDBCTemplate.getConnection();
+    	
+        FaqDao dao = new FaqDao();
+        List<FaqVo> faqVoList = dao.selectFaqListByCategory(conn, categoryNo, null);
+        
+        JDBCTemplate.close(conn);
+        
+        return faqVoList;
+    }
+
+    // 카테고리에 따른 전체 FAQ 갯수 조회
+    public int selectFaqCountByCategory(String categoryNo) throws Exception {
+        
+    	Connection conn = JDBCTemplate.getConnection();
+    	
+        FaqDao dao = new FaqDao();
+        int cnt = dao.selectFaqCountByCategory(conn, categoryNo);
+        
+        JDBCTemplate.close(conn);
+        
+        return cnt;
+    }
+	
+	
 	//전체 게시글 갯수 조회
 	public int selectFaqCount() throws Exception {
 		
@@ -47,27 +89,27 @@ public class FaqService {
 	public FaqVo selectFaqByNo(String faqNo) throws Exception {
 		
 		// conn
-				Connection conn = JDBCTemplate.getConnection();
-				
-				// dao
-				FaqDao dao = new FaqDao();
-				int result = dao.increaseHit(conn, faqNo);
-				FaqVo vo = null;
-				if(result == 1) {
-					vo = dao.selectFaqByNo(conn , faqNo);
-				}
-				
-				// tx
-				if(result == 1) {
-					JDBCTemplate.commit(conn);
-				}else {
-					JDBCTemplate.rollback(conn);
-				}
-				
-				// close
-				JDBCTemplate.close(conn);
-				
-				return vo;
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		FaqDao dao = new FaqDao();
+		int result = dao.increaseHit(conn, faqNo);
+		FaqVo vo = null;
+		if(result == 1) {
+			vo = dao.selectFaqByNo(conn , faqNo);
+		}
+		
+		// tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return vo;
 				
 	}
 	

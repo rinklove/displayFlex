@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="displayFlex.serviceCenter.faq.vo.CategoryVo"%>
 <%@page import="displayFlex.util.page.vo.PageVo"%>
 <%@page import="displayFlex.serviceCenter.faq.vo.FaqVo"%>
 <%@page import="java.util.List"%>
@@ -7,7 +9,8 @@
      <%
     	List<FaqVo> faqVoList = (List<FaqVo>) request.getAttribute("faqVoList");
      	PageVo pvo = (PageVo)request.getAttribute("pvo");
-	 %>
+     	List<CategoryVo> categoryList = (List<CategoryVo>) request.getAttribute("categoryList");
+     	%>
     
 <!DOCTYPE html>
 <html>
@@ -28,7 +31,7 @@
                 <h1>고객센터</h1>
                 <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
                 <%-- <% if(loginMember != null) { %> --%>
-	                <a href="/cinema/admin/faqAdd">등록</a>
+	                <button onclick="location.href=/cinema/admin/faqAdd">등록</button>
                 <%-- <% } %> --%>
                 <%-- </c:if> --%>
             </div>
@@ -49,32 +52,46 @@
                 </nav>
             </div>
             <div id="tab_con">
-                <div id="faq_icon_wrap">
-                    <button id="icon_01" onclick="clickIcon">
-                        <img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">
-                        <a href="">영화관 이용</a>
-                    </button>
-                    <button id="icon_02" onclick="clickIcon">
-                        <img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">
-                        <a href="">회원</a>
-                    </button>
-                    <button id="icon_03" onclick="clickIcon">
-                        <img src="/cinema/resources/image/faqIcon/star.png" alt="별 아이콘">
-                        <a href="">등급</a>
-                    </button>
-                    <button id="icon_04" onclick="clickIcon">
-                        <img src="/cinema/resources/image/faqIcon/ticket.png" alt="티켓 아이콘">
-                        <a href="">쿠폰</a>
-                    </button>
-                    <button id="icon_05" onclick="clickIcon">
-                        <img src="/cinema/resources/image/faqIcon/popcorn.png" alt="팝콘 아이콘">
-                        <a href="">스토어</a>
-                    </button>
-                    <button id="icon_06" onclick="clickIcon">
-                        <img src="/cinema/resources/image/faqIcon/ribbon.png" alt="리본 아이콘">
-                        <a href="">이벤트</a>
-                    </button>
-                </div>
+               	<% for(CategoryVo category : categoryList) { %>
+                	<div id="faq_icon_wrap">
+	                    <button id="icon_01" onclick="clickIcon">
+	                        <img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">
+	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
+	                        	<%= category.getCategoryName() %>
+	                        </a>
+	                    </button>
+	                    <button id="icon_02" onclick="clickIcon">
+	                        <img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">
+	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
+	                        	<%= category.getCategoryName() %>
+	                        </a>
+	                    </button>
+	                    <button id="icon_03" onclick="clickIcon">
+	                        <img src="/cinema/resources/image/faqIcon/star.png" alt="별 아이콘">
+	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
+	                        	<%= category.getCategoryName() %>
+	                        </a>
+	                    </button>
+	                    <button id="icon_04" onclick="clickIcon">
+	                        <img src="/cinema/resources/image/faqIcon/ticket.png" alt="티켓 아이콘">
+	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
+	                        	<%= category.getCategoryName() %>
+	                        </a>
+	                    </button>
+	                    <button id="icon_05" onclick="clickIcon">
+	                        <img src="/cinema/resources/image/faqIcon/popcorn.png" alt="팝콘 아이콘">
+	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
+	                        	<%= category.getCategoryName() %>
+	                        </a>
+	                    </button>
+	                    <button id="icon_06" onclick="clickIcon">
+	                        <img src="/cinema/resources/image/faqIcon/ribbon.png" alt="리본 아이콘">
+	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
+	                        	<%= category.getCategoryName() %>
+	                        </a>
+	                    </button>
+	                </div>
+            	<% } %>
                 <fieldset id="search_wrap">
                     <legend>영화관 FAQ 검색하기</legend>
                     <input type="text" placeholder="검색어를 입력해주세요." id="seachKeyword" title="검색어를 입력해주세요">
@@ -136,6 +153,26 @@
     </main>
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	
+	<!-- faqList.jsp -->
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function clickCategory(categoryNo) {
+            $.ajax({
+                type: 'GET',
+                url: '/cinema/serviceCenter/faqList',
+                data: { categoryNo: categoryNo },
+                success: function(data) {
+                    $('#tab').html(data);
+                },
+                error: function() {
+                    alert('카테고리별 FAQ 조회에 실패하였습니다.');
+                }
+            });
+        }
+    </script>
+
+	
 
     <!-- <script>
         function clickIcon(button) {
