@@ -7,11 +7,11 @@ let seatData = [];
 
 function changeMovieImage(){
 	
-	fetch("http://localhost:9002/cinema/ticket/select")
+	fetch("http://localhost:9002/cinema/ticket/select/image?영화이름=" + sessionStorage.getItem("movieInfo"))
 	.then( (resp) => { return resp.json() } ) 
-	.then( (movieImage) => { 
-			console.log(movieImage.title);
-	} );		
+	.then( (movieName) => { 
+			console.log(movieName);
+	} );
 	
 }
 
@@ -55,7 +55,7 @@ function changeMovieImage(){
     console.log(ticketData);
  
    	sessionStorage.setItem("movieInfo", movieInfo.innerText);
-//   	changeMovieImage();
+   	changeMovieImage();
   }
 
 // 예매 - 날짜 선택
