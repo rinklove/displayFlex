@@ -27,22 +27,35 @@ public class FaqListController extends HttpServlet {
 			FaqService fs = new FaqService();
 			
 			// data
-			int listCount = fs.selectFaqCount();				//전체 게시글 갯수
-			String currentPage_ = req.getParameter("pno");
-			if(currentPage_ == null) {
-				currentPage_ = "1";
+			String categoryNo = req.getParameter("categoryNo");
+			int listCount;
+			List<FaqVo> faqVoList;
+			
+			if(categoryNo != null) {
+				listCount = fs.selectFaqCountByCategory(categoryNo);
+				faqVoList = fs.selectFaqListByCategory(categoryNo);
+			} else {
+				listCount = fs.selectFaqCount();				//전체 게시글 갯수
+				String currentPage_ = req.getParameter("pno");
+				if(currentPage_ == null) {
+					currentPage_ = "1";
+				}
+				int currentPage = Integer.parseInt(currentPage_);	//현재 페이지
+				int pageLimit = 2;									//페이징 영역 페이지갯수
+				int faqLimit = 6;									//한 페이지에 보여줄 게시글 갯수
+				PageVo pvo = new PageVo(listCount, currentPage, pageLimit, faqLimit);
+				faqVoList = fs.selectFaqList(pvo);
+				req.setAttribute("pvo", pvo);
 			}
-			int currentPage = Integer.parseInt(currentPage_);	//현재 페이지
-			int pageLimit = 5;
-			int boardLimit = 10;
-			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+			
 			
 			// service
-			List<FaqVo> faqVoList = fs.selectFaqList(pvo);
+//			List<FaqVo> faqVoList = fs.selectFaqList(pvo);
 			
 			// result (==view)
+			
 			req.setAttribute("faqVoList", faqVoList);
-			req.setAttribute("pvo" , pvo);
+//			req.setAttribute("pvo" , pvo);
 			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/faq/faqList.jsp").forward(req, resp);
 			
 		}catch(Exception e) {

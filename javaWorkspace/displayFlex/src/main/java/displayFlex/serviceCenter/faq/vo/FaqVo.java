@@ -15,7 +15,7 @@ public class FaqVo {
 	public FaqVo(String faqNo, String faqCategoryNo, String title, String content, String hit, String enrollDate,
 			String modifyDate, String deleteYn, String categoryName) {
 		super();
-		faqNo = faqNo;
+		this.faqNo = faqNo;
 		this.faqCategoryNo = faqCategoryNo;
 		this.title = title;
 		this.content = content;
@@ -35,7 +35,7 @@ public class FaqVo {
 	}
 
 	public void setFaqNo(String faqNo) {
-		faqNo = faqNo;
+		this.faqNo = faqNo;
 	}
 
 	public String getFaqCategoryNo() {

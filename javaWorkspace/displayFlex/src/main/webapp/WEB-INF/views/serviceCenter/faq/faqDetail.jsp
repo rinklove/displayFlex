@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="displayFlex.serviceCenter.faq.vo.FaqVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -25,8 +26,8 @@
             <div id="title_top">
                 <h1>고객센터</h1>
                 <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
-                <a href="location.href='/cinema/serviceCenter/FaqEdit?no=<%= vo.getFaqNo() %>'">수정</a>
-                <a href="location.href='/cinema/serviceCenter/FaqDelete?no=<%= vo.getFaqNo() %>'">삭제</a>
+                <a href="<c:if test='${not empty vo}'>/cinema/serviceCenter/FaqEdit?no=${vo.getFaqNo()}</c:if>">수정</a>
+				<a href="<c:if test='${not empty vo}'>/cinema/serviceCenter/FaqDelete?no=${vo.getFaqNo()}</c:if>">삭제</a>
                 <%-- </c:if> --%>
             </div>
             <div id="tab_tit">
