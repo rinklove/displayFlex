@@ -27,10 +27,10 @@
             </div>
             <div class="coupon_content">
                 <div id="coupon_name">
-                    <div>s그냥쿠폰</div>
-                    <div>그냥그냥쿠폰</div>
-                    <div>VIP꺼져쿠폰</div>
-                    <div>아아아쿠폰</div>
+                    <div>VIP할인쿠폰</div>
+                    <div>어린이할인쿠폰</div>
+                    <div>경로할인쿠폰</div>
+                    <div>장애인할인쿠폰</div>
                 </div>
     
                 <div id="coupon_period">
@@ -41,10 +41,10 @@
                 </div>
     
                 <div id="coupon_info">
-                    <div>VIP할인쿠폰</div>
-                    <div>어린이할인쿠폰</div>
-                    <div>경로할인쿠폰</div>
-                    <div>장애인쿠폰</div>
+                    <div>VIP반값할인쿠폰</div>
+                    <div>어린이2000원할인쿠폰</div>
+                    <div>경로1000원할인쿠폰</div>
+                    <div>장애인1000원할인쿠폰</div>
                 </div>
     
                 <div id="coupon_yn">
