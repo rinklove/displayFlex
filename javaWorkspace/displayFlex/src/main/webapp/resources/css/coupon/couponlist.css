@@ -1,7 +1,7 @@
 .bw {
     width: 90%;
     height: 70%;
-    background-color: white;
+    background-color:white;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -53,6 +53,14 @@
     line-height: 5em;
     display: flex;
     
+}
+#coupon_period {
+    color: gray;
+    font-size: small;
+}
+#coupon_name {
+    font-weight: bolder;
+    font-size: large;
 }
 
 

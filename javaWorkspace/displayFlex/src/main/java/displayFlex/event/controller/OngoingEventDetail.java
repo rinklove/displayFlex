@@ -16,4 +16,10 @@ public class OngoingEventDetail extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/views/event/ongoingeventdetail.jsp").forward(req, resp);
 	}
 
+	//관리자 진행중 이벤트 상세조회
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	
+	}
 }
