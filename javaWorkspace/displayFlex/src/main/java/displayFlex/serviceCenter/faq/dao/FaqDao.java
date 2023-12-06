@@ -16,7 +16,7 @@ public class FaqDao {
 	public List<FaqVo> selectFaqList(Connection conn , PageVo pvo) throws Exception {
 
 		//sql
-		String sql = "SELECT * FROM FAQ WHERE DELETE_YN = 'N' ODER BY NO DESC";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM , T.* FROM (SELECT F.FAQ_NO ,F.FAQ_CATEGORY_NO ,F.TITLE ,F.CONTENT ,F.HIT ,F.ENROLL_DATE ,F.MODIFY_DATE ,FC.DIVISION AS CATEGORY_NAME FROM FAQ F JOIN FAQ_CATEGORY FC ON F.FAQ_CATEGORY_NO = FC.FAQ_CATEGORY_NO WHERE F.DELETE_YN = 'N' ORDER BY FAQ_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?;";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 //		pstmt.
 		ResultSet rs = pstmt.executeQuery();
@@ -25,7 +25,7 @@ public class FaqDao {
 		List<FaqVo> faqVoList = new ArrayList<FaqVo>();
 		while(rs.next()) {
 			String FaqNo = rs.getString("FAQ_NO");
-			String categoryNo = rs.getString("CATEGORY_NO");
+			String faqCategoryNo = rs.getString("FAQ_CATEGORY_NO");
 			String title = rs.getString("TITLE");
 			String content = rs.getString("CONTENT");
 //			String writerNo = rs.getString("WRITER_NO");
@@ -35,7 +35,7 @@ public class FaqDao {
 			
 			FaqVo vo = new FaqVo();
 			vo.setFaqNo(FaqNo);
-			vo.setCategoryNo(categoryNo);
+			vo.setFaqCategoryNo(faqCategoryNo);
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setEnrollDate(enrollDate);
@@ -81,36 +81,33 @@ public class FaqDao {
 
 
 	//게시글 번호로 게시글 1개 조회
-	public FaqVo selectFaqByNo(Connection conn, String no) throws Exception {
+	public FaqVo selectFaqByNo(Connection conn, String faqNo) throws Exception {
 
 		//SQL
-	    String sql = "SELECT B.NO ,B.CATEGORY_NO ,B.TITLE ,B.CONTENT ,B.WRITER_NO ,B.HIT ,B.ENROLL_DATE ,B.MODIFY_DATE ,B.STATUS ,M.NICK AS WRITER_NICK ,C.NAME AS CATEGORY_NAME FROM BOARD B JOIN MEMBER M ON B.WRITER_NO = M.NO JOIN CATEGORY C ON B.CATEGORY_NO = C.NO WHERE B.NO = ? AND B.STATUS = 'O'";
+	    String sql = "SELECT F.FAQ_NO ,F.FAQ_CATEGORY_NO ,F.TITLE ,F.CONTENT ,F.HIT ,F.ENROLL_DATE ,F.MODIFY_DATE ,FC.DIVISION AS CATEGORY_NAME FROM FAQ F JOIN FAQ_CATEGORY FC ON F.FAQ_CATEGORY_NO = FC.FAQ_CATEGORY_NO WHERE F.FAQ_NO = ? AND F.DELETE_YN = 'N'";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
-//	    pstmt.setString(1, no);
+	    pstmt.setString(1, faqNo);
 	    ResultSet rs = pstmt.executeQuery();
 	      
 	    //rs
 	    FaqVo vo = null;
 	    if(rs.next()) {
+//	    	String faqNo = rs.getString("FAQ_NO");
 			String title = rs.getString("TITLE");
-			String faqNo = rs.getString("FAQ_NO");
+			String faqCateforyNo = rs.getString("FAQ_CATEGORY_NO");
 			String content = rs.getString("CONTENT");
 			String hit = rs.getString("HIT");
 			String enrollDate = rs.getString("ENROLL_DATE");
-			String status = rs.getString("STATUS");
-			String categoryName = rs.getString("CATEGORY_NAME");
+//			String status = rs.getString("STATUS");
+			String categoryName = rs.getString("Category_Name");
 	         
-			vo = new BoardVo();
-			vo.setNo(no);
+			vo = new FaqVo();
+//			vo.setFaqNo(faqNo);
 			vo.setTitle(title);
-			vo.setCategoryNo(categoryNo);
+			vo.setFaqCategoryNo(faqCateforyNo);
 			vo.setContent(content);
-			vo.setWriterNo(writerNo);
-			vo.setWriterNick(writerNick);
 			vo.setHit(hit);
 			vo.setEnrollDate(enrollDate);
-			vo.setModifyDate(modifyDate);
-			vo.setStatus(status);
 			vo.setCategoryName(categoryName);
 		         
 	    }
@@ -118,7 +115,25 @@ public class FaqDao {
 		//close
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);
+		
 		return vo;
+		
+	}
+
+
+	//조회수 증가
+	public int increaseHit(Connection conn, String faqNo) throws Exception {
+		
+		//SQL
+		String sql = "UPDATE FAQ SET HIT = HIT + 1 WHERE FAQ_NO = 1 AND DELETE_YN = 'N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, faqNo);
+		int result = pstmt.executeUpdate();
+		
+		//close
+		JDBCTemplate.close(pstmt);
+			      
+		return result;
 		
 	}
 

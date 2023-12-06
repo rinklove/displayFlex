@@ -1,5 +1,15 @@
+<%@page import="displayFlex.serviceCenter.faq.vo.FaqVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	FaqVo vo = (FaqVo)request.getAttribute("vo");
+    	String currPage = (String)request.getAttribute("currPage");
+    	if(currPage == null) {
+    		currPage = "1";
+    	}
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +25,8 @@
             <div id="title_top">
                 <h1>고객센터</h1>
                 <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
-                <a href="/cinema/admin/FaqAdd">수정</a>
-                <a href="">삭제</a>
+                <a href="location.href='/cinema/serviceCenter/FaqEdit?no=<%= vo.getFaqNo() %>'">수정</a>
+                <a href="location.href='/cinema/serviceCenter/FaqDelete?no=<%= vo.getFaqNo() %>'">삭제</a>
                 <%-- </c:if> --%>
             </div>
             <div id="tab_tit">
@@ -36,7 +46,7 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>게시글 제목</th>
+                                <th><%= vo.getTitle() %></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,28 +54,22 @@
                                 <td>
                                     <span class="tit">번호</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">1</span>
+                                    <span class="cont"><%= vo.getFaqNo() %></span>
                                     <span class="tit">등록일</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">2023-12-04</span>
+                                    <span class="cont"><%= vo.getEnrollDate() %></span>
                                     <span class="tit">조회수</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">1</span>
+                                    <span class="cont"><%= vo.getHit() %></span>
                                 </td>
                             </tr>
                             <tr id="tb_content">
                                 <td>
                                     <div id="noticeContents">
                                         <p>
-                                            내용 ~~
+                                        	<br>
+                                            <%= vo.getContent() %>
                                             <br>
-                                            ~~
-                                            <br>
-                                            ~~
-                                            <br>
-                                            ~~
-                                            <br>
-                                            ~~
                                         </p>
                                     </div>
                                 </td>
@@ -87,12 +91,14 @@
                         </tbody>
                     </table>
                     <div id="list_btn">
-                        <a href="/cinema/serviceCenter/faqList"">목록</a>
+                        <a href="/cinema/serviceCenter/faqList?pno<%= currPage %>">목록</a>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 </body>
 </html>

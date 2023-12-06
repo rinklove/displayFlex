@@ -44,17 +44,17 @@ public class FaqService {
 	}
 
 	//게시글 상세조회 (조회수 증가)
-	public FaqVo selectFaqByNo(String no) throws Exception {
+	public FaqVo selectFaqByNo(String faqNo) throws Exception {
 		
 		// conn
 				Connection conn = JDBCTemplate.getConnection();
 				
 				// dao
 				FaqDao dao = new FaqDao();
-				int result = dao.increaseHit(conn, no);
+				int result = dao.increaseHit(conn, faqNo);
 				FaqVo vo = null;
 				if(result == 1) {
-					vo = dao.selectFaqByNo(conn , no);
+					vo = dao.selectFaqByNo(conn , faqNo);
 				}
 				
 				// tx
