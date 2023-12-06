@@ -59,14 +59,17 @@
 	
 	title.addEventListener("change", async () => {
 			const selectedMovie = title.value.split("/");
+
 			title.value = selectedMovie[0];
 			let searchMovie = await getMoviePoster(title.value);
 
-			searchMovie = searchMovie.filter(el => el.Codes.Code[0].CodeNo !== '' && el.Codes.Code[0].CodeNo === selectedMovie[1]).shift();
+			searchMovie = searchMovie?.filter(el => el.Codes.Code[0].CodeNo !== '' && el.Codes.Code[0].CodeNo === selectedMovie[1]).shift();
 			console.log(searchMovie);
 			
 			//데이터가 존재하면 input 값에 값 채워넣기
 			if(searchMovie !== undefined) {
+				const movieCdInput = document.getElementById('movieCd');
+				movieCdInput.value = selectedMovie[1];
 				//감독
 				const directorInput = document.getElementById("director");
 				directorInput.value = searchMovie.directors.director[0].directorNm;
@@ -139,8 +142,10 @@
 			if(searchMovie.stlls !== "") {
 				let stillSrcArr = searchMovie.stlls.split("|", 3);
 				for(let index = 0; index < stillSrcArr.length; index++) {
+					const srcInput = document.getElementById('still-url'+(index+1));
 					stillImageArr[index].width = 300
 					stillImageArr[index].src = stillSrcArr[index];
+					srcInput.value = stillSrcArr[index];
 					stillImageArr[index].alt = "스틸 이미지가 없습니다.";
 					stillImageFileArr[index].disabled = true;
 				}				

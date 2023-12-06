@@ -184,49 +184,53 @@ public class MovieDao {
 	 * @throws SQLException 
 	 */
 	public int getAllMovieCountByCondition(String[] genres, String grade, Connection con) throws SQLException {
-		StringBuilder dynamicQuery = new StringBuilder("SELECT COUNT(M.MOVIE_NO) FROM MOVIE M INNER JOIN MOVIE_CATE MC ON M.MOVIE_NO = MC.MOVIE_NO ");
+		StringBuilder dynamicQuery = new StringBuilder("SELECT COUNT(DISTINCT M.MOVIE_NO) FROM MOVIE M ");
 		int index = 1;
 		
 		
 		//조건에 따라 쿼리문 동적 생성
-		if(genres != null || grade != null) {
-			dynamicQuery.append("WHERE ");
-			
-			if(grade != null) {
-				dynamicQuery.append("M.SCREEN_GRADE_NO = ? ");
-			}
-			
-			if(genres != null) {
-				// 체크박스 값에 따라 파라미터 설정 및 동적 쿼리 생성
-				if(genres != null && grade != null) {
-					dynamicQuery.append("AND MC.GENRE_CATE_NO IN (");
-				} else {
-					dynamicQuery.append("MC.GENRE_CATE_NO IN(");					
-				}
-				
-		        for (int i = 0; i < genres.length; i++) {
-		            dynamicQuery.append("?");
-//		            pstmt.setString(index, genres[i]);
-		            if (i < genres.length - 1) {
-		                dynamicQuery.append(", ");
-		            } else {
-		            	dynamicQuery.append(")");
-		            }
-		        }
-			}
+		if(genres != null) {
+			dynamicQuery.append("INNER JOIN MOVIE_CATE MC ON M.MOVIE_NO = MC.MOVIE_NO WHERE ");
+		} else if(grade != null) {
+			dynamicQuery.append("WHERE ");			
+		}
+		
+		if(genres != null) {
+			dynamicQuery.append("MC.GENRE_CATE_NO IN (");
+
+	        for (int i = 0; i < genres.length; i++) {
+	            dynamicQuery.append("?");
+	            if (i < genres.length - 1) {
+	                dynamicQuery.append(", ");
+	            } else {
+	            	dynamicQuery.append(") ");
+	            }
+	        }
+		}
+		
+		if(genres != null && grade != null) {
+			dynamicQuery.append("AND ");
+		}
+		
+		if(grade != null) {
+			dynamicQuery.append("M.SCREEN_GRADE_NO = ? ");
 		}
 		
 		PreparedStatement pstmt = con.prepareStatement(dynamicQuery.toString());
 		System.out.println("dynamicQuery = " + dynamicQuery.toString());
+		
+		if(genres != null) {
+			for(int count = 0; count <genres.length; count++) {
+				pstmt.setString(index, genres[count]);
+				index++;
+			}			
+		}
+		
 		if(grade != null) {
 			pstmt.setString(index, grade);
 			index++;
 		}
-		for(int count = 0; count <genres.length; count++) {
-			pstmt.setString(index, genres[count]);
-			index++;
-		}
-
+		
 		int count = 0;
 		ResultSet rs = pstmt.executeQuery();
 
@@ -249,47 +253,49 @@ public class MovieDao {
 	 * @throws SQLException 
 	 */
 	public List<MovieListDto> findMoiveListByCondition(String[] genres, String grade, PageVo page, Connection con) throws SQLException {
-		StringBuilder dynamicQuery = new StringBuilder("SELECT  A.*, SG.NAME FROM ( SELECT ROW_NUMBER() OVER(ORDER BY M.WRITE_DATE DESC) RNUM , M.MOVIE_NO , M.MOVIE_NAME , M.SCREEN_GRADE_NO , TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE , M.MOVIE_IMAGE , M.RUNNING_TIME , M.RATE , M.GENRE FROM MOVIE M INNER JOIN MOVIE_CATE MC ON M.MOVIE_NO = MC.MOVIE_NO");
+		StringBuilder dynamicQuery = new StringBuilder("SELECT A.*, SG.NAME FROM ( SELECT ROW_NUMBER() OVER(ORDER BY M.WRITE_DATE DESC) RNUM ,  M.MOVIE_NO , M.MOVIE_NAME , M.SCREEN_GRADE_NO , TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE , M.MOVIE_IMAGE , M.RUNNING_TIME , M.RATE , M.GENRE FROM MOVIE M WHERE M.MOVIE_NO IN (SELECT DISTINCT O.MOVIE_NO FROM MOVIE O ");
 		int index = 1;
 		
 		//조건에 따라 쿼리문 동적 생성
-		if(genres != null || grade != null) {
-			dynamicQuery.append("WHERE ");
-			
-			if(grade != null) {
-				dynamicQuery.append("M.SCREEN_GRADE_NO = ? ");
-			}
-			
-			if(genres != null) {
-				// 체크박스 값에 따라 파라미터 설정 및 동적 쿼리 생성
-				if(genres != null && grade != null) {
-					dynamicQuery.append("AND MC.GENRE_CATE_NO IN (");
-				} else {
-					dynamicQuery.append("MC.GENRE_CATE_NO IN(");					
-				}
-				
-		        for (int i = 0; i < genres.length; i++) {
-		            dynamicQuery.append("?");
-//		            pstmt.setString(index, genres[i]);
-		            if (i < genres.length - 1) {
-		                dynamicQuery.append(", ");
-		            } else {
-		            	dynamicQuery.append(")");
-		            }
-		        }
-			}
+		if(genres != null) {
+			dynamicQuery.append("INNER JOIN MOVIE_CATE MC ON O.MOVIE_NO = MC.MOVIE_NO WHERE ");
+		} else if(grade != null) {
+			dynamicQuery.append("WHERE ");			
 		}
 		
-		dynamicQuery.append(" A INNER JOIN SCREEN_GRADE SG ON A.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO WHERE A.RNUM BETWEEN ? AND ?");
+		if(genres != null) {
+			dynamicQuery.append("MC.GENRE_CATE_NO IN (");
+
+	        for (int i = 0; i < genres.length; i++) {
+	            dynamicQuery.append("?");
+	            if (i < genres.length - 1) {
+	                dynamicQuery.append(", ");
+	            } else {
+	            	dynamicQuery.append(") ");
+	            }
+	        }
+		}
+		if(genres != null && grade != null) {
+			dynamicQuery.append("AND ");
+		}
+		
+		if(grade != null) {
+			dynamicQuery.append("M.SCREEN_GRADE_NO = ? ");
+		}
+		
+		dynamicQuery.append(")) A INNER JOIN SCREEN_GRADE SG ON A.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO WHERE A.RNUM BETWEEN ? AND ?");
 		
 		PreparedStatement pstmt = con.prepareStatement(dynamicQuery.toString());
-		if(grade != null) {
-			pstmt.setString(index, grade);
-			index++;
+		
+		if(genres != null) {
+			for(int count = 0; count <genres.length; count++) {
+				pstmt.setString(index, genres[count]);
+				index++;
+			}			
 		}
 		
-		for(int count = 0; count <genres.length; count++) {
-			pstmt.setString(index, genres[count]);
+		if(grade != null) {
+			pstmt.setString(index, grade);
 			index++;
 		}
 		
