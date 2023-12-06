@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+%> 
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -16,8 +21,8 @@
   <div class="container">
         <div class="main">
             <div class="main-box">
-                <div><img src="/cinema/resources/image/mypage/6.svg"></div>
-                <div>"user01"님, 환영합니다.</div>
+                <div><a href="/cinema/home"><img src="/cinema/resources/image/mypage/6.svg"></a></div>
+                <div><%= loginMember.getMemberNick() %>님, 환영합니다.</div>
                 <div>VIP 회원</div>
                 <div>포인트 : 1,000점</div>
                 <div><img src="/cinema/resources/image/mypage/7.svg"></div>
@@ -25,7 +30,7 @@
             <div class="main-text">마이페이지</div>
             <div class="main-menu">
                 <div class="main-menu-area">
-                    <div><img src="/cinema/resources/image/mypage/1.svg"></div>
+                    <div><img src="/cinema/resources/image/mypage/1.svg" onclick="/cinema/mypage/inquiryHistory"></div>
                     <div>나의 예매내역</div>
                     <div>회원님이 예매하신 영화내역 
                         및 정보를 확인할 수 있습니다.</div>
