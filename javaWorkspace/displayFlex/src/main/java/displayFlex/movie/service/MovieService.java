@@ -93,6 +93,39 @@ public class MovieService {
 		return imageList;
 	}
 
+	/**
+	 * 조건에 맞는 영화 전체 개수 가져오기
+	 * @param genres
+	 * @param grade
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getAllMovieCountByCondition(String[] genres, String grade) throws SQLException {
+
+		Connection con = JDBCTemplate.getConnection();
+		
+		int count = movieDao.getAllMovieCountByCondition(genres, grade, con);
+		JDBCTemplate.close(con);
+
+		return count;
+	}
+
+	/**
+	 * 조건에 맞는 영화 개수 가져오기
+	 * @param genres
+	 * @param grade
+	 * @param page 
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<MovieListDto> findMoiveListByCondition(String[] genres, String grade, PageVo page) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		List<MovieListDto> movieList = movieDao.findMoiveListByCondition(genres, grade, page, con);
+		JDBCTemplate.close(con);
+		return movieList;
+	}
+
 	
 
 	
