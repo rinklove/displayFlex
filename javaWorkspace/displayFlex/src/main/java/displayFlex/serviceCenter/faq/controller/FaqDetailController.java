@@ -19,11 +19,11 @@ public class FaqDetailController extends HttpServlet {
 try {
 			
 			// data
-			String no = req.getParameter("no");
+			String faqNo = req.getParameter("faqNo");
 			
 			// service
 			FaqService bs = new FaqService();
-			FaqVo vo = bs.selectFaqByNo(no);
+			FaqVo vo = bs.selectFaqByNo(faqNo);
 			
 			// result == view
 			req.setAttribute("vo", vo);

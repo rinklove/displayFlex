@@ -2,26 +2,28 @@ package displayFlex.serviceCenter.faq.vo;
 
 public class FaqVo {
 	
-	private String FaqNo;
-	private String categoryNo;
+	private String faqNo;
+	private String faqCategoryNo;
 	private String title;
 	private String content;
 	private String hit;
 	private String enrollDate;
 	private String modifyDate;
 	private String deleteYn;
+	private String categoryName;
 	
-	public FaqVo(String faqNo, String categoryNo, String title, String content, String hit, String enrollDate,
-			String modifyDate, String deleteYn) {
+	public FaqVo(String faqNo, String faqCategoryNo, String title, String content, String hit, String enrollDate,
+			String modifyDate, String deleteYn, String categoryName) {
 		super();
-		FaqNo = faqNo;
-		this.categoryNo = categoryNo;
+		faqNo = faqNo;
+		this.faqCategoryNo = faqCategoryNo;
 		this.title = title;
 		this.content = content;
 		this.hit = hit;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.deleteYn = deleteYn;
+		this.categoryName = categoryName;
 	}
 
 	public FaqVo() {
@@ -29,19 +31,19 @@ public class FaqVo {
 	}
 
 	public String getFaqNo() {
-		return FaqNo;
+		return faqNo;
 	}
 
 	public void setFaqNo(String faqNo) {
-		FaqNo = faqNo;
+		faqNo = faqNo;
 	}
 
-	public String getCategoryNo() {
-		return categoryNo;
+	public String getFaqCategoryNo() {
+		return faqCategoryNo;
 	}
 
-	public void setCategoryNo(String categoryNo) {
-		this.categoryNo = categoryNo;
+	public void setFaqCategoryNo(String faqCategoryNo) {
+		this.faqCategoryNo = faqCategoryNo;
 	}
 
 	public String getTitle() {
@@ -92,12 +94,23 @@ public class FaqVo {
 		this.deleteYn = deleteYn;
 	}
 
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
 	@Override
 	public String toString() {
-		return "FaqVo [FaqNo=" + FaqNo + ", categoryNo=" + categoryNo + ", title=" + title + ", content=" + content
-				+ ", hit=" + hit + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", deleteYn="
-				+ deleteYn + "]";
+		return "FaqVo [faqNo=" + faqNo + ", faqCategoryNo=" + faqCategoryNo + ", title=" + title + ", content="
+				+ content + ", hit=" + hit + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", deleteYn="
+				+ deleteYn + ", categoryName=" + categoryName + "]";
 	}
+	
+	
+	
 	
 	
 	
