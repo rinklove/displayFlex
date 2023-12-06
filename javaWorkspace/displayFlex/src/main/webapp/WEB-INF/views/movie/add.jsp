@@ -18,31 +18,19 @@
             <span ><span class="star">*</span>표시가 붙은 부분은 필수 입력란입니다.</span>
         </div>
         <hr>
-        <form action="${pageConText.request.contextPath}/admin/movie/add" method="post" onsubmit="return checkInputValue()" class="m-auto">
+        <form action="${pageContext.request.contextPath}/admin/movie/add" method="post" onsubmit="return checkInputValue()" class="m-auto">
             <table>
                 <thead></thead>
                 <tbody>
+                	<tr>
+                		<td colspan="5"><input type="text" name="movieCd" id="movieCd" hidden></td>
+                	</tr>
                     <tr>
                         <td class="normal_text">제목<span class="star">*</span></td>
                         <td>
                             <input list="search-result" type="text" class="form-control custom-form" placeholder="영화 제목을 입력하새요" name="title" id="title" >
                         	<dataList class="list-group-flush border-dark shadow" id="search-result">
-                        		<!-- <li class="list-group-item d-flex align-items-center justify-content-between flex-row">
-								    <div>
-								        <span>벼랑 위의 포뇨</span><span>(2008)</span>
-								    </div>
-								    <div>
-								        <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg"  width="60" alt="" class="search-poster">
-								    </div>
-								</li>
-								<li class="list-group-item d-flex align-items-center justify-content-between flex-row">
-								    <div>
-								        <span>벼랑 위의 포뇨</span><span>(2008)</span>
-								    </div>
-								    <div>
-								        <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg"  width="60" alt="" class="search-poster">
-								    </div>
-								</li> -->
+                        		
                         	</dataList>
                         </td>
                         <td class="normal_text">감독</td>
@@ -63,11 +51,9 @@
                         <td>
                             <select id="screen-grade" class="w-60 form-select custom-form" name="screenGrade" aria-label="관람 등급 선택" >
                                 <option value="0">선택하세요</option>
-                                <option value="1">전체 관람가</option>
-                                <option value="2">12세 이상 관람가</option>
-                                <option value="3">15세 이상 관람가</option>
-                                <option value="4">청소년 관람 불가</option>
-                                <option value="5">제한 상영가</option>
+                            <c:forEach var="element" items="${screenGrade }">
+                                <option value="${element.screenGradeNo }">${element.name}</option>                            
+                            </c:forEach>
                             </select>
                         </td>
                         <td class="normal_text">상영 시간</td>
@@ -79,7 +65,7 @@
                     </tr>
                     <tr>
                         <td class="normal_text">별점<span class="star">*</span></td>
-                        <td><input type="number" class="w-50 form-control custom-form" name="rate" id="rate"  min="1" max="10"></td>
+                        <td><input type="number" class="w-50 form-control custom-form" name="rate" id="rate"  min="1" max="10" step="0.01"></td>
                         <td>제작 국가</td>
                         <td><input type="text" class="form-control custom-form" name="nation" id="nation" placeholder="2개 이상의 국가는', '로 작성"></td>
                     </tr>
