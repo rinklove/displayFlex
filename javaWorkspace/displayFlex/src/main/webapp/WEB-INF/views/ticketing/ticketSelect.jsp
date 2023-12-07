@@ -210,7 +210,7 @@
     
     <div id="selectInfo">
         <div id="ticket-posterImg">
-			<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="포스터" id="posterImg">
+			<img src="../resources/image/ticketing/flexLogo.png" alt="포스터" id="posterImg">
 		</div>
         <div id="ticket-movieName">
             <span id="movieInfo">영화를 선택해주세요</span>

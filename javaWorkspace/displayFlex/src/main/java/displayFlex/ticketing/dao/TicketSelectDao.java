@@ -37,6 +37,24 @@ public class TicketSelectDao {
 		return movieList;
 	}
 
+	public String getMovieImageUrl(Connection conn, String movieNo) throws Exception {
+		
+		String sql = "SELECT MOVIE_IMAGE FROM MOVIE WHERE MOVIE_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, movieNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		String movieImgUrl = "";
+		if(rs.next()) {
+			movieImgUrl = rs.getString("MOVIE_IMAGE");
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return movieImgUrl;
+	}
+
 //	public List<SelectMovieVo> getScreenDateList(Connection conn) throws Exception {
 //		
 //		String sql = "";

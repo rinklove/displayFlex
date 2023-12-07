@@ -7,10 +7,14 @@ let seatData = [];
 
 function changeMovieImage(){
 	
-	fetch("http://localhost:9002/cinema/ticket/select/image?영화이름=" + sessionStorage.getItem("movieInfo"))
-	.then( (resp) => { return resp.json() } ) 
-	.then( (movieName) => { 
-			console.log(movieName);
+	fetch("http://localhost:9002/cinema/ticket/select/image?movieNo=" + sessionStorage.getItem("movieNo"))
+	.then( (resp) => { return resp.text() } ) 
+	.then( (movieImgUrl) => { 
+			console.log(movieImgUrl);
+			
+			const posterImg = document.getElementById("posterImg");
+			
+			posterImg.src = movieImgUrl;
 	} );
 	
 }
@@ -54,7 +58,8 @@ function changeMovieImage(){
 
     console.log(ticketData);
  
-   	sessionStorage.setItem("movieInfo", movieInfo.innerText);
+//   	sessionStorage.setItem("movieInfo", movieInfo.innerText);
+   	sessionStorage.setItem("movieNo", index);
    	changeMovieImage();
   }
 
