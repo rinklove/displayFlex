@@ -9,6 +9,7 @@ import displayFlex.movie.dao.MovieDao;
 import displayFlex.movie.dto.MovieDetailDto;
 import displayFlex.movie.dto.MovieListDto;
 import displayFlex.movie.vo.GenreCategoryVo;
+import displayFlex.movie.vo.MovieVo;
 import displayFlex.movie.vo.ScreenGradeVo;
 import displayFlex.movie.vo.StillImageVo;
 import displayFlex.util.page.vo.PageVo;
@@ -22,6 +23,11 @@ public class MovieService {
 		movieDao = new MovieDao();
 	}
 	
+	/**
+	 * 모든 장르 카테고리 가져오기
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<GenreCategoryVo> getAllGenreCategory() throws SQLException {
 
 		Connection con = JDBCTemplate.getConnection();
@@ -32,7 +38,11 @@ public class MovieService {
 		return genreList;
 	}
 
-	
+	/**
+	 * 모든 관람 등급 가져오기
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<ScreenGradeVo> getAllScreenGrade() throws SQLException {
 		Connection con = JDBCTemplate.getConnection();
 		
@@ -124,6 +134,28 @@ public class MovieService {
 		List<MovieListDto> movieList = movieDao.findMoiveListByCondition(genres, grade, page, con);
 		JDBCTemplate.close(con);
 		return movieList;
+	}
+
+	/**
+	 * 영화 등록하기
+	 * @param newMovie
+	 * @param stillImageUrl
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int addMovie(MovieVo newMovie, List<String> stillImageUrl) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = movieDao.addMovie(con, newMovie, stillImageUrl);
+		
+		if(result ==1) {
+			JDBCTemplate.commit(con);			
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		
+		JDBCTemplate.close(con);
+		return result;
 	}
 
 	

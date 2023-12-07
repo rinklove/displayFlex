@@ -137,6 +137,8 @@
 				for(let index = 0; index < 3; index++) {
 					stillImageArr[index].src = '';
 					stillImageArr[index].alt = '';
+					const srcInput = document.getElementById('still-url'+(index+1));
+					srcInput.value = '';
 					stillImageFileArr[index].disabled = false;
 				}
 			if(searchMovie.stlls !== "") {
@@ -156,3 +158,10 @@
 			}
 		
 		});
+		//파일 선택시 value값 삭제
+		const stillImgArr = document.getElementsByName('stillImage');
+		for(let index = 0; index < stillImgArr.length; index++) {
+			stillImgArr[index].addEventListener("change", () => {
+				document.getElementById('still-url'+(index+1)).value= '';
+			})
+		}

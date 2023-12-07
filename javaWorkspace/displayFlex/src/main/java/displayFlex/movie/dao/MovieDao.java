@@ -12,6 +12,7 @@ import java.util.Map;
 import displayFlex.movie.dto.MovieDetailDto;
 import displayFlex.movie.dto.MovieListDto;
 import displayFlex.movie.vo.GenreCategoryVo;
+import displayFlex.movie.vo.MovieVo;
 import displayFlex.movie.vo.ScreenGradeVo;
 import displayFlex.movie.vo.StillImageVo;
 import displayFlex.util.page.vo.PageVo;
@@ -321,6 +322,36 @@ public class MovieDao {
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);
 		return movieList;
+	}
+
+	/**
+	 * 영화 등록
+	 * @param con
+	 * @param newMovie
+	 * @param stillImageUrl
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int addMovie(Connection con, MovieVo newMovie, List<String> stillImageUrl) throws SQLException {
+		query = "INSERT INTO MOVIE (MOVIE_NO, MOVIE_NAME, ACTORS, STORY, RATE, MAIN_DIRECTOR, MOVIE_IMAGE, RUNNING_TIME, SCREEN_GRADE_NO, RELEASE_DATE, GENRE, NATION, MAIN_IMAGE) VALUES (SEQ_MOVIE.NEXTVAL,?,?,?,?,?,?,?,?,to_timestamp(?, 'YYYY-MM-DD:HH24:MI:SS'),?,?,?))";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, newMovie.getMovieName());
+		pstmt.setString(2, newMovie.getActors());
+		pstmt.setString(3, newMovie.getStory());
+		pstmt.setString(4, newMovie.getRate());
+		pstmt.setString(5, newMovie.getMainDirector());
+		pstmt.setString(6, newMovie.getMovieImage());
+		pstmt.setString(7, newMovie.getRunningTime());
+		pstmt.setString(8, newMovie.getScreenGradeNo());
+		pstmt.setString(9, newMovie.getReleaseDate());
+		pstmt.setString(10, newMovie.getGenre());
+		pstmt.setString(11, newMovie.getNation());
+		pstmt.setString(12, newMovie.getMainImage());
+
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
 	}
 
 	
