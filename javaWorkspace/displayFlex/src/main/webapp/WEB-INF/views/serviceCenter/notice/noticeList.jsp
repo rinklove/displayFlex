@@ -1,5 +1,16 @@
+<%@page import="java.util.Map"%>
+<%@page import="displayFlex.util.page.vo.PageVo"%>
+<%@page import="displayFlex.serviceCenter.notice.vo.NoticeVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	List<NoticeVo> noticeVoList = (List<NoticeVo>) request.getAttribute("noticeVoList");
+    	PageVo pvo = (PageVo)request.getAttribute("pvo");
+    	Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +28,7 @@
             <div id="title_top">
                 <h1>고객센터</h1>
                 <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
-                <a href="/cinema/admin/noticeAdd">등록</a>
+                <button onclick="location.href='/cinema/admin/noticeAdd'">등록</a>
                 <%-- </c:if> --%>
             </div>
             <div id="tab_tit">
@@ -35,8 +46,8 @@
                     <option value="2">내용</option>
                     <option value="3">제목+내용</option>
                 </select>
-                <input type="text" placeholder="검색어를 입력해주세요." id="seachKeyword1" title="검색어를 입력해주세요">
-                <button type="button" class="btn_col2">검색</button>
+                <input type="text" name="searchValue" placeholder="검색어를 입력해주세요." id="seachKeyword1" title="검색어를 입력해주세요">
+                <input type="submit" class="btn_col2" value="검색" onclick="location.href='/cinema/serviceCenter/noticeSearch?searchType=' + document.getElementById('selectCondition1').value + '&searchValue=' + document.getElementById('seachKeyword1').value;">
             </fieldset>
             <div id="acc1">
                 <table id="tb_acc_wrap1"
@@ -54,59 +65,81 @@
                         </tr>
                     </thead>
                     <tbody id="tab">
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">8</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">제목8</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일8</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">7</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">제목7</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일7</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">6</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">제목6</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일6</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">5</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">제목5</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일5</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">4</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">제목4</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일4</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">3</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">제목3</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일3</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">2</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">제목2</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일2</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">1</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">제목1</a></td>
-                            <td><a href="/cinema/serviceCenter/noticeDetail">등록일1</a></td>
-                        </tr>
+                    <% for(NoticeVo vo : noticeVoList){ %>
+						<tr>
+							<td><%= vo.getNoticeNo() %></td>
+							<td><%= vo.getTitle() %></td>
+							<td><%= vo.getEnrollDate() %></td>
+						</tr>
+					<% } %>
                     </tbody>
                 </table>
                 <div id="paging">
-                    <a href="">1</a>
-                    <a href="">2</a>
-                    <a href="">3</a>
-                    <a href="">4</a>
-                    <a href="">5</a>
+                    <% if(pvo.getStartPage() != 1){ %>
+                   		<a href="/cinema/serviceCenter/noticeList?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+                   	<% } %>
+                   	
+                   	<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
+						<% if( i == pvo.getCurrentPage() ){ %>
+							<span><%= i %></span>
+						<% } else { %>
+							<a href="/cinema/serviceCenter/noticeList?pno=<%= i %>"><%= i %></a>
+						<% } %>
+					<% } %>
+					
+					<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
+						<a href="/cinema/serviceCenter/noticeList?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+					<% } %>
                 </div>
             </div>
             
         </div>
     </main>
+    
+    <script>
+    const trArr = document.querySelectorAll("main > table > tbody > tr");
+	for(let i = 0 ; i < trArr.length; ++i){
+		trArr[i].addEventListener('click' , handleClick);
+	}
+
+	function handleClick(event){
+		const tr = event.currentTarget;
+		const no = tr.children[0].innerText;
+		location.href = '/cinema/serviceCenter/noticeDetail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
+	}
+    	
+    <% if(searchMap != null){ %>
+	function setSearchArea(){
+		
+		// 옵션태그 셋팅
+		const optionTagArr = document.querySelectorAll("#search_wrap1 form option");
+		const searchType = "<%= searchMap.get("searchType") %>";
+		for(let i = 0; i < optionTagArr.length; ++i){
+			if( optionTagArr[i].value === searchType ){
+				optionTagArr[i].selected = true;
+				break;
+			}
+		}
+		
+		// 인풋태그 셋팅
+		const searchValueTag = document.querySelector("#search_wrap1 form input[name=searchValue]");
+		searchValueTag.value = "<%= searchMap.get("searchValue") %>";
+		
+	}
+	setSearchArea();
+	
+	function setPageArea(){
+		const aTagArr = document.querySelectorAll("#paging a");
+		for(let i = 0 ; i < aTagArr.length; ++i){
+			aTagArr[i].href = aTagArr[i].href.replace("list" , "search"); 
+			aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
+			aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
+		}
+	}
+	setPageArea();
+	<% } %>
+    
+    </script>
 
 </body>
 </html> 

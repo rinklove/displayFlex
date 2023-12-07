@@ -42,10 +42,10 @@ public class FaqDao {
 			vo.setFaqCategoryNo(faqCategoryNo);
 			vo.setTitle(title);
 			vo.setContent(content);
+			vo.setContent(hit);
 			vo.setEnrollDate(enrollDate);
 			vo.setModifyDate(modifyDate);
 			vo.setCategoryName(faqCategoryNo);
-//			vo.setDeleteYn(deleteYn);
 			
 			faqVoList.add(vo);
 			
@@ -176,17 +176,14 @@ public class FaqDao {
 	    //rs
 	    FaqVo vo = null;
 	    if(rs.next()) {
-//	    	String faqNo = rs.getString("FAQ_NO");
 			String title = rs.getString("TITLE");
 			String faqCateforyNo = rs.getString("FAQ_CATEGORY_NO");
 			String content = rs.getString("CONTENT");
 			String hit = rs.getString("HIT");
 			String enrollDate = rs.getString("ENROLL_DATE");
-//			String status = rs.getString("STATUS");
 			String categoryName = rs.getString("Category_Name");
 	         
 			vo = new FaqVo();
-//			vo.setFaqNo(faqNo);
 			vo.setTitle(title);
 			vo.setFaqCategoryNo(faqCateforyNo);
 			vo.setContent(content);

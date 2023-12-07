@@ -28,7 +28,7 @@ public class CategoryService {
 		
 		CategoryDao categoryDao = new CategoryDao();
 		List<CategoryVo> categoryList = categoryDao.selectAllCategoryList(conn);
-		
+
 		JDBCTemplate.close(conn);
 		
 		return categoryList;
