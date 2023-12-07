@@ -2,7 +2,7 @@ package displayFlex.store.vo;
 
 public class StoreVo {
 	
-	private String detailNo;
+	private String productNo;
 	private String category;
 	private String memberNo;
 	private String image;
@@ -18,10 +18,10 @@ public class StoreVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public StoreVo(String detailNo, String category, String memberNo, String image, String title, String price,
+	public StoreVo(String productNo, String category, String memberNo, String image, String title, String price,
 			String productElement, String enrollDate, String delYn, String shortDescription) {
 		super();
-		this.detailNo = detailNo;
+		this.productNo = productNo;
 		this.category = category;
 		this.memberNo = memberNo;
 		this.image = image;
@@ -35,17 +35,17 @@ public class StoreVo {
 
 	@Override
 	public String toString() {
-		return "StoreVo [detailNo=" + detailNo + ", category=" + category + ", memberNo=" + memberNo + ", image="
+		return "StoreVo [productNo=" + productNo + ", category=" + category + ", memberNo=" + memberNo + ", image="
 				+ image + ", title=" + title + ", price=" + price + ", productElement=" + productElement
 				+ ", enrollDate=" + enrollDate + ", delYn=" + delYn + ", shortDescription=" + shortDescription + "]";
 	}
 
-	public String getDetailNo() {
-		return detailNo;
+	public String getProductNo() {
+		return productNo;
 	}
 
-	public void setDetailNo(String detailNo) {
-		this.detailNo = detailNo;
+	public void setProductNo(String productNo) {
+		this.productNo = productNo;
 	}
 
 	public String getCategory() {
