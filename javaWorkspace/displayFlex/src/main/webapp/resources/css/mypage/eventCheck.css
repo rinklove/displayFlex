@@ -71,67 +71,45 @@ body {
   }
 
   .main-blank {
-    height: 70px;
+    height: 50px;
   }
 
   .main-table {
-    display: grid;
+	display: flex;
     height: 600px;
-    align-items: center;
+    width: 1000px;
+    justify-items: center;
     justify-content: center;
-    justify-items: center;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 5px;
+    padding: 0;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0 10px;
   }
 
-  .main-table-type {
-    display: grid;
-    align-items: center;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    width: 100%;
-    height:100%;
-  }
-
-  .main-table-title {
-    display: grid;
-    align-items: center;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    width: 100%;
-    height:100%;
-  }
-
-  .main-table-period {
-    display: grid;
-    align-items: center;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    width: 100%;
-    height:100%;
-  }
-
-  .main-table-header{
-    display: grid;
-    border-bottom: 2px solid black;
-    font-size: 20px;
-    height: 100%;
+  .thead {
+    background-color: #800020;
+    width: 1000px;
+    height: 50px;
+    color: white;
+    font-size: 22px;
     font-weight: bold;
-    align-items: center;
+    padding: 5px;
+  }
+  
+  tbody {
+	  width: 1000px;
+	  height: 100px;
+	  color: black;
+	  font-size: 20px;
+  }
+  
+  .main-table > table > tbody > tr:hover {
     background-color: lightgray;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-  }
-
-  .main-table-content {
-    font-size : 18px;
-    color: gray;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    height: 100%;
-    display: grid;
-    border-bottom: 1px solid lightgray;
-  }
+    cursor: pointer;
+}
 
   footer{
-    height: 50px;
-    width: 100%;
+	  width: 100%;
+	  height: 50px;
   }
+

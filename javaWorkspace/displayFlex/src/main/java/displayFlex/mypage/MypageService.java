@@ -31,12 +31,12 @@ public class MypageService {
 		
 		//dao
 		MypageDao dao = new MypageDao();
-		List<EventDto> eventVoList = dao.selectEventList(conn, pvo);
+		List<EventDto> eventDtoList = dao.selectEventList(conn, pvo);
 		
 		//close
 		JDBCTemplate.close(conn);
 		
-		return eventVoList;
+		return eventDtoList;
 	}
 
 }
