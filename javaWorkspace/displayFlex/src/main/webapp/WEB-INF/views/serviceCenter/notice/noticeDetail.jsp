@@ -17,6 +17,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/notice/noticeDetail.css">
+<script defer type="text/javascript" src="./resources/js/serviceCenter/notice.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -25,10 +26,10 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
-                <button onclick="location.href='/cinema/admin/FaqAdd'">수정</button>
-                <button>삭제</button>
-                <%-- </c:if> --%>
+                <c:if test="${loginMember.adminYn eq 'Y'}">
+	                <button onclick="location.href='/cinema/admin/FaqAdd'">수정</button>
+	                <button>삭제</button>
+                </c:if>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -47,7 +48,7 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>게시글 제목</th>
+                                <th><%= vo.getTitle() %></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,14 +66,14 @@
                                 </td>
                             </tr>
                             <tr id="tb_content">
-                                <td>
+                                <td colspan="2">
                                     <div id="noticeContents">
                                         <%= vo.getContent() %>
                                     </div>
                                 </td>
                             </tr>
                             <tr id="tb_link">
-                                <td colspan="2">
+                                <td>
                                     <a href="" id="">
                                         <span class="tb_next">다음글</span>
                                     </a>
@@ -88,7 +89,7 @@
                         </tbody>
                     </table>
                     <div id="list_btn">
-                        <a href="/cinema/serviceCenter/faqList"">목록</a>
+                        <a href="/cinema/serviceCenter/faqList?pno=<%= currPage %>">">목록</a>
                     </div>
                 </div>
             </div>
