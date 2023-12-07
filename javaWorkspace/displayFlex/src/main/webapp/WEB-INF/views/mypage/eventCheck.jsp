@@ -84,15 +84,17 @@
 </html>
 
 <script>
-	const trArr = document.querySelectorAll("main > table > tbody > tr");
+	const trArr = document.querySelectorAll(".main  table > tbody > tr");
 	for(let i = 0 ; i < trArr.length; ++i){
-		trArr[i].addEventListener('click' , handleClick);
+		trArr[i].addEventListener('click' , (e) => {
+			handleClick(e);
+		});
 	}
 
 	function handleClick(event){
 		const tr = event.currentTarget;
 		const no = tr.children[0].innerText;
-		location.href = '/cinema/mypage/eventContent?eventNo=' + eventNo + '&currentPage=<%= pvo.getCurrentPage() %>';	
+		location.href = 'http://localhost:9002/cinema/mypage/eventContent?eventNo=' + no + '&currentPage=<%= pvo.getCurrentPage() %>';	
 	}
 
 </script>

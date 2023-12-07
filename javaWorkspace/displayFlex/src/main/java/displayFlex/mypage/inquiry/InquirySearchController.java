@@ -1,7 +1,9 @@
 package displayFlex.mypage.inquiry;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,42 +15,49 @@ import displayFlex.mypage.MypageService;
 import displayFlex.mypage.vo.PageVo;
 import displayFlex.serviceCenter.inquiry.vo.InquiryVo;
 
-@WebServlet("/mypage/inquiry")
-public class InquiryHistory extends HttpServlet {
+@WebServlet("/cinema/inquiry/search")
+public class InquirySearchController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
-			//data
 			MypageService ms = new MypageService();
-			int listCount = ms.selectMypageCount();
 			
-			String currentPage_ = req.getParameter("pno");
-			if(currentPage_ == null) {
-				currentPage_ = "1";
+			//data
+			String searchType = req.getParameter("searchType");
+			String searchValue = req.getParameter("searchValue");
+			
+			Map<String, String> m = new HashMap<String, String>();
+			m.put("searchType", searchType);
+			m.put("searchValue", searchValue);
+			
+			int listCount = ms.selectSearchInquiryCount(m);
+			int currentPage = 1;
+			if(req.getParameter("pno") != null) {
+				currentPage = Integer.parseInt(req.getParameter("pno"));
 			}
-			int currentPage = Integer.parseInt(currentPage_);
 			int pageLimit = 5;
-			int boardLimit = 10;
-			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+			int allLimit = 10;
+			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, allLimit);
+			
 			
 			//service
-			List<InquiryVo> inquiryVoList = ms.selectInquiryList(pvo);
-			
+			List<InquiryVo> inquiryVoList = ms.search(m, pvo);
 			
 			//result
 			req.setAttribute("inquiryVoList", inquiryVoList);
 			req.setAttribute("pvo", pvo);
-			
+			req.setAttribute("searchMap", m);
 			req.getRequestDispatcher("/WEB-INF/views/mypage/inquiryHistory.jsp").forward(req, resp);
+			
 		}catch(Exception e) {
-			System.out.println("[ERROR-I001] 1:1 문의 게시글 목록 조회 중 에러 발생...");
+			System.out.println("[ERROR-I123] 1:1 문의 조회 중 에러 발생...!");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "1:1 문의 목록 조회 에러");
+			req.setAttribute("errorMsg", "1:1 문의 조회 중 에러 발생..!");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 		
-		
 	}
+
 }

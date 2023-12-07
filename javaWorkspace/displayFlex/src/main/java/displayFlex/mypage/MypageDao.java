@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import displayFlex.event.dto.EventDto;
 import displayFlex.mypage.vo.PageVo;
+import displayFlex.serviceCenter.inquiry.vo.InquiryVo;
 import test.JDBCTemplate;
 
 public class MypageDao {
@@ -70,6 +72,158 @@ public class MypageDao {
 		JDBCTemplate.close(pstmt);
 		
 		return eventDtoList;
+	}
+	
+	//조회수 증가
+	public int increaseHit(Connection conn, String eventNo) throws Exception {
+		
+		//sql
+		String sql = "UPDATE EVENT SET EVENT_HIT = EVENT_HIT + 1 WHERE EVENT_NO = ? AND EVENT_PROGRESS = 'N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, eventNo);
+		int result = pstmt.executeUpdate();
+		
+		//close
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	
+	}
+	
+	//이벤트 상세조회
+	public EventDto selectEventByNo(Connection conn, String eventNo) throws Exception {
+		//sql
+		String sql = "SELECT E.EVENT_NO , E.EVENT_TITLE , E.EVENT_CONTENTS , E.EVENT_STARTDATE , E.EVENT_ENDDATE , E.EVENT_HIT FROM EVENT E WHERE E.EVENT_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, eventNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		EventDto dto = null;
+		if(rs.next()) {
+			String eventNum = rs.getString("EVENT_NO");
+			String eventTitle = rs.getString("EVENT_TITLE");
+			String eventContents = rs.getString("EVENT_CONTENTS");
+			String eventStartdate = rs.getString("EVENT_STARTDATE");
+			String eventEnddate = rs.getString("EVENT_ENDDATE");
+			String eventHit = rs.getString("EVENT_HIT");
+			
+			dto = new EventDto();
+			dto.setEventNo(eventNum);
+			dto.setEventTitle(eventTitle);
+			dto.setEventContents(eventContents);
+			dto.setEventStartdate(eventStartdate);
+			dto.setEventEnddate(eventEnddate);
+			dto.setEventHit(eventHit);
+			
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return dto;
+	}
+
+	public List<InquiryVo> selectInquiryList(Connection conn, PageVo pvo) throws Exception {
+		
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.ONETOONE_NO , I.MEMBER_NO , I.TITLE , I.RE_TITLE , I.ENROLL_DATE , I.RE_ENROLL_DATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.DELETE_YN = 'N' AND M.ADMIN_YN = 'N' ) T ) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pvo.getStartRow());
+		pstmt.setInt(2, pvo.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<InquiryVo> inquiryVoList = new ArrayList<InquiryVo>();
+		while(rs.next()) {
+
+			String onetooneNo = rs.getString("ONETOONE_NO");
+			String memberNo = rs.getString("MEMBER_NO");
+			String title = rs.getString("TITLE");
+			String reTitle = rs.getString("RE_TITLE");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String reEnrollDate = rs.getString("RE_ENROLL_DATE");
+			
+			InquiryVo vo = new InquiryVo();
+			
+			vo.setOnetooneNo(onetooneNo);
+			vo.setMemberNo(memberNo);
+			vo.setTitle(title);
+			vo.setReTitle(reTitle);
+			vo.setEnrollDate(reEnrollDate);
+			vo.setReEnrollDate(reEnrollDate);
+			
+			inquiryVoList.add(vo);
+			
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return inquiryVoList;
+	}
+
+	public int getInquiryCountBySearch(Connection conn, Map<String, String> m) throws Exception {
+		
+		//sql
+		String sql = "SELECT COUNT(*) FROM INQUIRY WHERE DELETE_YN = 'N' AND \" + m.get(\"searchType\") + \" LIKE '%' || ? || '%'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.get("searchType"));
+		ResultSet rs = pstmt.executeQuery();
+		
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt;
+		
+	}
+
+	public List<InquiryVo> search(Connection conn, Map<String, String> m, PageVo pvo) throws Exception {
+		
+		String searchType = m.get("searchType");
+		
+		//sql
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.ONETOONE_NO , I.MEMBER_NO , I.TITLE , I.CONTENT , I.ENROLL_DATE , I.DELETE_YN , I.RE_TITLE , I.RE_CONTENT , I.RE_ENROLL_DATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.DELETE_YN = 'N' AND \" + searchType + \" LIKE '%' || '?' || '%' ORDER BY I.MEMBER_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ? ;";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.get("searchValue"));
+		pstmt.setString(2, "1");
+		pstmt.setString(3, "10");
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		List<InquiryVo> inquiryVoList = new ArrayList<InquiryVo>();
+			while(rs.next()) {
+				
+				String onetooneNo = rs.getString("ONETOONE_NO");
+				String memberNo = rs.getString("MEMBER_NO");
+				String title = rs.getString("TITLE");
+				String content = rs.getString("CONTENT");
+				String enrollDate = rs.getString("ENROLL_DATE");
+				String deleteYn = rs.getString("DELETE_YN");
+				String reTitle = rs.getString("RE_TITLE");
+				String reContent = rs.getString("RE_CONTENT");
+				String reEnrollDate = rs.getString("RE_ENROLL_DATE");
+				
+				InquiryVo vo = new InquiryVo();
+				vo.setOnetooneNo(onetooneNo);
+				vo.setMemberNo(memberNo);
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setEnrollDate(enrollDate);
+				vo.setDeleteYn(deleteYn);
+				vo.setReTitle(reTitle);
+				vo.setReContent(reContent);
+				vo.setReEnrollDate(reEnrollDate);
+				
+				inquiryVoList.add(vo);
+			}
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+			
+			return inquiryVoList;
 	}
 
 }
