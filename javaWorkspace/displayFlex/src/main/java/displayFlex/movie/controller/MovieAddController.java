@@ -1,12 +1,18 @@
 package displayFlex.movie.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -54,6 +60,7 @@ public class MovieAddController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			String movieCd = request.getParameter("movieCd");				//영화 코드
 			String title = request.getParameter("title");								//영화 제목
 			String director = request.getParameter("director");					//감독
 			String poster = request.getParameter("poster");						//포스터
@@ -63,10 +70,37 @@ public class MovieAddController extends HttpServlet {
 			String runningTime = request.getParameter("runningTime");		//상영 시간
 			String actor = request.getParameter("actor");							//배우
 			String rate = request.getParameter("rate");								//평점
-			String story = request.getParameter("story");							//줄거리
-			String mainImage = request.getParameter("mainImage");			//메인 페이지용 이미지
-			Map<String,String[]> parameterMap = request.getParameterMap();
+			String nation = request.getParameter("nation");						//국가
 			
+			String story = request.getParameter("story");							//줄거리
+			String mainImage = request.getParameter("mainImage");	//메인 페이지용 이미지 
+			List<String> stillImageUrl = Arrays.stream(request.getParameterValues("stillImageUrl")).filter(el -> el.equals("")).toList(); //스틸 이미지 파일 url 경로
+			List<Part> parts = request.getParts().stream().filter(element -> element.getName().equals("mainImage") || element.getName().equals("stillImage") ).toList();
+			
+
+			String sep = File.separator;
+			for(Part p : parts) {
+				
+				String name = p.getName();
+
+				System.out.println("경로: "+Paths.get(request.getServletContext().getRealPath(sep + "resources"+sep+"image"+sep+"movie"+sep+"main")));
+				if(name.equals("mainImage")) {
+					String fileName =UUID.randomUUID().toString() +"_"+getFileName(p);
+					System.out.println("fileName = "+fileName);
+					Path filePath = Paths.get(request.getServletContext().getRealPath(sep + "resources"+sep+"image"+sep+"movie"+sep+"main"), fileName);
+					System.out.println("파일 위치 = " + String.valueOf(filePath));
+					 try (InputStream input = p.getInputStream()) {
+			                Files.copy(input, filePath, StandardCopyOption.REPLACE_EXISTING);
+			            }
+				} else {
+					
+					
+				}
+			}
+			
+			//값 확인용
+			Map<String,String[]> parameterMap = request.getParameterMap();
+			movieCd = movieCd == null ? releaseDate : movieCd;
 			for(Entry<String, String[]> entry : parameterMap.entrySet()) {
 				System.out.println(entry.getKey());
 				System.out.println(Arrays.stream(entry.getValue()).collect(Collectors.joining(" / ")));
@@ -76,7 +110,15 @@ public class MovieAddController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
+	 private String getFileName(final Part part) {
+	        final String partHeader = part.getHeader("content-disposition");
+	        for (String content : partHeader.split(";")) {
+	            if (content.trim().startsWith("filename")) {
+	                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+	            }
+	        }
+	        return null;
+	    }
 }
