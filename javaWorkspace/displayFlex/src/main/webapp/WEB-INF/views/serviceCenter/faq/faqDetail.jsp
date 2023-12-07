@@ -63,7 +63,7 @@
                                     <span class="mid">|</span>
                                     <span class="cont"><%= vo.getHit() %></span>
                                 </td>
-                            </tr>
+                            </tr>00.000
                             <tr id="tb_content">
                                 <td>
                                     <div id="noticeContents">
