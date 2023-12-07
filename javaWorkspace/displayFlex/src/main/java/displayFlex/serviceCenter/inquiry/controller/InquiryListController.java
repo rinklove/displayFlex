@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/inquiryList")
+@WebServlet("/serviceCenter/inquiryList")
 public class InquiryListController extends HttpServlet {
 	
 	//1:1 문의 화면

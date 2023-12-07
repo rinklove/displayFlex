@@ -153,7 +153,7 @@ thead {
 
 th {
     padding: 15px 0;
-}
+} 
 
 #tb_acc_wrap1 thead th {
     border-bottom-color: #BBBBBB;
@@ -173,6 +173,7 @@ tbody {
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
+    cursor: pointer;
 }
 
 #tb_acc_wrap1 td {

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.Map"%>
 <%@page import="displayFlex.util.page.vo.PageVo"%>
 <%@page import="displayFlex.serviceCenter.notice.vo.NoticeVo"%>
@@ -27,9 +28,9 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
-                <button onclick="location.href='/cinema/admin/noticeAdd'">등록</a>
-                <%-- </c:if> --%>
+                <c:if test="${loginMember.adminYn eq 'Y'}">
+                	<button onclick="location.href='/cinema/admin/noticeAdd'">등록</button>
+                </c:if>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -42,11 +43,11 @@
             <fieldset id="search_wrap1">
                 <legend>전체 공지 검색하기</legend>
                 <select class="ty3" title="검색조건 제목 선택" id="selectCondition1">
-                    <option value="1">제목</option>
-                    <option value="2">내용</option>
-                    <option value="3">제목+내용</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="abc">제목+내용</option>
                 </select>
-                <input type="text" name="searchValue" placeholder="검색어를 입력해주세요." id="seachKeyword1" title="검색어를 입력해주세요">
+                <input type="text" name="searchValue" placeholder="검색어를 입력해주세요." id="seachKeyword1" >
                 <input type="submit" class="btn_col2" value="검색" onclick="location.href='/cinema/serviceCenter/noticeSearch?searchType=' + document.getElementById('selectCondition1').value + '&searchValue=' + document.getElementById('seachKeyword1').value;">
             </fieldset>
             <div id="acc1">
@@ -97,22 +98,22 @@
     </main>
     
     <script>
-    const trArr = document.querySelectorAll("main > table > tbody > tr");
+const trArr = document.querySelectorAll("main > table > tbody > tr");
 	for(let i = 0 ; i < trArr.length; ++i){
 		trArr[i].addEventListener('click' , handleClick);
 	}
 
-	function handleClick(event){
-		const tr = event.currentTarget;
-		const no = tr.children[0].innerText;
-		location.href = '/cinema/serviceCenter/noticeDetail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
-	}
-    	
-    <% if(searchMap != null){ %>
+function handleClick(event){
+	const tr = event.currentTarget;
+	const no = tr.children[0].innerText;
+	location.href = '/cinema/serviceCenter/noticeDetail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
+}
+   	
+<% if(searchMap != null){ %>
 	function setSearchArea(){
 		
 		// 옵션태그 셋팅
-		const optionTagArr = document.querySelectorAll("#search_wrap1 form option");
+		const optionTagArr = document.querySelectorAll("#search_wrap1 option");
 		const searchType = "<%= searchMap.get("searchType") %>";
 		for(let i = 0; i < optionTagArr.length; ++i){
 			if( optionTagArr[i].value === searchType ){
@@ -122,12 +123,12 @@
 		}
 		
 		// 인풋태그 셋팅
-		const searchValueTag = document.querySelector("#search_wrap1 form input[name=searchValue]");
+		const searchValueTag = document.querySelector("#search_wrap1 input[name=searchValue]");
 		searchValueTag.value = "<%= searchMap.get("searchValue") %>";
 		
 	}
 	setSearchArea();
-	
+
 	function setPageArea(){
 		const aTagArr = document.querySelectorAll("#paging a");
 		for(let i = 0 ; i < aTagArr.length; ++i){
@@ -137,7 +138,7 @@
 		}
 	}
 	setPageArea();
-	<% } %>
+<% } %>
     
     </script>
 

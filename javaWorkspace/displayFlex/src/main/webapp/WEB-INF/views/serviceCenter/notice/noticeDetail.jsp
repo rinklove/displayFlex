@@ -1,5 +1,16 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="displayFlex.serviceCenter.notice.vo.NoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	NoticeVo vo = (NoticeVo) request.getAttribute("vo");
+    	String currPage = (String)request.getAttribute("currPage");
+    	if(currPage == null){
+    		currPage = "1";
+    	}
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +26,8 @@
             <div id="title_top">
                 <h1>고객센터</h1>
                 <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
-                <a href="/cinema/admin/FaqAdd">수정</a>
-                <a href="">삭제</a>
+                <button onclick="location.href='/cinema/admin/FaqAdd'">수정</button>
+                <button>삭제</button>
                 <%-- </c:if> --%>
             </div>
             <div id="tab_tit">
@@ -44,34 +55,24 @@
                                 <td>
                                     <span class="tit">번호</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">1</span>
+                                    <span class="cont"><%= vo.getNoticeNo() %></span>
                                     <span class="tit">등록일</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">2023-12-04</span>
+                                    <span class="cont"><%= vo.getEnrollDate() %></span>
                                     <span class="tit">조회수</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">1</span>
+                                    <span class="cont"><%= vo.getHit() %></span>
                                 </td>
                             </tr>
                             <tr id="tb_content">
                                 <td>
                                     <div id="noticeContents">
-                                        <p>
-                                            내용 ~~
-                                            <br>
-                                            ~~
-                                            <br>
-                                            ~~
-                                            <br>
-                                            ~~
-                                            <br>
-                                            ~~
-                                        </p>
+                                        <%= vo.getContent() %>
                                     </div>
                                 </td>
                             </tr>
                             <tr id="tb_link">
-                                <td>
+                                <td colspan="2">
                                     <a href="" id="">
                                         <span class="tb_next">다음글</span>
                                     </a>
