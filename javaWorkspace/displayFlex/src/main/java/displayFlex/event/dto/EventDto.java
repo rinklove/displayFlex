@@ -4,7 +4,7 @@ public class EventDto {
 	
 	private String eventNo;
 	private String eventtypeNo;
-	private String mebmerNo;
+	private String memberNo;
 	private String eventTitle;
 	private String eventContents;
 	private String eventPreparationdate;
@@ -26,11 +26,11 @@ public class EventDto {
 	public void setEventtypeNo(String eventtypeNo) {
 		this.eventtypeNo = eventtypeNo;
 	}
-	public String getMebmerNo() {
-		return mebmerNo;
+	public String getMemberNo() {
+		return memberNo;
 	}
-	public void setMebmerNo(String mebmerNo) {
-		this.mebmerNo = mebmerNo;
+	public void setMemberNo(String memberNo) {
+		this.memberNo = memberNo;
 	}
 	public String getEventTitle() {
 		return eventTitle;
@@ -80,13 +80,13 @@ public class EventDto {
 	public void setEventHit(String eventHit) {
 		this.eventHit = eventHit;
 	}
-	public EventDto(String eventNo, String eventtypeNo, String mebmerNo, String eventTitle, String eventContents,
+	public EventDto(String eventNo, String eventtypeNo, String memberNo, String eventTitle, String eventContents,
 			String eventPreparationdate, String eventReportingdate, String eventProgress, String eventStartdate,
 			String eventEnddate, String eventHit) {
 		super();
 		this.eventNo = eventNo;
 		this.eventtypeNo = eventtypeNo;
-		this.mebmerNo = mebmerNo;
+		this.memberNo = memberNo;
 		this.eventTitle = eventTitle;
 		this.eventContents = eventContents;
 		this.eventPreparationdate = eventPreparationdate;
@@ -102,7 +102,7 @@ public class EventDto {
 	}
 	@Override
 	public String toString() {
-		return "EventDto [eventNo=" + eventNo + ", eventtypeNo=" + eventtypeNo + ", mebmerNo=" + mebmerNo
+		return "EventDto [eventNo=" + eventNo + ", eventtypeNo=" + eventtypeNo + ", memberNo=" + memberNo
 				+ ", eventTitle=" + eventTitle + ", eventContents=" + eventContents + ", eventPreparationdate="
 				+ eventPreparationdate + ", eventReportingdate=" + eventReportingdate + ", eventProgress="
 				+ eventProgress + ", eventStartdate=" + eventStartdate + ", eventEnddate=" + eventEnddate
