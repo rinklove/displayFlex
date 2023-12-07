@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import displayFlex.movie.service.MovieService;
+import displayFlex.movie.vo.MovieVo;
 import displayFlex.movie.vo.ScreenGradeVo;
 
 @WebServlet("/admin/movie/add")
@@ -73,40 +74,47 @@ public class MovieAddController extends HttpServlet {
 			String nation = request.getParameter("nation");						//국가
 			
 			String story = request.getParameter("story");							//줄거리
-			String mainImage = request.getParameter("mainImage");	//메인 페이지용 이미지 
-			List<String> stillImageUrl = Arrays.stream(request.getParameterValues("stillImageUrl")).filter(el -> el.equals("")).toList(); //스틸 이미지 파일 url 경로
+			String mainImage = null; 													//메인 페이지용 이미지 경로
 			List<Part> parts = request.getParts().stream().filter(element -> element.getName().equals("mainImage") || element.getName().equals("stillImage") ).toList();
+			List<String> stillImageUrl = Arrays.stream(request.getParameterValues("stillImageUrl")).filter(el -> !el.equals("")).toList(); //스틸 이미지 파일 url 경로
 			
-
+			System.out.println(stillImageUrl);
 			String sep = File.separator;
 			for(Part p : parts) {
-				
 				String name = p.getName();
-
-				System.out.println("경로: "+Paths.get(request.getServletContext().getRealPath(sep + "resources"+sep+"image"+sep+"movie"+sep+"main")));
+				
+				String fileName = UUID.randomUUID().toString() +"_"+getFileName(p);
+				System.out.println("fileName = "+fileName);
+				//메인 페이지용 사진일 경우
 				if(name.equals("mainImage")) {
-					String fileName =UUID.randomUUID().toString() +"_"+getFileName(p);
-					System.out.println("fileName = "+fileName);
-					Path filePath = Paths.get(request.getServletContext().getRealPath(sep + "resources"+sep+"image"+sep+"movie"+sep+"main"), fileName);
-					System.out.println("파일 위치 = " + String.valueOf(filePath));
+					
+					Path filePath = Paths.get("D:"+sep+"java"+sep+"dev"+sep+"semiPrj"+sep+"javaWorkspace"+sep+"displayFlex"+sep+"src"+sep+"main"+sep+"webapp"+sep+ "resources"+sep+"image"+sep+"movie"+sep+"main", fileName);
+					String mainImagePath = String.valueOf(filePath);
+					System.out.println("파일 위치 = " + mainImagePath);
 					 try (InputStream input = p.getInputStream()) {
-			                Files.copy(input, filePath, StandardCopyOption.REPLACE_EXISTING);
+			                Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
 			            }
-				} else {
-					
-					
+					 mainImage = mainImagePath.substring(mainImagePath.indexOf("resources"));
+					 System.out.println("mainImage = " + mainImage);
+				} 
+				// 스틸이미지용일 경우
+				else {
+					Path filePath = Paths.get("D:"+sep+"java"+sep+"dev"+sep+"semiPrj"+sep+"javaWorkspace"+sep+"displayFlex"+sep+"src"+sep+"main"+sep+"webapp"+sep+ "resources"+sep+"image"+sep+"movie"+sep+"stills", fileName);
+					String stillImagePath = String.valueOf(filePath);
+					System.out.println("파일 위치 = " + stillImagePath);
+					 try (InputStream input = p.getInputStream()) {
+			                Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
+			            }
+					 stillImageUrl.add(stillImagePath.substring(stillImagePath.indexOf("resources")));
+					 System.out.println("stillImage = " + mainImage);
 				}
 			}
-			
-			//값 확인용
-			Map<String,String[]> parameterMap = request.getParameterMap();
-			movieCd = movieCd == null ? releaseDate : movieCd;
-			for(Entry<String, String[]> entry : parameterMap.entrySet()) {
-				System.out.println(entry.getKey());
-				System.out.println(Arrays.stream(entry.getValue()).collect(Collectors.joining(" / ")));
-				System.out.println();
-			}
+			MovieVo newMovie = new MovieVo(null, title, actor, story, rate, director, screenGrade, poster, runningTime, releaseDate, null, null, genre, nation, mainImage);
+			int result = movieService.addMovie(newMovie, stillImageUrl);	
 		
+			if(result != 1) {
+				
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
