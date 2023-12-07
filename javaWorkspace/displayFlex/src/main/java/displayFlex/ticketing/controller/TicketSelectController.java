@@ -23,15 +23,11 @@ public class TicketSelectController extends HttpServlet{
 		resp.setCharacterEncoding("UTF-8");
 		
 		try {
-//			String movieNo = req.getParameter("영화이름");
-//			System.out.println("movieNo = " + movieNo);
+
 			TicketSelectService tss = new TicketSelectService();
 			List<SelectMovieVo> movieList = tss.getMovieList();
-//			PrintWriter out = resp.getWriter();
-//			String x = "{\"no\":\"11111111\",\"name\":\"222222222\"}";
-//			out.write(x);
+
 			
-//			req.setAttribute("screenDateList", screenDateList);
 			req.setAttribute("movieList", movieList);
 			
 			req.getRequestDispatcher("/WEB-INF/views/ticketing/ticketSelect.jsp").forward(req, resp);

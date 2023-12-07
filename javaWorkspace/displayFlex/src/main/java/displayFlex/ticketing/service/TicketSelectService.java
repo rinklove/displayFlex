@@ -22,6 +22,19 @@ public class TicketSelectService {
 		return movieList;
 	}
 
+	public String getMovieImageUrl(String movieNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		TicketSelectDao dao = new TicketSelectDao();
+		
+		String movieImgUrl = dao.getMovieImageUrl(conn, movieNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return movieImgUrl;
+	}
+
 //	public List<SelectMovieVo> getScreenDateList() throws Exception {
 //		Connection conn = JDBCTemplate.getConnection();
 //		
