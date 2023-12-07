@@ -52,7 +52,11 @@ public class NoticeService {
 		
 		// DAO
 		NoticeDao dao = new NoticeDao();
-		List<NoticeVo> noticeVoList = dao.search(conn , m, pvo);
+		if(m.get("searchType").equals("abc")) {
+			dao.searchByTitleAndContent(conn , m , pvo);
+		}else {
+			List<NoticeVo> noticeVoList = dao.search(conn , m, pvo);
+		}
 		
 		//close
 		JDBCTemplate.close(conn);
@@ -74,6 +78,58 @@ public class NoticeService {
 		JDBCTemplate.close(conn);
 		
 		return cnt;
+	}
+
+	//공지사항 작성
+	public int write(NoticeVo vo) throws Exception {
+		
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		NoticeDao dao = new NoticeDao();
+		int result = dao.write(conn, vo);
+		
+		// tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return result;
+				
+	}
+
+	//공지사항 상세조회 (+조회수 증가)
+	public NoticeVo selectNoticeByNo(String noticeNo) throws Exception {
+		
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		NoticeDao dao = new NoticeDao();
+		int result = dao.increaseHit(conn, noticeNo);
+		NoticeVo vo = null;
+		if(result == 1) {
+			vo = dao.selectNoticeByNo(conn , noticeNo);
+		}
+		
+		// tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return vo;
+		
 	}
 
 		

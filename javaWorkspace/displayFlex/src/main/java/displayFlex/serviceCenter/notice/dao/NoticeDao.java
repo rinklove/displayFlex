@@ -82,7 +82,7 @@ public class NoticeDao {
 		String searchType = m.get("searchType");
 		
 		// SQL
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT NOTICE_NO , TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE , HIT FROM NOTICE WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ?|| '%' ORDER BY NOTICE_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT NOTICE_NO , TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE , HIT FROM NOTICE WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%' ORDER BY NOTICE_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.get("searchValue"));
 		pstmt.setInt(2, pvo.getStartRow());
@@ -138,6 +138,77 @@ public class NoticeDao {
 		JDBCTemplate.close(pstmt);
 		
 		return cnt;
+	}
+
+	//공지사항 작성
+	public int write(Connection conn, NoticeVo vo) throws Exception {
+		
+		System.out.println("dao 's vo ::: " + vo);
+		
+		//SQL
+		String sql = "INSERT INTO NOTICE (NOTICE_NO, TITLE, CONTENT) VALUES (SEQ_NOTICE.NEXTVAL, ?, ?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getTitle());
+		pstmt.setString(2, vo.getContent());
+		int result = pstmt.executeUpdate();
+		  
+		//close
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
+	//게시글 번호로 게시글 1개 조회
+	public NoticeVo selectNoticeByNo(Connection conn, String noticeNo) throws Exception {
+		
+		//SQL
+	    String sql = "SELECT NOTICE_NO, TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE, HIT FROM NOTICE WHERE NOTICE_NO = ? AND DELETE_YN = 'N'";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, noticeNo);
+	    ResultSet rs = pstmt.executeQuery();
+	      
+	    //rs
+	    NoticeVo vo = null;
+	    if(rs.next()) {
+			String title = rs.getString("TITLE");
+//			String faqCateforyNo = rs.getString("FAQ_CATEGORY_NO");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String modifyDate = rs.getString("MODIFY_DATE");
+			String hit = rs.getString("HIT");
+	         
+			vo = new NoticeVo();
+			vo.setNoticeNo(noticeNo);
+			vo.setTitle(title);
+//			vo.setFaqCategoryNo(faqCateforyNo);
+			vo.setContent(content);
+			vo.setEnrollDate(enrollDate);
+			vo.setModifyDate(modifyDate);
+			vo.setHit(hit);
+		         
+	    }
+	    
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return vo;
+		
+	}
+
+	//조회수 증가
+	public int increaseHit(Connection conn, String noticeNo) throws Exception {
+		
+		//SQL
+		String sql = "UPDATE NOTICE SET HIT = HIT + 1 WHERE NOTICE_NO = ? AND DELETE_YN = 'N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, noticeNo);
+		int result = pstmt.executeUpdate();
+		
+		//close
+		JDBCTemplate.close(pstmt);
+			      
+		return result;
+				
 	}
 
 	
