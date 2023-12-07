@@ -1,5 +1,15 @@
+<%@page import="displayFlex.event.dto.EventDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+		EventDto dto = (EventDto)request.getAttribute("dto");
+		String currentPage = (String) request.getAttribute("currentPage");
+		if(currentPage == null){
+			currentPage = "1";
+		}
+	%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,32 +31,23 @@
             </div>
             <div class="main-blank"></div>
             <div class="main-table">
-                <div class="main-table-header">이벤트 타입</div>
-                <div class="main-table-header">제목</div>
-                <div class="main-table-header">기간</div>
-                <div class="main-table-body">HOT</div>
-                <div class="main-table-body">[어벤져스4 - 엔드게임] 예매권 퀴즈 이벤트 당첨자 발표</div>
-                <div class="main-table-body">2023.11.14 ~ 2023.11.15</div>
+                <div class="main-table-header">이벤트 번호</div>
+                <div class="main-table-header">이벤트 제목</div>
+                <div class="main-table-header">이벤트 시작일</div>
+                <div class="main-table-header">이벤트 종료일</div>
+                <div class="main-table-header">조회수</div>
+                <div class="main-table-body"><%= dto.getEventNo() %></div>
+                <div class="main-table-body"><%= dto.getEventTitle() %></div>
+                <div class="main-table-body"><%= dto.getEventStartdate() %></div>
+                <div class="main-table-body"><%= dto.getEventEnddate() %></div>
+                <div class="main-table-body"><%= dto.getEventHit() %></div>
             </div>
             <div></div>
-            <div class="main-content">
-                <div class="main-content-first">
-                    안녕하세요 FLEX입니다.
-                </div>
-                <div class="main-content-second"> [어벤져스4 - 엔드게임] FLEX 회원 예매권 퀴즈 이벤트 당첨 안내를 알려드립니다.
-                </div>
-                <div class="main-content-third">
-                    응모 회원님께서는 2023.11.23일에 있을 [어벤져스4 - 엔드게임] 방영시간 아무 시간대에
-                    영화를 즐기실 수 있습니다.
-                </div>
-                <div class="main-content-fourth">
-                    당첨 여부를 확인해주시고, 당일날 안내드리는 점 알려드립니다.
-                    <br><br><br><br>앞으로도 FLEX에 많은 관심 부탁드립니다.
-                    <br><br><br><br>감사합니다.
-                </div>
-            </div>
+            <div class="main-content"><%= dto.getEventContents() %></div>
         </div>
-    </div>
+     </div>
+     
+     	<a href="/cinema/mypage/eventCheck?pno=<%=currentPage %>">목록으로</a>
     <footer></footer>
 
 </body>
