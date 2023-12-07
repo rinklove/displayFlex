@@ -9,13 +9,7 @@ import test.JDBCTemplate;
 
 public class StoreService {
 
-	public int selectStoreCount() {
-
-	
-		return 0;
-	}
-
-	// 스토어 목록 조회
+	// 스토어 리스트
 	public List<StoreVo> selectStoreList() throws Exception{
 
 		

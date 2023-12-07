@@ -1,6 +1,7 @@
 package displayFlex.store.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,22 +21,29 @@ public class StoreListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			StoreService ss = new StoreService();
 			
 			//data
-			int listCount = ss.selectStoreCount();
+			String category = req.getParameter("productNo");
 			
 			//service
+			StoreService ss = new StoreService();
 			List<StoreVo> storeVoList = ss.selectStoreList();
 			
 			//result (==view)
-			req.setAttribute("StoreVo", storeVoList);
+			
+			//확인용
+//			System.out.println("==========스토어 리스트======");
+//			for(StoreVo storeVo : storeVoList) {
+//				System.out.println(storeVo);
+//			}
+			
+			req.setAttribute("storeVoList", storeVoList);
 			req.getRequestDispatcher("/WEB-INF/views/store/storeList.jsp").forward(req, resp);
 			
 		}catch(Exception e) {
 			System.out.println("[ERROR-S001] 스토어 목록 조회중 에러발생...");
 			e.printStackTrace();
-			req.setAttribute("errorMsg" , "스토어 목록조회 에러");
+			req.setAttribute("errorMsg" , "스토어 목록조회 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 		
