@@ -18,7 +18,7 @@
             <span ><span class="star">*</span>표시가 붙은 부분은 필수 입력란입니다.</span>
         </div>
         <hr>
-        <form action="${pageContext.request.contextPath}/admin/movie/add" method="post" onsubmit="return checkInputValue()" class="m-auto">
+        <form action="${pageContext.request.contextPath}/admin/movie/add" method="post" onsubmit="return checkInputValue()" class="m-auto" enctype="multipart/form-data">
             <table>
                 <thead></thead>
                 <tbody>
