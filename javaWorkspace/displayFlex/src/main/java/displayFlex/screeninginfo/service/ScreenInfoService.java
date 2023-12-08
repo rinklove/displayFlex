@@ -64,18 +64,27 @@ public class ScreenInfoService {
 				if(result == 1) {
 					JDBCTemplate.commit(con);
 					findNo = infoDao.getInfoNoByCondition(infoList.get(index), con);
-				} else JDBCTemplate.rollback(con);
+				} else {
+					JDBCTemplate.rollback(con);
+					break;
+				}
 			}
 			
 			timeList.get(index).setScreeningInfoNo(findNo);
-			result = infoDao.addScreeningTime(timeList.get(index), con);
-			
 			if(result == 1) {
-				JDBCTemplate.commit(con);
-			} else {
-				JDBCTemplate.rollback(con);
+				result = infoDao.addScreeningTime(timeList.get(index), con);
+				
+				if(result == 1) {
+					JDBCTemplate.commit(con);
+				} else {
+					JDBCTemplate.rollback(con);
+					int deleteResult = infoDao.deleteScreeningInfo(findNo, con);
+					if(deleteResult == 1) JDBCTemplate.commit(con);
+					else JDBCTemplate.rollback(con);
+				}			
 			}
 		}
+		
 		JDBCTemplate.close(con);
 		return result;
 	}

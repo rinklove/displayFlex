@@ -118,22 +118,31 @@ public class ScreenInfoDao {
 		query = "INSERT INTO SCREENING_TIME(SCREENING_TIME_NO,  SCREENING_INFO_NO, START_TIME, END_TIME) VALUES (SEQ_SCREENING_TIME.NEXTVAL, ?, TO_TIMESTAMP(?, 'HH24:MI:SS'), TO_TIMESTAMP(?, 'HH24:MI:SS'))";
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
+		int result = 0;
 		pstmt.setString(1, screeningTime.getScreeningInfoNo());
 		pstmt.setString(2, screeningTime.getStartTime());
 		pstmt.setString(3, screeningTime.getEndTime());
-		
-		int result = pstmt.executeUpdate();
+			
+		result = pstmt.executeUpdate();
+
 		JDBCTemplate.close(pstmt);
 		return result;
 	}
 
 	/**
-	 * 추가한 상영정보
-	 * @param screeingInfoVo
+	 * 추가한 상영정보 삭제
+	 * @param findNo
 	 * @param con
+	 * @throws SQLException 
 	 */
-	public void deleteScreeningInfo(ScreeingInfoVo screeingInfoVo, Connection con) {
-		// TODO Auto-generated method stub
+	public int deleteScreeningInfo(String findNo, Connection con) throws SQLException {
+		query = "DELETE FROM SCREENING_INFO WHERE SCREENING_INFO_NO = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, findNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
 		
 	}
 

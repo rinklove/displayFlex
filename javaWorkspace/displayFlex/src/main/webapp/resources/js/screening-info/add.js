@@ -31,13 +31,57 @@
   const deleteTableRow = (row) => {
         document.getElementById("info-table").deleteRow(row.rowIndex);
     };
-  
-
+ 
+ const checkExistInfo = () => {
+	 
+	 
+	 const title = document.getElementById('title').value;
+	 const theater = document.getElementById('theater').value;
+	 const dateInput = document.getElementById('dateInput').value;
+	 const startTime = document.getElementById('startTime').value;
+	 const endTime = document.getElementById('endTime').value;
+	 
+	  if(title === '') {
+			  alert('제목을 입력하세요.');
+			  title.focus();
+			  return false;
+		  }
+		  
+		  if(theater === '') {
+			  alert('상영관을 선택하세요.');
+			  theater.focus();
+			  return false;
+		  }
+		  if(dateInput === '') {
+			  alert('상영 일자를 입력하세요.');
+			  title.focus();
+			  return false;
+		  }
+		  if(startTime === '') {
+			  alert('시작 시간을 입력하세요.');
+			  startTime.focus();
+			  return false;
+		  }
+		  if(endTime === '') {
+			  alert('제목을 입력하세요.');
+			  endTime.focus();
+			  return false;
+		  }
+		  
+	 fetch(`http://localhost:9002/cinema/admin/screen-info-check?title=${title}&theater=${theater}&dateInput=${dateInput}&startTime=${startTime}&endTime=${endTime}`)
+	 .then(() => {
+		 addTableRow();
+	 })
+	 .catch((err) => {
+		 alert('상영 시간이 겹치는 정보입니다.');
+		 console.log(err);
+		 return false;
+	 })
+}
   
   //단순 텍스트를 input태그에 넣는 작업 필요
   const addTableRow = () => {
 	  
-
 		  const tbody = document.getElementById("info-table").getElementsByTagName("tbody")[0];
 		  
 		  let newRow = tbody.insertRow();
@@ -55,32 +99,6 @@
 		  const startTime = document.getElementById("startTime");
 		  const endTime = document.getElementById("endTime");
 		  
-		  if(title.value === '') {
-			  alert('제목을 입력하세요.');
-			  title.focus();
-			  return false;
-		  }
-		  
-		  if(theater.value === '') {
-			  alert('상영관을 선택하세요.');
-			  theater.focus();
-			  return false;
-		  }
-		  if(screenInput.value === '') {
-			  alert('상영 일자를 입력하세요.');
-			  title.focus();
-			  return false;
-		  }
-		  if(startTime.value === '') {
-			  alert('시작 시간을 입력하세요.');
-			  startTime.focus();
-			  return false;
-		  }
-		  if(endTime.value === '') {
-			  alert('제목을 입력하세요.');
-			  endTime.focus();
-			  return false;
-		  }
 		  
 		  titleCell.innerHTML = title.value.split('|')[0];
 		  const titleInput = document.createElement("input");

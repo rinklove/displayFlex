@@ -66,7 +66,7 @@
         </div>
         <div class="col-3 m-auto mt-4">
             <br>
-            <button type="button" class="btn btn-danger w-100" onclick="addTableRow();">상영 정보 추가</button>
+            <button type="button" class="btn btn-danger w-100" onclick="checkExistInfo();">상영 정보 추가</button>
         </div>
     </div>
     <div class="d-inline-block fs-5 fw-bold list-title">등록할 상영 정보</div>
