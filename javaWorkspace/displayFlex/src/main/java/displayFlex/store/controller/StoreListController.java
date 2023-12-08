@@ -23,11 +23,11 @@ public class StoreListController extends HttpServlet{
 		try {
 			
 			//data
-			String category = req.getParameter("category");
 			
 			//service
 			StoreService ss = new StoreService();
-			List<StoreVo> storeVoList = ss.selectStoreList(category);
+			List<StoreVo> storeVoList = ss.selectStoreList();
+			List<StoreVo> storeVoList2 = ss.selectMenuList();
 			
 			//result (==view)
 			
@@ -38,6 +38,7 @@ public class StoreListController extends HttpServlet{
 //			}
 			
 			req.setAttribute("storeVoList", storeVoList);
+			req.setAttribute("storeVoList2", storeVoList2);
 			req.getRequestDispatcher("/WEB-INF/views/store/storeList.jsp").forward(req, resp);
 			
 		}catch(Exception e) {

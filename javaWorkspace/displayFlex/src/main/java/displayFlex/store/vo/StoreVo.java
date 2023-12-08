@@ -18,6 +18,13 @@ public class StoreVo {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	public StoreVo(String category) {
+		super();
+		this.category = category;
+	}
+
+
 	public StoreVo(String productNo, String category, String memberNo, String image, String title, String price,
 			String productElement, String enrollDate, String delYn, String shortDescription) {
 		super();

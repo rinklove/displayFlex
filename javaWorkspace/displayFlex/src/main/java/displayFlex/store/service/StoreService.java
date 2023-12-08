@@ -8,9 +8,25 @@ import displayFlex.store.vo.StoreVo;
 import test.JDBCTemplate;
 
 public class StoreService {
+	
+	// 스토어 메뉴 리스트
+	public List<StoreVo> selectMenuList() throws Exception{
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao 
+		StoreDao dao = new StoreDao();
+		List<StoreVo> storeVoList2 = dao.selectMenuList(conn);
+		
+		//close
+		JDBCTemplate.close(conn);
+		return storeVoList2;
+		
+	}// selectMenuList
 
 	// 스토어 리스트
-	public List<StoreVo> selectStoreList(String category) throws Exception{
+	public List<StoreVo> selectStoreList() throws Exception{
 
 		
 		//conn
@@ -18,7 +34,7 @@ public class StoreService {
 
 		//dao
 		StoreDao dao = new StoreDao();
-		List<StoreVo> storeVoList = dao.selectStoreList(conn, category);
+		List<StoreVo> storeVoList = dao.selectStoreList(conn);
 		
 		
 		//close
