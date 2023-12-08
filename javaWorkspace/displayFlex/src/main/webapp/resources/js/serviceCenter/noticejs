@@ -39,3 +39,11 @@ function handleClick(event){
 	}
 	setPageArea();
 <% } %>
+
+// 각 공지사항의 상세조회 페이지로 이동하는 함수
+function goToNoticeDetail(noticeNo) {
+	// 공지사항 상세조회 페이지 URL을 생성
+	var url = "/cinema/serviceCenter/noticeDetail?noticeNo=" + noticeNo;
+	// 페이지 이동
+	window.location.href = url;
+}

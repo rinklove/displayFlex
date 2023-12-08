@@ -52,10 +52,12 @@ public class NoticeService {
 		
 		// DAO
 		NoticeDao dao = new NoticeDao();
-		if(m.get("searchType").equals("abc")) {
+		List<NoticeVo> noticeVoList = null;
+		
+		if(m.get("searchType").equals("titcon")) {
 			dao.searchByTitleAndContent(conn , m , pvo);
 		}else {
-			List<NoticeVo> noticeVoList = dao.search(conn , m, pvo);
+			noticeVoList = dao.search(conn , m, pvo);
 		}
 		
 		//close
@@ -129,6 +131,30 @@ public class NoticeService {
 		JDBCTemplate.close(conn);
 		
 		return vo;
+		
+	}
+
+	//공지사항 삭제
+	public int delete(String no, String memberNo)  throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		NoticeDao dao = new NoticeDao();
+		int result = dao.delete(conn , no , memberNo);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+
+		return result;
 		
 	}
 

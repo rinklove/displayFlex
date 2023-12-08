@@ -19,11 +19,12 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/notice/noticeList.css">
-
+<script defer type="text/javascript" src="./resources/js/serviceCenter/notice.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
+    
+    
     <main>
         <div id="contents">
             <div id="title_top">
@@ -41,11 +42,11 @@
                 </nav>
             </div>
             <fieldset id="search_wrap1">
-                <legend>전체 공지 검색하기</legend>
+                <!-- <legend>전체 공지 검색하기</legend> -->
                 <select class="ty3" title="검색조건 제목 선택" id="selectCondition1">
                     <option value="title">제목</option>
                     <option value="content">내용</option>
-                    <option value="abc">제목+내용</option>
+                    <option value="titcon">제목+내용</option>
                 </select>
                 <input type="text" name="searchValue" placeholder="검색어를 입력해주세요." id="seachKeyword1" >
                 <input type="submit" class="btn_col2" value="검색" onclick="location.href='/cinema/serviceCenter/noticeSearch?searchType=' + document.getElementById('selectCondition1').value + '&searchValue=' + document.getElementById('seachKeyword1').value;">
@@ -97,50 +98,6 @@
         </div>
     </main>
     
-    <script>
-const trArr = document.querySelectorAll("main > table > tbody > tr");
-	for(let i = 0 ; i < trArr.length; ++i){
-		trArr[i].addEventListener('click' , handleClick);
-	}
-
-function handleClick(event){
-	const tr = event.currentTarget;
-	const no = tr.children[0].innerText;
-	location.href = '/cinema/serviceCenter/noticeDetail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
-}
-   	
-<% if(searchMap != null){ %>
-	function setSearchArea(){
-		
-		// 옵션태그 셋팅
-		const optionTagArr = document.querySelectorAll("#search_wrap1 option");
-		const searchType = "<%= searchMap.get("searchType") %>";
-		for(let i = 0; i < optionTagArr.length; ++i){
-			if( optionTagArr[i].value === searchType ){
-				optionTagArr[i].selected = true;
-				break;
-			}
-		}
-		
-		// 인풋태그 셋팅
-		const searchValueTag = document.querySelector("#search_wrap1 input[name=searchValue]");
-		searchValueTag.value = "<%= searchMap.get("searchValue") %>";
-		
-	}
-	setSearchArea();
-
-	function setPageArea(){
-		const aTagArr = document.querySelectorAll("#paging a");
-		for(let i = 0 ; i < aTagArr.length; ++i){
-			aTagArr[i].href = aTagArr[i].href.replace("list" , "search"); 
-			aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
-			aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
-		}
-	}
-	setPageArea();
-<% } %>
-    
-    </script>
 
 </body>
 </html> 
