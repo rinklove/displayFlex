@@ -1,5 +1,17 @@
+<%@page import="java.util.Map"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="displayFlex.serviceCenter.recommend.vo.RecommendVo"%>
+<%@page import="displayFlex.util.page.vo.PageVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	List<RecommendVo> recommendVoList = (List<RecommendVo>) request.getAttribute("recommendVoList");
+    	PageVo pvo = (PageVo)request.getAttribute("pvo");
+    	Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +19,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/recommend/recommendList.css">
+<script defer type="text/javascript" src="./resources/js/serviceCenter/recommend.js"></script>
 
 </head>
 <body>
@@ -16,9 +29,9 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <%-- <c:if test="${loginMember.adminYn eq 'N'}"> --%>
-                <a href="/cinema/serviceCenter/recommendWrite">작성</a>
-                <%-- </c:if> --%>
+                <c:if test="${loginMember.adminYn eq 'N'}">
+                	<button onclick="location.href='/cinema/serviceCenter/recommendWrite'">작성</button>
+                </c:if>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -29,14 +42,14 @@
                 </nav>
             </div>
             <fieldset id="search_wrap2">
-                <legend>상영 요청작 검색하기</legend>
+                <!-- <legend>상영 요청작 검색하기</legend> -->
                 <select class="ty3" title="검색조건 제목 선택" id="selectCondition1">
-                    <option value="1">제목</option>
-                    <option value="2">내용</option>
-                    <option value="3">제목+내용</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="titcon">제목+내용</option>
                 </select>
-                <input type="text" placeholder="검색어를 입력해주세요." id="seachKeyword2" title="검색어를 입력해주세요">
-                <button type="button" class="btn_col3">검색</button>
+                <input type="text" name="searchValue" placeholder="검색어를 입력해주세요." id="seachKeyword2">
+                <input type="submit" class="btn_col3" value="검색" onclick="location.href='/cinema/serviceCenter/recommendSearch?searchType=' + document.getElementById('selectCondition1').value + '&searchValue=' + document.getElementById('seachKeyword1').value;">
             </fieldset>
             <div id="acc3">
                 <table id="tb_acc_wrap3"
@@ -50,58 +63,37 @@
                         <tr>
                             <th id="thead1">번호</th>
                             <th id="thread2">제목</th>
-                            <th id="thread3">등록일</th>
+                            <th id="thread3">작성자</th>
+                            <th id="thread4">등록일</th>
                         </tr>
                     </thead>
                     <tbody id="tab">
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">8</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">제목8</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">등록일8</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">7</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">제목7</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">등록일7</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">6</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">제목6</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">등록일6</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">5</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">제목5</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">등록일5</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">4</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">제목4</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">등록일4</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">3</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">제목3</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">등록일3</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">2</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">제목2</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">등록일2</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">1</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">제목1</a></td>
-                            <td><a href="/cinema/serviceCenter/recommendDetail">등록일1</a></td>
-                        </tr>
+						<% for(RecommendVo vo : recommendVoList){ %>
+							<tr>
+								<td><%= vo.getRecommendMvNo() %></td>
+								<td><%= vo.getTitle() %></td>
+								<td><%= vo.getWriterNick() %></td>
+								<td><%= vo.getEnrollDate() %></td>
+							</tr>
+						<% } %>
                     </tbody>
                 </table>
                 <div id="paging">
-                    <a href="">1</a>
-                    <a href="">2</a>
-                    <a href="">3</a>
-                    <a href="">4</a>
-                    <a href="">5</a>
+                    <% if(pvo.getStartPage() != 1){ %>
+                   		<a href="/cinema/serviceCenter/recommendList?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+                   	<% } %>
+                   	
+                   	<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
+						<% if( i == pvo.getCurrentPage() ){ %>
+							<span><%= i %></span>
+						<% } else { %>
+							<a href="/cinema/serviceCenter/recommendList?pno=<%= i %>"><%= i %></a>
+						<% } %>
+					<% } %>
+					
+					<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
+						<a href="/cinema/serviceCenter/recommendList?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+					<% } %>
                 </div>
             </div>
             
