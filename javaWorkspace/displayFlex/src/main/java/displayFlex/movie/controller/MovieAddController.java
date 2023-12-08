@@ -78,6 +78,7 @@ public class MovieAddController extends HttpServlet {
 			List<Part> parts = request.getParts().stream().filter(element -> element.getName().equals("mainImage") || element.getName().equals("stillImage") ).toList();
 			List<String> stillImageUrl = Arrays.stream(request.getParameterValues("stillImageUrl")).filter(el -> !el.equals("")).toList(); //스틸 이미지 파일 url 경로
 			
+			
 			System.out.println(stillImageUrl);
 			String sep = File.separator;
 			for(Part p : parts) {
@@ -109,13 +110,18 @@ public class MovieAddController extends HttpServlet {
 					 System.out.println("stillImage = " + mainImage);
 				}
 			}
+			
 			MovieVo newMovie = new MovieVo(null, title, actor, story, rate, director, screenGrade, poster, runningTime, releaseDate, null, null, genre, nation, mainImage);
 			int result = movieService.addMovie(newMovie, stillImageUrl);	
 		
-			if(result != 1) {
-				
-			} 
+			if(result == 1) {
+				request.getSession().setAttribute("alertMsg", "영화가 등록 되었습니다.");
+				response.sendRedirect(request.getContextPath()+"/movie/list?pno=1");
+			} else 
+				throw new Exception();
 		} catch (Exception e) {
+			request.getSession().setAttribute("alertMsg", "영화 등록에 실패하셨습니다.");
+			response.sendRedirect(request.getContextPath()+"/admin/movie/add");
 			e.printStackTrace();
 		}
 	}

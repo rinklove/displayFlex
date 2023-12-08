@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,16 @@
 <script defer src="${pageContext.request.contextPath}/resources/js/movie/add.js"></script>
 </head>
 <body>
+<%
+	String x = (String) session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
+ <c:set var="msg"  value="<%= x %>" />
+ <c:if test="${not empty msg}">
+	 <script>
+	        alert('<%= x %> ');
+	</script>
+ </c:if>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="add-form bg-w">
         <div class="title-container">
@@ -19,12 +30,10 @@
         </div>
         <hr>
         <form action="${pageContext.request.contextPath}/admin/movie/add" method="post" onsubmit="return checkInputValue()" class="m-auto" enctype="multipart/form-data">
+           <input type="text" name="movieCd" id="movieCd" hidden>
             <table>
                 <thead></thead>
                 <tbody>
-                	<tr>
-                		<td colspan="5"><input type="text" name="movieCd" id="movieCd" hidden></td>
-                	</tr>
                     <tr>
                         <td class="normal_text">제목<span class="star">*</span></td>
                         <td>

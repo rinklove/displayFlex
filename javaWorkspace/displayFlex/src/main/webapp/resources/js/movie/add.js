@@ -165,3 +165,24 @@
 				document.getElementById('still-url'+(index+1)).value= '';
 			})
 		}
+		
+		
+		//값이 유효한지 확인
+		const checkInputValue = () => {
+			
+			if(title.value.trim() == '') {
+				alert('영화제목은 필수 입력값입니다');
+				title.focus();
+				return false;
+			}
+			
+			const rateInput = document.getElementById('rate');
+			if(rateInput.value == '') {
+				alert('별점은 필수 입력값입니다');
+				rateInput.focus();
+				return false;
+			}
+			
+			const check = confirm('영화를 등록하시겠습니까?');
+			return check;
+		}

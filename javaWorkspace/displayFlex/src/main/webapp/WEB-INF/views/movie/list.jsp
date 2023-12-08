@@ -11,6 +11,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/movie/list.js"></script>
 </head>
 <body>
+<%
+	String x = (String) session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
+ <c:set var="msg"  value="<%= x %>" />
+ <c:if test="${not empty msg}">
+	 <script>
+	        alert('<%= x %> ');
+	</script>
+ </c:if>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="condition-search-container">
     <div class="first-div">

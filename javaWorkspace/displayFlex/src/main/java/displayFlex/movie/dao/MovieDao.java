@@ -333,7 +333,7 @@ public class MovieDao {
 	 * @throws SQLException 
 	 */
 	public int addMovie(Connection con, MovieVo newMovie, List<String> stillImageUrl) throws SQLException {
-		query = "INSERT INTO MOVIE (MOVIE_NO, MOVIE_NAME, ACTORS, STORY, RATE, MAIN_DIRECTOR, MOVIE_IMAGE, RUNNING_TIME, SCREEN_GRADE_NO, RELEASE_DATE, GENRE, NATION, MAIN_IMAGE) VALUES (SEQ_MOVIE.NEXTVAL,?,?,?,?,?,?,?,?,to_timestamp(?, 'YYYY-MM-DD:HH24:MI:SS'),?,?,?))";
+		query = "INSERT INTO MOVIE (MOVIE_NO, MOVIE_NAME, ACTORS, STORY, RATE, MAIN_DIRECTOR, MOVIE_IMAGE, RUNNING_TIME, SCREEN_GRADE_NO, RELEASE_DATE, GENRE, NATION, MAIN_IMAGE) VALUES (SEQ_MOVIE.NEXTVAL,?,?,?,?,?,?,?,?,to_timestamp(?, 'YYYY-MM-DD:HH24:MI:SS'),?,?,?)";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, newMovie.getMovieName());
 		pstmt.setString(2, newMovie.getActors());
@@ -349,6 +349,50 @@ public class MovieDao {
 		pstmt.setString(12, newMovie.getMainImage());
 
 		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
+	/**
+	 * 최근에 등록한 영화번호 가져오기
+	 * @return
+	 * @throws SQLException 
+	 */
+	public String getRecentOne(Connection con) throws SQLException {
+		query = "SELECT A.MOVIE_NO FROM ( SELECT M.MOVIE_NO , ROW_NUMBER() OVER(ORDER BY M.MOVIE_NO DESC) RNUM FROM MOVIE M ) A WHERE A.RNUM = 1";
+		
+		PreparedStatement pstmt = con.prepareStatement(query);
+		ResultSet rs = pstmt.executeQuery();
+		String recentMovieNo = null;
+		if(rs.next()) {
+			recentMovieNo =  rs.getString(1);
+
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return recentMovieNo;
+	}
+
+	/**
+	 * 스틸 이미지 추가
+	 * @param con
+	 * @param recentMovieNo
+	 * @param stillImageUrl
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int addStillImage(Connection con, String recentMovieNo, List<String> stillImageUrl) throws SQLException {
+		query = "INSERT INTO STILL_IMAGE_FILE(STILL_NO, MOVIE_NO, FILE_NAME) VALUES (SEQ_STILL_IMAGE_FILE.NEXTVAL, ?, ?)";
+		
+		PreparedStatement pstmt = con.prepareStatement(query);
+		int result = 0;
+		for(String s : stillImageUrl) {
+			pstmt.setString(1, recentMovieNo);
+			pstmt.setString(2, s);
+			
+			result = pstmt.executeUpdate();
+		}
 		
 		JDBCTemplate.close(pstmt);
 		return result;
