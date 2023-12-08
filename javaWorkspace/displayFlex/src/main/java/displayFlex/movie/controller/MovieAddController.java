@@ -61,6 +61,7 @@ public class MovieAddController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			
 			String movieCd = request.getParameter("movieCd");				//영화 코드
 			String title = request.getParameter("title");								//영화 제목
 			String director = request.getParameter("director");					//감독
@@ -78,36 +79,31 @@ public class MovieAddController extends HttpServlet {
 			List<Part> parts = request.getParts().stream().filter(element -> element.getName().equals("mainImage") || element.getName().equals("stillImage") ).toList();
 			List<String> stillImageUrl = Arrays.stream(request.getParameterValues("stillImageUrl")).filter(el -> !el.equals("")).toList(); //스틸 이미지 파일 url 경로
 			
-			
 			System.out.println(stillImageUrl);
 			String sep = File.separator;
 			for(Part p : parts) {
-				String name = p.getName();
-				
+				String name = p.getName();				
 				String fileName = UUID.randomUUID().toString() +"_"+getFileName(p);
-				System.out.println("fileName = "+fileName);
+
 				//메인 페이지용 사진일 경우
 				if(name.equals("mainImage")) {
-					
 					Path filePath = Paths.get("D:"+sep+"java"+sep+"dev"+sep+"semiPrj"+sep+"javaWorkspace"+sep+"displayFlex"+sep+"src"+sep+"main"+sep+"webapp"+sep+ "resources"+sep+"image"+sep+"movie"+sep+"main", fileName);
 					String mainImagePath = String.valueOf(filePath);
-					System.out.println("파일 위치 = " + mainImagePath);
+
 					 try (InputStream input = p.getInputStream()) {
 			                Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
 			            }
 					 mainImage = mainImagePath.substring(mainImagePath.indexOf("resources"));
-					 System.out.println("mainImage = " + mainImage);
 				} 
 				// 스틸이미지용일 경우
 				else {
 					Path filePath = Paths.get("D:"+sep+"java"+sep+"dev"+sep+"semiPrj"+sep+"javaWorkspace"+sep+"displayFlex"+sep+"src"+sep+"main"+sep+"webapp"+sep+ "resources"+sep+"image"+sep+"movie"+sep+"stills", fileName);
 					String stillImagePath = String.valueOf(filePath);
-					System.out.println("파일 위치 = " + stillImagePath);
+
 					 try (InputStream input = p.getInputStream()) {
 			                Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
 			            }
 					 stillImageUrl.add(stillImagePath.substring(stillImagePath.indexOf("resources")));
-					 System.out.println("stillImage = " + mainImage);
 				}
 			}
 			
