@@ -25,7 +25,7 @@
         <hr id="jul2">
         <div id="main_top">
             <div id="main_title">
-                <div style="color: white; font-size:xx-large"><a href="/cinema/event/event" style="color: white; text-decoration: none;">전체</a></div>
+                <div style="color: white; font-size:xx-large"><a href="/cinema/event/event" style="color: white; text-decoration: underline;">전체</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventAffDis" style="color: white; text-decoration: none;">제휴/할인</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventPreMee" style="color: white; text-decoration: none;">시사회/간담회</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventStaGre" style="color: white; text-decoration: none;">무대인사</a></div>

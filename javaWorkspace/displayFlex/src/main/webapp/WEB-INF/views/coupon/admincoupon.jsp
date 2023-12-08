@@ -28,14 +28,6 @@
 					
 					<div id="detail">
 						<div id="description">
-							<div style="font-size: xx-large;">쿠폰이름</div>
-							<div>
-								<input style="width: 20%; font-size: 15px;"type="text">
-							</div>
-							<div style="font-size: xx-large;">쿠폰정보</div>
-							<div>
-								<input style="width: 10em; font-size: 15px;"type="text">
-							</div>
 							<div style="font-size: xx-large;">쿠폰선택</div>
 							<span> 
 								<select name="할인종류" id="diskind" >
@@ -45,14 +37,29 @@
 										<option value="경로할인쿠폰">경로할인쿠폰</option>
 										<option value="장애인할인쿠폰">장애인할인쿠폰</option>				
 								</select>
-							</span>
+							</span>		
 							<div style="font-size: xx-large;">할인금액</div>
+							<span> 
+								<select name="할인종류" id="diskind" >
+										<option value=""  style="color: gray;" >할인금액</option>
+										<option value="VIP할인쿠폰">VIP전액(8000원)</option>
+										<option value="VIP할인쿠폰">VIP반값(4000원)</option>
+										<option value="어린이할인쿠폰">어린이할인(2000원)</option>
+										<option value="경로할인쿠폰">경로할인(1000원)</option>
+										<option value="장애인할인쿠폰">장애인할인(1000원)</option>				
+								</select>
+							</span>
+							<div style="font-size: xx-large;">쿠폰정보</div>
 							<div>
 								<input style="width: 10em; font-size: 15px;"type="text">
-							</div>
+							</div>		
 							<div style="font-size: xx-large;">쿠폰발행일자</div>
 							<div>
 								<input style="width: 10em; font-size: 15px;"type="date" id="couponUsageStartDate" name="couponUsageStartDate" value="2023-12-01">
+							</div>
+							<div style="font-size: xx-large;">쿠폰사용기간</div>
+							<div>
+								발행일부터<input style="width: 10em; font-size: 15px;"type="date" id="couponUsageStartDate" name="couponUsageStartDate" value="2023-12-01">까지
 							</div>
                             
 							<div style="font-size: xx-large;">쿠폰안내</div>
