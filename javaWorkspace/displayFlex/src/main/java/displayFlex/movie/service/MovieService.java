@@ -147,6 +147,13 @@ public class MovieService {
 		Connection con = JDBCTemplate.getConnection();
 		
 		int result = movieDao.addMovie(con, newMovie, stillImageUrl);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+		
 		String recentMovieNo = null;
 		if(result ==1) {
 			recentMovieNo = movieDao.getRecentOne(con);

@@ -392,6 +392,9 @@ public class MovieDao {
 			pstmt.setString(2, s);
 			
 			result = pstmt.executeUpdate();
+			if(result == 0) {
+				break;
+			}
 		}
 		
 		JDBCTemplate.close(pstmt);
