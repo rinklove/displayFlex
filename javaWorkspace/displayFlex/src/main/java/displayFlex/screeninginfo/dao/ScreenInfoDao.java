@@ -9,6 +9,7 @@ import java.util.List;
 
 import displayFlex.movie.vo.MovieVo;
 import displayFlex.screeninginfo.vo.ScreeingInfoVo;
+import displayFlex.screeninginfo.vo.ScreenInfoDto;
 import displayFlex.screeninginfo.vo.ScreeningTimeVo;
 import test.JDBCTemplate;
 
@@ -69,7 +70,7 @@ public class ScreenInfoDao {
 	 * @throws SQLException 
 	 */
 	public String getInfoNoByCondition(ScreeingInfoVo screeingInfo, Connection con) throws SQLException {
-		query = "SELECT SCREENING_INFO_NO FROM SCREENING_INFO WHERE MOVIE_NO = ? AND = THEATER_NO = ? AND TO_CHAR(START_DATE, 'YYYY-MM-DD') = ?";
+		query = "SELECT SCREENING_INFO_NO FROM SCREENING_INFO WHERE MOVIE_NO = ? AND  THEATER_NO = ? AND TO_CHAR(START_DATE, 'YYYY-MM-DD') = ?";
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
 		
@@ -118,12 +119,12 @@ public class ScreenInfoDao {
 		query = "INSERT INTO SCREENING_TIME(SCREENING_TIME_NO,  SCREENING_INFO_NO, START_TIME, END_TIME) VALUES (SEQ_SCREENING_TIME.NEXTVAL, ?, TO_TIMESTAMP(?, 'HH24:MI:SS'), TO_TIMESTAMP(?, 'HH24:MI:SS'))";
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
-		int result = 0;
+
 		pstmt.setString(1, screeningTime.getScreeningInfoNo());
 		pstmt.setString(2, screeningTime.getStartTime());
 		pstmt.setString(3, screeningTime.getEndTime());
 			
-		result = pstmt.executeUpdate();
+		int result = pstmt.executeUpdate();
 
 		JDBCTemplate.close(pstmt);
 		return result;
@@ -144,6 +145,37 @@ public class ScreenInfoDao {
 		JDBCTemplate.close(pstmt);
 		return result;
 		
+	}
+	
+	/**
+	 * 기존 상영 정보가 있는지
+	 * @param screenInfoDto
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int isExistScreeningInfo(ScreenInfoDto screenInfoDto, Connection con) throws SQLException {
+		query = "SELECT COUNT(ST.SCREENING_TIME_NO) FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE SI.MOVIE_NO = ? AND SI.THEATER_NO = ? AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ? AND (((TO_CHAR(ST.START_TIME, 'HH24:MI') < ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') > ?) OR (TO_CHAR(ST.START_TIME, 'HH24:MI') < ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') > ?) OR(TO_CHAR(ST.START_TIME, 'HH24:MI') > ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') < ?)))";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, screenInfoDto.getTitle());
+		pstmt.setString(2, screenInfoDto.getTheater());
+		pstmt.setString(3, screenInfoDto.getDate());
+		pstmt.setString(4, screenInfoDto.getStartTime());
+		pstmt.setString(5, screenInfoDto.getStartTime());
+		pstmt.setString(6, screenInfoDto.getEndTime());
+		pstmt.setString(7, screenInfoDto.getEndTime());
+		pstmt.setString(8, screenInfoDto.getStartTime());
+		pstmt.setString(9, screenInfoDto.getEndTime());
+		
+		ResultSet rs = pstmt.executeQuery();
+		int count = 0;
+		if(rs.next()) {
+			count = rs.getInt(1);
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return count;
 	}
 
 }

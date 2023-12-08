@@ -7,6 +7,7 @@ import java.util.List;
 import displayFlex.movie.vo.MovieVo;
 import displayFlex.screeninginfo.dao.ScreenInfoDao;
 import displayFlex.screeninginfo.vo.ScreeingInfoVo;
+import displayFlex.screeninginfo.vo.ScreenInfoDto;
 import displayFlex.screeninginfo.vo.ScreeningTimeVo;
 import test.JDBCTemplate;
 
@@ -60,10 +61,11 @@ public class ScreenInfoService {
 			//신규로 추가하는 경우
 			if(findNo == null) {
 				result = infoDao.addScreeningInfo(infoList.get(index), con);
-				
+				System.out.println("result1 = " + result);
 				if(result == 1) {
 					JDBCTemplate.commit(con);
 					findNo = infoDao.getInfoNoByCondition(infoList.get(index), con);
+
 				} else {
 					JDBCTemplate.rollback(con);
 					break;
@@ -71,9 +73,9 @@ public class ScreenInfoService {
 			}
 			
 			timeList.get(index).setScreeningInfoNo(findNo);
-			if(result == 1) {
+			if(findNo != null) {
 				result = infoDao.addScreeningTime(timeList.get(index), con);
-				
+				System.out.println("result2 = " + result);
 				if(result == 1) {
 					JDBCTemplate.commit(con);
 				} else {
@@ -86,7 +88,22 @@ public class ScreenInfoService {
 		}
 		
 		JDBCTemplate.close(con);
+		System.out.println("result3 = " + result);
 		return result;
+	}
+	
+	/**
+	 * 기존의 상영 정보가 있는 지 체크
+	 * @param screenInfoDto
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int isExistScreeningInfo(ScreenInfoDto screenInfoDto) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int count = infoDao.isExistScreeningInfo(screenInfoDto, con);
+		JDBCTemplate.close(con);
+		return count;
 	}
 
 }
