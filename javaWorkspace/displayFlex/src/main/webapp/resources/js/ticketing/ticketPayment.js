@@ -11,6 +11,7 @@ const seatInfo = document.getElementById("seatInfo");
 const paymentAmount = document.getElementById("paymentAmount-value");
 const discountValue = document.getElementById("discount-value");
 const totalPayment = document.getElementById("totalPayment-value");
+const posterImg = document.getElementById("posterImg");
 
 movieInfo.innerText = ticketData.selectedMovie;
 dateInfo.innerText = ticketData.selectedDate;
@@ -19,8 +20,9 @@ theaterInfo.innerText = ticketData.selectedTheater;
 reservedInfo.innerText = ticketData.totalReserved;
 seatInfo.innerText = ticketData.selectedSeat;
 paymentAmount.innerText = ticketData.totalAmount;
-
 totalPayment.innerText = ticketData.totalAmount;
+posterImg.src = ticketData.posterImg;
+
 
 sessionStorage.clear();
 
