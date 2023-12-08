@@ -26,17 +26,15 @@
         <div class="main">
             <div class="main-first">나의 문의내역</div>
             <div class="main-second">1:1 문의</div>
-            <div class="main-text">
-                <form action="/cinema/inquiry/search" method="get">
-                    <div class="main-text-t1">문의조회</div>
+                <form action="/cinema/mypage/inquiry/search" method="get">
                     <select name="searchType">
-                        <option value="title">질문제목</option>
+                        <option value="title">문의제목</option>
                         <option value="reTitle">답변제목</option>
                     </select>
                     <input class="main-text-t2" type="text" name="searchValue" placeholder="검색할 내용을 입력하세요">
 					<input class="main-text-t3" type="submit" value="검색하기">
                 </form>
-            </div>
+        
             <div class="main-table">
                 <div class="main-table-header">번호</div>
                 <div class="main-table-header">회원번호</div>
@@ -89,7 +87,7 @@
                     <div class="main-botton-content-t2">불편사항과 문의사항을 남겨주시면 친절히
                         답변드리겠습니다.</div></div>
             </div>
-
+		</div>
         </div>
     </div>
         <footer></footer>
@@ -106,14 +104,14 @@ const trArr = document.querySelectorAll("main > table > tbody > tr");
 	function handleClick(event){
 		const tr = event.currentTarget;
 		const no = tr.children[0].innerText;
-		location.href = '/cinema/mypage/inquiry?no=' + no + '&currentPage=<%= pvo.getCurrentPage() %>';	
+		location.href = '/cinema/mypage/inquiry?onetooneNo=' + onetooneNo + '&currentPage=<%= pvo.getCurrentPage() %>';	
 	}
 	
 	<% if(searchMap != null){ %>
 		function setSearchArea(){
 			
 			// 옵션태그 셋팅
-			const optionTagArr = document.querySelectorAll(".main-text form option");
+			const optionTagArr = document.querySelectorAll("form option");
 			const searchType = "<%= searchMap.get("searchType") %>";
 			for(let i = 0; i < optionTagArr.length; ++i){
 				if( optionTagArr[i].value === searchType ){
@@ -123,7 +121,7 @@ const trArr = document.querySelectorAll("main > table > tbody > tr");
 			}
 			
 			// 인풋태그 셋팅
-			const searchValueTag = document.querySelector(".main-text form input[name=searchValue]");
+			const searchValueTag = document.querySelector("form input[name=searchValue]");
 			searchValueTag.value = "<%= searchMap.get("searchValue") %>";
 			
 		}

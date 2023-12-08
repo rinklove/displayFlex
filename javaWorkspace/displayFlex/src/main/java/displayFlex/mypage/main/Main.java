@@ -37,7 +37,6 @@ public class Main extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("alertMsg", "로그인 성공!");
 			session.setAttribute("loginMember", loginMember);
-			resp.sendRedirect("/cinema/home");
 			
 		}catch(Exception e) {
 			System.out.println("[ERROR-M002] 로그인 중 예외 발생...!!");

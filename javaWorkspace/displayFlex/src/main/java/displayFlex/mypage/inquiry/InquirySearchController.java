@@ -15,7 +15,7 @@ import displayFlex.mypage.MypageService;
 import displayFlex.mypage.vo.PageVo;
 import displayFlex.serviceCenter.inquiry.vo.InquiryVo;
 
-@WebServlet("/cinema/inquiry/search")
+@WebServlet("/mypage/inquiry/search")
 public class InquirySearchController extends HttpServlet {
 	
 	@Override
