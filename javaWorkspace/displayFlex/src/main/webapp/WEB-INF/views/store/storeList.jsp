@@ -24,15 +24,16 @@
 				<%-- </c:if> --%>
 			</div>
 			<div id="smallMenu">
-				<div><button onclick="location.href='/cinema/store'"><span>베스트</span></button></div>
-				<div><button onclick="location.href='/cinema/store/giftcard'"><span>기프트카드</span></button></div>
-				<div><button onclick="location.href='/cinema/store/combo'"><span>콤보</span></button></div>
-				<div><button onclick="location.href='/cinema/store/popcorn'"><span>팝콘</span></button></div>
-				<div><button onclick="location.href='/cinema/store/drink'"><span>음료</span></button></div>
-				<div><button onclick="location.href='/cinema/store/snack'"><span>스낵</span></button></div>
+				<div><button onclick="handleMenu();"><span>베스트</span></button></div>
+				<div><button onclick="handleMenu();"><span>기프트카드</span></button></div>
+				<div><button onclick="handleMenu();"><span>콤보</span></button></div>
+				<div><button onclick="handleMenu();"><span>팝콘</span></button></div>
+				<div><button onclick="handleMenu();"><span>음료</span></button></div>
+				<div><button onclick="handleMenu();"><span>스낵</span></button></div>
 			</div>
 			<div class="itemPoto">
 				<c:forEach items="${storeVoList}" var="vo">
+				<c:if test="${vo.category}">
 					<div>
 						<a href="/cinema/store/product">
 						<img src="${vo.image}" alt="product">
@@ -44,6 +45,7 @@
 						<br>
 						<span id="third"><b>${vo.price}</b></span>
 					</div>
+				</c:if>
 				</c:forEach>
 				<div></div>
 				<div></div>

@@ -123,7 +123,7 @@ h1 {
 }
 .itemPoto > div >a> img {
 	width: 100%;
-	height: 70%;
+	height: 63%;
 	transition: filter 0.3s ease;
 }
 .itemPoto > div > a> img:hover {

@@ -23,11 +23,11 @@ public class StoreListController extends HttpServlet{
 		try {
 			
 			//data
-			String category = req.getParameter("productNo");
+			String category = req.getParameter("category");
 			
 			//service
 			StoreService ss = new StoreService();
-			List<StoreVo> storeVoList = ss.selectStoreList();
+			List<StoreVo> storeVoList = ss.selectStoreList(category);
 			
 			//result (==view)
 			

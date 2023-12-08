@@ -12,21 +12,21 @@ import test.JDBCTemplate;
 public class StoreDao {
 
 	// 스토어 리스트
-	public List<StoreVo> selectStoreList(Connection conn) throws Exception {
+	public List<StoreVo> selectStoreList(Connection conn, String category) throws Exception {
+		
+		List<StoreVo> storeVoList = new ArrayList<StoreVo>();
 		
 		//sql
-		String sql = "SELECT P.PRODUCT_NO , C.CATE_NAME CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.CATE_NAME LIKE 'BEST'";
+		String sql = "SELECT P.PRODUCT_NO , C.PRODUCT_CATE_NO CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.PRODUCT_CATE_NO LIKE ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-//		pstmt.setString(1, );
+		pstmt.setString(1, category);
 		ResultSet rs = pstmt.executeQuery();
 		
 		//rs
-		List<StoreVo> storeVoList = new ArrayList<StoreVo>();
 		
 		while(rs.next()) {
 			
 			String productNo = rs.getString("PRODUCT_NO");
-			String category = rs.getString("CATEGORY");
 			String memberNo = rs.getString("MEMBER_NO");
 			String image = rs.getString("IMAGE");
 			String title = rs.getString("TITLE");

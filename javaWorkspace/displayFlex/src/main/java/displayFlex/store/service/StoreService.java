@@ -10,7 +10,7 @@ import test.JDBCTemplate;
 public class StoreService {
 
 	// 스토어 리스트
-	public List<StoreVo> selectStoreList() throws Exception{
+	public List<StoreVo> selectStoreList(String category) throws Exception{
 
 		
 		//conn
@@ -18,7 +18,7 @@ public class StoreService {
 
 		//dao
 		StoreDao dao = new StoreDao();
-		List<StoreVo> storeVoList = dao.selectStoreList(conn);
+		List<StoreVo> storeVoList = dao.selectStoreList(conn, category);
 		
 		
 		//close
