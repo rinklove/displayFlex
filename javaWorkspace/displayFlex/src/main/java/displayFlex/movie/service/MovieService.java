@@ -148,18 +148,30 @@ public class MovieService {
 		
 		int result = movieDao.addMovie(con, newMovie, stillImageUrl);
 		
-		if(result ==1) {
-			JDBCTemplate.commit(con);			
+		if(result == 1) {
+			JDBCTemplate.commit(con);
 		} else {
 			JDBCTemplate.rollback(con);
 		}
 		
+		String recentMovieNo = null;
+		if(result ==1) {
+			recentMovieNo = movieDao.getRecentOne(con);
+			
+			// 스틸이미지 넣기
+			if(stillImageUrl.size() != 0 || stillImageUrl != null || recentMovieNo != null) {
+				result = movieDao.addStillImage(con, recentMovieNo, stillImageUrl);
+			}
+			
+			if(result == 1) JDBCTemplate.commit(con);
+			else JDBCTemplate.rollback(con);
+		} else {
+			JDBCTemplate.rollback(con);
+		}
+
 		JDBCTemplate.close(con);
 		return result;
 	}
 
-	
-
-	
 	
 }

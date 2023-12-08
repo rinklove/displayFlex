@@ -8,12 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -61,6 +57,7 @@ public class MovieAddController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			
 			String movieCd = request.getParameter("movieCd");				//영화 코드
 			String title = request.getParameter("title");								//영화 제목
 			String director = request.getParameter("director");					//감독
@@ -81,41 +78,42 @@ public class MovieAddController extends HttpServlet {
 			System.out.println(stillImageUrl);
 			String sep = File.separator;
 			for(Part p : parts) {
-				String name = p.getName();
-				
+				String name = p.getName();				
 				String fileName = UUID.randomUUID().toString() +"_"+getFileName(p);
-				System.out.println("fileName = "+fileName);
+
 				//메인 페이지용 사진일 경우
 				if(name.equals("mainImage")) {
-					
 					Path filePath = Paths.get("D:"+sep+"java"+sep+"dev"+sep+"semiPrj"+sep+"javaWorkspace"+sep+"displayFlex"+sep+"src"+sep+"main"+sep+"webapp"+sep+ "resources"+sep+"image"+sep+"movie"+sep+"main", fileName);
 					String mainImagePath = String.valueOf(filePath);
-					System.out.println("파일 위치 = " + mainImagePath);
+
 					 try (InputStream input = p.getInputStream()) {
 			                Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
 			            }
 					 mainImage = mainImagePath.substring(mainImagePath.indexOf("resources"));
-					 System.out.println("mainImage = " + mainImage);
 				} 
 				// 스틸이미지용일 경우
 				else {
 					Path filePath = Paths.get("D:"+sep+"java"+sep+"dev"+sep+"semiPrj"+sep+"javaWorkspace"+sep+"displayFlex"+sep+"src"+sep+"main"+sep+"webapp"+sep+ "resources"+sep+"image"+sep+"movie"+sep+"stills", fileName);
 					String stillImagePath = String.valueOf(filePath);
-					System.out.println("파일 위치 = " + stillImagePath);
+
 					 try (InputStream input = p.getInputStream()) {
 			                Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
 			            }
 					 stillImageUrl.add(stillImagePath.substring(stillImagePath.indexOf("resources")));
-					 System.out.println("stillImage = " + mainImage);
 				}
 			}
+			
 			MovieVo newMovie = new MovieVo(null, title, actor, story, rate, director, screenGrade, poster, runningTime, releaseDate, null, null, genre, nation, mainImage);
 			int result = movieService.addMovie(newMovie, stillImageUrl);	
 		
-			if(result != 1) {
-				
-			} 
+			if(result == 1) {
+				request.getSession().setAttribute("alertMsg", "영화가 등록 되었습니다.");
+				response.sendRedirect(request.getContextPath()+"/movie/list?pno=1");
+			} else 
+				throw new Exception();
 		} catch (Exception e) {
+			request.getSession().setAttribute("alertMsg", "영화 등록에 실패하셨습니다.");
+			response.sendRedirect(request.getContextPath()+"/admin/movie/add");
 			e.printStackTrace();
 		}
 	}

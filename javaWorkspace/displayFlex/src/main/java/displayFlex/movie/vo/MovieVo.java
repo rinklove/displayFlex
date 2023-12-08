@@ -18,6 +18,13 @@ public class MovieVo {
 	private String nation;				//제작국가
 	private String mainImage;			//메인 화면용 이미지
 	
+	public MovieVo(String movieNo, String movieName, String releaseDate) {
+		super();
+		this.movieNo = movieNo;
+		this.movieName = movieName;
+		this.releaseDate = releaseDate;
+	}
+
 	public MovieVo(String movieNo, String movieName, String actors, String story, String rate, String mainDirector,
 			String screenGradeNo, String movieImage, String runningTime, String releaseDate, String writeDate,
 			String modifyDate, String genre, String nation, String mainImage) {

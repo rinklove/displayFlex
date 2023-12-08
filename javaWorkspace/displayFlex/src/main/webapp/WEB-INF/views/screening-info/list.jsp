@@ -18,6 +18,16 @@
 
 </head>
 <body>
+<%
+	String x = (String) session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
+ <c:set var="msg"  value="<%= x %>" />
+ <c:if test="${not empty msg}">
+	 <script>
+	        alert('<%= x %> ');
+	</script>
+ </c:if>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!-- 검색 영역 + 리스트 영역 -->
 <div class="search-container">
