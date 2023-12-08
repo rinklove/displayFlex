@@ -155,7 +155,7 @@
 
     <div id="selectInfo">
         <div id="ticket-posterImg">
-			    <img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="벼랑 위의 포뇨" id="posterImg">
+			    <img src="../resources/image/ticketing/flexLogo.png" alt="포스터" id="posterImg">
 		    </div>
         <div id="ticket-movieName">
             <span id="movieInfo">벼랑 위의 포뇨</span>

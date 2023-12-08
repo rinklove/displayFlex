@@ -13,7 +13,7 @@ function changeMovieImage(){
 			console.log(movieImgUrl);
 			
 			const posterImg = document.getElementById("posterImg");
-			
+			ticketData.posterImg = movieImgUrl;
 			posterImg.src = movieImgUrl;
 	} );
 	
@@ -173,6 +173,7 @@ function handleSeatClick(event) {
   const totalAmount = totalReserved * 8000;
   ticketData.totalAmount = totalAmount;
   payInfo.innerText = totalAmount;
+  console.log("마지막" + ticketData);
   sessionStorage.setItem("ticketData", JSON.stringify(ticketData));  
 }
 
