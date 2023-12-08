@@ -52,8 +52,7 @@
                 <input type="submit" class="btn_col2" value="검색" onclick="location.href='/cinema/serviceCenter/noticeSearch?searchType=' + document.getElementById('selectCondition1').value + '&searchValue=' + document.getElementById('seachKeyword1').value;">
             </fieldset>
             <div id="acc1">
-                <table id="tb_acc_wrap1"
-                    summary="공지사항 표입니다. 구분, 질문 순서로 행이 구성되어 있습니다." >
+                <table id="tb_acc_wrap1" onclick="location.href='/cinema/serviceCenter/noticeDetail?noticeNo=' + noticeNo">
                     <colgroup>
                         <col style="width: 20%;">
                         <col style="width: auto">
