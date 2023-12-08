@@ -8,15 +8,22 @@
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/screening-info/add.css?ver=1">
-<script src="${pageContext.request.contextPath}/resources/js/screening-info/add.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3/dist/flatpickr.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.3/dist/l10n/ko.js"></script>
-
-
-
+<script src="${pageContext.request.contextPath}/resources/js/screening-info/add.js"></script>
 </head>
 <body>
+<%
+	String x = (String) session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
+ <c:set var="msg"  value="<%= x %>" />
+ <c:if test="${not empty msg}">
+	 <script>
+	        alert('<%= x %> ');
+	</script>
+ </c:if>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!-- 검색 영역 + 리스트 영역 -->
 <div class="form-container m-auto p-4">
@@ -25,17 +32,20 @@
     <div class="input-container row g-3 m-auto">
         <div class="col-9 m-auto w-75 m-1">
             <label for="title" class="form-label">등록할 영화 검색하기</label>
-            <input type="text" class="form-control w-100" placeholder="영화 제목을 입력하새요" name="title" id="title">
-            <div class="bg-white form-control d-none position-absolute z-1 result-container"></div>
+            <input list="search-result"  type="text" class="form-control w-100" placeholder="영화 제목을 입력하새요" name="title" id="title">
+            <dataList class="list-group-flush border-dark shadow" id="search-result">
+             	<c:forEach var="movie" items="${movieList }">
+             	<option value="${movie.movieName }|${movie.movieNo }">(개봉일: ${movie.releaseDate })</option>
+             	</c:forEach>
+             </dataList>
         </div>
         <div class="col-3 m-auto">
             <label for="theater" class="form-label">상영관 선택</label>
             <select class="form-select d-inline-block" aria-label="상영관 선택" id="theater" name="theater">
                 <option selected>상영관 선택</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                <c:forEach var="element" items="${theater }">
+	                <option value="${element }">${element }</option>
+                </c:forEach>
             </select>
         </div>
         <div class="col-4 m-auto mt-3">
@@ -61,7 +71,7 @@
     </div>
     <div class="d-inline-block fs-5 fw-bold list-title">등록할 상영 정보</div>
     <hr class="custom-hr">
-    <form action="<%-- ${pageContext.request.contextPath }/admin/screen-info/add --%>" method="post" onsubmit="return checkValidate();">
+    <form action="${pageContext.request.contextPath }/admin/screen-info/add" method="post" onsubmit="return checkValidate();">
     <table id="info-table">
         <thead>
             <tr>

@@ -32,7 +32,12 @@
         document.getElementById("info-table").deleteRow(row.rowIndex);
     };
   
+
+  
+  //단순 텍스트를 input태그에 넣는 작업 필요
   const addTableRow = () => {
+	  
+
 		  const tbody = document.getElementById("info-table").getElementsByTagName("tbody")[0];
 		  
 		  let newRow = tbody.insertRow();
@@ -44,32 +49,149 @@
 		  let periodCell = newRow.insertCell(3);
 		  let deleteCell = newRow.insertCell(4);
 		  
-		  titleCell.innerHTML = document.getElementById("title").value;
-		  theaterCell.innetHinnerHTML = document.getElementById("theater").value;
-		  screenDayCell.innerHTML = document.getElementById("dateInput").value;
-		  periodCell.innerHTML = document.getElementById("startTime").value + " ~ " + document.getElementById("endTime").value;
-
+		  const title = document.getElementById("title");
+		  const theater = document.getElementById("theater");
+		  const screenInput = document.getElementById("dateInput");
+		  const startTime = document.getElementById("startTime");
+		  const endTime = document.getElementById("endTime");
+		  
+		  if(title.value === '') {
+			  alert('제목을 입력하세요.');
+			  title.focus();
+			  return false;
+		  }
+		  
+		  if(theater.value === '') {
+			  alert('상영관을 선택하세요.');
+			  theater.focus();
+			  return false;
+		  }
+		  if(screenInput.value === '') {
+			  alert('상영 일자를 입력하세요.');
+			  title.focus();
+			  return false;
+		  }
+		  if(startTime.value === '') {
+			  alert('시작 시간을 입력하세요.');
+			  startTime.focus();
+			  return false;
+		  }
+		  if(endTime.value === '') {
+			  alert('제목을 입력하세요.');
+			  endTime.focus();
+			  return false;
+		  }
+		  
+		  titleCell.innerHTML = title.value.split('|')[0];
+		  const titleInput = document.createElement("input");
+		  titleInput.type = "text";
+		  titleInput.name = "inputTitle";
+		  titleInput.value = title.value.split('|')[1];
+		  titleInput.hidden = true;
+		  titleCell.appendChild(titleInput);
+		  
+		  theaterCell.innerHTML = theater.value;
+		  const theaterInput = document.createElement("input");
+		  theaterInput.type = "text";
+		  theaterInput.name = "inputTheater";
+		  theaterInput.value = theater.value;
+		  theaterInput.hidden = true;
+		  theaterCell.appendChild(theaterInput);
+		  
+		  screenDayCell.innerHTML = screenInput.value;
+		  const dateInput = document.createElement("input");
+		  dateInput.type = "text";
+		  dateInput.name = "inputDate";
+		  dateInput.value = screenInput.value;
+		  dateInput.hidden = true;
+		  screenDayCell.appendChild(dateInput);
+		  
+		  periodCell.innerHTML = startTime.value + ' ~ ' + endTime.value;
+		  const startTimeInput = document.createElement("input");
+		  startTimeInput.type = "text";
+		  startTimeInput.name = "inputStartTime";
+		  startTimeInput.value = startTime.value;
+		  startTimeInput.hidden = true;
+		  periodCell.appendChild(startTimeInput);
+		  
+		  const endTimeInput = document.createElement("input");
+		  endTimeInput.type = "text";
+		  endTimeInput.name = "inputEndTime";
+		  endTimeInput.value = endTime.value;
+		  endTimeInput.hidden = true;
+		  periodCell.appendChild(endTimeInput);
+		  
+		  
 		  const deleteLink = document.createElement('a');
-        deleteLink.href = '#';
-        deleteLink.textContent = 'X';
-        deleteLink.addEventListener('click', function () {
-            deleteTableRow(newRow);
-        });
+	        deleteLink.href = '#';
+	        deleteLink.textContent = 'X';
+	        deleteLink.addEventListener('click', function () {
+	            deleteTableRow(newRow);
+	        });
         
-        deleteCell.appendChild(deleteLink);
+        	deleteCell.appendChild(deleteLink);
+        
+        title.value = '';
+        theater.value ='';
+        screenInput.value = '';
+        startTime.value = '';
+        endTime.value = '';
+        
 	}
 	
 	const checkValidate = () => {
 		const allTr = document.querySelectorAll("#info-table > tbody > tr");
 		
-		allTr.forEach(function (row, rowIndex) {
-            const cells = row.querySelectorAll('td');
-            const rowData = Array.from(cells).map(function (cell) {
-                return cell.textContent;
-            });
-            console.log(`행 ${rowIndex + 1}: [${rowData.join(', ')}]`);
-        });
-		return false;
+		if(allTr.length === 0 || allTr === undefined) {
+			alert('등록할 상영 정보를 입력해주세요.');
+			return false;
+		}
+		
+		const allTitle = document.querySelectorAll('input[name=inputTitle]');
+		allTitle.forEach(el => {
+			if(el.value === '') {
+				alert('영화제목란에 비어있는 값이 있습니다.');
+				return false;
+			}
+		});
+		
+		const allTheater = document.querySelectorAll('input[name=inputTheater]');
+		allTheater.forEach(el => {
+			if(el.value === '') {
+				alert('상영관에 비어있는 값이 있습니다.');
+				return false;
+			}
+		});
+		
+		const allInputDate = document.querySelectorAll('input[name=inputDate]');
+		allInputDate.forEach(el => {
+			if(el.value === '') {
+				alert('상영 일자에 비어있는 값이 있습니다.');
+				return false;
+			}
+		});
+		
+		const allStartTime = document.querySelectorAll('input[name=inputStartTime]');
+		allStartTime.forEach(el => {
+			if(el.value === '') {
+				alert('시작 시간에 비어있는 값이 있습니다.');
+				return false;
+			} else {
+				console.log(el.value);
+			}
+		});
+		
+		const allendTime = document.querySelectorAll('input[name=inputEndTime]');
+		allendTime.forEach(el => {
+			if(el.value === '') {
+				alert('상영관에 비어있는 값이 있습니다.');
+				return false;
+			}  else {
+				console.log(el.value);
+			}
+		});
+		
+		return true;
 	}
 	  
     
@@ -80,7 +202,7 @@
 		  const startTime = document.getElementById("startTime").value;
 		 flatpickr('#endTime', {
 	      enableTime: true,       // 시간 선택 활성화
-	      minTime: startTime, 
+	      minTime: startTime,
 	      noCalendar: true,       // 달력 비활성화
 	      dateFormat: "H:i",      // 시간 형식 설정
 	      time_24hr: true,        // 24시간 형식 사용
@@ -106,5 +228,7 @@
 		  } 
 	  });
   }
+  
+  
   
   
