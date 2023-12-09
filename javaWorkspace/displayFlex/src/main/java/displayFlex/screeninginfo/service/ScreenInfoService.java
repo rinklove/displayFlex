@@ -6,9 +6,10 @@ import java.util.List;
 
 import displayFlex.movie.vo.MovieVo;
 import displayFlex.screeninginfo.dao.ScreenInfoDao;
+import displayFlex.screeninginfo.dto.ScreenInfoDto;
 import displayFlex.screeninginfo.vo.ScreeingInfoVo;
-import displayFlex.screeninginfo.vo.ScreenInfoDto;
 import displayFlex.screeninginfo.vo.ScreeningTimeVo;
+import displayFlex.util.page.vo.PageVo;
 import test.JDBCTemplate;
 
 public class ScreenInfoService {
@@ -104,6 +105,34 @@ public class ScreenInfoService {
 		int count = infoDao.isExistScreeningInfo(screenInfoDto, con);
 		JDBCTemplate.close(con);
 		return count;
+	}
+	
+	/**
+	 * 전체 상영 정보 리스트 개수 가져오기 
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getTotalCount() throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int count = infoDao.getTotalCount(con);
+		JDBCTemplate.close(con);
+		return count;
+	}
+	
+	/**
+	 * 전체 상영 정보 리스트 가져오기
+	 * @param page
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<ScreenInfoDto> getInfoList(PageVo page) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		List<ScreenInfoDto> infoList = infoDao.getInfoList(page, con);
+		
+		JDBCTemplate.close(con);
+		return infoList;
 	}
 
 }

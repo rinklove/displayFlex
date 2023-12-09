@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import displayFlex.movie.vo.MovieVo;
+import displayFlex.screeninginfo.dto.ScreenInfoDto;
 import displayFlex.screeninginfo.vo.ScreeingInfoVo;
-import displayFlex.screeninginfo.vo.ScreenInfoDto;
 import displayFlex.screeninginfo.vo.ScreeningTimeVo;
+import displayFlex.util.page.vo.PageVo;
 import test.JDBCTemplate;
 
 public class ScreenInfoDao {
@@ -116,7 +117,7 @@ public class ScreenInfoDao {
 	 * @throws SQLException 
 	 */
 	public int addScreeningTime(ScreeningTimeVo screeningTime, Connection con) throws SQLException {
-		query = "INSERT INTO SCREENING_TIME(SCREENING_TIME_NO,  SCREENING_INFO_NO, START_TIME, END_TIME) VALUES (SEQ_SCREENING_TIME.NEXTVAL, ?, TO_TIMESTAMP(?, 'HH24:MI:SS'), TO_TIMESTAMP(?, 'HH24:MI:SS'))";
+		query = "INSERT INTO SCREENING_TIME(SCREENING_TIME_NO,  SCREENING_INFO_NO, START_TIME, END_TIME) VALUES (SEQ_SCREENING_TIME.NEXTVAL, ?, TO_TIMESTAMP(?, 'YYYY/MM/DD HH24:MI:SS'), TO_TIMESTAMP(?, 'YYYY/MM/DD HH24:MI:SS'))";
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
 
@@ -155,17 +156,16 @@ public class ScreenInfoDao {
 	 * @throws SQLException 
 	 */
 	public int isExistScreeningInfo(ScreenInfoDto screenInfoDto, Connection con) throws SQLException {
-		query = "SELECT COUNT(ST.SCREENING_TIME_NO) FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE SI.MOVIE_NO = ? AND SI.THEATER_NO = ? AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ? AND (((TO_CHAR(ST.START_TIME, 'HH24:MI') < ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') > ?) OR (TO_CHAR(ST.START_TIME, 'HH24:MI') < ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') > ?) OR(TO_CHAR(ST.START_TIME, 'HH24:MI') > ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') < ?)))";
+		query = "SELECT COUNT(ST.SCREENING_TIME_NO) FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE SI.THEATER_NO = ? AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ? AND (((TO_CHAR(ST.START_TIME, 'HH24:MI') < ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') > ?) OR (TO_CHAR(ST.START_TIME, 'HH24:MI') < ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') > ?) OR(TO_CHAR(ST.START_TIME, 'HH24:MI') > ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') < ?)))";
 		PreparedStatement pstmt = con.prepareStatement(query);
-		pstmt.setString(1, screenInfoDto.getTitle());
-		pstmt.setString(2, screenInfoDto.getTheater());
-		pstmt.setString(3, screenInfoDto.getDate());
+		pstmt.setString(1, screenInfoDto.getTheater());
+		pstmt.setString(2, screenInfoDto.getDate());
+		pstmt.setString(3, screenInfoDto.getStartTime());
 		pstmt.setString(4, screenInfoDto.getStartTime());
-		pstmt.setString(5, screenInfoDto.getStartTime());
+		pstmt.setString(5, screenInfoDto.getEndTime());
 		pstmt.setString(6, screenInfoDto.getEndTime());
-		pstmt.setString(7, screenInfoDto.getEndTime());
-		pstmt.setString(8, screenInfoDto.getStartTime());
-		pstmt.setString(9, screenInfoDto.getEndTime());
+		pstmt.setString(7, screenInfoDto.getStartTime());
+		pstmt.setString(8, screenInfoDto.getEndTime());
 		
 		ResultSet rs = pstmt.executeQuery();
 		int count = 0;
@@ -176,6 +176,47 @@ public class ScreenInfoDao {
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);
 		return count;
+	}
+
+	/**
+	 * 전체 상영정보 개수 가져오기
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getTotalCount(Connection con) throws SQLException {
+		query = "SELECT COUNT(SCREENING_TIME_NO) FROM SCREENING_TIME WHERE END_TIME > SYSDATE";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		
+		ResultSet rs = pstmt.executeQuery();
+		int totalCount = 0;
+		if(rs.next()) {
+			totalCount = rs.getInt(1);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return totalCount;
+	}
+
+	/**
+	 * 전체 상영정보 출력
+	 * @param page
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<ScreenInfoDto> getInfoList(PageVo page, Connection con) throws SQLException {
+		query ="SELECT A.RNUM , A.SCREENING_TIME_NO , A.THEATER_NO , A.START_DATE , A.START_TIME , A.END_TIME , M.MOVIE_NAME FROM( SELECT ROW_NUMBER() OVER(ORDER BY ST.END_TIME ASC) RNUM , ST.SCREENING_TIME_NO , SI.MOVIE_NO , SI.THEATER_NO , TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') START_DATE , TO_CHAR(ST.START_TIME, 'HH24:MI') START_TIME , TO_CHAR(ST.END_TIME, 'HH24:MI') END_TIME FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE ST.END_TIME > SYSDATE ) A INNER JOIN MOVIE M ON A.MOVIE_NO = M.MOVIE_NO WHERE A.RNUM BETWEEN ? AND ? ORDER BY 1";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, page.getStartRow());
+		pstmt.setInt(2, page.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		List<ScreenInfoDto> infoList = new ArrayList<ScreenInfoDto>();
+		
+//		while(rs.next()) {
+//			rs.getString()
+//		}
+		return null;
 	}
 
 }
