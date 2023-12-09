@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import displayFlex.ticketing.service.TicketSelectService;
 
-/**
- * Servlet implementation class TicketMovieImageController
- */
 @WebServlet("/ticket/select/image")
 public class TicketMovieImageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

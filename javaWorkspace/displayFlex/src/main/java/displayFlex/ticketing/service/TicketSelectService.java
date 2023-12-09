@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import displayFlex.ticketing.dao.TicketSelectDao;
+import displayFlex.ticketing.vo.ScreeningDateVo;
 import displayFlex.ticketing.vo.SelectMovieVo;
 import test.JDBCTemplate;
 
@@ -35,17 +36,23 @@ public class TicketSelectService {
 		return movieImgUrl;
 	}
 
-//	public List<SelectMovieVo> getScreenDateList() throws Exception {
-//		Connection conn = JDBCTemplate.getConnection();
-//		
-//		TicketSelectDao dao = new TicketSelectDao();
-//		
-//		List<SelectMovieVo> screenDateList = (List<SelectMovieVo>) dao.getScreenDateList(conn); 
-//		
-//		JDBCTemplate.close(conn);
-//		
-//		return screenDateList;
-//	}
+	public List<ScreeningDateVo> getScreeningList(String movieNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		TicketSelectDao dao = new TicketSelectDao();
+		
+		List<ScreeningDateVo> screeningList = (List<ScreeningDateVo>) dao.getScreeningList(conn, movieNo); 
+		
+		JDBCTemplate.close(conn);
+		
+		return screeningList;
+	}
+
+	public List<ScreeningDateVo> getScreeningTimeList(String movieNo) {
+		
+
+		return null;
+	}
 
 	
 	
