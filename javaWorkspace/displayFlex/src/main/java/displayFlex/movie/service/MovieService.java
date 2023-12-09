@@ -168,6 +168,31 @@ public class MovieService {
 		} else {
 			JDBCTemplate.rollback(con);
 		}
+		
+		if(result == 1) {
+			if(newMovie.getGenre() != null) {
+				String[] gnereSplit = newMovie.getGenre().split(",");
+				for(String s : gnereSplit) {
+					String genre = movieDao.getExistingGenres(s, con);		
+					
+					if(genre == null) {
+						result = movieDao.addGenre(s,con);
+						
+						if(result == 1) {
+							JDBCTemplate.commit(con);
+							genre = movieDao.getExistingGenres(s, con);		
+						}
+						else JDBCTemplate.rollback(con);
+					} 
+					result = movieDao.addGenreCate(genre, recentMovieNo, con);
+					
+					if(result == 1) {
+						JDBCTemplate.commit(con);
+					}
+					else JDBCTemplate.rollback(con);
+				}				
+			}
+		}
 
 		JDBCTemplate.close(con);
 		return result;

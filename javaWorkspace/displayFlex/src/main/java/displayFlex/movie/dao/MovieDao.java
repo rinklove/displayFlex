@@ -401,6 +401,58 @@ public class MovieDao {
 		return result;
 	}
 
+	/**
+	 * 기존의 장르가 있는 지
+	 * @param s
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public String getExistingGenres(String s, Connection con) throws SQLException {
+		query = "SELECT GENRE_CATE_NO FROM GENRE_CATEGORY WHERE CATE_NAME LIKE '%' || ? || '%'"; 
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, s);
+		
+		ResultSet rs = pstmt.executeQuery();
+		String genre = null;
+		if(rs.next()) {
+			genre = rs.getString(1);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return genre;
+	}
+
+	public int addGenre(String s, Connection con) throws SQLException {
+		query = "INSERT INTO GENRE_CATEGORY(GENRE_CATE_NO, CATE_NAME) VALUES (SEQ_GENRE_CATEGORY.NEXTVAL, ?)";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, s);
+		
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
+	/**
+	 * 조건 검색용 테이블에 장르 넣기
+	 * @param s
+	 * @param recentMovieNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int addGenreCate(String genre, String recentMovieNo, Connection con) throws SQLException {
+		query = "INSERT INTO MOVIE_CATE(MOVIE_CATE_NO, MOVIE_NO, GENRE_CATE_NO) VALUES (SEQ_MOVIE_CATE.NEXTVAL, ?, ?)";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, recentMovieNo);
+		pstmt.setString(2, genre);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
 	
 	
 
