@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-	<form action="/cinema/coupon/admincoupon" method="post"
+	<form action="/cinema/admin/coupon/add" method="post"
 		entype="multipart/form-data">
 		<div class="product">
 			<div></div>
@@ -30,41 +30,43 @@
 						<div id="description">
 							<div style="font-size: xx-large;">쿠폰선택</div>
 							<span> 
-								<select name="할인종류" id="diskind" >
+								<select name="s_type" id="diskind" >
 										<option value=""  style="color: gray;" >쿠폰을 선택해주세요.</option>
-										<option value="VIP할인쿠폰">VIP할인쿠폰</option>
-										<option value="어린이할인쿠폰">어린이할인쿠폰</option>
-										<option value="경로할인쿠폰">경로할인쿠폰</option>
-										<option value="장애인할인쿠폰">장애인할인쿠폰</option>				
+										<option value="1">VIP할인쿠폰</option>
+										<option value="2">어린이할인쿠폰</option>
+										<option value="3">경로할인쿠폰</option>
+										<option value="4">장애인할인쿠폰</option>	
+										<option value="5">스토어할인쿠폰</option>				
 								</select>
 							</span>		
 							<div style="font-size: xx-large;">할인금액</div>
 							<span> 
-								<select name="할인종류" id="diskind" >
+								<select name="s_discount" id="diskind" >
 										<option value=""  style="color: gray;" >할인금액</option>
-										<option value="VIP할인쿠폰">VIP전액(8000원)</option>
-										<option value="VIP할인쿠폰">VIP반값(4000원)</option>
-										<option value="어린이할인쿠폰">어린이할인(2000원)</option>
-										<option value="경로할인쿠폰">경로할인(1000원)</option>
-										<option value="장애인할인쿠폰">장애인할인(1000원)</option>				
+										<option value="8000">VIP전액(8000원)</option>
+										<option value="4000">VIP반값(4000원)</option>
+										<option value="2000">어린이할인(2000원)</option>
+										<option value="1000">경로할인(1000원)</option>
+										<option value="1000">장애인할인(1000원)</option>	
+										<option value="1000">스토어할인(1000원)</option>			
 								</select>
 							</span>
 							<div style="font-size: xx-large;">쿠폰정보</div>
 							<div>
-								<input style="width: 10em; font-size: 15px;"type="text">
+								<input style="width: 10em; font-size: 15px;"type="text" name="i_name">
 							</div>		
 							<div style="font-size: xx-large;">쿠폰발행일자</div>
 							<div>
-								<input style="width: 10em; font-size: 15px;"type="date" id="couponUsageStartDate" name="couponUsageStartDate" value="2023-12-01">
+								<input style="width: 10em; font-size: 15px;"type="date" name="i_CreationDate" value="2023-12-01">
 							</div>
 							<div style="font-size: xx-large;">쿠폰사용기간</div>
 							<div>
-								발행일부터<input style="width: 10em; font-size: 15px;"type="date" id="couponUsageStartDate" name="couponUsageStartDate" value="2023-12-01">까지
+								발행일부터<input style="width: 10em; font-size: 15px;"type="date" name="i_ValidPeriod" value="2023-12-01">까지
 							</div>
                             
 							<div style="font-size: xx-large;">쿠폰안내</div>
 							<div>
-								<textarea id="productDetail" cols="50" rows="2"
+								<textarea name="t_info" cols="50" rows="2"
 									placeholder="쿠폰써라 "></textarea>
 							</div>
 							
@@ -73,7 +75,7 @@
 				</div>
 				<div id="adminButton">
 					<div id="enroll">
-						<input type="submit" value="등록">
+						<input type="submit" value="등록" >
 					</div>
 					<div id="delete">
 						<button>취소</button>
