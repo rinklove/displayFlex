@@ -35,11 +35,11 @@
  const checkExistInfo = () => {
 	 
 	 
-	 const title = document.getElementById('title').value;
-	 const theater = document.getElementById('theater').value;
-	 const dateInput = document.getElementById('dateInput').value;
-	 const startTime = document.getElementById('startTime').value;
-	 const endTime = document.getElementById('endTime').value;
+	 const title = encodeURIComponent(document.getElementById('title').value);
+	 const theater = encodeURIComponent(document.getElementById('theater').value);
+	 const dateInput = encodeURIComponent(document.getElementById('dateInput').value);
+	 const startTime = encodeURIComponent(document.getElementById('startTime').value);
+	 const endTime = encodeURIComponent(document.getElementById('endTime').value);
 	 
 	  if(title === '') {
 			  alert('제목을 입력하세요.');
@@ -68,9 +68,18 @@
 			  return false;
 		  }
 		  
-	 fetch(`http://localhost:9002/cinema/admin/screen-info-check?title=${title}&theater=${theater}&dateInput=${dateInput}&startTime=${startTime}&endTime=${endTime}`)
-	 .then(() => {
-		 addTableRow();
+	 fetch(`http://localhost:9002/cinema/admin/screen-info/check?title=${title}&theater=${theater}&dateInput=${dateInput}&startTime=${startTime}&endTime=${endTime}`)
+	 .then((res) => {
+		 if(!res.ok) {
+			 throw new Error();
+		 }
+		 return res.text();
+	 })
+	 .then((data) => {
+		 const check = confirm(data);
+		 if(check) {
+		 	addTableRow();			 
+		 }
 	 })
 	 .catch((err) => {
 		 alert('상영 시간이 겹치는 정보입니다.');

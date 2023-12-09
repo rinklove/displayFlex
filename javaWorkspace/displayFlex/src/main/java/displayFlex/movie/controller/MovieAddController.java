@@ -105,7 +105,7 @@ public class MovieAddController extends HttpServlet {
 			
 			MovieVo newMovie = new MovieVo(null, title, actor, story, rate, director, screenGrade, poster, runningTime, releaseDate, null, null, genre, nation, mainImage);
 			int result = movieService.addMovie(newMovie, stillImageUrl);	
-		
+			
 			if(result == 1) {
 				request.getSession().setAttribute("alertMsg", "영화가 등록 되었습니다.");
 				response.sendRedirect(request.getContextPath()+"/movie/list?pno=1");
