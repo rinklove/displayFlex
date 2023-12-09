@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import displayFlex.screeninginfo.dto.ScreenInfoDto;
 import displayFlex.screeninginfo.service.ScreenInfoService;
-import displayFlex.screeninginfo.vo.ScreenInfoDto;
 
 
 @WebServlet("/admin/screen-info/check")
@@ -34,12 +34,17 @@ public class CheckInfoExistController extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		try {
-			String title = request.getParameter("title");
+			String title = request.getParameter("title").substring(request.getParameter("title").indexOf("|")+1);
 			String theater = request.getParameter("theater");
 			String date = request.getParameter("dateInput");
 			String startTime = request.getParameter("startTime");
 			String endTime = request.getParameter("endTime");
 			
+			System.out.println("title = " + title);
+			System.out.println("theater = " + theater);
+			System.out.println("dateInput = " + date);
+			System.out.println("startTime = " + startTime);
+			System.out.println("endTime = " + endTime);
 			int count = infoService.isExistScreeningInfo(new ScreenInfoDto(title, theater, date, startTime, endTime));
 			
 			if(count != 0) {

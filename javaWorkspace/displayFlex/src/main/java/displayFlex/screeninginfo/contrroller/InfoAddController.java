@@ -70,7 +70,7 @@ public class InfoAddController extends HttpServlet {
 				System.out.println("endTime = "+endTime[i]);
 				
 				infoList.add(new ScreeingInfoVo(title[i], theater[i], date[i]));
-				timeList.add(new ScreeningTimeVo(null, startTime[i], endTime[i]));
+				timeList.add(new ScreeningTimeVo(null, date[i] +" "+startTime[i], date[i] +" "+endTime[i]));
 			}
 			
 			int result = infoService.addScreeningInfo(infoList, timeList);
