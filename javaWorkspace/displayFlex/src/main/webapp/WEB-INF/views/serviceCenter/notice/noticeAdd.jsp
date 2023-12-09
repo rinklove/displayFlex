@@ -38,7 +38,7 @@
 	                        <h3>* 필수입력</h3>
 	                    </div>
 	                </div>
-	                <table id="tbl_form" summary="문의내용작성 테이블">
+	                <table id="tbl_form">
 	                    <colgroup>
 	                        <col style="width: 15%;">
 	                        <col style="width: auto;">
@@ -89,8 +89,6 @@
 	                <div id="btn_wrap">
 	                    <input class="cancle" type="submit" value="취소">
 	                    <input class="ok" type="submit" value="확인">
-	                    <!-- <button class="cancle">취소</button>
-	                    <button class="ok">확인</button> -->
 	                </div>
 	            </div>
 	            
