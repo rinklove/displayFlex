@@ -179,19 +179,19 @@ header > nav {
 
 #time{
     display: none;
-    grid-template-rows: 41.25px 1fr 1fr 1fr;
+    grid-template-rows: 41.25px 1fr 1fr 1fr 1fr;
     grid-row-gap: 10px;
     max-height: 483.25px;
     max-width: 380px;
 } 
 
-#theater1, #theater2, #theater3 {
+#theater1, #theater2, #theater3, #theater4 {
 	border: 1px solid #ab9e9e;
     background-color: #f2f2f2;
     border-radius: 10px;
     box-shadow: 2px 2px 2px gray;
     display: grid;
-    grid-template-rows: 0.8fr 1fr 1fr;
+/*    grid-template-rows: 0.8fr 1fr 1fr;*/
 }
 
 #arrow1{
@@ -230,25 +230,25 @@ header > nav {
 }
 
 
-#theater1 > div:first-child, #theater2 > div:first-child, #theater3 > div:first-child {
+#theater1 > div:first-child, #theater2 > div:first-child, #theater3 > div:first-child, #theater4 > div:first-child {
     border-bottom: 1px solid #ab9e9e;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#theater1 > div:first-child > span, #theater2 > div:first-child > span, #theater3 > div:first-child > span{
+#theater1 > div:first-child > span, #theater2 > div:first-child > span, #theater3 > div:first-child > span, #theater4 > div:first-child > span{
     font-weight: bold;
 }
 
-#theater1 > div:nth-of-type(2), #theater2 > div:nth-of-type(2), #theater3 > div:nth-of-type(2) {
+#theater1 > div:nth-of-type(2), #theater2 > div:nth-of-type(2), #theater3 > div:nth-of-type(2), #theater4 > div:nth-of-type(2) {
     margin-bottom: 5px;
 }
-#theater1 > div:nth-of-type(3), #theater2 > div:nth-of-type(3), #theater3 > div:nth-of-type(3) {
+#theater1 > div:nth-of-type(3), #theater2 > div:nth-of-type(3), #theater3 > div:nth-of-type(3), #theater4 > div:nth-of-type(3) {
     margin-top: 5px;
 }   
 
-.theater1_time, .theater2_time, .theater3_time {
+.theater1_time, .theater2_time, .theater3_time, .theater4_time  {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
@@ -260,7 +260,7 @@ header > nav {
     text-align: center;
 }
 
-.theater1_time > div, .theater2_time > div, .theater3_time > div {
+.theater1_time > div, .theater2_time > div, .theater3_time > div, .theater4_time > div {
     border-radius: 10px;
     background-color:#c3c3c3;
     position: relative;
@@ -272,11 +272,11 @@ header > nav {
 
 
 
-.theater1_time > div:hover, .theater2_time > div:hover, .theater3_time > div:hover {
+.theater1_time > div:hover, .theater2_time > div:hover, .theater3_time > div:hover, .theater4_time > div:hover {
     font-weight: bold;
 }
 
-.theater1_time > div > button, .theater2_time > div > button, .theater3_time > div > button {
+.theater1_time > div > button, .theater2_time > div > button, .theater3_time > div > button, .theater4_time > div > button {
     position: relative;
 }
 
@@ -422,6 +422,7 @@ header > nav {
 #ticket-payButton {
 	border: none;
     margin-right: 200px;
+    
 }
 
 #ticket-payButton > form > button {
@@ -430,7 +431,7 @@ header > nav {
     height: 105px;
     border-radius: 30px;
     background: #625F5F;
-    display: flex;
+    display: none;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;

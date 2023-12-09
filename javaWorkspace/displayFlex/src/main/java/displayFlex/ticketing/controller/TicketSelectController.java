@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import displayFlex.ticketing.service.TicketSelectService;
+import displayFlex.ticketing.vo.ScreeningDateVo;
 import displayFlex.ticketing.vo.SelectMovieVo;
 
 @WebServlet("/ticket/select")
@@ -26,16 +27,15 @@ public class TicketSelectController extends HttpServlet{
 
 			TicketSelectService tss = new TicketSelectService();
 			List<SelectMovieVo> movieList = tss.getMovieList();
-
-			
-			req.setAttribute("movieList", movieList);
-			
+//			List<ScreeningVo> screeningList = tss.getScreeningList();
+//			
+//			req.setAttribute("screeningList", screeningList);
+			req.setAttribute("movieList", movieList);			
 			req.getRequestDispatcher("/WEB-INF/views/ticketing/ticketSelect.jsp").forward(req, resp);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
-	
-	
+
 }

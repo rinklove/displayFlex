@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 	List<SelectMovieVo> movieList = (List<SelectMovieVo>)request.getAttribute("movieList");
 	
@@ -19,12 +21,8 @@
     
 </head>
 <body>
+     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<!--     <header> -->
-<!--         <nav>     -->
-            <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<!--         </nav> -->
-<!--     </header> -->
     <main>
         <section id="section1">
             <div id="ticketing1-back">
@@ -35,26 +33,53 @@
                         <span class="text">영화</span>
                     </div>
                     <ul id="movieList">
-                        <% for(int i = 0; i < movieList.size(); i++){
-                        	String movieName = movieList.get(i).getMovieName();
-                        	int movieNo = Integer.parseInt(movieList.get(i).getMovieNo());
-                        	String movieImage = movieList.get(i).getMovieImage();
-                        	String screenGradeNo = movieList.get(i).getScreenGradeNo();
-                        	String ratedImgSrc = "../resources/image/ticketing/ratedAll.png";
-                        	switch(screenGradeNo){
-                        	case "2" : ratedImgSrc = "../resources/image/ticketing/rated12.png"; break;
-                        	case "3" : ratedImgSrc = "../resources/image/ticketing/rated15.png"; break;
-                        	case "4" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break;
-                        	case "5" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break;
-                        	}
-                        %>
-                        <li class="ticketingMovie">
-                            <button type="button" id="movieSelect" onclick="changeMovieInfo('<%=i+1%>');">
-                        		<img src="<%=ratedImgSrc%>" alt="이용가">
-                       			<span class="text" id="movieNo<%=movieNo%>" value="<%=movieNo%>"><%=movieName%></span>
-                            </button>
-                        </li>
-                        <% } %>
+                    <c:forEach var="movie" items="${movieList}" varStatus="status">
+					    <c:set var="movieName" value="${movie.movieName}" />
+					    <c:set var="movieNo" value="${movie.movieNo}" />
+					    <c:set var="movieImage" value="${movie.movieImage}" />
+					    <c:set var="screenGradeNo" value="${movie.screenGradeNo}" />
+
+					    <c:set var="ratedImgSrc" value="../resources/image/ticketing/ratedAll.png" />
+					    <c:choose>
+					        <c:when test="${screenGradeNo eq '2'}">
+				            	<c:set var="ratedImgSrc" value="../resources/image/ticketing/rated12.png" />
+       						</c:when>
+        						<c:when test="${screenGradeNo eq '3'}">
+            				<c:set var="ratedImgSrc" value="../resources/image/ticketing/rated15.png" />
+					        </c:when>
+					        <c:when test="${screenGrad0eNo eq '4' or screenGradeNo eq '5'}">
+					            <c:set var="ratedImgSrc" value="../resources/image/ticketing/rated19.png" />
+					        </c:when>
+    					</c:choose>
+
+					    <li class="ticketingMovie">
+					        <button type="button" id="movieSelect" onclick="changeMovieInfo('${status.index + 1}')">
+					            <img src="${ratedImgSrc}" alt="이용가">
+					            <span class="text" id="movieNo${movieNo}" value="${movieNo}">${movieName}</span>
+					        </button>
+					    </li>
+					</c:forEach>
+<!--                     상영중인 영화리스트..(수정필요)  -->
+<%--                         <% for(int i = 0; i < movieList.size(); i++){ --%>
+<!-- //                         	String movieName = movieList.get(i).getMovieName(); -->
+<!-- //                         	int movieNo = Integer.parseInt(movieList.get(i).getMovieNo()); -->
+<!-- //                         	String movieImage = movieList.get(i).getMovieImage(); -->
+<!-- //                         	String screenGradeNo = movieList.get(i).getScreenGradeNo(); -->
+<!-- //                         	String ratedImgSrc = "../resources/image/ticketing/ratedAll.png"; -->
+<!-- //                         	switch(screenGradeNo){ -->
+<!-- //                         	case "2" : ratedImgSrc = "../resources/image/ticketing/rated12.png"; break; -->
+<!-- //                         	case "3" : ratedImgSrc = "../resources/image/ticketing/rated15.png"; break; -->
+<!-- //                         	case "4" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break; -->
+<!-- //                         	case "5" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break; -->
+<!-- //                         	} -->
+<%--                         %> --%>
+<!--                         <li class="ticketingMovie"> -->
+<%--                             <button type="button" id="movieSelect" onclick="changeMovieInfo('<%=i+1%>');"> --%>
+<%--                         		<img src="<%=ratedImgSrc%>" alt="이용가"> --%>
+<%--                        			<span class="text" id="movieNo<%=movieNo%>" value="<%=movieNo%>"><%=movieName%></span> --%>
+<!--                             </button> -->
+<!--                         </li> -->
+<%--                         <% } %> --%>
                     </ul>
                 </div>
                 <div id="arrow1">
@@ -68,14 +93,7 @@
                         <span class="text">날짜</span>
                     </div>
                     <ul id="dateList">
-                        <% for(int i = 0; i < 100; i++){ %>
-                        <li class="ticketingDate">
-                            <button type="button" onclick="changeDateInfo('<%=i%>')">
-                                <span class="text" id="movieDate<%=i%>">2023-12-<%= i %></span>
-                            </button>
-                
-                        </li>               
-                        <% } %>
+<!--                     	상영 날짜 리스트 들어가는곳 -->
                     </ul>
                 </div>
                 <div id="arrow2">
@@ -94,8 +112,6 @@
                             <div><button class="selectTime">시간1</button></div>
                             <div><button class="selectTime">시간2</button></div>
                             <div><button class="selectTime">시간3</button></div>
-                        </div>
-                        <div class="theater1_time">
                             <div><button class="selectTime">시간4</button></div>
                             <div><button class="selectTime">시간5</button></div>
                             <div><button class="selectTime">시간6</button></div>
@@ -107,8 +123,6 @@
                             <div><button class="selectTime">시간1</button></div>
                             <div><button class="selectTime">시간2</button></div>
                             <div><button class="selectTime">시간3</button></div>
-                        </div>
-                        <div class="theater2_time">
                             <div><button class="selectTime">시간4</button></div>
                             <div><button class="selectTime">시간5</button></div>
                             <div><button class="selectTime">시간6</button></div>
@@ -117,11 +131,20 @@
                     <div id="theater3">
                         <div>3관</div>
                         <div class="theater3_time">
+                            <div><button class="selectTime">시간1</button></div>
+                            <div><button class="selectTime">시간2</button></div>
+                            <div><button class="selectTime">시간3</button></div>
                             <div><button class="selectTime">시간4</button></div>
                             <div><button class="selectTime">시간5</button></div>
                             <div><button class="selectTime">시간6</button></div>
                         </div>
-                        <div class="theater3_time">
+                    </div>
+                    <div id="theater4">
+                        <div>4관</div>
+                        <div class="theater4_time">
+                            <div><button class="selectTime">시간1</button></div>
+                            <div><button class="selectTime">시간2</button></div>
+                            <div><button class="selectTime">시간3</button></div>
                             <div><button class="selectTime">시간4</button></div>
                             <div><button class="selectTime">시간5</button></div>
                             <div><button class="selectTime">시간6</button></div>
@@ -259,7 +282,7 @@
         </div>
         <div id="ticket-payButton">
             <form action="/cinema/ticket/payment" method="get">
-                <button type="submit">
+                <button type="submit" id="selectComplete">
                     <i class="bi bi-check-circle-fill"></i>
                     <span>선택 완료</span>
                 </button>
