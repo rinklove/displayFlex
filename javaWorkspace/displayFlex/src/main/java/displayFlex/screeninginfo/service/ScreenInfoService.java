@@ -134,5 +134,23 @@ public class ScreenInfoService {
 		JDBCTemplate.close(con);
 		return infoList;
 	}
+	
+	/**
+	 * 상영 정보 삭제
+	 * @param infoNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteByNo(String infoNo) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = infoDao.deleteByNo(infoNo, con);
+		
+		if(result ==1) JDBCTemplate.commit(con);
+		else JDBCTemplate.rollback(con);
+		
+		JDBCTemplate.close(con);
+		return result;
+	}
 
 }

@@ -206,17 +206,43 @@ public class ScreenInfoDao {
 	 * @throws SQLException 
 	 */
 	public List<ScreenInfoDto> getInfoList(PageVo page, Connection con) throws SQLException {
-		query ="SELECT A.RNUM , A.SCREENING_TIME_NO , A.THEATER_NO , A.START_DATE , A.START_TIME , A.END_TIME , M.MOVIE_NAME FROM( SELECT ROW_NUMBER() OVER(ORDER BY ST.END_TIME ASC) RNUM , ST.SCREENING_TIME_NO , SI.MOVIE_NO , SI.THEATER_NO , TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') START_DATE , TO_CHAR(ST.START_TIME, 'HH24:MI') START_TIME , TO_CHAR(ST.END_TIME, 'HH24:MI') END_TIME FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE ST.END_TIME > SYSDATE ) A INNER JOIN MOVIE M ON A.MOVIE_NO = M.MOVIE_NO WHERE A.RNUM BETWEEN ? AND ? ORDER BY 1";
+		query ="SELECT A.RNUM , A.SCREENING_TIME_NO , A.THEATER_NO, A.START_DATE , A.START_TIME , A.END_TIME , M.MOVIE_NAME FROM( SELECT ROW_NUMBER() OVER(ORDER BY ST.END_TIME ASC) RNUM , ST.SCREENING_TIME_NO , SI.MOVIE_NO , SI.THEATER_NO , TO_CHAR(SI.START_DATE, 'YYYY\"년 \"MM\"월 \"DD\"일\"') START_DATE , TO_CHAR(ST.START_TIME, 'HH24:MI') START_TIME , TO_CHAR(ST.END_TIME, 'HH24:MI') END_TIME FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE ST.END_TIME > SYSDATE ) A INNER JOIN MOVIE M ON A.MOVIE_NO = M.MOVIE_NO WHERE A.RNUM BETWEEN ? AND ? ORDER BY 1";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setInt(1, page.getStartRow());
 		pstmt.setInt(2, page.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		List<ScreenInfoDto> infoList = new ArrayList<ScreenInfoDto>();
 		
-//		while(rs.next()) {
-//			rs.getString()
-//		}
-		return null;
+		while(rs.next()) {
+			String screeningTimeNo = rs.getString("SCREENING_TIME_NO");
+			String title = rs.getString("MOVIE_NAME");
+			String theaterNo = rs.getString("THEATER_NO");
+			String startDate = rs.getString("START_DATE");
+			String startTime = rs.getString("START_TIME");
+			String endTime = rs.getString("END_TIME");
+			
+			infoList.add(new ScreenInfoDto(screeningTimeNo, title, theaterNo, startDate, startTime, endTime));
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return infoList;
+	}
+
+	/**
+	 * 상영정보 삭제
+	 * @param infoNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteByNo(String infoNo, Connection con) throws SQLException {
+		query = "DELETE FROM SCREENING_TIME WHERE SCREENING_TIME_NO = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, infoNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
 	}
 
 }
