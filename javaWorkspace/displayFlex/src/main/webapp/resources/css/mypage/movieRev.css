@@ -1,0 +1,78 @@
+body {
+    display: grid;
+    justify-items: center;
+  }
+
+  .container {
+	background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1200px;
+    height: 900px;
+    text-align: center;
+    position: relative;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .main {
+	display: grid;
+    grid-template-rows: 75px 50px 150px 500px 75px;
+    width: 1000px;
+    align-items: center;
+    justify-items: start;
+  }
+
+  .main-first {
+    width: 1000px;
+    font-weight: bold;
+    font-size: 28px;
+    color: gray;
+    border-bottom : 3px solid #800020;
+    text-align: left;
+  }
+
+  .main-second{
+    font-size: 18px;
+    color: gray;
+    font-weight: bolder;
+  }
+
+  .main-third {
+	border: 1px solid gray;
+    background-color: lightgray;
+    width: 1000px;
+    height: 150px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr;
+    align-items: center;
+  }
+  
+  .main-third-t1 {
+	  font-size: 20px;
+	  font-weight: bold;
+	  color: gray;
+  }
+  
+   .main-third-t2 {
+	  font-size: 20px;
+	  font-weight: bold;
+	  color: gray;
+  }
+  
+  .main-third-t2 > button {
+	 margin: 5px;
+	 width: 50px;
+  }
+  
+  .main-third-t3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
+  }
