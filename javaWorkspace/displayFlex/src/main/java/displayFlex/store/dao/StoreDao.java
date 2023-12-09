@@ -75,5 +75,54 @@ public class StoreDao {
 	
 	}
 
+	public StoreVo storeMenuList(Connection conn, String cate) throws Exception{
+
+		//SQL
+		String sql = "SELECT P.PRODUCT_NO , C.CATE_NAME CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.CATE_NAME LIKE ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, cate);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		StoreVo vo = null;
+		while(rs.next()) {
+			
+			String productNo = rs.getString("PRODUCT_NO");
+			String category = rs.getString("CATEGORY");
+			String memberNo = rs.getString("MEMBER_NO");
+			String image = rs.getString("IMAGE");
+			String title = rs.getString("TITLE");
+			String price = rs.getString("PRICE");
+			String productElement = rs.getString("PRODUCT_ELEMENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String delYn = rs.getString("DEL_YN");
+			String shortDescription = rs.getString("SHORT_DESCRIPTION");
+			
+			vo= new StoreVo();
+			vo.setProductNo(productNo);
+			vo.setCategory(category);
+			vo.setMemberNo(memberNo);
+			vo.setImage(image);
+			vo.setTitle(title);
+			vo.setPrice(price);
+			vo.setProductElement(productElement);
+			vo.setEnrollDate(enrollDate);
+			vo.setDelYn(delYn);
+			vo.setShortDescription(shortDescription);
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return vo;
+	}
+
 
 }
+
+
+
+
+
+

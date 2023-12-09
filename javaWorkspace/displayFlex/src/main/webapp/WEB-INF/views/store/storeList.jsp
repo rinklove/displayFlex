@@ -4,9 +4,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="/cinema/resources/css/store/storeList.css">
-<script defer src="/cinema/resources/js/store/storeList.js"></script>
+<script src="/cinema/resources/js/store/storeList.js"></script>
 <%
 	List<StoreVo> storeVoList2 = (List<StoreVo>)request.getAttribute("storeVoList2");
+	List<StoreVo> storeVoList = (List<StoreVo>)request.getAttribute("storeVoList");
 %>
 
 <!DOCTYPE html>
@@ -31,12 +32,7 @@
 			</div>
 			<div id="smallMenu">
 				<c:forEach items="${storeVoList2}" var="vo">
-				<div><button onclick="handleMenu();"><span>${vo.category}</span></button></div>
-				<!-- <div><button onclick="handleMenu();"><span>기프트카드</span></button></div>
-				<div><button onclick="handleMenu();"><span>콤보</span></button></div>
-				<div><button onclick="handleMenu();"><span>팝콘</span></button></div>
-				<div><button onclick="handleMenu();"><span>음료</span></button></div>
-				<div><button onclick="handleMenu();"><span>스낵</span></button></div> -->
+				<div><button><span>${vo.category}</span></button></div>
 				</c:forEach>
 			</div>
 			<div class="itemPoto">
