@@ -1,7 +1,9 @@
 package displayFlex.store.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import displayFlex.store.dao.StoreDao;
 import displayFlex.store.vo.StoreVo;
@@ -41,6 +43,26 @@ public class StoreService {
 		JDBCTemplate.close(conn);
 		return storeVoList;
 	
+	}
+
+	public Map<String, Object> storeMenuList(String cate) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		StoreDao dao = new StoreDao();
+		StoreVo vo = dao.storeMenuList(conn, cate);
+		
+		//tx
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vo", vo);
+		
+		return map;
 	}
 
 }//class
