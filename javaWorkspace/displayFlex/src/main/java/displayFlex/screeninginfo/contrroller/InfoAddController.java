@@ -80,7 +80,7 @@ public class InfoAddController extends HttpServlet {
 			}
 			
 			request.getSession().setAttribute("alertMsg", "상영 정보를 등록하셨습니다.");
-			response.sendRedirect(request.getContextPath()+"/admin/screen-info/list");
+			response.sendRedirect(request.getContextPath()+"/admin/screen-info/list?pno=1");
 		} catch(Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("alertMsg", "상영 정보 등록에 실패하셨습니다.");
