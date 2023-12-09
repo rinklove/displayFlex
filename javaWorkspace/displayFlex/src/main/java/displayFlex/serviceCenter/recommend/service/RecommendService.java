@@ -86,4 +86,28 @@ public class RecommendService {
 		
 	}
 
+	//상영요청 작성
+	public int write(RecommendVo vo) throws Exception {
+		
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		RecommendDao dao = new RecommendDao();
+		int result = dao.write(conn, vo);
+		
+		// tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return result;
+			
+	}
+
 }

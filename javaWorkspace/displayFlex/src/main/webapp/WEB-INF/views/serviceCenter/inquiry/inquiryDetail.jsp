@@ -1,11 +1,22 @@
+<%@page import="displayFlex.serviceCenter.inquiry.vo.InquiryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	InquiryVo vo = (InquiryVo) request.getAttribute("vo");
+    	String currPage = (String)request.getAttribute("currPage");
+    	if(currPage == null){
+    		currPage = "1";
+    	}
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryDetail.css">
+<script defer type="text/javascript" src="./resources/js/serviceCenter/inquiry.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -32,7 +43,7 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th>게시글 제목</th>
+                                <th><%= vo.getTitle() %></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,28 +51,23 @@
                                 <td>
                                     <span class="tit">번호</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">1</span>
+                                    <span class="cont"><%= vo.getOnetooneNo() %></span>
+                                    <span class="tit">작성자</span>
+                                    <span class="mid">|</span>
+                                    <span class="cont"><%= vo.getWriterNick() %></span>
                                     <span class="tit">등록일</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">2023-12-04</span>
-                                    <span class="tit">조회수</span>
+                                    <span class="cont"><%= vo.getEnrollDate() %></span>
+                                    <span class="tit">답변여부</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">1</span>
+                                    <span class="cont">O</span>
                                 </td>
                             </tr>
                             <tr id="tb_content">
-                                <td>
+                                <td colspan="2">
                                     <div id="noticeContents">
                                         <p>
-                                            내용 ~~
-                                            <br>
-                                            ~~
-                                            <br>
-                                            ~~
-                                            <br>
-                                            ~~
-                                            <br>
-                                            ~~
+                                        	<%= vo.getContent() %>
                                         </p>
                                     </div>
                                 </td>
@@ -83,7 +89,7 @@
                         </tbody>
                     </table>
                     <div id="list_btn">
-                        <a href="/cinema/serviceCenter/faqList"">목록</a>
+                        <a href="/cinema/serviceCenter/inquiryList?pno=<%= currPage %>">목록</a>
                     </div>
                 </div>
             </div>

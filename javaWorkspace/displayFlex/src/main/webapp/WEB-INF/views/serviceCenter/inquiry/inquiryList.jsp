@@ -1,13 +1,21 @@
+<%@page import="displayFlex.util.page.vo.PageVo"%>
+<%@page import="displayFlex.serviceCenter.inquiry.vo.InquiryVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    	List<InquiryVo> inquiryVoList = (List<InquiryVo>) request.getAttribute("inquiryVoList");
+    	PageVo pvo = (PageVo)request.getAttribute("pvo");
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryList.css">
-
+<script defer type="text/javascript" src="./resources/js/serviceCenter/inquiry.js"></script>
 </head>
 <body>
 	
@@ -17,7 +25,9 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <a href="/cinema/admin/inquiryWrite">등록</a>
+                <c:if test="${loginMember.adminYn eq 'N'}">
+                	<a href="/cinema/admin/inquiryWrite">등록</a>
+                </c:if>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -28,8 +38,7 @@
                 </nav>
             </div>
             <div id="acc2">
-                <table id="tb_acc_wrap2"
-                    summary="1:1 문의 표입니다. 구분, 질문 순서로 행이 구성되어 있습니다." >
+                <table id="tb_acc_wrap2">
                     <colgroup>
                         <col style="width: 20%;">
                         <col style="width: auto">
@@ -39,58 +48,38 @@
                         <tr>
                             <th id="thead1">번호</th>
                             <th id="thread2">제목</th>
-                            <th id="thread3">등록일</th>
+                            <th id="thread3">작성자</th>
+                            <th id="thread4">등록일</th>
                         </tr>
                     </thead>
                     <tbody id="tab">
-                        <tr>
-                            <td><a href="/cinema/admin/inquiryDetail">8</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">제목8</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">등록일8</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/admin/inquiryDetail">7</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">제목7</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">등록일7</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/admin/inquiryDetail">6</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">제목6</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">등록일6</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/admin/inquiryDetail">5</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">제목5</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">등록일5</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/admin/inquiryDetail">4</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">제목4</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">등록일4</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/admin/inquiryDetail">3</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">제목3</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">등록일3</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/admin/inquiryDetail">2</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">제목2</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">등록일2</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="/cinema/admin/inquiryDetail">1</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">제목1</a></td>
-                            <td><a href="/cinema/admin/inquiryDetail">등록일1</a></td>
-                        </tr>
+                    <% for (InquiryVo vo : inquiryVoList) { %>
+                    	<tr>
+                    		<td><%= vo.getOnetooneNo() %></td>
+                    		<td><%= vo.getTitle() %></td>
+                    		<td><%= vo.getWriterNick() %></td>
+                    		<td><%= vo.getEnrollDate() %></td>
+                    	</tr>
+                    <% } %>
+                    	
                     </tbody>
                 </table>
                 <div id="paging">
-                    <a href="">1</a>
-                    <a href="">2</a>
-                    <a href="">3</a>
-                    <a href="">4</a>
-                    <a href="">5</a>
+                    <% if(pvo.getStartPage() != 1){ %>
+                   		<a href="/cinema/serviceCenter/inquiryList?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+                   	<% } %>
+                   	
+                   	<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
+						<% if( i == pvo.getCurrentPage() ){ %>
+							<span><%= i %></span>
+						<% } else { %>
+							<a href="/cinema/serviceCenter/inquiryList?pno=<%= i %>"><%= i %></a>
+						<% } %>
+					<% } %>
+					
+					<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
+						<a href="/cinema/serviceCenter/inquiryList?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+					<% } %>
                 </div>
             </div>
 

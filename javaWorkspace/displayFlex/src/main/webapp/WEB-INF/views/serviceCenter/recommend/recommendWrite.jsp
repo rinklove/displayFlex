@@ -13,7 +13,8 @@
 
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-    <main>
+	<form action="/cinema/serviceCenter/recommendWrite" method="post">
+		<main>
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
@@ -35,7 +36,7 @@
                         <h3>* 필수입력</h3>
                     </div>
                 </div>
-                <table id="tbl_form" summary="문의내용작성 테이블">
+                <table id="tbl_form">
                     <colgroup>
                         <col style="width: 15%;">
                         <col style="width: auto;">
@@ -47,7 +48,7 @@
                             </th>
                             <td>
                                 <label>
-                                    <input type="text" name="inputYear" placeholder="예: 2011" style="height: 40px; width: 90px;">
+                                    <input type="text" name="year" placeholder="예: 2011" style="height: 40px; width: 90px;">
                                     년
                                 </label>
                             </td>
@@ -58,7 +59,7 @@
                             </th>
                             <td>
                                 <div class="bx_textarea">
-                                    <input type="text" class="ty2" placeholder="제목을 입력해주세요" title="문의내용 제목입력" id="iDtitle">
+                                    <input type="text" name="title" class="ty2" placeholder="제목을 입력해주세요" title="문의내용 제목입력" id="iDtitle">
                                     <span class="txt_count">
                                         <em id="strongContentsCount_title">0</em>
                                         /한글
@@ -74,8 +75,8 @@
                             </th>
                             <td>
                                 <div class="bx_textarea">
-                                    <input type="text" class="ty2" id="iDcontents" cols="10" rows="10" title="문의내용을 입력해주세요" 
-                                    placeholder="내용에 개인정보(개인번호, 계좌번호, 주민번호)가 포함되지 않도록 유의하여 입력해주세요"></input>
+                                    <textarea type="text" name="content" class="ty2" id="iDcontents" cols="10" rows="10" title="문의내용을 입력해주세요" 
+                                    placeholder="내용에 개인정보(개인번호, 계좌번호, 주민번호)가 포함되지 않도록 유의하여 입력해주세요"></textarea>
                                     <br>
                                     <div class="txt_red txt_color01">
                                         <img src="/cinema/resources/image/faqIcon/caution_.png" alt="주의 아이콘" width="14px">
@@ -95,13 +96,13 @@
                     </tbody>
                 </table>
                 <div id="btn_wrap">
-                    <button class="cancle">취소</button>
-                    <button class="ok">확인</button>
+                	<input class="cancle" type="submit" value="취소">
+                   	<input class="ok" type="submit" value="확인">
                 </div>
             </div>
-            
-                    
         </div>
+	</form>
+    
 
 
 </body>
