@@ -33,17 +33,21 @@
 <div class="search-container">
     <span class="fs-5 fw-bold">상영 정보 검색</span>
     <hr>
-    <form action="${pageContext.request.contextPath }/admin/screen-info/list" class="row g-2 mx-2">
+    <form action="${pageContext.request.contextPath }/admin/screen-info/search/list" class="row g-2 mx-2">
         <div class="col-4 m-auto">
-            <input type="text" class="form-control w-100 h-2-5em" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="영화 검색" name="title">
+            <input list="search-result"  type="text" class="form-control w-100 h-2-5em" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="영화 검색" name="title">
+             <dataList class="list-group-flush border-dark shadow" id="search-result">
+             	<c:forEach var="movie" items="${movieList }">
+             	<option value="${movie.movieName }|${movie.movieNo }">(개봉일: ${movie.releaseDate })</option>
+             	</c:forEach>
+             </dataList>
         </div>
         <div class="col-2 m-auto">
           <select class="form-select  d-inline-block h-2-5em" aria-label="Small select example">
               <option selected>상영관 선택</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
+                <c:forEach var="element" items="${theater }">
+	                <option value="${element }">${element }</option>
+                </c:forEach>
           </select>
         </div>
         <div class="col-2 m-auto">
@@ -73,24 +77,19 @@
                 <th>상영관</th>
                 <th>상영일자</th>
                 <th>상영시간</th>
-                <th>삭제하기</th>
+                <th><c:if test="${loginMember.adminYn eq 'Y' }">삭제하기</c:if></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>벼랑 위의 포뇨</td>
-                <td>2</td>
-                <td>2023년 12월 13일</td>
-                <td>17:50 ~ 19:30</td>
-                <td><div><a href="${pageContext.request.contextPath}/admin/screen-info/delete">X</a></div></td>
+        <c:forEach var="element" items="${infoList }">
+       		<tr>
+                <td>${element.title }</td>
+                <td>${element.theater }</td>
+                <td>${element.date }</td>
+                <td>${element.startTime } ~ ${element.endTime }</td>     
+               	<td><c:if test="${loginMember.adminYn eq 'Y' }"><div><a href="${pageContext.request.contextPath}/admin/screen-info/delete?no=${element.screeningTimeNo}">X</a></div></c:if></td>
             </tr>
-              <tr>
-                <td>벼랑 위의 포뇨</td>
-                <td>2</td>
-                <td>2023년 12월 13일</td>
-                <td>17:50 ~ 19:30</td>
-                <td><div><a href="${pageContext.request.contextPath}/admin/screen-info/delete">X</a></div></td>
-            </tr>
+        </c:forEach>
         </tbody>
         <tfoot>
             <tr>
@@ -104,26 +103,21 @@
     </table>
     <div class="page-area text-center">
         <c:if test="${pageVo.startPage gt 1 }">
-            <a href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${pageVo.startPage-1}" }>이전</a>	            
+            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${pageVo.startPage-1}" >이전</a>	            
         </c:if>
         <c:forEach var="i"  begin="${pageVo.startPage }" end="${pageVo.endPage }">
         <c:choose>
         <c:when test="${pageVo.currentPage eq i}">
-            <span class="bg-success">${i }</span>                        	
+            <span class="bg-success p-2 m-1 text-white">${i }</span>      	
         </c:when>
         <c:otherwise>
-            <a href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${i}" }>${i }</a>            
+            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${i}" }" >${i }</a>            
         </c:otherwise>
         </c:choose>
         </c:forEach>
         <c:if test="${pageVo.endPage ne pageVo.maxPage }">
-            <a href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${pageVo.endPage+1}" }>다음</a>	
+            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${pageVo.endPage+1}" >다음</a>	
         </c:if>
-        <span class="bg-success text-white p-2 m-1">1</span>
-        <a href="#" class="text-decoration-none text-black m-1">2</a>
-        <a href="#" class="text-decoration-none text-black m-1">3</a>
-        <a href="#" class="text-decoration-none text-black m-1">4</a>
-        <a href="#" class="text-decoration-none text-black m-1">5</a>
     </div>
         
 </div>

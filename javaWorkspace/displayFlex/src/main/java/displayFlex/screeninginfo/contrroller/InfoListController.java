@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import displayFlex.movie.vo.MovieVo;
 import displayFlex.screeninginfo.dto.ScreenInfoDto;
 import displayFlex.screeninginfo.service.ScreenInfoService;
 import displayFlex.util.page.vo.PageVo;
@@ -33,17 +34,29 @@ public class InfoListController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			//영화 목록
+			List<MovieVo> movieList = infoService.getAllMovie();
+			
+			//상영관 가져오기
+			List<String> theaterList = infoService.getAllTheater();
+			
 			//영화 리스트 가져오기(페이징 처리 10개씩)
 			int pno = request.getParameter("pno") == null ? 1 : Integer.parseInt(request.getParameter("pno"));
 			int infoTotalCount = infoService.getTotalCount();
-			PageVo page = setPage(infoTotalCount , pno, 10, 5);
+			PageVo page = setPage(infoTotalCount , pno, 5, 10);
 			
 			List<ScreenInfoDto> infoList = infoService.getInfoList(page);
+			
+			//jsp로 보내기
+			request.setAttribute("movieList", movieList);
+			request.setAttribute("theater", theaterList);
+			request.setAttribute("infoList", infoList);
+			request.setAttribute("pageVo", page);
+			request.getRequestDispatcher("/WEB-INF/views/screening-info/list.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 		}
-		request.getRequestDispatcher("/WEB-INF/views/screening-info/list.jsp").forward(request, response);
 	}
 
 	/**
