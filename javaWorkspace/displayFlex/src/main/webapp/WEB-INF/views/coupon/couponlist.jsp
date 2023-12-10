@@ -51,46 +51,39 @@
                 <div style="color: white; font-size:large">쿠폰사용여부</div>
             </div>
             <div class="coupon_content">
-               <% 
+              
+                <div id="coupon_name">
+                 <% 
                 if(couponVoList != null){
                 for(CouponVo vo : couponVoList){ %>
-                <div id="coupon_name">
-                    <div>쿠폰이름1</div>
-                    <div>쿠폰이름2</div>
-                    <div>쿠폰이름3</div>
-                    <div>쿠폰이름4</div>
+                    <div><%=vo.getCouponName() %></div>
+                   
                     <% }} %>
 
                 </div>
-    			<% 
+    			
+                <div id="coupon_period">
+                <% 
                 if(couponVoList != null){
                 for(CouponVo vo : couponVoList){ %>
-                <div id="coupon_period">
-                    <div>쿠폰유효기간1</div>
-                    <div>쿠폰유효기간2</div>
-                    <div>쿠폰유효기간3</div>
-                    <div>쿠폰유효기간4</div>
+                   <div><%=vo.getCouponValidePeriod() %></div>
                    <% }} %>
                 </div>
-    			<% 
+    			
+                <div id="coupon_info">
+                <% 
                 if(couponVoList != null){
                 for(CouponVo vo : couponVoList){ %>
-                <div id="coupon_info">
-                    <div>VIP반값할인쿠폰1</div>
-                    <div>VIP반값할인쿠폰2</div>
-                    <div>VIP반값할인쿠폰3</div>
-                    <div>VIP반값할인쿠폰4</div>
+                    <div><%=vo.getCouponInfo() %></div>
                     <% }} %>
                 </div>
                 
-    			<% 
+    			
+                <div id="coupon_no">
+                <% 
                 if(couponVoList != null){
                 for(CouponVo vo : couponVoList){ %>
-                <div id="coupon_no">
-                    <div>사용가능</div>
-                    <div>사용가능</div>
-                    <div>사용가능</div>
-                    <div>사용가능</div>
+                   <div><%=vo.getCouponNo() %></div>
                     <% }} %>
                 </div>
                 
