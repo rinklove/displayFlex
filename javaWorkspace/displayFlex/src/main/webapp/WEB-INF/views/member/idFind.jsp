@@ -32,12 +32,12 @@
              </tr>
             <tr>
               <td>핸드폰번호</td>
-              <td><input type="phone" placeholder="핸드폰번호"></td>
+              <td><input type="email" placeholder="이메일"></td>
             </tr>
         </table>
       </div>
-      <div class="container-sixth">※ 휴대폰 번호를 잃어버리셨다면 고객센터를 문의 바랍니다.</div>
-      <div><button type="submit">아이디 찾기</button></div>
+      <div class="container-sixth">※ 이메일을 잃어버리셨다면 고객센터를 문의 바랍니다.</div>
+      <div><button type="button" onclick="location.href='/cinema/member/idFindConfirm'">아이디 찾기</button></div>
     </div>
     <footer></footer>
       

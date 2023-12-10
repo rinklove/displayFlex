@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import displayFlex.event.dto.EventDto;
+import displayFlex.mypage.MoviePaymentVo;
 import displayFlex.mypage.MypageService;
 import displayFlex.mypage.vo.PageVo;
 
@@ -33,10 +34,10 @@ public class MovieRev extends HttpServlet {
 			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 			
 			//service
-			List<EventDto> eventDtoList = ms.selectEventList(pvo);
+			List<MoviePaymentVo> moviePaymentVoList = ms.selectMoviePaymentList(pvo);
 			
 			//result
-			req.setAttribute("eventDtoList", eventDtoList);
+			req.setAttribute("moviePaymentVoList", moviePaymentVoList);
 			req.setAttribute("pvo", pvo);
 			
 			req.getRequestDispatcher("/WEB-INF/views/mypage/movieRev.jsp").forward(req, resp);
