@@ -226,4 +226,133 @@ public class MypageDao {
 			return inquiryVoList;
 	}
 
+	public List<MoviePaymentVo> selectMoviePaymentList(Connection conn, PageVo pvo) throws Exception {
+		
+		//sql
+				String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT P.PAYMENTS_NO , P.MEMBER_NO , P.PAYMENT_DATE , P.PRICE , P.MOVIE_NAME FROM MOVIE_PAYMENT P JOIN MOVIE M ON P.MOVIE_NAME = M.MOVIE_NAME ) T ) WHERE RNUM BETWEEN ? AND ?";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, pvo.getStartRow());
+				pstmt.setInt(2, pvo.getLastRow());
+				ResultSet rs = pstmt.executeQuery();
+				
+				//rs
+				List<MoviePaymentVo> moviePaymentVoList = new ArrayList<MoviePaymentVo>();
+				while(rs.next()) {
+					String paymentsNo = rs.getString("PAYMENTS_NO");
+					String memberNo = rs.getString("MEMBER_NO");
+					String movieName = rs.getString("MOVIE_NAME");
+					String paymentDate = rs.getString("PAYMENT_DATE");
+					String price = rs.getString("PRICE");
+					
+					MoviePaymentVo vo = new MoviePaymentVo();
+					vo.setPaymentsNo(paymentsNo);
+					vo.setMemberNo(memberNo);
+					vo.setMovieName(movieName);
+					vo.setPaymentDate(paymentDate);
+					vo.setPrice(price);
+					
+					moviePaymentVoList.add(vo);
+
+				}
+				
+				JDBCTemplate.close(rs);
+				JDBCTemplate.close(pstmt);
+				
+				return moviePaymentVoList;
+		
+	}
+
+	public List<CouponVo> selectCouponList(Connection conn, PageVo pvo) throws Exception {
+		
+		//sql
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT C.NO , C.TYPE , C.NAME , C.CREATIONDATE , C.VALIDPERIOD FROM COUPON C JOIN RETAINED_COUPON R ON C.NO = R.RETAINED_NO ) T ) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, pvo.getStartRow());
+		pstmt.setInt(2, pvo.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		List<CouponVo> couponVoList = new ArrayList<CouponVo>();
+		while(rs.next()) {
+			String no = rs.getString("NO");
+			String type = rs.getString("TYPE");
+			String name = rs.getString("NAME");
+			String creationdate = rs.getString("CREATIONDATE");
+			String validperiod = rs.getString("VALIDPERIOD");
+			
+			CouponVo vo = new CouponVo();
+			vo.setNo(no);
+			vo.setName(name);
+			vo.setType(type);
+			vo.setCreationdate(creationdate);
+			vo.setValidperiod(validperiod);
+			
+			couponVoList.add(vo);
+
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return couponVoList;
+		
+	}
+
+	public int getCouponCountBySearch(Connection conn, Map<String, String> m) throws Exception {
+		
+		//sql
+		String sql = "SELECT COUNT(*) FROM COUPON WHERE \" + m.get(\"searchType\") + \" LIKE '%' || ? || '%'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.get("searchType"));
+		ResultSet rs = pstmt.executeQuery();
+		
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt;
+	}
+
+	public List<CouponVo> couponSearch(Connection conn, Map<String, String> m, PageVo pvo) throws Exception {
+		String searchType = m.get("searchType");
+		
+		//sql
+		String sql = "";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.get("searchValue"));
+		pstmt.setString(2, "1");
+		pstmt.setString(3, "10");
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		List<CouponVo> couponVoList = new ArrayList<CouponVo>();
+			while(rs.next()) {
+				
+				String no = rs.getString("NO");
+				String name = rs.getString("NAME");
+				String type = rs.getString("TYPE");
+				String creationdate = rs.getString("CREATIONDATE");
+				String validperiod = rs.getString("VALIDPERIOD");
+				
+				CouponVo vo = new CouponVo();
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setType(type);
+				vo.setCreationdate(creationdate);
+				vo.setValidperiod(validperiod);
+				
+				couponVoList.add(vo);
+			}
+			
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+			
+			return couponVoList;
+		
+     }
+
 }

@@ -109,4 +109,62 @@ public class MypageService {
 		
 	}
 
+	public List<MoviePaymentVo> selectMoviePaymentList(PageVo pvo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MypageDao dao = new MypageDao();
+		List<MoviePaymentVo> moviePaymentVoList = dao.selectMoviePaymentList(conn, pvo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return moviePaymentVoList;
+	}
+
+	public List<CouponVo> selectCouponList(PageVo pvo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MypageDao dao = new MypageDao();
+		List<CouponVo> couponVoList = dao.selectCouponList(conn, pvo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return couponVoList;
+	}
+
+	public int selectSearchCouponCount(Map<String, String> m) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MypageDao dao = new MypageDao();
+		int cnt = dao.getCouponCountBySearch(conn, m);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return cnt;
+	}
+
+	public List<CouponVo> couponSearch(Map<String, String> m, PageVo pvo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MypageDao dao = new MypageDao();
+		List<CouponVo> couponVoList = dao.couponSearch(conn, m, pvo);
+		
+		JDBCTemplate.close(conn);
+		
+		return couponVoList;
+	}
+
 }

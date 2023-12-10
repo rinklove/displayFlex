@@ -69,10 +69,23 @@ body {
   
   .main-third-t3 {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 10px;
+    justify-content: flex-start;
+    gap: 20px;
     font-size: 20px;
     font-weight: bold;
     color: gray;
+    flex-direction: row;
+    align-items: center;
   }
+
+  form{
+    display: flex;
+    gap: 20px;
+  }
+  
+  table {
+	  margin-top: 50px;
+	  width: 1000px;
+	  height: 500px;
+  }
+  

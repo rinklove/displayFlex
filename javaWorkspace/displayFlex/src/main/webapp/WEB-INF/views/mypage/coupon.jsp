@@ -1,5 +1,14 @@
+<%@page import="displayFlex.mypage.vo.PageVo"%>
+<%@page import="displayFlex.mypage.CouponVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <%
+    	List<CouponVo> couponVoList = (List<CouponVo>) request.getAttribute("couponVoList");
+    	PageVo pvo = (PageVo)request.getAttribute("pvo");
+ %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,29 +30,21 @@
             </div>
             <div class="main-table">
                 <div class="main-table-header">
+                    <div>쿠폰번호</div>
                     <div>쿠폰이름</div>
-                    <div>사용기간</div>
-                    <div>사용가능경로</div>
-                    <div>쿠폰정보</div>
+                    <div>쿠폰타입</div>
+                    <div>쿠폰생성일자</div>
+                    <div>쿠폰유효기간</div>
                 </div>
+                <% for(CouponVo vo : couponVoList){ %>
                 <div class="main-table-body">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>5</div>
-                    <div>6</div>
-                    <div>7</div>
-                    <div>8</div>
-                    <div>9</div>
-                    <div>10</div>
-                    <div>11</div>
-                    <div>12</div>
-                    <div>13</div>
-                    <div>14</div>
-                    <div>15</div>
-                    <div>16</div>
+                    <div><%= vo.getNo() %></div>
+                    <div><%= vo.getName() %></div>
+                    <div><%= vo.getType() %></div>
+                    <div><%= vo.getCreationdate() %></div>
+                    <div><%= vo.getValidperiod() %></div>
                 </div>
+                <% } %>
             </div>
             <div class="main-third">FLEX 할인쿠폰 사용내역</div>
             <div class="main-fourth">
@@ -69,9 +70,20 @@
                     <div>사용기간</div>
                     <div>사용가능경로</div>
                     <div>쿠폰정보</div>
+                    <div>쿠폰정보</div>
+             <% for(CouponVo vo : couponVoList){ %>
                 </div>
-                <div class="main-table-body">1</div>
+                <div class="main-table-body">
+                <div><%= vo.getNo() %></div>
+                <div><%= vo.getName() %></div>
+                <div><%= vo.getType() %></div>
+                <div><%= vo.getCreationdate() %></div>
+                <div><%= vo.getValidperiod() %></div>
+                
+                </div>
+                
             </div>
+            <% } %>
         </div>
     </div>
         <footer></footer>

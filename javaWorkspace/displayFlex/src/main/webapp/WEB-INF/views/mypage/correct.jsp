@@ -51,12 +51,6 @@
                 <td></td>
             </tr>
             <tr>
-                <td><label for="addr">주소</label></td>
-                <td>서울특별시 강남구 역삼동</td>
-                <td><input type="submit" id="addr" name="addr" value="주소검색"></td>
-                <td></td>
-            </tr>
-            <tr>
                 <td><label for="phone">핸드폰번호</label></td>
                 <td class="hi">010-****-****<br><div colspan="2" class="last">휴대전화번호는 본인 인증된 정보로 자동 적용 됩니다. </div><br><div class="last">휴대전화번호로 예매, 쿠폰, 이벤트 등 제공받으실 수 있습니다.</div></td>
                 <td></td>
@@ -65,7 +59,7 @@
         </tbody>
     </table>
     <br><br>
-    <button type="button" onclick="">회원가입</button>
+    <button type="button" onclick="/cinema/mypage/main">정보수정</button>
 </form>
 </div>
 <footer></footer>

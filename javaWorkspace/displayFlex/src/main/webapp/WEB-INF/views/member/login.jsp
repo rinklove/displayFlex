@@ -36,6 +36,8 @@
                     </div>
                     <div class="form-check-confirm-b2">
                         <input type="submit" value="로그인" id="logincheck"></div>
+                 <div><a href="/cinema/member/idFind">아이디 찾기</a></div>
+                 <div><a href="/cinema/member/pwdFind">비밀번호 찾기</a></div>
                 </div>
                  <%}else { %>
                  	<h3><%= loginMember.getMemberNick() %></h3>
