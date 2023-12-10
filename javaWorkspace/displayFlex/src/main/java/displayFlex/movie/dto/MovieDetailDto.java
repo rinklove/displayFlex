@@ -20,8 +20,6 @@ public class MovieDetailDto {
 	private String nation;						//제작국가
 	private List<StillImageVo> stillsList;		//스틸 이미지
 
-	
-	
 	public MovieDetailDto(String movieNo, String movieName, String gradeName, String actors, String story, String rate,
 			String mainDirector, String movieImage, String runningTime, String releaseDate, String genre,
 			String nation) {
@@ -41,11 +39,11 @@ public class MovieDetailDto {
 		this.nation = nation;
 	}
 
-	public boolean isScreening() {
+	public boolean getIsScreening() {
 		return isScreening;
 	}
 
-	public void setScreening(boolean isScreening) {
+	public void setIsScreening(boolean isScreening) {
 		this.isScreening = isScreening;
 	}
 

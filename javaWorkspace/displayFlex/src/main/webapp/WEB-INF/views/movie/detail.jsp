@@ -62,7 +62,7 @@
                     <td>${movie.nation }</td>
                     <td id="reserve-td">
                     	<c:if test="${movie.isScreening eq true  && loginMember.adminYn eq 'N'}">
-                    		<button class="bg-abc95f"  onclick="location.href='${pageContext.request.contextPath}/'">예매하기→</button>
+                    		<button class=" btn btn-succsess bg-abc95f"  onclick='location.href="${pageContext.request.contextPath}/ticket/select"'>예매하기→</button>
                     	</c:if>
                     </td>
                 </tr>
