@@ -35,7 +35,8 @@ public class Deletecontroller extends HttpServlet {
 			}
 
 			request.getSession().setAttribute("alertMsg", "상영 정보를 삭제했습니다.");
-			response.sendRedirect(request.getContextPath()+"/admin/screen-info/list?pno=1");
+
+			response.sendRedirect(request.getContextPath()+"/admin/screen-info/list?pno=1");				
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("alertMsg", "상영 정보를 삭제하지 못했습니다.");

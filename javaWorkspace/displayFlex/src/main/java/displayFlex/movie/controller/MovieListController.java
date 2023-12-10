@@ -63,13 +63,6 @@ public class MovieListController extends HttpServlet {
 		}
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-//		request.getRequestDispatcher("/movie/list?" + request.getQueryString()).forward(request, response);
-	}
-
 	private PageVo setPage(int listCount, int currentPage, int pageLimit, int boardLimit) {
 		return new PageVo(listCount, currentPage, pageLimit, boardLimit);
 	}
