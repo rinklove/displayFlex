@@ -40,11 +40,6 @@ public class CheckInfoExistController extends HttpServlet {
 			String startTime = request.getParameter("startTime");
 			String endTime = request.getParameter("endTime");
 			
-			System.out.println("title = " + title);
-			System.out.println("theater = " + theater);
-			System.out.println("dateInput = " + date);
-			System.out.println("startTime = " + startTime);
-			System.out.println("endTime = " + endTime);
 			int count = infoService.isExistScreeningInfo(new ScreenInfoDto(title, theater, date, startTime, endTime));
 			
 			if(count != 0) {

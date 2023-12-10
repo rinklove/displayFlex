@@ -206,17 +206,348 @@ public class ScreenInfoDao {
 	 * @throws SQLException 
 	 */
 	public List<ScreenInfoDto> getInfoList(PageVo page, Connection con) throws SQLException {
-		query ="SELECT A.RNUM , A.SCREENING_TIME_NO , A.THEATER_NO , A.START_DATE , A.START_TIME , A.END_TIME , M.MOVIE_NAME FROM( SELECT ROW_NUMBER() OVER(ORDER BY ST.END_TIME ASC) RNUM , ST.SCREENING_TIME_NO , SI.MOVIE_NO , SI.THEATER_NO , TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') START_DATE , TO_CHAR(ST.START_TIME, 'HH24:MI') START_TIME , TO_CHAR(ST.END_TIME, 'HH24:MI') END_TIME FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE ST.END_TIME > SYSDATE ) A INNER JOIN MOVIE M ON A.MOVIE_NO = M.MOVIE_NO WHERE A.RNUM BETWEEN ? AND ? ORDER BY 1";
+		query ="SELECT A.RNUM , A.SCREENING_TIME_NO , A.THEATER_NO, A.START_DATE , A.START_TIME , A.END_TIME , M.MOVIE_NAME FROM( SELECT ROW_NUMBER() OVER(ORDER BY ST.END_TIME ASC) RNUM , ST.SCREENING_TIME_NO , SI.MOVIE_NO , SI.THEATER_NO , TO_CHAR(SI.START_DATE, 'YYYY\"년 \"MM\"월 \"DD\"일\"') START_DATE , TO_CHAR(ST.START_TIME, 'HH24:MI') START_TIME , TO_CHAR(ST.END_TIME, 'HH24:MI') END_TIME FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE ST.END_TIME > SYSDATE ) A INNER JOIN MOVIE M ON A.MOVIE_NO = M.MOVIE_NO WHERE A.RNUM BETWEEN ? AND ? ORDER BY 1";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setInt(1, page.getStartRow());
 		pstmt.setInt(2, page.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		List<ScreenInfoDto> infoList = new ArrayList<ScreenInfoDto>();
 		
-//		while(rs.next()) {
-//			rs.getString()
-//		}
-		return null;
+		while(rs.next()) {
+			String screeningTimeNo = rs.getString("SCREENING_TIME_NO");
+			String title = rs.getString("MOVIE_NAME");
+			String theaterNo = rs.getString("THEATER_NO");
+			String startDate = rs.getString("START_DATE");
+			String startTime = rs.getString("START_TIME");
+			String endTime = rs.getString("END_TIME");
+			
+			infoList.add(new ScreenInfoDto(screeningTimeNo, title, theaterNo, startDate, startTime, endTime));
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return infoList;
+	}
+
+	/**
+	 * 상영정보 삭제
+	 * @param infoNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteByNo(String infoNo, Connection con) throws SQLException {
+		query = "DELETE FROM SCREENING_TIME WHERE SCREENING_TIME_NO = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, infoNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
+	/**
+	 * 조건에 맞는 상영 정보 개수 가져오기
+	 * @param screenInfoDto
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getTotalCountByCondition(ScreenInfoDto screenInfoDto, Connection con) throws SQLException {
+		StringBuilder dynamicQuery = new StringBuilder("SELECT COUNT(ST.SCREENING_TIME_NO) FROM SCREENING_TIME ST INNER JOIN SCREENING_INFO SI ON ST.SCREENING_INFO_NO = SI.SCREENING_INFO_NO INNER JOIN MOVIE M ON SI.MOVIE_NO = M.MOVIE_NO");
+		int index = 1;
+		if(screenInfoDto.getTitle() != null || screenInfoDto.getTheater() !=null || screenInfoDto.getDate() !=null || screenInfoDto.getStartTime() !=null || screenInfoDto.getEndTime() !=null) {
+			dynamicQuery.append(" WHERE");
+			
+			if(screenInfoDto.getTitle() != null) {
+				dynamicQuery.append(" M.MOVIE_NAME LIKE '%' || ? ||'%'");
+				
+				if(screenInfoDto.getTheater() != null) {
+					dynamicQuery.append(" AND SI.THEATER_NO = ?");
+				}
+				
+				if (screenInfoDto.getDate() != null) {
+					 dynamicQuery.append(" AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ?");
+				 }
+				 
+				if(screenInfoDto.getStartTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.START_TIME, 'HH24:MI') >= ?");					
+				}
+				
+				if(screenInfoDto.getEndTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.END_TIME, 'HH24:MI') <= ?");					
+				}
+				
+			} else if(screenInfoDto.getTheater() != null) {
+				dynamicQuery.append(" SI.THEATER_NO = ?");
+				
+				 if (screenInfoDto.getDate() != null) {
+					 dynamicQuery.append(" AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ?");
+				 }
+				 
+				if(screenInfoDto.getStartTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.START_TIME, 'HH24:MI') >= ?");					
+				}
+				
+				if(screenInfoDto.getEndTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.END_TIME, 'HH24:MI') <= ?");					
+				}
+				
+			} else if (screenInfoDto.getDate() != null) {
+				dynamicQuery.append(" TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ?");
+				
+				if(screenInfoDto.getStartTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.START_TIME, 'HH24:MI') >= ?");					
+				}
+				
+				if(screenInfoDto.getEndTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.END_TIME, 'HH24:MI') <= ?");					
+				}
+				
+			} else if(screenInfoDto.getStartTime() != null) {
+				dynamicQuery.append(" TO_CHAR(ST.START_TIME, 'HH24:MI') >= ?");
+				
+				if(screenInfoDto.getEndTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.END_TIME, 'HH24:MI') <= ?");					
+				}
+			}
+		}
+		
+		PreparedStatement pstmt = con.prepareStatement(dynamicQuery.toString());
+		
+		if(screenInfoDto.getTitle() != null) {
+			pstmt.setString(index, screenInfoDto.getTitle());
+			index++;
+			
+			if(screenInfoDto.getTheater() != null) {
+				pstmt.setString(index, screenInfoDto.getTheater());
+				index++;
+			}
+			
+			if(screenInfoDto.getDate() != null) {
+				pstmt.setString(index, screenInfoDto.getDate());
+				index++;
+			}
+			
+			if(screenInfoDto.getStartTime() != null) {
+				pstmt.setString(index, screenInfoDto.getStartTime());
+				index++;
+			}
+			
+			if(screenInfoDto.getEndTime() != null) {
+				pstmt.setString(index, screenInfoDto.getEndTime());
+				index++;
+			}
+			
+		} else if(screenInfoDto.getTheater() != null) {
+			pstmt.setString(index, screenInfoDto.getTheater());
+			index++;
+			
+			if(screenInfoDto.getDate() != null) {
+				pstmt.setString(index, screenInfoDto.getDate());
+				index++;
+			}
+			
+			if(screenInfoDto.getStartTime() != null) {
+				pstmt.setString(index, screenInfoDto.getStartTime());
+				index++;
+			}
+			
+			if(screenInfoDto.getEndTime() != null) {
+				pstmt.setString(index, screenInfoDto.getEndTime());
+				index++;
+			}
+			
+		} else if (screenInfoDto.getDate() != null) {
+			pstmt.setString(index, screenInfoDto.getDate());
+			index++;
+			
+			if(screenInfoDto.getStartTime() != null) {
+				pstmt.setString(index, screenInfoDto.getStartTime());
+				index++;
+			}
+			
+			if(screenInfoDto.getEndTime() != null) {
+				pstmt.setString(index, screenInfoDto.getEndTime());
+				index++;
+			}
+			
+		} else if(screenInfoDto.getStartTime() != null) {
+			pstmt.setString(index, screenInfoDto.getStartTime());
+			index++;
+			
+			if(screenInfoDto.getEndTime() != null) {
+				pstmt.setString(index, screenInfoDto.getEndTime());
+				index++;				
+			}
+		}
+
+		
+		ResultSet rs = pstmt.executeQuery();
+		int count = 0;
+		if(rs.next())  {
+			count = rs.getInt(1);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return count;
+	}
+
+	/**
+	 * 조건에 맞는 상영 정보리스트 출력하기
+	 * @param screenInfoDto 
+	 * @param page
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<ScreenInfoDto> getInfoListByCondition(ScreenInfoDto screenInfoDto, PageVo page, Connection con) throws SQLException {
+		StringBuilder dynamicQuery = new StringBuilder("SELECT A.* FROM( SELECT ROW_NUMBER() OVER(ORDER BY ST.END_TIME ASC) RNUM , ST.SCREENING_TIME_NO , M.MOVIE_NAME , SI.THEATER_NO , TO_CHAR(SI.START_DATE, 'YYYY\"년 \"MM\"월 \"DD\"일\"') START_DATE , TO_CHAR(ST.START_TIME, 'HH24:MI') START_TIME , TO_CHAR(ST.END_TIME, 'HH24:MI') END_TIME FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO INNER JOIN MOVIE M ON SI.MOVIE_NO = M.MOVIE_NO");
+		int index = 1;
+		if(screenInfoDto.getTitle() != null || screenInfoDto.getTheater() !=null || screenInfoDto.getDate() !=null || screenInfoDto.getStartTime() !=null || screenInfoDto.getEndTime() !=null) {
+			dynamicQuery.append(" WHERE");
+			
+			if(screenInfoDto.getTitle() != null) {
+				dynamicQuery.append(" M.MOVIE_NAME LIKE '%' || ? ||'%'");
+				
+				if(screenInfoDto.getTheater() != null) {
+					dynamicQuery.append(" AND SI.THEATER_NO = ?");
+				}
+				
+				if (screenInfoDto.getDate() != null) {
+					 dynamicQuery.append(" AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ?");
+				 }
+				 
+				if(screenInfoDto.getStartTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.START_TIME, 'HH24:MI') >= ?");					
+				}
+				
+				if(screenInfoDto.getEndTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.END_TIME, 'HH24:MI') <= ?");					
+				}
+				
+			} else if(screenInfoDto.getTheater() != null) {
+				dynamicQuery.append(" SI.THEATER_NO = ?");
+				
+				 if (screenInfoDto.getDate() != null) {
+					 dynamicQuery.append(" AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ?");
+				 }
+				 
+				if(screenInfoDto.getStartTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.START_TIME, 'HH24:MI') >= ?");					
+				}
+				
+				if(screenInfoDto.getEndTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.END_TIME, 'HH24:MI') <= ?");					
+				}
+				
+			} else if (screenInfoDto.getDate() != null) {
+				dynamicQuery.append(" TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ?");
+				
+				if(screenInfoDto.getStartTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.START_TIME, 'HH24:MI') >= ?");					
+				}
+				
+				if(screenInfoDto.getEndTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.END_TIME, 'HH24:MI') <= ?");					
+				}
+				
+			} else if(screenInfoDto.getStartTime() != null) {
+				dynamicQuery.append(" TO_CHAR(ST.START_TIME, 'HH24:MI') >= ?");
+				
+				if(screenInfoDto.getEndTime() != null) {
+					dynamicQuery.append(" AND TO_CHAR(ST.END_TIME, 'HH24:MI') <= ?");					
+				}
+			}
+		}
+		dynamicQuery.append(") A WHERE A.RNUM BETWEEN ? AND ? ORDER BY 1");
+		PreparedStatement pstmt = con.prepareStatement(dynamicQuery.toString());
+		
+		if(screenInfoDto.getTitle() != null) {
+			pstmt.setString(index, screenInfoDto.getTitle());
+			index++;
+			
+			if(screenInfoDto.getTheater() != null) {
+				pstmt.setString(index, screenInfoDto.getTheater());
+				index++;
+			}
+			
+			if(screenInfoDto.getDate() != null) {
+				pstmt.setString(index, screenInfoDto.getDate());
+				index++;
+			}
+			
+			if(screenInfoDto.getStartTime() != null) {
+				pstmt.setString(index, screenInfoDto.getStartTime());
+				index++;
+			}
+			
+			if(screenInfoDto.getEndTime() != null) {
+				pstmt.setString(index, screenInfoDto.getEndTime());
+				index++;
+			}
+			
+		} else if(screenInfoDto.getTheater() != null) {
+			pstmt.setString(index, screenInfoDto.getTheater());
+			index++;
+			
+			if(screenInfoDto.getDate() != null) {
+				pstmt.setString(index, screenInfoDto.getDate());
+				index++;
+			}
+			
+			if(screenInfoDto.getStartTime() != null) {
+				pstmt.setString(index, screenInfoDto.getStartTime());
+				index++;
+			}
+			
+			if(screenInfoDto.getEndTime() != null) {
+				pstmt.setString(index, screenInfoDto.getEndTime());
+				index++;
+			}
+			
+		} else if (screenInfoDto.getDate() != null) {
+			pstmt.setString(index, screenInfoDto.getDate());
+			index++;
+			
+			if(screenInfoDto.getStartTime() != null) {
+				pstmt.setString(index, screenInfoDto.getStartTime());
+				index++;
+			}
+			
+			if(screenInfoDto.getEndTime() != null) {
+				pstmt.setString(index, screenInfoDto.getEndTime());
+				index++;
+			}
+			
+		} else if(screenInfoDto.getStartTime() != null) {
+			pstmt.setString(index, screenInfoDto.getStartTime());
+			index++;
+			
+			if(screenInfoDto.getEndTime() != null) {
+				pstmt.setString(index, screenInfoDto.getEndTime());
+				index++;				
+			}
+		}
+		
+		pstmt.setInt(index, page.getStartRow());
+		index++;
+		pstmt.setInt(index, page.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		List<ScreenInfoDto> infoList = new ArrayList<ScreenInfoDto>();
+		
+		while(rs.next()) {
+			String screeningTimeNo = rs.getString("SCREENING_TIME_NO");
+			String title = rs.getString("MOVIE_NAME");
+			String theaterNo = rs.getString("THEATER_NO");
+			String startDate = rs.getString("START_DATE");
+			String startTime = rs.getString("START_TIME");
+			String endTime = rs.getString("END_TIME");
+			
+			infoList.add(new ScreenInfoDto(screeningTimeNo, title, theaterNo, startDate, startTime, endTime));
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return infoList;
 	}
 
 }

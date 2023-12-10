@@ -134,5 +134,53 @@ public class ScreenInfoService {
 		JDBCTemplate.close(con);
 		return infoList;
 	}
+	
+	/**
+	 * 상영 정보 삭제
+	 * @param infoNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteByNo(String infoNo) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int result = infoDao.deleteByNo(infoNo, con);
+		
+		if(result ==1) JDBCTemplate.commit(con);
+		else JDBCTemplate.rollback(con);
+		
+		JDBCTemplate.close(con);
+		return result;
+	}
+	
+	/**
+	 * 조건에 해당하는 상영정보 리스트 출력하기
+	 * @param screenInfoDto
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getTotalCountByCondition(ScreenInfoDto screenInfoDto) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int count = infoDao.getTotalCountByCondition(screenInfoDto, con);
+		JDBCTemplate.close(con);
+		return count;
+	}
+	
+	/**
+	 *
+	 * @param screenInfo
+	 * @param page
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<ScreenInfoDto> getInfoListByCondition(ScreenInfoDto screenInfo, PageVo page) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		List<ScreenInfoDto> infoList = infoDao.getInfoListByCondition(screenInfo, page, con);
+		
+		JDBCTemplate.close(con);
+		return infoList;
+	}
 
 }
