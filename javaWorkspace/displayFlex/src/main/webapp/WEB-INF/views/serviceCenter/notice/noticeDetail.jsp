@@ -17,7 +17,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/notice/noticeDetail.css">
-<script defer type="text/javascript" src="./resources/js/serviceCenter/notice.js"></script>
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/notice.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -89,12 +89,14 @@
                         </tbody>
                     </table>
                     <div id="list_btn">
-                        <a href="/cinema/serviceCenter/faqList?pno=<%= currPage %>">">목록</a>
+                        <a href="/cinema/serviceCenter/noticeList?pno=<%= currPage %>">목록</a>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    
+    
 
 </body>
 </html>

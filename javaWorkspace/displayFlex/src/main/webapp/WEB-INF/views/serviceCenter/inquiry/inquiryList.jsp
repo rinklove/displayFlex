@@ -15,7 +15,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryList.css">
-<script defer type="text/javascript" src="./resources/js/serviceCenter/inquiry.js"></script>
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry.js"></script>
+
 </head>
 <body>
 	
@@ -25,7 +26,7 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <c:if test="${loginMember.adminYn eq 'N'}">
+                <c:if test="${loginMember eq 'Y'}">
                 	<a href="/cinema/admin/inquiryWrite">등록</a>
                 </c:if>
             </div>

@@ -19,7 +19,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/recommend/recommendList.css">
-<script defer type="text/javascript" src="./resources/js/serviceCenter/recommend.js"></script>
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/recommend.js"></script>
 
 </head>
 <body>
@@ -29,7 +29,7 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <c:if test="${loginMember.adminYn eq 'N'}">
+                <c:if test="${not empty loginMember}">
                 	<button onclick="location.href='/cinema/serviceCenter/recommendWrite'">작성</button>
                 </c:if>
             </div>
@@ -42,14 +42,15 @@
                 </nav>
             </div>
             <fieldset id="search_wrap2">
-                <!-- <legend>상영 요청작 검색하기</legend> -->
-                <select class="ty3" title="검색조건 제목 선택" id="selectCondition1">
-                    <option value="title">제목</option>
-                    <option value="content">내용</option>
-                    <option value="titcon">제목+내용</option>
-                </select>
-                <input type="text" name="searchValue" placeholder="검색어를 입력해주세요." id="seachKeyword2">
-                <input type="submit" class="btn_col3" value="검색" onclick="location.href='/cinema/serviceCenter/recommendSearch?searchType=' + document.getElementById('selectCondition1').value + '&searchValue=' + document.getElementById('seachKeyword1').value;">
+            	<form action="/cinema/serviceCenter/recommendSearch" method="get">
+	                <select class="ty3" title="검색조건 제목 선택" id="selectCondition1">
+	                    <option value="title">제목</option>
+	                    <option value="content">내용</option>
+	                    <option value="titcon">제목+내용</option>
+	                </select>
+	                <input type="text" name="searchValue" placeholder="검색어를 입력해주세요." id="seachKeyword2">
+	                <input type="submit" class="btn_col3" value="검색" onclick="location.href='/cinema/serviceCenter/recommendSearch?searchType=' + document.getElementById('selectCondition1').value + '&searchValue=' + document.getElementById('seachKeyword2').value;">
+            	</form>
             </fieldset>
             <div id="acc3">
                 <table id="tb_acc_wrap3"
@@ -99,6 +100,48 @@
             
         </div>
     </main>
+    
+    <script>
+	    <% if(searchMap != null){ %>
+			function setSearchArea(){
+				
+				// 옵션태그 셋팅
+				const optionTagArr = document.querySelectorAll("#search_wrap2 select option");
+				const searchType = "<%= searchMap.get("searchType") %>";
+				for(let i = 0; i < optionTagArr.length; ++i){
+					if( optionTagArr[i].value === searchType ){
+						optionTagArr[i].selected = true;
+						break;
+					}
+				}
+				
+				// 인풋태그 셋팅
+				const searchValueTag = document.querySelector("#search_wrap2 input[name=searchValue]");
+				searchValueTag.value = "<%= searchMap.get("searchValue") %>";
+				
+			}
+			setSearchArea();
+			
+			function setPageArea(){
+				const aTagArr = document.querySelectorAll("#paging a");
+				for(let i = 0 ; i < aTagArr.length; ++i){
+					aTagArr[i].href = aTagArr[i].href.replace("list" , "search"); 
+					aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
+					aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
+				}
+			}
+			setPageArea();
+		<% } %>
+
+		/* // 각 공지사항의 상세조회 페이지로 이동하는 함수
+		function goToRecommendDetail(RecommendMvNo) {
+			// 공지사항 상세조회 페이지 URL을 생성
+			var url = "/cinema/serviceCenter/recommendDetail?noticeNo=" + RecommendMvNo;
+			// 페이지 이동
+			window.location.href = url; 
+		} */
+			
+    </script>
 
 </body>
 </html>

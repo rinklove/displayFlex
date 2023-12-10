@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import displayFlex.serviceCenter.inquiry.vo.InquiryVo;
 import displayFlex.serviceCenter.notice.vo.NoticeVo;
 import displayFlex.serviceCenter.recommend.vo.RecommendVo;
 import displayFlex.util.page.vo.PageVo;
@@ -87,20 +88,21 @@ public class RecommendDao {
    //검색
    public List<RecommendVo> search(Connection conn, Map<String, String> m, PageVo pvo) throws Exception {
       
-      String searchType = m.get("searchType");
-      
-      // SQL
-      String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.RECOMMEND_MV_NO, R.MEMBER_NO, R.YEAR, R.TITLE , R.CONTENT , R.ENROLL_DATE , R.MODIFY_DATE , R.RECOMMEND_COUNT, R.HIT, M.MEMBER_ID AS WRITER_NICK FROM RECOMMEND_MV R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO WHERE DELETE_YN = 'N' AND \" + m.get(\"searchType\") + \" LIKE '%' || ? || '%' ORDER BY RECOMMEND_MV_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
-      PreparedStatement pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, m.get("searchValue"));
-      pstmt.setInt(2, pvo.getStartRow());
-      pstmt.setInt(3, pvo.getLastRow());
-      ResultSet rs = pstmt.executeQuery();
+	   // 예시 코드
+	   String searchType = m.get("searchType");
+
+	   String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.RECOMMEND_MV_NO, R.MEMBER_NO, M.MEMBER_ID AS WRITER_NICK, R.YEAR, R.TITLE , R.CONTENT , R.ENROLL_DATE , R.MODIFY_DATE , R.RECOMMEND_COUNT, R.HIT FROM RECOMMEND_MV R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO WHERE R.DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%' ORDER BY R.RECOMMEND_MV_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+	   PreparedStatement pstmt = conn.prepareStatement(sql);
+	   pstmt.setString(1, m.get("searchValue"));
+	   pstmt.setInt(2, pvo.getStartRow());
+	   pstmt.setInt(3, pvo.getLastRow());
+	   ResultSet rs = pstmt.executeQuery();
       
       // rs
        List<RecommendVo> recommendVoList = new ArrayList<RecommendVo>();
        while(rs.next()) {
           String recommendMvNo = rs.getString("RECOMMEND_MV_NO");
+          String memberNo = rs.getString("MEMBER_NO");
           String writerNick = rs.getString("WRITER_NICK");
           String year = rs.getString("YEAR");
           String title = rs.getString("TITLE");
@@ -112,6 +114,7 @@ public class RecommendDao {
             
           RecommendVo vo = new RecommendVo();
           vo.setRecommendMvNo(recommendMvNo);
+          vo.setMemberNo(memberNo);
           vo.setWriterNick(writerNick);
           vo.setYear(year);
           vo.setTitle(title);
@@ -200,24 +203,24 @@ public class RecommendDao {
    }
 
    
-   //상영요청 작성
+	// 상영요청 작성
 	public int write(Connection conn, RecommendVo vo) throws Exception  {
-
-		//SQL
-		String sql = "INSERT INTO RECOMMEND_MV (RECOMMEND_MV_NO, MEMBER_NO, YEAR, TITLE, CONTENT) VALUES (SEQ_RECOMMEND_MV.NEXTVAL, ?, ?, ?, ?)";
+	    // SQL
+	    String sql = "INSERT INTO RECOMMEND_MV (RECOMMEND_MV_NO, MEMBER_NO, ENROLL_DATE, MODIFY_DATE, DELETE_YN, YEAR, TITLE, CONTENT, RECOMMEND_COUNT, HIT) VALUES (SEQ_RECOMMEND_MV.NEXTVAL, ?, SYSDATE, SYSDATE, 'N', ?, ?, ?, 0, 0)";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
-	    pstmt.setString(1, (vo.getMemberNo() != null) ? vo.getMemberNo() : "기본값");		// 작성자의 회원 번호를 설정
+	    pstmt.setString(1, vo.getMemberNo());
 	    pstmt.setString(2, vo.getYear());
 	    pstmt.setString(3, vo.getTitle());
 	    pstmt.setString(4, vo.getContent());
-	    int result = pstmt.executeUpdate();		// 실행 결과 반환
+	    
+	    int result = pstmt.executeUpdate(); // 실행 결과 반환
 	    
 	    // close
 	    JDBCTemplate.close(pstmt);
 	    
 	    return result;
-		
 	}
+
 
 	//게시글 번호로 게시글 1개 조회
 	public NoticeVo selectNoticeByNo(Connection conn, String noticeNo) throws Exception {
@@ -255,6 +258,69 @@ public class RecommendDao {
 		
 		return vo;
 	
+	}
+
+	//게시글 번호로 게시글 1개 조회
+	public RecommendVo selectRecommendByNo(Connection conn, String recommendMvNo) throws Exception {
+
+		//SQL
+		String sql = "SELECT R.RECOMMEND_MV_NO, R.MEMBER_NO, M.MEMBER_ID AS WRITER_NICK ,R.TITLE ,R.CONTENT ,R.ENROLL_DATE, R.MODIFY_DATE, R.YEAR, R.RECOMMEND_COUNT, R.HIT FROM RECOMMEND_MV R JOIN MEMBER M ON R.MEMBER_NO = M.MEMBER_NO WHERE R.RECOMMEND_MV_NO = ? AND R.DELETE_YN = 'N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, recommendMvNo);
+		ResultSet rs = pstmt.executeQuery();
+		  
+		//rs
+		RecommendVo vo = null;
+		if(rs.next()) {
+			String memberNo = rs.getString("MEMBER_NO");
+			String writerNick = rs.getString("WRITER_NICK");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String modifyDate = rs.getString("MODIFY_DATE");
+			String year = rs.getString("YEAR");
+			String recommendCount = rs.getString("RECOMMEND_COUNT");
+			String hit = rs.getString("HIT");
+			 
+			vo = new RecommendVo();
+			vo.setRecommendMvNo(recommendMvNo);
+			vo.setMemberNo(memberNo);
+			vo.setWriterNick(writerNick);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setEnrollDate(enrollDate);
+			vo.setModifyDate(modifyDate);
+			vo.setYear(year);
+			vo.setRecommendCount(recommendCount);
+			vo.setHit(hit);
+			 
+			System.out.println("dao 's vo ::: " + vo);
+			
+		}
+		
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		  
+		return vo;
+	
+	}
+
+	//조회수 증가
+	public int increaseHit(Connection conn, String recommendMvNo) throws Exception {
+		
+		//SQL
+		String sql = "UPDATE RECOMMEND_MV SET HIT = HIT + 1 WHERE RECOMMEND_MV_NO = ? AND DELETE_YN = 'N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, recommendMvNo);
+		int result = pstmt.executeUpdate();
+		
+		//close
+		JDBCTemplate.close(pstmt);
+			      
+		return result;
+				
 	}
    
    

@@ -84,10 +84,10 @@ public class InquiryDao {
 	      //rs
 	      InquiryVo vo = null;
 	      if(rs.next()) {
-	         String title = rs.getString("TITLE");
-	         String content = rs.getString("CONTENT");
 	         String memberNo = rs.getString("MEMBER_NO");
 	         String writerNick = rs.getString("WRITER_NICK");
+	         String title = rs.getString("TITLE");
+	         String content = rs.getString("CONTENT");
 	         String enrollDate = rs.getString("ENROLL_DATE");
 	         String reTitle = rs.getString("RE_TITLE");
 	         String reContent = rs.getString("RE_CONTENT");
@@ -95,19 +95,20 @@ public class InquiryDao {
 	         
 	         vo = new InquiryVo();
 	         vo.setOnetooneNo(onetooneNo);
-	         vo.setTitle(title);
-	         vo.setContent(content);
 	         vo.setMemberNo(memberNo);
 	         vo.setWriterNick(writerNick);
+	         vo.setTitle(title);
+	         vo.setContent(content);
 	         vo.setEnrollDate(enrollDate);
-	         vo.setReTitle(reTitle);;
+	         vo.setReTitle(reTitle);
 	         vo.setReContent(reContent);
-	         vo.setReEnrollDate(reEnrollDate);;
+	         vo.setReEnrollDate(reEnrollDate);
 	         
 	      }
 	      //close
 	      JDBCTemplate.close(rs);
 	      JDBCTemplate.close(pstmt);
+	      
 	      return vo;
 
 	

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import displayFlex.serviceCenter.inquiry.dao.InquiryDao;
+import displayFlex.serviceCenter.inquiry.vo.InquiryVo;
 import displayFlex.serviceCenter.notice.dao.NoticeDao;
 import displayFlex.serviceCenter.notice.vo.NoticeVo;
 import displayFlex.serviceCenter.recommend.dao.RecommendDao;
@@ -108,6 +110,34 @@ public class RecommendService {
 		
 		return result;
 			
+	}
+
+	//상영요청 상세조회 (조회수 증가)
+	public RecommendVo selectRecommendByNo(String recommendMvNo) throws Exception {
+
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		RecommendDao dao = new RecommendDao();
+		int result = dao.increaseHit(conn, recommendMvNo);
+		RecommendVo vo = null;
+		if(result == 1) {
+			vo = dao.selectRecommendByNo(conn , recommendMvNo);
+		}
+		
+		// tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		// close
+		JDBCTemplate.close(conn);
+
+		return vo;
+		
 	}
 
 }

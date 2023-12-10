@@ -35,7 +35,7 @@ div#title_top {
     font-weight: normal;
 }
 
-#title_top a {
+#title_top button {
     margin-left: 5px;
     height: 35px;
     line-height: 33px;
@@ -51,8 +51,8 @@ div#title_top {
     border: 2px solid #7c0000;
 }
 
-#title_top a:nth-child(2){margin-right: 12px; color: #ffffff; background-color: rgba(121, 0, 0, 0.326);}
-#title_top a:nth-child(3){color: #8c8c8c;}
+#title_top button:nth-child(2){margin-right: 12px; color: #ffffff; background-color: rgba(121, 0, 0, 0.326);}
+#title_top button:nth-child(3){color: #8c8c8c;}
 
 #contents #tab_tit #ty1 {
     /* grid-column: span 3; */

@@ -66,7 +66,8 @@ public class RecommendWriteController extends HttpServlet {
 	         vo.setYear(year);
 	         vo.setTitle(title);
 	         vo.setContent(content);
-	         System.out.println(vo);
+	         vo.setMemberNo(loginMember.getMemberNo());
+//	         System.out.println(vo);
 	         
 	         // service
 	         RecommendService rs = new RecommendService();
