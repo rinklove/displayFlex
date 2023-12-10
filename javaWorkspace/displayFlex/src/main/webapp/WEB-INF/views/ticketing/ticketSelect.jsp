@@ -33,53 +33,53 @@
                         <span class="text">영화</span>
                     </div>
                     <ul id="movieList">
-                    <c:forEach var="movie" items="${movieList}" varStatus="status">
-					    <c:set var="movieName" value="${movie.movieName}" />
-					    <c:set var="movieNo" value="${movie.movieNo}" />
-					    <c:set var="movieImage" value="${movie.movieImage}" />
-					    <c:set var="screenGradeNo" value="${movie.screenGradeNo}" />
+<%--                     <c:forEach var="movie" items="${movieList}" varStatus="status"> --%>
+<%-- 					    <c:set var="movieName" value="${movie.movieName}" /> --%>
+<%-- 					    <c:set var="movieNo" value="${movie.movieNo}" /> --%>
+<%-- 					    <c:set var="movieImage" value="${movie.movieImage}" /> --%>
+<%-- 					    <c:set var="screenGradeNo" value="${movie.screenGradeNo}" /> --%>
 
-					    <c:set var="ratedImgSrc" value="../resources/image/ticketing/ratedAll.png" />
-					    <c:choose>
-					        <c:when test="${screenGradeNo eq '2'}">
-				            	<c:set var="ratedImgSrc" value="../resources/image/ticketing/rated12.png" />
-       						</c:when>
-        						<c:when test="${screenGradeNo eq '3'}">
-            				<c:set var="ratedImgSrc" value="../resources/image/ticketing/rated15.png" />
-					        </c:when>
-					        <c:when test="${screenGrad0eNo eq '4' or screenGradeNo eq '5'}">
-					            <c:set var="ratedImgSrc" value="../resources/image/ticketing/rated19.png" />
-					        </c:when>
-    					</c:choose>
+<%-- 					    <c:set var="ratedImgSrc" value="../resources/image/ticketing/ratedAll.png" /> --%>
+<%-- 					    <c:choose> --%>
+<%-- 					        <c:when test="${screenGradeNo eq '2'}"> --%>
+<%-- 				            	<c:set var="ratedImgSrc" value="../resources/image/ticketing/rated12.png" /> --%>
+<%--        						</c:when> --%>
+<%--         					<c:when test="${screenGradeNo eq '3'}"> --%>
+<%--             					<c:set var="ratedImgSrc" value="../resources/image/ticketing/rated15.png" /> --%>
+<%-- 					        </c:when> --%>
+<%-- 					        <c:when test="${screenGradeNo eq '5'}"> --%>
+<%-- 					            <c:set var="ratedImgSrc" value="../resources/image/ticketing/rated19.png" /> --%>
+<%-- 					        </c:when> --%>
+<%--     					</c:choose> --%>
 
-					    <li class="ticketingMovie">
-					        <button type="button" id="movieSelect" onclick="changeMovieInfo('${status.index + 1}')">
-					            <img src="${ratedImgSrc}" alt="이용가">
-					            <span class="text" id="movieNo${movieNo}" value="${movieNo}">${movieName}</span>
-					        </button>
-					    </li>
-					</c:forEach>
+<!-- 					    <li class="ticketingMovie"> -->
+<%-- 					        <button type="button" id="movieSelect" onclick="changeMovieInfo('${status.index + 1}')"> --%>
+<%-- 					            <img src="${ratedImgSrc}" alt="이용가"> --%>
+<%-- 					            <span class="text" id="movieNo${movieNo}" value="${movieNo}">${movieName}</span> --%>
+<!-- 					        </button> -->
+<!-- 					    </li> -->
+<%-- 					</c:forEach> --%>
 <!--                     상영중인 영화리스트..(수정필요)  -->
-<%--                         <% for(int i = 0; i < movieList.size(); i++){ --%>
-<!-- //                         	String movieName = movieList.get(i).getMovieName(); -->
-<!-- //                         	int movieNo = Integer.parseInt(movieList.get(i).getMovieNo()); -->
-<!-- //                         	String movieImage = movieList.get(i).getMovieImage(); -->
-<!-- //                         	String screenGradeNo = movieList.get(i).getScreenGradeNo(); -->
-<!-- //                         	String ratedImgSrc = "../resources/image/ticketing/ratedAll.png"; -->
-<!-- //                         	switch(screenGradeNo){ -->
-<!-- //                         	case "2" : ratedImgSrc = "../resources/image/ticketing/rated12.png"; break; -->
-<!-- //                         	case "3" : ratedImgSrc = "../resources/image/ticketing/rated15.png"; break; -->
-<!-- //                         	case "4" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break; -->
-<!-- //                         	case "5" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break; -->
-<!-- //                         	} -->
-<%--                         %> --%>
-<!--                         <li class="ticketingMovie"> -->
-<%--                             <button type="button" id="movieSelect" onclick="changeMovieInfo('<%=i+1%>');"> --%>
-<%--                         		<img src="<%=ratedImgSrc%>" alt="이용가"> --%>
-<%--                        			<span class="text" id="movieNo<%=movieNo%>" value="<%=movieNo%>"><%=movieName%></span> --%>
-<!--                             </button> -->
-<!--                         </li> -->
-<%--                         <% } %> --%>
+                        <% for(int i = 0; i < movieList.size(); i++){
+                         	String movieName = movieList.get(i).getMovieName();
+                         	int movieNo = Integer.parseInt(movieList.get(i).getMovieNo());
+                         	String movieImage = movieList.get(i).getMovieImage();
+                         	String screenGradeNo = movieList.get(i).getScreenGradeNo();
+                         	String ratedImgSrc = "../resources/image/ticketing/ratedAll.png";
+                         	switch(screenGradeNo){
+                         	case "2" : ratedImgSrc = "../resources/image/ticketing/rated12.png"; break;
+                         	case "3" : ratedImgSrc = "../resources/image/ticketing/rated15.png"; break;
+                         	case "4" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break;
+                         	case "5" : ratedImgSrc = "../resources/image/ticketing/rated19.png"; break;
+                         	}
+                        %>
+                        <li class="ticketingMovie">
+                            <button type="button" id="movieSelect" onclick="changeMovieInfo('<%=movieNo%>');">
+                        		<img src="<%=ratedImgSrc%>" alt="이용가">
+                       			<span class="text" id="movieNo<%=movieNo%>" value="<%=movieNo%>"><%=movieName%></span>
+                            </button>
+                        </li>
+                        <% } %>
                     </ul>
                 </div>
                 <div id="arrow1">
@@ -93,6 +93,7 @@
                         <span class="text">날짜</span>
                     </div>
                     <ul id="dateList">
+
 <!--                     	상영 날짜 리스트 들어가는곳 -->
                     </ul>
                 </div>
@@ -106,49 +107,31 @@
                     <div class="menuName">
                         <span>상영관</span>
                     </div>
-                    <div id="theater1">
-                        <div>1관</div>
-                        <div class="theater1_time">
-                            <div><button class="selectTime">시간1</button></div>
-                            <div><button class="selectTime">시간2</button></div>
-                            <div><button class="selectTime">시간3</button></div>
-                            <div><button class="selectTime">시간4</button></div>
-                            <div><button class="selectTime">시간5</button></div>
-                            <div><button class="selectTime">시간6</button></div>
-                        </div>
-                    </div>
-                    <div id="theater2">
-                        <div>2관</div>
-                        <div class="theater2_time">
-                            <div><button class="selectTime">시간1</button></div>
-                            <div><button class="selectTime">시간2</button></div>
-                            <div><button class="selectTime">시간3</button></div>
-                            <div><button class="selectTime">시간4</button></div>
-                            <div><button class="selectTime">시간5</button></div>
-                            <div><button class="selectTime">시간6</button></div>
-                        </div>
-                    </div>
-                    <div id="theater3">
-                        <div>3관</div>
-                        <div class="theater3_time">
-                            <div><button class="selectTime">시간1</button></div>
-                            <div><button class="selectTime">시간2</button></div>
-                            <div><button class="selectTime">시간3</button></div>
-                            <div><button class="selectTime">시간4</button></div>
-                            <div><button class="selectTime">시간5</button></div>
-                            <div><button class="selectTime">시간6</button></div>
-                        </div>
-                    </div>
-                    <div id="theater4">
-                        <div>4관</div>
-                        <div class="theater4_time">
-                            <div><button class="selectTime">시간1</button></div>
-                            <div><button class="selectTime">시간2</button></div>
-                            <div><button class="selectTime">시간3</button></div>
-                            <div><button class="selectTime">시간4</button></div>
-                            <div><button class="selectTime">시간5</button></div>
-                            <div><button class="selectTime">시간6</button></div>
-                        </div>
+                    <div id="theater">	                
+	                    <div id="theater1">
+	                        <div>1관</div>
+	                        <div id="theater1_time">
+<!-- 							 	1관 상영타임 -->
+	                        </div>
+	                    </div>
+	                    <div id="theater2">
+	                        <div>2관</div>
+	                        <div id="theater2_time">
+<!-- 								2관 상영타임 -->
+	                        </div>
+	                    </div>
+	                    <div id="theater3">
+	                        <div>3관</div>
+	                        <div id="theater3_time">
+<!-- 								3관 상영타임 -->
+	                        </div>
+	                    </div>
+	                    <div id="theater4">
+	                        <div>4관</div>
+	                        <div id="theater4_time">
+<!-- 								4관 상영타임 -->
+	                        </div>
+	                    </div>
                     </div>
                 </div>   
             </div>  
@@ -243,15 +226,15 @@
                 <tbody>
                     <tr>
                         <td>일시</td>
-                        <td><span id="dateInfo"></span><span id="timeInfo"></span></td>
+                        <td><span id="dateInfo"><!-- 선택날짜 --></span><span id="timeInfo"><!-- 선택시간 --></span></td>
                     </tr>
                     <tr>
                         <td>상영관</td>
-                        <td><span id="theaterInfo"></span></td>
+                        <td><span id="theaterInfo"><!-- 선택상영관--></span></td>
                     </tr>
                     <tr>
                         <td>인원</td>
-                        <td id="reservedInfo"></td>
+                        <td id="reservedInfo"><!-- 좌석몇개? --></td>
                     </tr>
                 </tbody>
             </table>
@@ -265,7 +248,7 @@
                     </tr>
                     <tr>
                         <td>좌석번호</td>
-                        <td id="seatInfo"></td>
+                        <td id="seatInfo"><!-- 좌석번호.. A1,A2... --></td>
                     </tr>
                 </tbody>
             </table>
@@ -275,7 +258,7 @@
                 <tbody>
                     <tr>
                         <td>총금액</td>
-                        <td id="payInfo">0</td>
+                        <td id="payInfo">0<!-- 금액(좌석 수 * 8000)  --></td>
                     </tr>
                 </tbody>
             </table>

@@ -36,7 +36,8 @@ public class ScreeningDateListController extends HttpServlet{
 			Gson gson = new Gson();
 			String gsonList = gson.toJson(dateList);
 			PrintWriter out = resp.getWriter();
-			req.setAttribute("screeningList", screeningList);
+//			req.setAttribute("screeningList", screeningList);
+//			req.getSession().setAttribute();
 			out.write(gsonList);
 			
 //			req.getRequestDispatcher("/WEB-INF/views/ticketing/ticketSelect.jsp").include(req, resp);
