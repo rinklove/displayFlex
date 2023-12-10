@@ -48,6 +48,13 @@ public class ScreeningDateVo {
 		this.startTime = startTime;
 	}
 
+	
+	
+	public ScreeningDateVo(String startTime, String theaterNo) {
+		super();
+		this.theaterNo = theaterNo;
+		this.startTime = startTime;
+	}
 	public ScreeningDateVo(String startTime) {
 		super();
 		this.startTime = startTime;

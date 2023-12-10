@@ -179,11 +179,16 @@ header > nav {
 
 #time{
     display: none;
-    grid-template-rows: 41.25px 1fr 1fr 1fr 1fr;
+    grid-template-rows: 41.25px 1fr;
     grid-row-gap: 10px;
     max-height: 483.25px;
     max-width: 380px;
 } 
+
+#theater{
+	    display: grid;
+    grid-gap: 10px;
+}
 
 #theater1, #theater2, #theater3, #theater4 {
 	border: 1px solid #ab9e9e;
@@ -248,7 +253,7 @@ header > nav {
     margin-top: 5px;
 }   
 
-.theater1_time, .theater2_time, .theater3_time, .theater4_time  {
+#theater1_time, #theater2_time, #theater3_time, #theater4_time  {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
@@ -260,7 +265,7 @@ header > nav {
     text-align: center;
 }
 
-.theater1_time > div, .theater2_time > div, .theater3_time > div, .theater4_time > div {
+#theater1_time > div, #theater2_time > div, #theater3_time > div, #theater4_time > div {
     border-radius: 10px;
     background-color:#c3c3c3;
     position: relative;
@@ -272,11 +277,11 @@ header > nav {
 
 
 
-.theater1_time > div:hover, .theater2_time > div:hover, .theater3_time > div:hover, .theater4_time > div:hover {
+#theater1_time > div:hover, #theater2_time > div:hover, #theater3_time > div:hover, #theater4_time > div:hover {
     font-weight: bold;
 }
 
-.theater1_time > div > button, .theater2_time > div > button, .theater3_time > div > button, .theater4_time > div > button {
+#theater1_time > div > button, #theater2_time > div > button, #theater3_time > div > button, #theater4_time > div > button {
     position: relative;
 }
 

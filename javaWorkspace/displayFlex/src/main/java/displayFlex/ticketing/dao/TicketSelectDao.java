@@ -16,7 +16,7 @@ public class TicketSelectDao {
 	// 상영중인 영화 리스트 받아오기
 	public List<SelectMovieVo> getMovieList(Connection conn) throws Exception {
 		
-		String sql ="SELECT SI.* , M.MOVIE_NO , M.MOVIE_NAME , M.MOVIE_IMAGE , M.SCREEN_GRADE_NO FROM SCREENING_INFO SI JOIN MOVIE M ON SI.MOVIE_NO = M.MOVIE_NO";
+		String sql ="SELECT SI.* , M.MOVIE_NO , M.MOVIE_NAME , M.MOVIE_IMAGE , M.SCREEN_GRADE_NO FROM SCREENING_INFO SI JOIN MOVIE M ON SI.MOVIE_NO = M.MOVIE_NO ORDER BY M.MOVIE_NO";
 		String x = "SELECT SI.* , M.MOVIE_NAME, M.SCREEN_GRADE_NO, M.MOVIE_IMAGE , T.THEATER_NO , ST.SCREENING_TIME_NO, ST.START_TIME, ST.END_TIME FROM SCREENING_INFO SI JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO JOIN MOVIE M ON M.MOVIE_NO = SI.MOVIE_NO JOIN THEATER T ON SI.THEATER_NO = T.THEATER_NO WHERE SI.START_DATE >= SYSDATE";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
@@ -71,9 +71,9 @@ public class TicketSelectDao {
 //			String screeningInfoNo = rs.getString("SCREENING_INFO_NO");
 //			String theaterNo = rs.getString("THEATER_NO");
 //			String screeningTimeNo = rs.getString("SCREENING_TIME_NO");			
-			String startTime = rs.getString("START_TIME");
-			System.out.println("startTime : " + startTime);
-			ScreeningDateVo vo = new ScreeningDateVo(startTime);
+			String date = rs.getString("START_TIME");
+			System.out.println("date : " + date);
+			ScreeningDateVo vo = new ScreeningDateVo(date);
 			screeningList.add(vo);
 		}
 //		System.out.println("screeningList" + screeningList);
@@ -84,6 +84,28 @@ public class TicketSelectDao {
 	}
 
 	// 상영시간(상영관) 받아오기
+	public List<ScreeningDateVo> getScreeningTimeList(Connection conn, String movieNo) throws Exception {
+
+		String sql = "SELECT TO_CHAR(T.START_TIME, 'HH24:MI') AS TIME, I.THEATER_NO FROM SCREENING_TIME T JOIN SCREENING_INFO I ON T.SCREENING_INFO_NO = I.SCREENING_INFO_NO WHERE I.MOVIE_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, movieNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<ScreeningDateVo> screeningTimeList = new ArrayList<ScreeningDateVo>();
+		while(rs.next()) {
+			String time = rs.getString("TIME");
+			String theaterNo = rs.getString("THEATER_NO");
+			System.out.println("time : " + time);
+			
+			ScreeningDateVo vo = new ScreeningDateVo(time, theaterNo);
+			
+			screeningTimeList.add(vo);
+		}
+		
+		
+		return screeningTimeList;
+	}
+
 	
 	// 좌석정보 받아오기
 }

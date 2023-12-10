@@ -30,17 +30,25 @@ function printDateList(){
 
             dateList.innerHTML = "";
 
+			if(voList.length == 0 ){
+				const x = document.createElement("li");
+				dateList.appendChild(x);
+				x.innerText = "상영정보가 없습니다.";
+			}
+	
             voList.forEach((date, index) => {
-                const listItem = createListItem(date, index);
+                const listItem = createDateList(date, index);
                 dateList.appendChild(listItem);
             });
+            
+            
         })
 }
 
 // 날짜 li 생성
-function createListItem(date, index) {
-//    cosole.log("createListItem date : " + date);
-//        cosole.log("createListItem index : " + index);
+function createDateList(date, index) {
+//    console.log("createListItem date : " + date);
+//    console.log("createListItem index : " + index);
 
     const listItem = document.createElement("li");
     listItem.className = "ticketingDate";
@@ -67,17 +75,90 @@ function createListItem(date, index) {
 function printTimeList(){
  	fetch("http://localhost:9002/cinema/ticket/select/timeList?movieNo=" + sessionStorage.getItem("movieNo"))
 	.then( (resp) => { return resp.json() } ) 
-	.then( (voList) => { 
-            console.log(voList);
-            const dateList = document.getElementById("dateList");
+	.then( (theatersData) => { 
+			console.log(theatersData);
 
-            dateList.innerHTML = "";
-
-            voList.forEach((date, index) => {
-                const listItem = createListItem(date, index);
-                dateList.appendChild(listItem);
-            });
+            const theater1 = document.getElementById("theater1_time")
+            const theater2 = document.getElementById("theater2_time")
+            const theater3 = document.getElementById("theater3_time")
+            const theater4 = document.getElementById("theater4_time")
+			
+			theater1.innerHTML = "";
+			theater2.innerHTML = "";
+			theater3.innerHTML = "";
+			theater4.innerHTML = "";
+			
+			theatersData.forEach((list) => {
+				switch(list.theaterNo){
+					case '1' : 
+						theater1.appendChild(createTimeDiv(list));
+						break;
+			        case '2' :
+						theater2.appendChild(createTimeDiv(list));
+						break;
+			        case '3' :
+						theater3.appendChild(createTimeDiv(list));
+						break;
+			        case '4' :	
+			        	theater4.appendChild(createTimeDiv(list));	
+			        	break;
+				}
+			})
+			
+			
+//			const theaters = {};
+//			
+//			// 상영관 및 시간 정보 분류
+//			theatersData.forEach((item) => {
+//				const theaterNo = item.theaterNo;
+//				if (!theaters[theaterNo]) {
+//			    	theaters[theaterNo] = [];
+//			 	}
+//				theaters[theaterNo].push(item.startTime);
+//			});
+//			
+//			console.log(theaters);
+//			
+//			// 상영관 및 시간 정보 추가
+//			const timeContainer = document.getElementById("theater");
+//			
+//			for (const theaterNo in theaters) {
+//			  	const theaterDiv = document.createElement("div");
+//				theaterDiv.id = "theater" + theaterNo;
+//			  
+//			  	const theaterNameDiv = document.createElement("div");
+//			  	theaterNameDiv.textContent = theaterNo + "관";
+//			  	theaterDiv.appendChild(theaterNameDiv);
+//			  
+//			  	const timeButtonsDiv = document.createElement("div");
+//			  	timeButtonsDiv.className = "theater" + theaterNo + "_time";
+//			  	
+//			  	theaters[theaterNo].forEach((startTime) => {
+//			   		const button = document.createElement("button");
+//			    	button.className = "selectTime";
+//			    	button.textContent = startTime;
+//			    	timeButtonsDiv.appendChild(document.createElement("div").appendChild(button).parentNode);
+//			  	});
+//			  	
+//			  	theaterDiv.appendChild(timeButtonsDiv);
+//			  	timeContainer.appendChild(theaterDiv);
+//			
+//			}
         })
+}
+
+// 시간 div 생성
+function createTimeDiv(list){
+	const div = document.createElement("div");
+	const button = document.createElement("button");
+	button.type = "button";
+	button.onclick = () => changeTimeInfo(list);
+	button.className="selectTime";
+	button.value= list.theaterNo + ":" +  list.startTime; 
+	div.appendChild(button);
+	button.textContent =  list.startTime;
+	
+	return div;
 }
 
 
@@ -121,6 +202,7 @@ function printTimeList(){
     console.log(ticketData);
  
    	sessionStorage.setItem("movieNo", index);
+   	ticketData.selectedMovieNo = index;
    	changeMovieImage();
    	printDateList();
   }
@@ -158,42 +240,74 @@ function printTimeList(){
 	}
 
     console.log(ticketData);
+    printTimeList();
    }
 
+// 예매 - 상영관, 시간 선택 (다시짜는중...)
+// list.theaterNo, list.startTime
+function changeTimeInfo(list){
+	console.log("아무것도엇ㅂ지롱ㅋㅋ");
+	console.log(list);
+	const clickedTime = event.target;
+	clickedTime.parentNode.style.backgroundColor = '#EDD711';
+	
+	if (window.selectedTime && window.selectedTime !== clickedTime) {
+       window.selectedTime.parentNode.style.backgroundColor = '';
+    }
+
+	const timeInfo = document.getElementById('timeInfo');
+    timeInfo.innerText = list.startTime;
+
+	const theaterInfo = document.getElementById('theaterInfo');
+	theaterInfo.innerText = list.theaterNo + "관";
+
+	window.selectedTime = clickedTime;
+	
+	ticketData.selectedTime = list.startTime;
+    ticketData.selectedTheater = list.theaterNo;
+	
+	console.log(ticketData);
+	
+	const seatMenu = document.getElementById('ticketing2')
+
+    if(ticketData.selectedTime !== null){
+    	seatMenu.style.cssText = 'display : block;'  
+    }
+}
 
 // 예매 -상영관, 시간 선택
-const selectedTimeButtons = document.getElementsByClassName("selectTime");
-
-Array.from(selectedTimeButtons).forEach(function (button) {
-    button.addEventListener('click', function() {
-      const selectedTheater = this.closest('div[id^="theater"]').querySelector('div:first-child').innerText;
-      button.parentNode.style.backgroundColor = '#EDD711';
- 
-      if (window.selectedTime && window.selectedTime !== button) {
-          window.selectedTime.parentNode.style.backgroundColor = '';
-      }
-
-
-      const timeInfo = document.getElementById('timeInfo');
-      timeInfo.innerText = button.innerText;
-	
-		  const theaterInfo = document.getElementById('theaterInfo');
-		  theaterInfo.innerText = selectedTheater
-
-      window.selectedTime = button;
-
-      ticketData.selectedTime = button.innerText;
-      ticketData.selectedTheater = theaterInfo.innerText;
-
-      const seatMenu = document.getElementById('ticketing2')
-
-      if(ticketData.selectedTime !== null){
-        seatMenu.style.cssText = 'display : block;'  
-      }
-
-      console.log(ticketData);
-    });
-});
+//const selectedTimeButtons = document.getElementsByClassName("selectTime");
+//
+//Array.from(selectedTimeButtons).forEach(function (button) {
+//    button.addEventListener('click', function() {
+//      const selectedTheater = this.closest('div[id^="theater"]').querySelector('div:first-child').innerText;
+//      button.parentNode.style.backgroundColor = '#EDD711';
+// 
+//      if (window.selectedTime && window.selectedTime !== button) {
+//          window.selectedTime.parentNode.style.backgroundColor = '';
+//      }
+//
+//
+//      const timeInfo = document.getElementById('timeInfo');
+//      timeInfo.innerText = button.innerText;
+//	
+//	  const theaterInfo = document.getElementById('theaterInfo');
+//	  theaterInfo.innerText = selectedTheater
+//
+//      window.selectedTime = button;
+//
+//      ticketData.selectedTime = button.innerText;
+//      ticketData.selectedTheater = theaterInfo.innerText;
+//
+//      const seatMenu = document.getElementById('ticketing2')
+//
+//      if(ticketData.selectedTime !== null){
+//        seatMenu.style.cssText = 'display : block;'  
+//      }
+//
+//      console.log(ticketData);
+//    });
+//});
     
 // 좌석 선택 - 몇 명인지, 몇번 좌석인지
 document.querySelectorAll('.seat div').forEach(seat => {

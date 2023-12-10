@@ -48,10 +48,17 @@ public class TicketSelectService {
 		return screeningList;
 	}
 
-	public List<ScreeningDateVo> getScreeningTimeList(String movieNo) {
+	public List<ScreeningDateVo> getScreeningTimeList(String movieNo) throws Exception {
 		
-
-		return null;
+		Connection conn = JDBCTemplate.getConnection();
+		
+		TicketSelectDao dao = new TicketSelectDao();
+		
+		List<ScreeningDateVo> screeningList = (List<ScreeningDateVo>) dao.getScreeningTimeList(conn, movieNo); 
+		
+		JDBCTemplate.close(conn);
+		
+		return screeningList;
 	}
 
 	
