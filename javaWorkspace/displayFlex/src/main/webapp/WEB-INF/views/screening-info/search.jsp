@@ -43,8 +43,8 @@
              </dataList>
         </div>
         <div class="col-2 m-auto">
-          <select class="form-select  d-inline-block h-2-5em" name="theater" aria-label="Small select example">
-              <option selected value="">상영관 선택</option>
+          <select class="form-select  d-inline-block h-2-5em" aria-label="Small select example" name="theater">
+              <option selected>상영관 선택</option>
                 <c:forEach var="element" items="${theater }">
 	                <option value="${element }">${element }</option>
                 </c:forEach>
@@ -103,7 +103,7 @@
     </table>
     <div class="page-area text-center">
         <c:if test="${pageVo.startPage gt 1 }">
-            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${pageVo.startPage-1}" >이전</a>	            
+            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/search/list?pno=${pageVo.startPage-1}" >이전</a>	            
         </c:if>
         <c:forEach var="i"  begin="${pageVo.startPage }" end="${pageVo.endPage }">
         <c:choose>
@@ -111,12 +111,12 @@
             <span class="bg-success p-2 m-1 text-white">${i }</span>      	
         </c:when>
         <c:otherwise>
-            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${i}" }" >${i }</a>            
+            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/search/list?pno=${i}" }" >${i }</a>            
         </c:otherwise>
         </c:choose>
         </c:forEach>
         <c:if test="${pageVo.endPage ne pageVo.maxPage }">
-            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/list?pno=${pageVo.endPage+1}" >다음</a>	
+            <a class="m-1 text-decoration-none text-black" href="${pageContext.request.contextPath}/admin/screen-info/search/list?pno=${pageVo.endPage+1}" >다음</a>	
         </c:if>
     </div>
         
