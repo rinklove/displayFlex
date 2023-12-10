@@ -11,7 +11,7 @@ import test.JDBCTemplate;
 
 public class StoreService {
 	
-	// 스토어 메뉴 리스트
+	// 스토어 메뉴 리스트(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)  
 	public List<StoreVo> selectMenuList() throws Exception{
 		
 		//conn
@@ -45,24 +45,22 @@ public class StoreService {
 	
 	}
 
-	public Map<String, Object> storeMenuList(String cate) throws Exception {
+	// 스토어메뉴 리스트(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
+	public List<StoreVo> storeMenuList(String cate) throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		StoreDao dao = new StoreDao();
-		StoreVo vo = dao.storeMenuList(conn, cate);
+		List<StoreVo> list = dao.storeMenuList(conn, cate);
 		
 		//tx
 		
 		//close
 		JDBCTemplate.close(conn);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("vo", vo);
-		
-		return map;
+		return list;
 	}
 
 }//class

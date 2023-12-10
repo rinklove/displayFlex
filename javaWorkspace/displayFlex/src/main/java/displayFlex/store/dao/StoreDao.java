@@ -11,7 +11,7 @@ import test.JDBCTemplate;
 
 public class StoreDao {
 	
-	// 스토어 메뉴 리스트
+	// 스토어 메뉴 리스트(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)
 	public List<StoreVo> selectMenuList(Connection conn) throws Exception{
 	
 		//sql
@@ -75,7 +75,8 @@ public class StoreDao {
 	
 	}
 
-	public StoreVo storeMenuList(Connection conn, String cate) throws Exception{
+	// 스토어메뉴 리스트(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
+	public List<StoreVo> storeMenuList(Connection conn, String cate) throws Exception{
 
 		//SQL
 		String sql = "SELECT P.PRODUCT_NO , C.CATE_NAME CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.CATE_NAME LIKE ?";
@@ -84,9 +85,9 @@ public class StoreDao {
 		ResultSet rs = pstmt.executeQuery();
 		
 		//rs
-		StoreVo vo = null;
+		List<StoreVo> voList = new ArrayList<StoreVo>();
+		
 		while(rs.next()) {
-			
 			String productNo = rs.getString("PRODUCT_NO");
 			String category = rs.getString("CATEGORY");
 			String memberNo = rs.getString("MEMBER_NO");
@@ -98,24 +99,15 @@ public class StoreDao {
 			String delYn = rs.getString("DEL_YN");
 			String shortDescription = rs.getString("SHORT_DESCRIPTION");
 			
-			vo= new StoreVo();
-			vo.setProductNo(productNo);
-			vo.setCategory(category);
-			vo.setMemberNo(memberNo);
-			vo.setImage(image);
-			vo.setTitle(title);
-			vo.setPrice(price);
-			vo.setProductElement(productElement);
-			vo.setEnrollDate(enrollDate);
-			vo.setDelYn(delYn);
-			vo.setShortDescription(shortDescription);
+			StoreVo vo = new StoreVo(productNo, category, memberNo, image, title, price, productElement, enrollDate, delYn, shortDescription);
+			voList.add(vo);
 		}
 		
 		//close
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);
 		
-		return vo;
+		return voList;
 	}
 
 
