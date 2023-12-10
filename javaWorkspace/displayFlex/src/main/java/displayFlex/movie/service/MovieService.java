@@ -198,5 +198,20 @@ public class MovieService {
 		return result;
 	}
 
+	/**
+	 * 영화가 상영중인지 체크하기
+	 * @param movieNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int checkScreeningByNo(String movieNo) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int count = movieDao.checkScreeningByNo(movieNo, con);
+		
+		JDBCTemplate.close(con);
+		return count;
+	}
+
 	
 }

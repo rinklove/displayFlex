@@ -453,6 +453,28 @@ public class MovieDao {
 		return result;
 	}
 
+	/**
+	 * 영화가 상영중인지 체크하기
+	 * @param movieNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int checkScreeningByNo(String movieNo, Connection con) throws SQLException {
+		query = "SELECT COUNT(SI.MOVIE_NO) FROM MOVIE M LEFT OUTER JOIN SCREENING_INFO SI ON M.MOVIE_NO = SI.MOVIE_NO INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE M.MOVIE_NO = ? AND ST.END_TIME > SYSDATE";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, movieNo);
+		
+		ResultSet rs = pstmt.executeQuery();
+		int count = 0;
+		if(rs.next()) {
+			count = rs.getInt(1);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return count;
+	}
+
 	
 	
 

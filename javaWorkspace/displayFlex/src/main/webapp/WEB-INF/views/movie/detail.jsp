@@ -61,9 +61,9 @@
                     <td>제작 국가</td>
                     <td>${movie.nation }</td>
                     <td id="reserve-td">
-                    	<%-- <c:if test="${movie.isScreening eq 'Y'  && loginMember.adminYn eq 'N'}">
+                    	<c:if test="${movie.isScreening eq true  && loginMember.adminYn eq 'N'}">
                     		<button class="bg-abc95f"  onclick="location.href='${pageContext.request.contextPath}/'">예매하기→</button>
-                    	</c:if> --%>
+                    	</c:if>
                     </td>
                 </tr>
 

@@ -36,6 +36,7 @@ public class MovieDetailDto {
 		this.movieImage = movieImage;
 		this.runningTime = runningTime;
 		this.releaseDate = releaseDate;
+		this.isScreening = false;
 		this.genre = genre;
 		this.nation = nation;
 	}
