@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryDetail.css">
-<script defer type="text/javascript" src="./resources/js/serviceCenter/inquiry.js"></script>
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -95,6 +95,11 @@
             </div>
         </div>
     </main>
+    
+    
+    <script>
+    	
+    </script>
 
 </body>
 </html>

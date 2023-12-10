@@ -1,6 +1,7 @@
 package displayFlex.serviceCenter.notice.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -156,6 +157,22 @@ public class NoticeService {
 
 		return result;
 		
+	}
+
+	// 게시글 수정 (화면)
+	public NoticeVo edit(String noticeNo) throws Exception {
+		
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		NoticeDao dao = new NoticeDao();
+		NoticeVo vo = dao.selectNoticeByNo(conn , noticeNo);
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return vo;
 	}
 
 		

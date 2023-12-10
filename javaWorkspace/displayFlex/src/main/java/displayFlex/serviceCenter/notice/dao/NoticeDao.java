@@ -197,7 +197,6 @@ public class NoticeDao {
 	//게시글 번호로 게시글 1개 조회
 	public NoticeVo selectNoticeByNo(Connection conn, String noticeNo) throws Exception {
 		
-		
 		//SQL
 	    String sql = "SELECT NOTICE_NO, TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE, HIT FROM NOTICE WHERE NOTICE_NO = ? AND DELETE_YN = 'N'";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -264,6 +263,8 @@ public class NoticeDao {
 	    return result;
 		
 	}
+
+	
 
 	
 
