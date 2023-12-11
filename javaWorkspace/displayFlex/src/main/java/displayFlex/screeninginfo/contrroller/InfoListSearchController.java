@@ -44,6 +44,7 @@ public class InfoListSearchController extends HttpServlet {
 			String startTime = request.getParameter("startTime") == "" ? null : request.getParameter("startTime");
 			String endTime = request.getParameter("endTime") == "" ? null : request.getParameter("endTime");
 
+			System.out.println("theater = " + theater );
 			ScreenInfoDto screenInfo = new ScreenInfoDto(title, theater, screeningDate, startTime, endTime);
 			//영화 리스트 가져오기(페이징 처리 10개씩)
 			int pno = request.getParameter("pno") == null ? 1 : Integer.parseInt(request.getParameter("pno"));
