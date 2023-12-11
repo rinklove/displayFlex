@@ -1,6 +1,8 @@
+<%@page import="displayFlex.store.vo.StoreVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/cinema/resources/css/store/productDetail.css">
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,27 +17,25 @@
 
 		<div class="product-main">
 			<div>
-				<div><h1>스토어</h1></div>
+				<div><h1>${ vo.category }</h1></div>
 				<%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
 				<div id="enroll"><button onclick="location.href='/cinema/admin/store/enroll'">등록</button></div>
 				<div id="delete"><button>삭제</button></div>
 				<%-- </c:if> --%>
 			</div>
 			<div id="product-detail">
-				<div>
-					<img src="/cinema/resources/image/store/item.png" alt="item">
-				</div>
+				<div><img src="/cinema/${vo.image}" alt="product" width="400" height="400"></div>
 				<div id="detail">
 					<h1>
-						<b>우리 패키지</b>
+						<b>${vo.title}</b>
 					</h1>
 					<div id="description">
 						<div>가격</div>
-						<div>61,000원</div>
+						<div>${vo.price}</div>
 						<div>상품구성</div>
-						<div>일반 영화 관람권 4매+더블콤보 1개</div>
+						<div>${vo.productElement}</div>
 						<div>제품설명</div>
-						<div>일반 영화를 관람할 수 있는 영화 관람권 4매와 맛있는 팝콘과 콜라를 먹을 수 있는 우리 패키지</div>
+						<div>${vo.shortDescription}</div>
 					</div>
 				</div>
 			</div>

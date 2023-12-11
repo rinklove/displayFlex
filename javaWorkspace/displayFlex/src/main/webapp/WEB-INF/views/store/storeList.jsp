@@ -38,7 +38,8 @@
 			<div class="itemPhoto">
 				<c:forEach items="${storeVoList}" var="vo">
 					<div>
-						<a href="/cinema/store/product">
+                        <!-- 제발 a 태그 주소 잘 받아와야한다!!!! 쫌!!!! -->
+						<a href="/cinema/store/product?no=${vo.productNo }">
 						<img src="${vo.image}" alt="product" width="200" height="200">
 						<br>
 						<span id="first"><b>${vo.title}</b></span>
@@ -50,8 +51,8 @@
 						<span id="third"><b>${vo.price}</b></span>
 					</div>
 				</c:forEach>
-				<div></div>
-				<div></div>
+					<div></div>
+					<div></div>
 			</div>
 
 		</div>

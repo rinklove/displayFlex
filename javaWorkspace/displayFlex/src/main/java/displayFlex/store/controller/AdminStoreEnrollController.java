@@ -38,7 +38,22 @@ public class AdminStoreEnrollController extends HttpServlet{
 		String fileName = sep + "abc.png";
 		File target = new File(path + fileName);
 		FileOutputStream out = new FileOutputStream(target);
+		
+		int data = 0;
+		while((data = in.read()) != -1) {
+			out.write(data);
+		}
 	
+		byte[] buf = new byte[194000];
+		int size = 0;
+		while( (size = in.read(buf)) != -1) {
+			out.write(buf, 0, size);
+		}
+		
+		// 정리
+		in.close();
+		out.close();
+		
 	}//doPost
 
 

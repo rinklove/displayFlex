@@ -30,7 +30,46 @@ window.onload = () => {
 	
 }
 
-function clickMenu(){
-	const itmePhoto = document.querySelector()
+
+
+
+
+
+
+const menu = document.querySelector("#smallMenu > div:first-child > button");
+
+function handleMenuClick(){
+    const currentColor = menu.style.color;  
+    let newColor;
+    if(currentColor === "#0C4667"){
+        newColor = "#abc95f";
+    }else{
+        newColor = "#0C4667";
+    }
+
+    menu.style.color = newColor;
 }
+
+menu.addEventListener("click", handleMenuClick);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
