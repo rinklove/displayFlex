@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.Arrays" %>
@@ -26,16 +27,16 @@
                     <td><span class="fs-6 fw-bold mx-2 mt-3 d-flex align-content-center">장르</span></td>
                     <td>
                         <c:forEach var="genreElement" items="${genreList}" >
-	                        <c:choose>
-								<c:when test="${fn:contains(selectGenre, genreElement.genreCateNo)}">
+<%-- 	                        <c:choose>
+								<c:when test="<%selectGenre.indexOf(${genreElement.genreCateNo}) != -1 && selectGenre != null %>">
 			                        <input type="checkbox" class="btn-check" name="genres" id="${genreElement.cateName}" value="${genreElement.genreCateNo}" autocomplete="off" checked="checked">
 									<label class="btn btn-outline-danger rounded-pill m-1" for="${genreElement.cateName}">${genreElement.cateName}</label>							
 								</c:when>
-								<c:otherwise>
+								<c:otherwise> --%>
 			                        <input type="checkbox" class="btn-check" name="genres" id="${genreElement.cateName}" value="${genreElement.genreCateNo}" autocomplete="off">
 									<label class="btn btn-outline-danger rounded-pill m-1" for="${genreElement.cateName}">${genreElement.cateName}</label>							
-								</c:otherwise>
-	                        </c:choose>
+<%-- 								</c:otherwise>
+	                        </c:choose> --%>
                         </c:forEach>
                     </td>
                 </tr>

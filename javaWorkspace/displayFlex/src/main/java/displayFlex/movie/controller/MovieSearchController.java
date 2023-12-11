@@ -1,6 +1,7 @@
 package displayFlex.movie.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -63,11 +64,10 @@ public class MovieSearchController extends HttpServlet {
 			if(selectedQuery.contains("&pno")) {
 				selectedQuery = request.getQueryString().substring(0, selectedQuery.lastIndexOf("&"));				
 			}
-			if(genres == null) {
-				genres[0] = "0";
-			}
+			List<String> list = Arrays.asList(genres);
+
 			request.setAttribute("genreList", genreList);
-			request.setAttribute("selectGenre", genres);	
+			request.setAttribute("selectGenre", list);	
 			request.setAttribute("selectGrade", grade);
 
 			request.setAttribute("screenGradeList", screenGradeList);
