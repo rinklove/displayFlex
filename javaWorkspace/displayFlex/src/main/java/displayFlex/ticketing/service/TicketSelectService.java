@@ -61,6 +61,19 @@ public class TicketSelectService {
 		return screeningList;
 	}
 
+	public List<String> getSeatInfo(String theaterNo, String screeningTimeNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		TicketSelectDao dao = new TicketSelectDao();
+		
+		List<String> reservedSeatList = dao.getSeatInfo(theaterNo, screeningTimeNo, conn);
+
+		JDBCTemplate.close(conn);
+		
+		return reservedSeatList;
+	}
+
 	
 	
 }

@@ -50,10 +50,11 @@ public class ScreeningDateVo {
 
 	
 	
-	public ScreeningDateVo(String startTime, String theaterNo) {
+	public ScreeningDateVo(String startTime, String theaterNo, String screeningTimeNo) {
 		super();
 		this.theaterNo = theaterNo;
 		this.startTime = startTime;
+		this.screeningTimeNo = screeningTimeNo;
 	}
 	public ScreeningDateVo(String startTime) {
 		super();

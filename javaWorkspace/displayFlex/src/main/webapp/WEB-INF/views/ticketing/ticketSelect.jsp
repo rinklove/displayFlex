@@ -144,63 +144,63 @@
                     <div id="seat_area">
                         <div class="seat" id="seat_A">
                             <div class="seatRow" id="A">A</div>
-                            <div class="seat_A" id="seat01"><button>1</button></div>
-                            <div class="seat_A" id="seat02"><button>2</button></div>
+                            <div class="seat_A" id="A1"><button>1</button></div>
+                            <div class="seat_A" id="A2"><button>2</button></div>
                             <div></div>
-                            <div class="seat_A" id="seat03"><button>3</button></div>
-                            <div class="seat_A" id="seat04"><button>4</button></div>
-                            <div class="seat_A" id="seat05"><button>5</button></div>
-                            <div class="seat_A" id="seat06"><button>6</button></div>
-                            <div class="seat_A" id="seat07"><button>7</button></div>
-                            <div class="seat_A" id="seat08"><button>8</button></div>
+                            <div class="seat_A" id="A3"><button>3</button></div>
+                            <div class="seat_A" id="A4"><button>4</button></div>
+                            <div class="seat_A" id="A5"><button>5</button></div>
+                            <div class="seat_A" id="A6"><button>6</button></div>
+                            <div class="seat_A" id="A7"><button>7</button></div>
+                            <div class="seat_A" id="A8"><button>8</button></div>
                             <div></div>
-                            <div class="seat_A" id="seat09"><button>9</button></div>
-                            <div class="seat_A" id="seat10"><button>10</button></div>
+                            <div class="seat_A" id="A9"><button>9</button></div>
+                            <div class="seat_A" id="A10"><button>10</button></div>
                         </div>
                         <div class="seat" id="seat_B">
                             <div class="seatRow" id="B">B</div>
-                            <div class="seat_B" id="seat01"><button>1</button></div>
-                            <div class="seat_B" id="seat02"><button>2</button></div>
+                            <div class="seat_B" id="B1"><button>1</button></div>
+                            <div class="seat_B" id="B2"><button>2</button></div>
                             <div></div>
-                            <div class="seat_B" id="seat03"><button>3</button></div>
-                            <div class="seat_B" id="seat04"><button>4</button></div>
-                            <div class="seat_B" id="seat05"><button>5</button></div>
-                            <div class="seat_B" id="seat06"><button>6</button></div>
-                            <div class="seat_B" id="seat07"><button>7</button></div>
-                            <div class="seat_B" id="seat08"><button>8</button></div>
+                            <div class="seat_B" id="B3"><button>3</button></div>
+                            <div class="seat_B" id="B4"><button>4</button></div>
+                            <div class="seat_B" id="B5"><button>5</button></div>
+                            <div class="seat_B" id="B6"><button>6</button></div>
+                            <div class="seat_B" id="B7"><button>7</button></div>
+                            <div class="seat_B" id="B8"><button>8</button></div>
                             <div></div>
-                            <div class="seat_B" id="seat09"><button>9</button></div>
-                            <div class="seat_B" id="seat10"><button>10</button></div>
+                            <div class="seat_B" id="B9"><button>9</button></div>
+                            <div class="seat_B" id="B10"><button>10</button></div>
                         </div>
                         <div class="seat" id="seat_C">
                             <div class="seatRow" id="C">C</div>
-                            <div class="seat_C" id="seat01"><button>1</button></div>
-                            <div class="seat_C" id="seat02"><button>2</button></div>
+                            <div class="seat_C" id="C1"><button>1</button></div>
+                            <div class="seat_C" id="C2"><button>2</button></div>
                             <div></div>
-                            <div class="seat_C" id="seat03"><button>3</button></div>
-                            <div class="seat_C" id="seat04"><button>4</button></div>
-                            <div class="seat_C" id="seat05"><button>5</button></div>
-                            <div class="seat_C" id="seat06"><button>6</button></div>
-                            <div class="seat_C" id="seat07"><button>7</button></div>
-                            <div class="seat_C" id="seat08"><button>8</button></div>
+                            <div class="seat_C" id="C3"><button>3</button></div>
+                            <div class="seat_C" id="C4"><button>4</button></div>
+                            <div class="seat_C" id="C5"><button>5</button></div>
+                            <div class="seat_C" id="C6"><button>6</button></div>
+                            <div class="seat_C" id="C7"><button>7</button></div>
+                            <div class="seat_C" id="C8"><button>8</button></div>
                             <div></div>
-                            <div class="seat_C" id="seat09"><button>9</button></div>
-                            <div class="seat_C" id="seat10"><button>10</button></div>
+                            <div class="seat_C" id="C9"><button>9</button></div>
+                            <div class="seat_C" id="C10"><button>10</button></div>
                         </div>
                         <div class="seat" id="seat_D">
                             <div class="seatRow" id="D">D</div>
-                            <div class="seat_D" id="seat01"><button>1</button></div>
-                            <div class="seat_D" id="seat02"><button>2</button></div>
+                            <div class="seat_D" id="D1"><button>1</button></div>
+                            <div class="seat_D" id="D2"><button>2</button></div>
                             <div></div>
-                            <div class="seat_D" id="seat03"><button>3</button></div>
-                            <div class="seat_D" id="seat04"><button>4</button></div>
-                            <div class="seat_D" id="seat05"><button>5</button></div>
-                            <div class="seat_D" id="seat06"><button>6</button></div>
-                            <div class="seat_D" id="seat07"><button>7</button></div>
-                            <div class="seat_D" id="seat08"><button>8</button></div>
+                            <div class="seat_D" id="D3"><button>3</button></div>
+                            <div class="seat_D" id="D4"><button>4</button></div>
+                            <div class="seat_D" id="D5"><button>5</button></div>
+                            <div class="seat_D" id="D6"><button>6</button></div>
+                            <div class="seat_D" id="D7"><button>7</button></div>
+                            <div class="seat_D" id="D8"><button>8</button></div>
                             <div></div>
-                            <div class="seat_D" id="seat09"><button>9</button></div>
-                            <div class="seat_D" id="seat10"><button>10</button></div>
+                            <div class="seat_D" id="D9"><button>9</button></div>
+                            <div class="seat_D" id="D10"><button>10</button></div>
                         </div>
                     </div>
                     <div id="seat_description">

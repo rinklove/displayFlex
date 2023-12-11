@@ -5,7 +5,7 @@
 let ticketData = {};
 let seatData = [];
 
-// 포스터 이미지 바꾸끼
+// 포스터 이미지 바꾸기
 function changeMovieImage(){
 	
 	fetch("http://localhost:9002/cinema/ticket/select/image?movieNo=" + sessionStorage.getItem("movieNo"))
@@ -133,6 +133,30 @@ function createTimeDiv(list){
 	return div;
 }
 
+// 예약된 좌석 스타일 변경
+function setSeat(list){
+	
+	const theaterNo = list.theaterNo;
+	const screeningTimeNo = list.screeningTimeNo;
+
+	fetch("http://localhost:9002/cinema/ticket/select/seatInfo?selectTheater=" + theaterNo + "," + screeningTimeNo )
+	.then( (resp) => { return resp.sjson() } ) 
+	.then((seatData) => {
+		console.log("시트데이터 : " + seatData);
+		seatData.forEach((seat) => {
+			console.log(seat);
+			const reservedSeat = document.getElementById(seat);
+			
+			reservedSeat.style.cssText = "background-color : #B73131; pointer-events: none;";
+		})
+	})
+}
+
+function zz(){}
+    const allSeats = document.querySelectorAll('.seat'); 
+    allSeats.forEach(seat => {
+        seat.style.cssText = ""; 
+    });
 
 // 예매 - 영화 선택
  function changeMovieInfo(index) {
@@ -212,10 +236,10 @@ function createTimeDiv(list){
     printTimeList();
    }
 
-// 예매 - 상영관, 시간 선택 (다시짜는중...)
+// 예매 - 상영관, 시간 선택 
 // list.theaterNo, list.startTime
 function changeTimeInfo(list){
-	console.log("아무것도엇ㅂ지롱ㅋㅋ");
+	
 	console.log(list);
 	const clickedTime = event.target;
 	clickedTime.parentNode.style.backgroundColor = '#EDD711';
@@ -233,6 +257,7 @@ function changeTimeInfo(list){
 	window.selectedTime = clickedTime;
 	
 	ticketData.selectedTime = list.startTime;
+	ticketData.selectedTimeNo = list.screeningTimeNo;
     ticketData.selectedTheater = list.theaterNo;
 	
 	console.log(ticketData);
@@ -242,6 +267,8 @@ function changeTimeInfo(list){
     if(ticketData.selectedTime !== null){
     	seatMenu.style.cssText = 'display : block;'  
     }
+    
+    setSeat(list);
 }
 
     
@@ -263,7 +290,7 @@ function handleSeatClick(event) {
     selectedSeat.classList.remove('selected');
     const button = selectedSeat.querySelector('button');
     button.style.backgroundColor = '';
-
+    
     seatData.splice(seatData.indexOf('seatName'), 1);
   } else {
     selectedSeat.classList.add('selected');
@@ -273,7 +300,7 @@ function handleSeatClick(event) {
     seatData.push(seatName);
   }
 
-	ticketData.selectedSeat = seatData;
+  ticketData.selectedSeat = seatData;
 
   const totalReserved = seatData.length;
   ticketData.totalReserved = totalReserved;
@@ -292,7 +319,12 @@ function handleSeatClick(event) {
   sessionStorage.setItem("ticketData", JSON.stringify(ticketData)); 
   
   const selectComplete = document.getElementById('selectComplete'); 
-  selectComplete.style.display = "flex";
+  
+  if(seatData.length > 0){
+  	selectComplete.style.display = "flex";  
+  } else if(seatData.length === 0){
+	selectComplete.style.display = "none";  
+  }
 }
 
 // 다른 항목 선택시 선택정보 초기화
@@ -309,8 +341,8 @@ function resetSelectedInfo(index){
 	}
 	// 상영시간 재선택시
 	if(index == 3){
-		
 	}
+	//좌석 색상 초기화후 다시 로드
 }
 
 function setDisplay(elementIds, displayValue) {
