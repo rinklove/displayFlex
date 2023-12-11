@@ -71,7 +71,7 @@ function renderData(data) {
 			  const reviewDiv = document.createElement('div');
 			  reviewDiv.classList.add('p-3');
 			  reviewDiv.classList.add('mt-3');
-			  reviewDiv.classList.add('bg-secondary-subtle');
+			  reviewDiv.classList.add('bg-f0f2f2');
 		        const firstDiv = document.createElement('div');
 		       	firstDiv.classList.add('p-2');
 		       	
@@ -92,7 +92,7 @@ function renderData(data) {
 		        
 		        const rateSpan = document.createElement('span');
 		        rateSpan.classList.add('m-1');
-		        rateSpan.innerHTML = '<i class="rating__star far fa-star"></i> '+ item.rate;
+		        rateSpan.innerHTML = '<i class="rating__star fas fa-star"></i> '+ item.rate;
 		        firstDiv.appendChild(rateSpan);
 		        
 		        if(item.ableToWatch) {

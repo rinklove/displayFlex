@@ -42,6 +42,8 @@
                 <tr>
                     <td><span class="fs-6 fw-bold mx-2 mt-3 d-flex align-content-center">관람 등급</span></td>
                     <td>
+                    	<input type="radio" class="btn-check" name="grade" id="grade0" value="" autocomplete="off">
+                        <label class="btn btn-outline-dark m-1 mt-3" for="grade0">관람등급 상관없음</label>
 	                    <c:forEach var="gradeElement" items="${screenGradeList }">
 	                        <input type="radio" class="btn-check" name="grade" id="grade${gradeElement.screenGradeNo }" value="${gradeElement.screenGradeNo }" autocomplete="off">
 	                        <label class="btn btn-outline-dark m-1 mt-3" for="grade${gradeElement.screenGradeNo }">${gradeElement.name }</label>

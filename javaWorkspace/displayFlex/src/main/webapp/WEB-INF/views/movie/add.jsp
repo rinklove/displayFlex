@@ -37,7 +37,7 @@
                     <tr>
                         <td class="normal_text">제목<span class="star">*</span></td>
                         <td>
-                            <input list="search-result" type="text" class="form-control custom-form" placeholder="영화 제목을 입력하새요" name="title" id="title" >
+                            <input list="search-result" type="text" class="form-control custom-form" placeholder="영화 제목을 입력하세요" name="title" id="title" >
                         	<dataList class="list-group-flush border-dark shadow" id="search-result">
                         		
                         	</dataList>

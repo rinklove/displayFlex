@@ -32,7 +32,8 @@ public class ReviewAddController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-
+		
+		String movieNo = request.getParameter("movieNo");
 		try {
 			//회원만 이용가능하게 하기
 			MemberVo sessionMember = (MemberVo)(request.getSession().getAttribute("loginMember"));
@@ -41,21 +42,21 @@ public class ReviewAddController extends HttpServlet {
 			}
 			
 			String writerNo = sessionMember.getMemberNo();
-			String movieNo = request.getParameter("movieNo");
 			String ratingValue = request.getParameter("rating-value");
 			String reviewContent = request.getParameter("review-content");
 
 			int result = reviewService.addReview(new ReviewVo(writerNo, movieNo, reviewContent, ratingValue));
 			
 			if(result == 1) {
+				request.getSession().setAttribute("alertMsg", "리뷰를 등록했습니다");
 				response.sendRedirect(request.getContextPath()+"/movie/detail?movieNo="+movieNo);
 			} else {
 				throw new Exception();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("errorMsg", "리뷰 삭제 실패");
-			request.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(request, response);
+			request.getSession().setAttribute("alertMsg", "리뷰를 등록하지 못했습니다");
+			response.sendRedirect(request.getContextPath()+"/movie/detail?movieNo="+movieNo);
 		}
 	}
 

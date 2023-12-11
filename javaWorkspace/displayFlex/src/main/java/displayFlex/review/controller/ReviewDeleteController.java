@@ -30,10 +30,11 @@ public class ReviewDeleteController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ReviewVo findReview = null;
 		try {
 			String reviewNo = request.getParameter("reviewNo");
 			MemberVo loginMember = (MemberVo)request.getSession().getAttribute("loginMember");
-			ReviewVo findReview = reviewService.findWriterByNo(reviewNo);
+			findReview = reviewService.findWriterByNo(reviewNo);
 			
 			if(loginMember == null || (loginMember.getAdminYn().equals("N") && !loginMember.getMemberNo().equals(findReview.getMemberNo())) ) {
 				throw new Exception("삭제 가능권한이 없습니다.");
@@ -41,14 +42,15 @@ public class ReviewDeleteController extends HttpServlet {
 			
 			int result = reviewService.deleteReview(reviewNo);
 			if(result == 1) {
+				request.getSession().setAttribute("alertMsg", "리뷰를 삭제했습니다");
 				response.sendRedirect(request.getContextPath()+"/movie/detail?movieNo=" + findReview.getMovieNo());				
 			} else {
 				throw new Exception();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("errorMsg", "리뷰 삭제 실패");
-			request.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(request, response);
+			request.getSession().setAttribute("alertMsg", "리뷰를 삭제하지 못했습니다");
+			response.sendRedirect(request.getContextPath()+"/movie/detail?movieNo=" + findReview.getMovieNo());
 		}
 		
 		

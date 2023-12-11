@@ -44,7 +44,7 @@
         </div>
         <div class="col-2 m-auto">
           <select class="form-select  d-inline-block h-2-5em" aria-label="Small select example" name="theater">
-              <option selected>상영관 선택</option>
+              <option selected value="">상영관 선택</option>
                 <c:forEach var="element" items="${theater }">
 	                <option value="${element }">${element }</option>
                 </c:forEach>

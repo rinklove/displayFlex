@@ -40,7 +40,7 @@ public class MovieDetailController extends HttpServlet {
 			//해당 영화가 상영 중인지 체크하기
 			int isScreening = movieService.checkScreeningByNo(movieNo);
 			if(isScreening != 0) {
-				movieDetailDto.setScreening(true);
+				movieDetailDto.setIsScreening(true);
 			}
 			
 			//스틸 이미지 가져오기
