@@ -1,4 +1,4 @@
-package displayFlex.ticketing.controller;
+package displayFlex.ticketing.select.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import displayFlex.ticketing.service.TicketSelectService;
+import displayFlex.ticketing.select.service.TicketSelectService;
 
 @WebServlet("/ticket/select/image")
 public class TicketMovieImageController extends HttpServlet {

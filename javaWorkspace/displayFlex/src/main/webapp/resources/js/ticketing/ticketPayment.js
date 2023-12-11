@@ -23,7 +23,6 @@ paymentAmount.innerText = ticketData.totalAmount;
 totalPayment.innerText = ticketData.totalAmount;
 posterImg.src = ticketData.posterImg;
 
-
 sessionStorage.clear();
 
 function openPopup(url){
