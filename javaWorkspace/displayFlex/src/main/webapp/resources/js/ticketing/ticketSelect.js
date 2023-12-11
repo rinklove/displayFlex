@@ -140,7 +140,7 @@ function setSeat(list){
 	const screeningTimeNo = list.screeningTimeNo;
 
 	fetch("http://localhost:9002/cinema/ticket/select/seatInfo?selectTheater=" + theaterNo + "," + screeningTimeNo )
-	.then( (resp) => { return resp.sjson() } ) 
+	.then( (resp) => { return resp.json() } ) 
 	.then((seatData) => {
 		console.log("시트데이터 : " + seatData);
 		seatData.forEach((seat) => {
