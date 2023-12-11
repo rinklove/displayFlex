@@ -28,20 +28,18 @@
         
         <div class="search-area">
 				<form action="/cinema/admin/coupon/list" method="get">
-					<select name="searchType">
+					<!-- <select name="searchType">
 						<option value="title">제목</option>
 						<option value="content">내용</option>
-					</select>
-					<input type="text" name="searchValue" placeholder="검색할 내용을 입력하세요">
-					<input type="submit" value="검색하기">
+					</select> -->
+					&nbsp;&nbsp;<input type="text" name="searchValue" placeholder="쿠폰조회">
+					<input type="submit" value="조회하기">
 				</form>
 			</div>
 			
         
         
         <div id="coupon_title2">
-            <div>영화쿠폰</div>
-            <div>스토어쿠폰</div>
         </div>
         <div id="main_top">
             <div id="main_title">
@@ -79,11 +77,11 @@
                 </div>
                 
     			
-                <div id="coupon_no">
+                <div id="coupon_status">
                 <% 
                 if(couponVoList != null){
                 for(CouponVo vo : couponVoList){ %>
-                   <div><%=vo.getCouponNo() %></div>
+                   <div><%=vo.getCouponStatus() %></div>
                     <% }} %>
                 </div>
                 
