@@ -1,11 +1,11 @@
-package displayFlex.ticketing.service;
+package displayFlex.ticketing.select.service;
 
 import java.sql.Connection;
 import java.util.List;
 
-import displayFlex.ticketing.dao.TicketSelectDao;
-import displayFlex.ticketing.vo.ScreeningDateVo;
-import displayFlex.ticketing.vo.SelectMovieVo;
+import displayFlex.ticketing.select.dao.TicketSelectDao;
+import displayFlex.ticketing.select.vo.ScreeningDateVo;
+import displayFlex.ticketing.select.vo.SelectMovieVo;
 import test.JDBCTemplate;
 
 public class TicketSelectService {

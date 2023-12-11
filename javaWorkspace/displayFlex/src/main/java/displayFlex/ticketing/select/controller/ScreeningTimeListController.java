@@ -1,4 +1,4 @@
-package displayFlex.ticketing.controller;
+package displayFlex.ticketing.select.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import displayFlex.ticketing.service.TicketSelectService;
-import displayFlex.ticketing.vo.ScreeningDateVo;
+import displayFlex.ticketing.select.service.TicketSelectService;
+import displayFlex.ticketing.select.vo.ScreeningDateVo;
 
-@WebServlet("/ticket/select/dateList")
-public class ScreeningDateListController extends HttpServlet{
+@WebServlet("/ticket/select/timeList")
+public class ScreeningTimeListController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,26 +25,23 @@ public class ScreeningDateListController extends HttpServlet{
 		try {
 			String movieNo = req.getParameter("movieNo");
 			TicketSelectService tss = new TicketSelectService();
+			List<ScreeningDateVo> timeList = tss.getScreeningTimeList(movieNo);
 			
-			List<ScreeningDateVo> screeningList = tss.getScreeningList(movieNo);
-				
-			List<String> dateList = new ArrayList<String>(); 
-			for (ScreeningDateVo vo : screeningList) {
-				dateList.add(vo.getStartTime());
+			List<String> x = new ArrayList<String>(); 
+			for (ScreeningDateVo vo : timeList) {
+				x.add(vo.getStartTime());
 			}
-
-			Gson gson = new Gson();
-			String gsonList = gson.toJson(dateList);
-			PrintWriter out = resp.getWriter();
-//			req.setAttribute("screeningList", screeningList);
-//			req.getSession().setAttribute();
-			out.write(gsonList);
 			
-//			req.getRequestDispatcher("/WEB-INF/views/ticketing/ticketSelect.jsp").include(req, resp);
+			Gson gson = new Gson();
+			String gsonList = gson.toJson(timeList);
+			PrintWriter out = resp.getWriter();
+			out.write(gsonList);
+
+			System.out.println("상영관,시간리스트 : " + gsonList);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
-
 	
 }

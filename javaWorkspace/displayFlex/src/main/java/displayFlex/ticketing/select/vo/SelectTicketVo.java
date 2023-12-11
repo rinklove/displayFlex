@@ -1,4 +1,4 @@
-package displayFlex.ticketing.vo;
+package displayFlex.ticketing.select.vo;
 
 public class SelectTicketVo {
 

@@ -1,4 +1,4 @@
-package displayFlex.ticketing.controller;
+package displayFlex.ticketing.select.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import displayFlex.ticketing.service.TicketSelectService;
+import displayFlex.ticketing.select.service.TicketSelectService;
 
 @WebServlet("/ticket/select/seatInfo")
 public class SetSeatInfoController extends HttpServlet {

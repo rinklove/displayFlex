@@ -83,18 +83,6 @@ function printTimeList(){
             const theater3 = document.getElementById("theater3_time");
             const theater4 = document.getElementById("theater4_time");
             
-            const t1Parent = document.getElementById("theater1_time").parentNode;
-            const t2Parent = document.getElementById("theater2_time").parentNode;
-            const t3Parent = document.getElementById("theater3_time").parentNode;
-            const t4Parent = document.getElementById("theater4_time").parentNode;
-
-//			theatersData.forEach((list) => {
-//				list.theaterNo.forEach((no) => {
-//					if(no === '1'){}
-//					else{t1Parent.style.cssText = "display : none";}
-//				})
-//			})
-			
 			theater1.innerHTML = "";
 			theater2.innerHTML = "";
 			theater3.innerHTML = "";
@@ -138,11 +126,12 @@ function setSeat(list){
 	
 	const theaterNo = list.theaterNo;
 	const screeningTimeNo = list.screeningTimeNo;
-
+	
 	fetch("http://localhost:9002/cinema/ticket/select/seatInfo?selectTheater=" + theaterNo + "," + screeningTimeNo )
 	.then( (resp) => { return resp.json() } ) 
 	.then((seatData) => {
 		console.log("시트데이터 : " + seatData);
+		
 		seatData.forEach((seat) => {
 			console.log(seat);
 			const reservedSeat = document.getElementById(seat);
@@ -151,12 +140,6 @@ function setSeat(list){
 		})
 	})
 }
-
-function zz(){}
-    const allSeats = document.querySelectorAll('.seat'); 
-    allSeats.forEach(seat => {
-        seat.style.cssText = ""; 
-    });
 
 // 예매 - 영화 선택
  function changeMovieInfo(index) {
@@ -167,11 +150,7 @@ function zz(){}
     if (window.selectedMovie && window.selectedMovie !== selectedMovie) {
     	window.selectedMovie.style.backgroundColor = '';
     	ticketData = {};
-//        window.selectedDate = undefined;
-//        window.selectedSeat = undefined;
-//        window.selectedTheater = undefined;
-//        window.selectedTime = undefined;
-//        window.totalReserved = undefined;
+
 		resetSelectedInfo("changeMovie");
 
     }
@@ -240,12 +219,15 @@ function zz(){}
 // list.theaterNo, list.startTime
 function changeTimeInfo(list){
 	
+	
 	console.log(list);
 	const clickedTime = event.target;
 	clickedTime.parentNode.style.backgroundColor = '#EDD711';
 	
 	if (window.selectedTime && window.selectedTime !== clickedTime) {
        window.selectedTime.parentNode.style.backgroundColor = '';
+       
+       resetSelectedInfo("changeTime");
     }
 
 	const timeInfo = document.getElementById('timeInfo');
@@ -267,7 +249,7 @@ function changeTimeInfo(list){
     if(ticketData.selectedTime !== null){
     	seatMenu.style.cssText = 'display : block;'  
     }
-    
+ 
     setSeat(list);
 }
 
@@ -278,22 +260,27 @@ document.querySelectorAll('.seat div').forEach(seat => {
 });
 
 function handleSeatClick(event) {
-  const selectedSeat = event.currentTarget;
-  const row = selectedSeat.parentElement.querySelector('.seatRow').textContent; 
-  const seatNumber = selectedSeat.textContent;
+  	const selectedSeat = event.currentTarget;
+  
+//  const row = selectedSeat.parentElement.querySelector('.seatRow').textContent; 
+//  const seatNumber = selectedSeat.textContent;
+//  const seatName = row + seatNumber;
+  	const seatName = event.currentTarget.id;
 
-  const seatName = row + seatNumber;
+//  	const isSelected = selectedSeat.classList.contains('selected');
 
-  const isSelected = selectedSeat.classList.contains('selected');
-
-  if (isSelected) {
-    selectedSeat.classList.remove('selected');
+//  if (isSelected) {
+	if (seatData.includes(seatName)){
+//    selectedSeat.classList.remove('selected');
     const button = selectedSeat.querySelector('button');
     button.style.backgroundColor = '';
     
-    seatData.splice(seatData.indexOf('seatName'), 1);
+    seatData.splice(seatData.indexOf(seatName), 1);
+    
+    resetSelectedInfo("changeSeat");
+    
   } else {
-    selectedSeat.classList.add('selected');
+//    selectedSeat.classList.add('selected');
     const button = selectedSeat.querySelector('button');
     button.style.backgroundColor = '#EDD711';
 
@@ -330,19 +317,41 @@ function handleSeatClick(event) {
 // 다른 항목 선택시 선택정보 초기화
 function resetSelectedInfo(index){
 	// 영화 재선택시
-	if(index == "changeMovie"){
+	if(index === "changeMovie"){
 		setDisplay(['selectComplete','time', 'arrow2', 'ticketing2'], 'none');
 		clearContent(['dateInfo','timeInfo', 'theaterInfo', 'reservedInfo', 'seatInfo', 'payInfo']);
 	}
 	// 날짜 재선택시
-	if(index == "changeDate"){
+	if(index === "changeDate"){
 		setDisplay(['selectComplete','ticketing2'], 'none');
 		clearContent(['timeInfo', 'theaterInfo', 'reservedInfo', 'seatInfo', 'payInfo']);
 	}
 	// 상영시간 재선택시
-	if(index == 3){
+	if(index === "changeTime"){
+		//좌석 색상 초기화후 다시 로드
+		setDisplay(['selectComplete'], 'none');
+		clearContent(['timeInfo', 'theaterInfo', 'reservedInfo', 'seatInfo', 'payInfo']);
+		//초기화
+		seatData = [];
+		const seatArr = document.querySelectorAll('#seat_area > #seat_A > .seat_A > button, #seat_area > #seat_B > .seat_B > button, #seat_area > #seat_C > .seat_C > button, #seat_area > #seat_D > .seat_D > button');
+		console.log(seatArr);
+		seatArr.forEach((x)=>{
+
+				x.style.cssText = "'';";
+		})
+		
+		// div에 배경먹인거 초기화하는거ㅣ임....
+		const zz = document.querySelectorAll('#seat_area > #seat_A > .seat_A, #seat_area > #seat_B > .seat_B, #seat_area > #seat_C > .seat_C, #seat_area > #seat_D > .seat_D');
+
+		zz.forEach((x)=>{
+			x.style.cssText = "'';";
+		})
+		
 	}
-	//좌석 색상 초기화후 다시 로드
+	
+	if(index === "changeSeat"){
+		
+	}
 }
 
 function setDisplay(elementIds, displayValue) {

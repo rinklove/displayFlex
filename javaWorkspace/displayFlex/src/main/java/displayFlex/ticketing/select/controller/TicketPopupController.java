@@ -1,4 +1,4 @@
-package displayFlex.ticketing.controller;
+package displayFlex.ticketing.select.controller;
 
 import java.io.IOException;
 

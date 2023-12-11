@@ -16,11 +16,8 @@
 
 </head>
 <body>
-<!--     <header> -->
-<!--         <nav>     -->
             <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<!--         </nav> -->
-<!--     </header> -->
+
     <main>
         <div class="empty"></div>
         <div id="stepMenu_area">

@@ -1,4 +1,4 @@
-package displayFlex.ticketing.dao;
+package displayFlex.ticketing.select.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import displayFlex.ticketing.vo.ScreeningDateVo;
-import displayFlex.ticketing.vo.SelectMovieVo;
+import displayFlex.ticketing.select.vo.ScreeningDateVo;
+import displayFlex.ticketing.select.vo.SelectMovieVo;
 import test.JDBCTemplate;
 
 public class TicketSelectDao {
