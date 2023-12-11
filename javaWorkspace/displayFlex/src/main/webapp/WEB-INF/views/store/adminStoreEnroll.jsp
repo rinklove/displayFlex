@@ -53,13 +53,13 @@
 							</div>
 							<div>분류</div>
 							<span> 
-								<input type="radio" value="snack" name="type"> 베스트 
-							    <input type="radio" value="snack" name="type"> 기프트카드
-								<input type="radio" value="photocard" name="type"> 콤보 
+								<input type="checkbox" value="snack" name="type"> 베스트 
+							    <input type="checkbox" value="snack" name="type"> 기프트카드
+								<input type="checkbox" value="photocard" name="type"> 콤보 
 								<br>
-								<input type="radio" value="combo" name="type"> 팝콘 
-							    <input type="radio" value="popcorn" name="type"> 음료 
-								<input type="radio" value="drink" name="type"> 스낵
+								<input type="checkbox" value="combo" name="type"> 팝콘 
+							    <input type="checkbox" value="popcorn" name="type"> 음료 
+								<input type="checkbox" value="drink" name="type"> 스낵
 							</span>
 						</div>
 					</div>

@@ -63,4 +63,24 @@ public class StoreService {
 		return list;
 	}
 
+	//제품 디테일 화면 보여주기
+	public Map<String, Object> selectMenuListByNo(String no) throws Exception{
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		StoreDao dao = new StoreDao();
+		StoreVo vo = dao.selectMenuListByNo(conn, no);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vo", vo);
+		
+		//tx
+		
+		//close
+		JDBCTemplate.close(conn);
+		return map;
+	
+	}
+
 }//class
