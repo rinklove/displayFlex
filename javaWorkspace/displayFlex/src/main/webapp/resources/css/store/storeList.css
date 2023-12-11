@@ -109,28 +109,28 @@ h1 {
 	padding-bottom: 15px;
 }
 
-.itemPoto{
+.itemPhoto{
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	place-items: center;
 }
-.itemPoto> div{
+.itemPhoto> div{
 	margin-top: 60px;
 	margin-bottom: 30px;
 	padding-right: 50px;
 	padding-left: 50px;
 }
 
-.itemPoto > div >a> img {
+.itemPhoto > div >a> img {
 	transition: filter 0.3s ease;
 }
-.itemPoto > div > a> img:hover {
+.itemPhoto > div > a> img:hover {
 	cursor: pointer;
 	color: rgb(214, 214, 214);
 	filter: brightness(80%);
 }
-.itemPoto > div > a {
+.itemPhoto > div > a {
 	text-decoration: none;
 }
 #first{

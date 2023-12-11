@@ -2,12 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script defer src="/cinema/resources/js/store/menuList.js"></script>
+<script defer src="/cinema/resources/js/store/storeList.js"></script>
 <%
 	StoreVo vo = (StoreVo)request.getAttribute("vo");
 %>
 
-<c:forEach items="${vo}" var="vo">
+<c:forEach var="vo" items="${cate }">
 	<div>
 		<a href="/cinema/store/product">
 		<img src="${vo.image}" alt="product" width="200" height="200">
