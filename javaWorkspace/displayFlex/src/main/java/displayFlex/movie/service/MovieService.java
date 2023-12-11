@@ -213,5 +213,38 @@ public class MovieService {
 		return count;
 	}
 
+	/**
+	 * 영화 삭제하기
+	 * @param movieNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteMovieByNo(String movieNo) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		//스틸 이미지 제거
+		int result = movieDao.deleteStillImageByNo(movieNo, con);
+		
+		if(result != 0) {
+			result = movieDao.deleteMovieCate(movieNo, con);
+			
+			if(result != 0) {
+				result = movieDao.deleteMovieByNo(movieNo, con);		
+				
+				if(result != 0) {
+					JDBCTemplate.commit(con);
+				} else {
+					JDBCTemplate.rollback(con);
+				}
+				
+			} else {
+				JDBCTemplate.rollback(con);
+			}
+		} else JDBCTemplate.rollback(con);
+		
+		JDBCTemplate.close(con);
+		return result;
+	}
+
 	
 }
