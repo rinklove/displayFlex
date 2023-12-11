@@ -120,10 +120,11 @@ public class InquiryDao {
 		System.out.println("dao 's vo ::: " + vo);
 		
 		//SQL
-		String sql = "INSERT INTO INQUIRY (ONETOONE_NO, TITLE, CONTENT) VALUES (SEQ_NOTICE.NEXTVAL, ?, ?)";
+		String sql = "INSERT INTO INQUIRY (ONETOONE_NO, MEMBER_NO, TITLE, CONTENT) VALUES (SEQ_NOTICE.NEXTVAL, ?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, vo.getTitle());
-		pstmt.setString(2, vo.getContent());
+		pstmt.setString(1, vo.getMemberNo());
+		pstmt.setString(2, vo.getTitle());
+		pstmt.setString(3, vo.getContent());
 		int result = pstmt.executeUpdate();
 		  
 		//close

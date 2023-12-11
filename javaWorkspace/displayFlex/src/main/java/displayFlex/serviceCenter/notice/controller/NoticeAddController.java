@@ -73,7 +73,7 @@ public class NoticeAddController extends HttpServlet {
          
          // result == view
          if(result != 1) {
-            throw new Exception("result 가 1이 아님");
+        	 throw new Exception("result 가 1이 아님");
          }
          
          req.getSession().setAttribute("alertMsg", "공지사항 작성 성공 !");

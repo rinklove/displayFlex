@@ -140,4 +140,45 @@ public class RecommendService {
 		
 	}
 
+	//상영요청글 수정
+	public RecommendVo edit(String recommendMvNo) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		RecommendDao dao = new RecommendDao();
+		RecommendVo vo = dao.selectRecommendByNo(conn , recommendMvNo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return vo;
+	
+	}
+
+	//상영요청글 수정
+	public int edit(RecommendVo vo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		RecommendDao dao = new RecommendDao();
+		int result = dao.updateRecommendByNo(conn , vo);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
 }

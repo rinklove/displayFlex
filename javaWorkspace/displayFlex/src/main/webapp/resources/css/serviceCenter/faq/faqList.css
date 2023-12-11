@@ -323,7 +323,10 @@ tbody {
     font-weight: 650;
 }
 
-
+#tab > tr:hover {
+	color: rgb(228, 178, 157);
+	cursor: pointer;
+}
 
 
 

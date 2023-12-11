@@ -6,6 +6,8 @@ import java.util.*;
 import displayFlex.serviceCenter.faq.dao.FaqDao;
 import displayFlex.serviceCenter.faq.vo.CategoryVo;
 import displayFlex.serviceCenter.faq.vo.FaqVo;
+import displayFlex.serviceCenter.notice.dao.NoticeDao;
+import displayFlex.serviceCenter.notice.vo.NoticeVo;
 import displayFlex.util.page.vo.PageVo;
 import test.JDBCTemplate;
 
@@ -111,6 +113,46 @@ public class FaqService {
 		
 		return vo;
 				
+	}
+
+	//faq 검색
+	public List<FaqVo> search(Map<String, String> m, PageVo pvo) throws Exception {
+		
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// DAO
+		FaqDao dao = new FaqDao();
+		List<FaqVo> faqVoList = dao.search(conn , m, pvo);
+		
+//		if(m.get("searchType").equals("titcon")) {
+//			dao.searchByTitleAndContent(conn , m , pvo);
+//		}else {
+//			faqVoList = dao.search(conn , m, pvo);
+//		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return faqVoList;
+		
+	}
+
+	// 게시글 갯수 조회 (검색값에 따라)
+	public int selectSearchFaqCount(Map<String, String> m) throws Exception {
+
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// DAO
+		FaqDao dao = new FaqDao();
+		int cnt = dao.getFaqCountBySearch(conn , m);
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return cnt;
+	
 	}
 	
 	

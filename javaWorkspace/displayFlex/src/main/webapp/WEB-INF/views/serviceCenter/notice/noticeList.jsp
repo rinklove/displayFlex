@@ -3,6 +3,7 @@
 <%@page import="displayFlex.util.page.vo.PageVo"%>
 <%@page import="displayFlex.serviceCenter.notice.vo.NoticeVo"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -10,6 +11,8 @@
     	List<NoticeVo> noticeVoList = (List<NoticeVo>) request.getAttribute("noticeVoList");
     	PageVo pvo = (PageVo)request.getAttribute("pvo");
     	Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
+    	String x = (String) session.getAttribute("alertMsg");
+    	session.removeAttribute("alertMsg");
     %>
     
 <!DOCTYPE html>
@@ -22,6 +25,53 @@
 <script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/notice.js"></script>
 </head>
 <body>
+
+	<c:set var="msg"  value="<%= x %>" />
+ 	<c:if test="${not empty msg}">
+ 	<script>
+ 		alert('<%= x %>');
+ 	
+	    <% if(searchMap != null){ %>
+			function setSearchArea(){
+				
+				// 옵션태그 셋팅
+				const optionTagArr = document.querySelectorAll("#search_wrap1 option");
+				const searchType = "<%= searchMap.get("searchType") %>";
+				for(let i = 0; i < optionTagArr.length; ++i){
+					if( optionTagArr[i].value === searchType ){
+						optionTagArr[i].selected = true;
+						break;
+					}
+				}
+				
+				// 인풋태그 셋팅
+				const searchValueTag = document.querySelector("#search_wrap1 input[name=searchValue]");
+				searchValueTag.value = "<%= searchMap.get("searchValue") %>";
+				
+			}
+			setSearchArea();
+			
+			function setPageArea(){
+				const aTagArr = document.querySelectorAll("#paging a");
+				for(let i = 0 ; i < aTagArr.length; ++i){
+					aTagArr[i].href = aTagArr[i].href.replace("list" , "search"); 
+					aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
+					aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
+				}
+			}
+			setPageArea();
+		<% } %>
+
+		/* // 각 공지사항의 상세조회 페이지로 이동하는 함수
+		function goToNoticeDetail(noticeNo) {
+			// 공지사항 상세조회 페이지 URL을 생성
+			var url = "/cinema/serviceCenter/noticeDetail?noticeNo=" + noticeNo;
+			// 페이지 이동
+			window.location.href = url;
+		} */
+    </script>
+ 	</c:if>
+
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     
     
@@ -98,46 +148,7 @@
     </main>
     
     
-    <script>
-	    <% if(searchMap != null){ %>
-			function setSearchArea(){
-				
-				// 옵션태그 셋팅
-				const optionTagArr = document.querySelectorAll("#search_wrap1 option");
-				const searchType = "<%= searchMap.get("searchType") %>";
-				for(let i = 0; i < optionTagArr.length; ++i){
-					if( optionTagArr[i].value === searchType ){
-						optionTagArr[i].selected = true;
-						break;
-					}
-				}
-				
-				// 인풋태그 셋팅
-				const searchValueTag = document.querySelector("#search_wrap1 input[name=searchValue]");
-				searchValueTag.value = "<%= searchMap.get("searchValue") %>";
-				
-			}
-			setSearchArea();
-			
-			function setPageArea(){
-				const aTagArr = document.querySelectorAll("#paging a");
-				for(let i = 0 ; i < aTagArr.length; ++i){
-					aTagArr[i].href = aTagArr[i].href.replace("list" , "search"); 
-					aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
-					aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
-				}
-			}
-			setPageArea();
-		<% } %>
-
-		/* // 각 공지사항의 상세조회 페이지로 이동하는 함수
-		function goToNoticeDetail(noticeNo) {
-			// 공지사항 상세조회 페이지 URL을 생성
-			var url = "/cinema/serviceCenter/noticeDetail?noticeNo=" + noticeNo;
-			// 페이지 이동
-			window.location.href = url;
-		} */
-    </script>
+    
 
 </body>
 </html> 

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import displayFlex.member.MemberVo;
+import displayFlex.serviceCenter.faq.service.CategoryService;
 import displayFlex.serviceCenter.faq.service.FaqService;
+import displayFlex.serviceCenter.faq.vo.CategoryVo;
 import displayFlex.serviceCenter.faq.vo.FaqVo;
 import displayFlex.util.page.vo.PageVo;
 
@@ -25,15 +27,18 @@ public class FaqListController extends HttpServlet {
 		try {
 			
 			FaqService fs = new FaqService();
+			CategoryService cs = new CategoryService();
 			
 			// data
 			String categoryNo = req.getParameter("categoryNo");
 			int listCount;
 			List<FaqVo> faqVoList;
+			List<CategoryVo> categoryList;
 			
 			if(categoryNo != null) {
 				listCount = fs.selectFaqCountByCategory(categoryNo);
 				faqVoList = fs.selectFaqListByCategory(categoryNo);
+				categoryList = cs.selectFaqCategoryList();
 			} else {
 				listCount = fs.selectFaqCount();				//전체 게시글 갯수
 				String currentPage_ = req.getParameter("pno");
@@ -45,16 +50,15 @@ public class FaqListController extends HttpServlet {
 				int faqLimit = 6;									//한 페이지에 보여줄 게시글 갯수
 				PageVo pvo = new PageVo(listCount, currentPage, pageLimit, faqLimit);
 				faqVoList = fs.selectFaqList(pvo);
+				categoryList = cs.selectAllCategoryList();
 				req.setAttribute("pvo", pvo);
 			}
 			
 			
-			// service
-//			List<FaqVo> faqVoList = fs.selectFaqList(pvo);
 			
 			// result (==view)
-			
 			req.setAttribute("faqVoList", faqVoList);
+			req.setAttribute("categoryList", categoryList);
 //			req.setAttribute("pvo" , pvo);
 			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/faq/faqList.jsp").forward(req, resp);
 			
@@ -66,9 +70,4 @@ public class FaqListController extends HttpServlet {
 		}
 	}
 
-	//faq 로직
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-	}
 }

@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="displayFlex.serviceCenter.faq.vo.CategoryVo"%>
 <%@page import="displayFlex.util.page.vo.PageVo"%>
@@ -10,6 +11,7 @@
     	List<FaqVo> faqVoList = (List<FaqVo>) request.getAttribute("faqVoList");
      	PageVo pvo = (PageVo)request.getAttribute("pvo");
      	List<CategoryVo> categoryList = (List<CategoryVo>) request.getAttribute("categoryList");
+     	Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
      	%>
     
 <!DOCTYPE html>
@@ -24,7 +26,6 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	
-	<form action="/cinema/admin/faqAdd" method="get"></form>
     <main>
         <div id="contents">
             <div id="title_top">
@@ -52,54 +53,41 @@
                 </nav>
             </div>
             <div id="tab_con">
-               	<% for(CategoryVo category : categoryList) { %>
                 	<div id="faq_icon_wrap">
-	                    <button id="icon_01" onclick="clickIcon">
+	                    <button id="icon_01" onclick="clickIcon" >
 	                        <img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">
-	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
-	                        	<%= category.getCategoryName() %>
-	                        </a>
+	                        영화관 이용
 	                    </button>
 	                    <button id="icon_02" onclick="clickIcon">
 	                        <img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">
-	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
-	                        	<%= category.getCategoryName() %>
-	                        </a>
+	                        회원
 	                    </button>
 	                    <button id="icon_03" onclick="clickIcon">
 	                        <img src="/cinema/resources/image/faqIcon/star.png" alt="별 아이콘">
-	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
-	                        	<%= category.getCategoryName() %>
-	                        </a>
+	                        등급
 	                    </button>
 	                    <button id="icon_04" onclick="clickIcon">
 	                        <img src="/cinema/resources/image/faqIcon/ticket.png" alt="티켓 아이콘">
-	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
-	                        	<%= category.getCategoryName() %>
-	                        </a>
+							쿠폰
 	                    </button>
 	                    <button id="icon_05" onclick="clickIcon">
 	                        <img src="/cinema/resources/image/faqIcon/popcorn.png" alt="팝콘 아이콘">
-	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
-	                        	<%= category.getCategoryName() %>
-	                        </a>
+							스토어
 	                    </button>
 	                    <button id="icon_06" onclick="clickIcon">
 	                        <img src="/cinema/resources/image/faqIcon/ribbon.png" alt="리본 아이콘">
-	                        <a href="#" onclick="clickCategory('<%= category.getFaqCategoryNo() %>')">
-	                        	<%= category.getCategoryName() %>
-	                        </a>
+							이벤트
 	                    </button>
 	                </div>
-            	<% } %>
                 <fieldset id="search_wrap">
-                    <legend>영화관 FAQ 검색하기</legend>
-                    <input type="text" placeholder="검색어를 입력해주세요." id="seachKeyword" title="검색어를 입력해주세요">
-                    <button type="button" id="btn_col1">검색</button>
-                    <div id="help_wrap" style="text-align: left;">
-                        <p>더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면?</p>
-                        <a href="/cinema/serviceCenter/inquiryWrite" style="font-weight: bold; color: #000000;">1:1문의 바로가기</a>
-                    </div>
+                	<form action="/cinema/serviceCenter/faqSearch" method="get">
+	                    <input type="text" name="searchType" placeholder="검색어를 입력해주세요." id="seachKeyword">
+	                    <button type="button" id="btn_col1">검색</button>
+	                    <div id="help_wrap" style="text-align: left;">
+	                        <p>더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면?</p>
+	                        <a href="/cinema/serviceCenter/inquiryWrite" style="font-weight: bold; color: #000000;">1:1문의 바로가기</a>
+	                    </div>
+	                </form>
                 </fieldset>
                 <div id="acc">
                     <table id="tb_acc_wrap"
@@ -155,21 +143,10 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<!-- faqList.jsp -->
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        function clickCategory(categoryNo) {
-            $.ajax({
-                type: 'GET',
-                url: '/cinema/serviceCenter/faqList',
-                data: { categoryNo: categoryNo },
-                success: function(data) {
-                    $('#tab').html(data);
-                },
-                error: function() {
-                    alert('카테고리별 FAQ 조회에 실패하였습니다.');
-                }
-            });
-        }
+    	function clickCategory(categoryNo){
+    		
+    	}
     </script>
 
 	
