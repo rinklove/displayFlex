@@ -120,5 +120,32 @@
         </c:if>
     </div>
 </div>
+
+	<script>
+	
+		const checkBoxTagArr = document.querySelectorAll("input[name=genres]");
+		const checkBoxMap = {};
+		for(let i = 0 ; i < checkBoxTagArr.length; ++i){
+			checkBoxTag = checkBoxTagArr[i];
+			checkBoxMap[checkBoxTag.value] = checkBoxTag;
+		}
+
+		const aStr = '${a}';
+		const bStr = '${b}';
+		
+		const a = JSON.parse(aStr);
+		const b = JSON.parse(bStr);
+		
+		b.forEach( (x)=>{
+			for(let i = 0; i < a.length; ++i){
+				const vo = a[i];
+				if(vo.genreCateNo === x){
+					checkBoxMap[vo.genreCateNo].checked = true;
+				}
+			}
+		} );
+		
+	</script>
+
 </body>
 </html>	
