@@ -5,9 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServlet;
 
 import displayFlex.serviceCenter.faq.vo.CategoryVo;
 import displayFlex.serviceCenter.faq.vo.FaqVo;
+import displayFlex.serviceCenter.notice.vo.NoticeVo;
 import displayFlex.util.page.vo.PageVo;
 import test.JDBCTemplate;
 
@@ -217,6 +221,118 @@ public class FaqDao {
 		return result;
 		
 	}
+
+
+	//faq 검색
+	public List<FaqVo> search(Connection conn, Map<String, String> m, PageVo pvo) throws Exception {
+		
+		String searchType = m.get("searchType");
+		
+		// SQL
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT FAQ_NO , FAQ_CATEGORY_NO , TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE , HIT FROM FAQ WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%' ORDER BY FAQ_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.get("searchValue"));
+		pstmt.setInt(2, pvo.getStartRow());
+		pstmt.setInt(3, pvo.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		
+		// rs
+	      List<FaqVo> faqVoList = new ArrayList<FaqVo>();
+	      while(rs.next()) {
+	         String faqNo = rs.getString("FAQ_NO");
+	         String faqCategoryNo = rs.getString("FAQ_CATEGORY_NO");
+	         String title = rs.getString("TITLE");
+	         String content = rs.getString("CONTENT");
+	         String enrollDate = rs.getString("ENROLL_DATE");
+	         String modifyDate = rs.getString("MODIFY_DATE");
+	         String hit = rs.getString("HIT");
+	         
+	         FaqVo vo = new FaqVo();
+	         vo.setFaqNo(faqNo);
+	         vo.setFaqCategoryNo(faqCategoryNo);
+	         vo.setTitle(title);
+	         vo.setContent(content);
+	         vo.setEnrollDate(enrollDate);
+	         vo.setModifyDate(modifyDate);
+	         vo.setHit(hit);
+	         
+	         faqVoList.add(vo);
+	      }
+	
+		// close
+	    JDBCTemplate.close(rs);
+	    JDBCTemplate.close(pstmt);
+	      
+	    return faqVoList;
+		
+	}
+	
+	//공지사항 검색 (제목+내용)
+//	public List<FaqVo> searchByTitleAndContent(Connection conn, Map<String, String> m, PageVo pvo) throws Exception {
+//
+//		//sql
+//		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT FAQ_NO, FAQ_CATEGORY_NO, TITLE, CONTENT, ENROLL_DATE, MODIFY_DATE, HIT FROM NOTICE WHERE DELETE_YN = 'N' AND (TITLE LIKE '%' || ? || '%' OR CONTENT LIKE '%' || ? || '%') ORDER BY FAQ_NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+//        PreparedStatement pstmt = conn.prepareStatement(sql);
+//        pstmt.setString(1, m.get("searchValue"));
+//        pstmt.setString(2, m.get("searchValue"));
+//        pstmt.setInt(3, pvo.getStartRow());
+//        pstmt.setInt(4, pvo.getLastRow());
+//        ResultSet rs = pstmt.executeQuery();
+//
+//        List<FaqVo> faqVoList = new ArrayList<FaqVo>();
+//        while (rs.next()) {
+//            String faqNo = rs.getString("FAQ_NO");
+//            String faqCategoryNo = rs.getString("FAQ_CATEGORY_NO");
+//            String title = rs.getString("TITLE");
+//            String content = rs.getString("CONTENT");
+//            String enrollDate = rs.getString("ENROLL_DATE");
+//            String modifyDate = rs.getString("MODIFY_DATE");
+//            String hit = rs.getString("HIT");
+//
+//            FaqVo vo = new FaqVo();
+//            vo.setFaqNo(faqNo);
+//            vo.setFaqCategoryNo(faqCategoryNo);
+//            vo.setTitle(title);
+//            vo.setContent(content);
+//            vo.setEnrollDate(enrollDate);
+//            vo.setModifyDate(modifyDate);
+//            vo.setHit(hit);
+//
+//            faqVoList.add(vo);
+//        }
+//
+//        JDBCTemplate.close(rs);
+//        JDBCTemplate.close(pstmt);
+//
+//        return faqVoList;
+//		
+//	}
+
+	// 게시글 갯수 조회 (검색값에 따라)
+	public int getFaqCountBySearch(Connection conn, Map<String, String> m) throws Exception {
+
+		// SQL
+		String sql = "SELECT COUNT(*) FROM FAQ WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.get("searchValue"));
+		ResultSet rs = pstmt.executeQuery();
+		
+		// rs
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		
+		// close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt;
+	
+	}
+
+
+	
 
 }
 

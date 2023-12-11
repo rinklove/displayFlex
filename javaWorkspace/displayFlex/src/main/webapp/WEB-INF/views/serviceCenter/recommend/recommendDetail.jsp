@@ -25,9 +25,9 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <c:if test="${loginMember eq 'Y'}"> 
-	                <a href="/cinema/admin/FaqAdd">수정</a>
-	                <a href="">삭제</a>
+                <c:if test="${not empty loginMember}"> 
+					<button onclick="location.href='/cinema/serviceCenter/recommendEdit?recommendMvNo=<%= vo.getRecommendMvNo() %>'">수정</button>
+	                <button onclick="location.href='/cinemaaerviees/recommendDelete?recommendMvNo=<%= vo.getRecommendMvNo() %>'">삭제</button>
                 </c:if> 
             </div>
             <div id="tab_tit">

@@ -23,11 +23,11 @@ public class InquiryWriteController extends HttpServlet {
 		try {
 
 			//로그인 안되어있으면 에러페이지로 보내기
-			MemberVo loginMember = (MemberVo) req.getSession().getAttribute("loginMember");
-			if(loginMember == null) {
-				req.setAttribute("errorMsg"	, "잘못된 접근입니다. (로그인 하고 오세요)");
-				req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
-			}
+//			MemberVo loginMember = (MemberVo) req.getSession().getAttribute("loginMember");
+//			if(loginMember == null) {
+//				req.setAttribute("errorMsg"	, "잘못된 접근입니다. (로그인 하고 오세요)");
+//				req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
+//			}
 			
 			InquiryService is = new InquiryService();
 			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/inquiry/inquiryWrite.jsp").forward(req, resp);
@@ -54,6 +54,8 @@ public class InquiryWriteController extends HttpServlet {
 			// data
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
+			String writerNick = req.getParameter("WRITER_NICK");
+			String enrollDate = req.getParameter("ENROLL_DATE");
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
 			if(loginMember == null) {
@@ -63,7 +65,9 @@ public class InquiryWriteController extends HttpServlet {
 			InquiryVo vo = new InquiryVo();
 			vo.setTitle(title);
 			vo.setContent(content);
-//			vo.setMemberNo(loginMember.getMemberNo());
+			vo.setMemberNo(loginMember.getMemberNo());
+			vo.setWriterNick(writerNick);
+			vo.setEnrollDate(enrollDate);
 			
 			// service
 			InquiryService is = new InquiryService();

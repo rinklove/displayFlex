@@ -32,7 +32,7 @@
             </div>
             <div id="tab_tit">
                 <nav>
-                    <a href="/cinema/serviceCenter/faqList">FAQ</a>
+                    <a href="/cinema/serviceCenter/faqList?categoryNo=1">FAQ</a>
                     <a href="/cinema/serviceCenter/noticeList">공지사항</a>
                     <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>
                     <a href="/cinema/serviceCenter/recommendList">상영요청</a>
