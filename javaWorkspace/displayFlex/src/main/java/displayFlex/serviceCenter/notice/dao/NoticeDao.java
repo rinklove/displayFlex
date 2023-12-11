@@ -254,7 +254,6 @@ public class NoticeDao {
 	    String sql = "UPDATE NOTICE SET DELETE_YN = 'Y' WHERE NOTICE_NO = ?";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1, noticeNo);
-	    pstmt.setString(2, memberNo);
 	    int result = pstmt.executeUpdate();
 	      
 	    //close
@@ -262,6 +261,25 @@ public class NoticeDao {
 	      
 	    return result;
 		
+	}
+
+	//공지사항 수정
+	public int updateNoticeByNo(Connection conn, NoticeVo vo) throws Exception {
+		
+		// SQL
+	    String sql = "UPDATE NOTICE SET TITLE = ? , CONTENT = ? , MODIFY_DATE = SYSDATE , HIT = ? WHERE NOTICE_NO = ? AND DELETE_YN = 'N'";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, vo.getTitle());
+	    pstmt.setString(2, vo.getContent());
+	    pstmt.setString(3, vo.getHit());
+	    pstmt.setString(4, vo.getNoticeNo());
+	    int result = pstmt.executeUpdate();
+	   
+	    // close
+	    JDBCTemplate.close(pstmt);
+	   
+	    return result;
+	
 	}
 
 	

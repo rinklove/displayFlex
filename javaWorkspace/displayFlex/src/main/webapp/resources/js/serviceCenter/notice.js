@@ -9,14 +9,14 @@ function handleClick(event){
 	location.href = '/cinema/serviceCenter/noticeDetail?noticeNo=' + noticeNo + '&currPage=<%= pvo.getCurrentPage() %>';	
 }
    	
-function setOptionSelected() {
-	const optionTag = document.querySeleterAll("main select option");
-	for(let i = 0; i < optionTagArr.length; i++){
-		const optionTag = optionTagArr[i];
-		if(optionTag.value == <%=vo.getCategoryNo() %>) {
-			optionTagArr[].selected = true;
-		}
-	}
-}
+// function setOptionSelected() {
+// 	const optionTag = document.querySeleterAll("main select option");
+// 	for(let i = 0; i < optionTagArr.length; i++){
+// 		const optionTag = optionTagArr[i];${}
+// 		if(optionTag.value == <%=vo.getCategoryNo() %>) {
+// 			optionTagArr[].selected = true;
+// 		}
+// 	}
+// }
 
-setOptionSelected();
+// setOptionSelected();

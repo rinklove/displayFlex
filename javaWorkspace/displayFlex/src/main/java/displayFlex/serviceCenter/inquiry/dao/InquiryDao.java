@@ -114,4 +114,22 @@ public class InquiryDao {
 	
 	}
 
+	//일대일 문의 작성
+	public int write(Connection conn, InquiryVo vo) throws Exception {
+		
+		System.out.println("dao 's vo ::: " + vo);
+		
+		//SQL
+		String sql = "INSERT INTO INQUIRY (ONETOONE_NO, TITLE, CONTENT) VALUES (SEQ_NOTICE.NEXTVAL, ?, ?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getTitle());
+		pstmt.setString(2, vo.getContent());
+		int result = pstmt.executeUpdate();
+		  
+		//close
+		JDBCTemplate.close(pstmt);
+		return result;
+		
+	}
+
 }

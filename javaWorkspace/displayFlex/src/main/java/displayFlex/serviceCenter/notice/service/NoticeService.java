@@ -136,14 +136,14 @@ public class NoticeService {
 	}
 
 	//공지사항 삭제
-	public int delete(String no, String memberNo)  throws Exception {
+	public int delete(String noticeNo, String memberNo)  throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		NoticeDao dao = new NoticeDao();
-		int result = dao.delete(conn , no , memberNo);
+		int result = dao.delete(conn , noticeNo , memberNo);
 		
 		//tx
 		if(result == 1) {
@@ -173,6 +173,30 @@ public class NoticeService {
 		JDBCTemplate.close(conn);
 		
 		return vo;
+	}
+
+	//공지사항 수정
+	public int edit(NoticeVo vo) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		NoticeDao dao = new NoticeDao();
+		int result = dao.updateNoticeByNo(conn , vo);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	
 	}
 
 		

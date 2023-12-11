@@ -4,8 +4,10 @@ const trArr = document.querySelectorAll("#tab > tr");
 	}
 
 function handleClick(event){
+
+
 	const tr = event.currentTarget;
-	const rocommendMvNo = tr.children[0].innerText;
-	location.href = '/cinema/serviceCenter/recommendDetail?rocommendMvNo=' + rocommendMvNo + '&currPage=<%= pvo.getCurrentPage() %>';	
+	const recommendMvNo = tr.children[0].innerText;
+	location.href = '/cinema/serviceCenter/recommendDetail?recommendMvNo=' + recommendMvNo + '&currPage=<%= pvo.getCurrentPage() %>';	
 }
-   	
+

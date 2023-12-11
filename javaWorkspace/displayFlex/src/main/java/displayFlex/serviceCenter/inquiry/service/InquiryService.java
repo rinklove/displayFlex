@@ -67,4 +67,28 @@ public class InquiryService {
 	
 	}
 
+	//일대일 문의 작성
+	public int write(InquiryVo vo) throws Exception {
+
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		InquiryDao dao = new InquiryDao();
+		int result = dao.write(conn, vo);
+		
+		// tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	
+	}
+
 }
