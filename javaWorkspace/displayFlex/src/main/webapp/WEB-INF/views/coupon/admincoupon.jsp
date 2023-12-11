@@ -51,9 +51,16 @@
 										<option value="1000">스토어할인(1000원)</option>			
 								</select>
 							</span>
-							<div style="font-size: xx-large;">쿠폰정보</div>
+							<div  style="font-size: xx-large;">쿠폰이름	</div>
 							<div>
-								<input style="width: 10em; font-size: 15px;"type="text" name="i_name">
+								<select name="i_name" id="diskind" >
+									<option value=""  style="color: gray;" >쿠폰선택</option>
+									<option value="VIP할인쿠폰">VIP할인</option>
+									<option value="어린이할인쿠폰">어린이할인</option>
+									<option value="경로할인쿠폰">경로할인</option>
+									<option value="장애인할인쿠폰">장애인할인</option>	
+									<option value="스토어할인쿠폰">스토어할인</option>			
+							</select>
 							</div>		
 							<div style="font-size: xx-large;">쿠폰발행일자</div>
 							<div>
@@ -67,7 +74,7 @@
 							<div style="font-size: xx-large;">쿠폰안내</div>
 							<div>
 								<textarea name="t_info" cols="50" rows="2"
-									placeholder="쿠폰써라 "></textarea>
+									placeholder="쿠폰 안내 메세지를 입력하세요. "></textarea>
 							</div>
 							
 						</div>
