@@ -24,7 +24,7 @@ public class NoticeAddController extends HttpServlet {
          //로그인 안되어있으면 에러페이지로 보내기
          MemberVo loginMember = (MemberVo) req.getSession().getAttribute("loginMember");
          if(loginMember == null) {
-            req.setAttribute("errorMsg"   , "잘못된 접근입니다. (관리자 로그인 하고 오세요)");
+            req.setAttribute("errorMsg" , "잘못된 접근입니다. (관리자 로그인 하고 오세요)");
             req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
             throw new Exception("공지사항 등록 실패");
          }

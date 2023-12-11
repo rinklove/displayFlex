@@ -29,7 +29,7 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <c:if test="${not empty loginMember}">
+                <c:if test="${not empty loginMember and loginMember.adminYn eq 'N'}">
                 	<button onclick="location.href='/cinema/serviceCenter/recommendWrite'">작성</button>
                 </c:if>
             </div>
@@ -43,7 +43,7 @@
             </div>
             <fieldset id="search_wrap2">
             	<form action="/cinema/serviceCenter/recommendSearch" method="get">
-	                <select class="ty3" title="검색조건 제목 선택" id="selectCondition1">
+	                <select name="searchType" class="ty3" title="검색조건 제목 선택" id="selectCondition1">
 	                    <option value="title">제목</option>
 	                    <option value="content">내용</option>
 	                    <option value="titcon">제목+내용</option>

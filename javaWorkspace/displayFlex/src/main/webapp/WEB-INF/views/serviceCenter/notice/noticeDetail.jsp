@@ -27,8 +27,8 @@
             <div id="title_top">
                 <h1>고객센터</h1>
                 <c:if test="${loginMember.adminYn eq 'Y'}">
-	                <button onclick="location.href='/cinema/admin/FaqAdd'">수정</button>
-	                <button>삭제</button>
+	                <button onclick="location.href='/cinema/admin/noticeEdit?noticeNo=<%= vo.getNoticeNo() %>'">수정</button>
+	                <button onclick="location.href='/cinema/admin/noticeDelete?noticeNo=<%= vo.getNoticeNo() %>'">삭제</button>
                 </c:if>
             </div>
             <div id="tab_tit">

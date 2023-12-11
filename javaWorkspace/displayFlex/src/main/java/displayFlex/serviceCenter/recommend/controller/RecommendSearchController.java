@@ -50,10 +50,10 @@ public class RecommendSearchController extends HttpServlet {
 			List<RecommendVo> recommendVoList = rs.search(m , pvo);
 			
 			// result
-			req.setAttribute("noticeVoList", recommendVoList);
+			req.setAttribute("recommendVoList", recommendVoList);
 			req.setAttribute("pvo", pvo);
 			req.setAttribute("searchMap", m);
-			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/recommemd/recommendList.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/recommend/recommendList.jsp").forward(req, resp);
 			
 		}catch(Exception e) {
 			System.out.println("[ERROR-B123] 상영요청 검색 중 에러 발생 ...");

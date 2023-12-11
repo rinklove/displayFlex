@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import displayFlex.member.MemberVo;
 import displayFlex.serviceCenter.notice.service.NoticeService;
 
-@WebServlet("/serviceCenter/noticeDelete")
+@WebServlet("/admin/noticeDelete")
 public class NoticeDeleteController extends HttpServlet {
 	
 	// 게시글 삭제
