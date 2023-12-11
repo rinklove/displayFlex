@@ -19,8 +19,14 @@
 
     <div class="bw"> 
         <hr id="jul1">      
-        <div id="event_title"> &nbsp;&nbsp;&nbsp;&nbsp;진행중 이벤트  
+        <div><div id="event_title"> &nbsp;&nbsp;진행중 이벤트  
             <div id="event_title2"><a href="/cinema/event/event" class="event" style="text-decoration: underline;">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
+        </div>
+        <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
+				<div><div id="enroll" style="float: left;"><button onclick="location.href='/cinema/event/adminevent'">등록</button></div>
+				<div id="delete"><button>삭제</button></div>
+				<%-- </c:if> --%>
+                </div>
         </div>
         <hr id="jul2">
         <div id="main_top">

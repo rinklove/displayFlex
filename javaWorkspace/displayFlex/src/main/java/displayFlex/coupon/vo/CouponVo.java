@@ -9,6 +9,7 @@ public class CouponVo {
 	private String couponCreationDate;
 	private String couponValidePeriod;
 	private String couponInfo;
+	private String couponStatus;
 	public String getCouponNo() {
 		return couponNo;
 	}
@@ -18,9 +19,6 @@ public class CouponVo {
 	public String getCouponType() {
 		return couponType;
 	}
-	
-	
-	
 	public void setCouponType(String couponType) {
 		this.couponType = couponType;
 	}
@@ -54,8 +52,14 @@ public class CouponVo {
 	public void setCouponInfo(String couponInfo) {
 		this.couponInfo = couponInfo;
 	}
+	public String getCouponStatus() {
+		return couponStatus;
+	}
+	public void setCouponStatus(String couponStatus) {
+		this.couponStatus = couponStatus;
+	}
 	public CouponVo(String couponNo, String couponType, String couponDiscount, String couponName,
-			String couponCreationDate, String couponValidePeriod, String couponInfo) {
+			String couponCreationDate, String couponValidePeriod, String couponInfo, String couponStatus) {
 		super();
 		this.couponNo = couponNo;
 		this.couponType = couponType;
@@ -64,17 +68,19 @@ public class CouponVo {
 		this.couponCreationDate = couponCreationDate;
 		this.couponValidePeriod = couponValidePeriod;
 		this.couponInfo = couponInfo;
+		this.couponStatus = couponStatus;
 	}
 	@Override
 	public String toString() {
 		return "CouponVo [couponNo=" + couponNo + ", couponType=" + couponType + ", couponDiscount=" + couponDiscount
 				+ ", couponName=" + couponName + ", couponCreationDate=" + couponCreationDate + ", couponValidePeriod="
-				+ couponValidePeriod + ", couponInfo=" + couponInfo + "]";
+				+ couponValidePeriod + ", couponInfo=" + couponInfo + ", couponStatus=" + couponStatus + "]";
 	}
 	public CouponVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 	
 	

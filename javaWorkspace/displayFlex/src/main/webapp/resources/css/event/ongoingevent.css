@@ -65,5 +65,36 @@
     font-size: 24px;
     margin-top: 20px; /* Add margin top for vertical spacing */
 }
-
-
+#enroll > input[type="submit"]{
+	cursor: pointer;
+    background-color: #010101;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+	width: 100px;
+	height: 35px;
+	margin-left: 20px;
+}
+#delete > button{
+	cursor: pointer;
+    background-color: #B73232;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+	width: 100px;
+	height: 35px;
+	margin-left: 20px;
+}
+#enroll > button{
+	cursor: pointer;
+    background-color: #010101;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+	width: 100px;
+	height: 35px;
+	margin-left: 20px;
+}

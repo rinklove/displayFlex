@@ -22,7 +22,7 @@ public class AdminCouponDao {
 	      		+ "                , NAME\r\n"
 	      		+ "                , CREATIONDATE\r\n"
 	      		+ "                , VALIDPERIOD\r\n"
-	      		+ "                , INFO\r\n"
+	      		+ "                , COUPON_INFO\r\n"
 	      		+ "                )\r\n"
 	      		+ "                \r\n"
 	      		+ "        VALUES(\r\n"
@@ -63,7 +63,7 @@ public class AdminCouponDao {
 	      		+ "    ,a.NAME\r\n"
 	      		+ "    ,a.CREATIONDATE\r\n"
 	      		+ "    ,a.VALIDPERIOD\r\n"
-	      		+ "    ,a.INFO\r\n"
+	      		+ "    ,a.COUPON_INFO\r\n"
 	      		+ " from coupon a \r\n"
 	      		+ " order by no";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -82,7 +82,7 @@ public class AdminCouponDao {
 	         String name = rs.getString("NAME");
 	         String creationDate = rs.getString("CREATIONDATE");
 	         String validPeriod = rs.getString("VALIDPERIOD");
-	         String info = rs.getString("INFO");
+	         String info = rs.getString("COUPON_INFO");
 	         
 	         
 	         CouponVo vo = new CouponVo();
