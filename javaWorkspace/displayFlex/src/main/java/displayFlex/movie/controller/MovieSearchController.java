@@ -48,7 +48,7 @@ public class MovieSearchController extends HttpServlet {
 			//관람 등급 가져오기
 			List<ScreenGradeVo> screenGradeList = movieService.getAllScreenGrade();
 			String[] genres = request.getParameterValues("genres");
-			String grade = request.getParameter("grade");
+			String grade = request.getParameter("grade") == "" ? null : request.getParameter("grade");
 			
 			//영화 리스트 가져오기(페이징 처리 5개씩)
 			int pno = request.getParameter("pno") == null ? 1 : Integer.parseInt(request.getParameter("pno"));
@@ -63,11 +63,13 @@ public class MovieSearchController extends HttpServlet {
 			if(selectedQuery.contains("&pno")) {
 				selectedQuery = request.getQueryString().substring(0, selectedQuery.lastIndexOf("&"));				
 			}
-			genres = genres == null ? new String[1]  : genres;
+			if(genres == null) {
+				genres[0] = "0";
+			}
 			request.setAttribute("genreList", genreList);
 			request.setAttribute("selectGenre", genres);	
 			request.setAttribute("selectGrade", grade);
-			request.setAttribute("genreList", genreList);
+
 			request.setAttribute("screenGradeList", screenGradeList);
 			request.setAttribute("pageVo", page);
 			request.setAttribute("movieList", movieList);

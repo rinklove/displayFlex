@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.Arrays" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
@@ -24,10 +25,9 @@
                 <tr>
                     <td><span class="fs-6 fw-bold mx-2 mt-3 d-flex align-content-center">장르</span></td>
                     <td>
-                    <c:set var="text" value="${fn:join(selectGenre, ',') }"/>
-                        <c:forEach var="genreElement" items="${genreList}">
+                        <c:forEach var="genreElement" items="${genreList}" >
 	                        <c:choose>
-								<c:when test="${fn:contains(text, genreElement.genreCateNo)}">
+								<c:when test="${fn:contains(selectGenre, genreElement.genreCateNo)}">
 			                        <input type="checkbox" class="btn-check" name="genres" id="${genreElement.cateName}" value="${genreElement.genreCateNo}" autocomplete="off" checked="checked">
 									<label class="btn btn-outline-danger rounded-pill m-1" for="${genreElement.cateName}">${genreElement.cateName}</label>							
 								</c:when>
@@ -42,6 +42,8 @@
                 <tr>
                     <td><span class="fs-6 fw-bold mx-2 mt-3 d-flex align-content-center">관람 등급</span></td>
                     <td>
+                    	<input type="radio" class="btn-check" name="grade" id="grade0" value="" autocomplete="off">
+                        <label class="btn btn-outline-dark m-1 mt-3" for="grade0">관람등급 상관없음</label>
 	                    <c:forEach var="gradeElement" items="${screenGradeList }">
 	                    <c:choose>
 	                    <c:when test="${selectGrade eq  gradeElement.screenGradeNo}">
