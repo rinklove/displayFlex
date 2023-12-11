@@ -240,6 +240,9 @@ header > nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 30px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 #theater1 > div:first-child > span, #theater2 > div:first-child > span, #theater3 > div:first-child > span, #theater4 > div:first-child > span{

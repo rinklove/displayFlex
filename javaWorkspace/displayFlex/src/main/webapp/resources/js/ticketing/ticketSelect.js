@@ -78,10 +78,22 @@ function printTimeList(){
 	.then( (theatersData) => { 
 			console.log(theatersData);
 
-            const theater1 = document.getElementById("theater1_time")
-            const theater2 = document.getElementById("theater2_time")
-            const theater3 = document.getElementById("theater3_time")
-            const theater4 = document.getElementById("theater4_time")
+            const theater1 = document.getElementById("theater1_time");
+            const theater2 = document.getElementById("theater2_time");
+            const theater3 = document.getElementById("theater3_time");
+            const theater4 = document.getElementById("theater4_time");
+            
+            const t1Parent = document.getElementById("theater1_time").parentNode;
+            const t2Parent = document.getElementById("theater2_time").parentNode;
+            const t3Parent = document.getElementById("theater3_time").parentNode;
+            const t4Parent = document.getElementById("theater4_time").parentNode;
+
+//			theatersData.forEach((list) => {
+//				list.theaterNo.forEach((no) => {
+//					if(no === '1'){}
+//					else{t1Parent.style.cssText = "display : none";}
+//				})
+//			})
 			
 			theater1.innerHTML = "";
 			theater2.innerHTML = "";
@@ -104,46 +116,6 @@ function printTimeList(){
 			        	break;
 				}
 			})
-			
-			
-//			const theaters = {};
-//			
-//			// 상영관 및 시간 정보 분류
-//			theatersData.forEach((item) => {
-//				const theaterNo = item.theaterNo;
-//				if (!theaters[theaterNo]) {
-//			    	theaters[theaterNo] = [];
-//			 	}
-//				theaters[theaterNo].push(item.startTime);
-//			});
-//			
-//			console.log(theaters);
-//			
-//			// 상영관 및 시간 정보 추가
-//			const timeContainer = document.getElementById("theater");
-//			
-//			for (const theaterNo in theaters) {
-//			  	const theaterDiv = document.createElement("div");
-//				theaterDiv.id = "theater" + theaterNo;
-//			  
-//			  	const theaterNameDiv = document.createElement("div");
-//			  	theaterNameDiv.textContent = theaterNo + "관";
-//			  	theaterDiv.appendChild(theaterNameDiv);
-//			  
-//			  	const timeButtonsDiv = document.createElement("div");
-//			  	timeButtonsDiv.className = "theater" + theaterNo + "_time";
-//			  	
-//			  	theaters[theaterNo].forEach((startTime) => {
-//			   		const button = document.createElement("button");
-//			    	button.className = "selectTime";
-//			    	button.textContent = startTime;
-//			    	timeButtonsDiv.appendChild(document.createElement("div").appendChild(button).parentNode);
-//			  	});
-//			  	
-//			  	theaterDiv.appendChild(timeButtonsDiv);
-//			  	timeContainer.appendChild(theaterDiv);
-//			
-//			}
         })
 }
 
@@ -169,19 +141,15 @@ function createTimeDiv(list){
     selectedMovie.style.cssText = 'background-color: #EDD711; border-radius: 10px;';
     
     if (window.selectedMovie && window.selectedMovie !== selectedMovie) {
-      window.selectedMovie.style.backgroundColor = '';
-      ticketData = {};
+    	window.selectedMovie.style.backgroundColor = '';
+    	ticketData = {};
 //        window.selectedDate = undefined;
 //        window.selectedSeat = undefined;
 //        window.selectedTheater = undefined;
 //        window.selectedTime = undefined;
 //        window.totalReserved = undefined;
-	 const timeMenu = document.getElementById('time');
-	 const arrow2 = document.getElementById('arrow2');
-	 timeMenu.style.display = "none";
-	 arrow2.style.display = "none";
-	 const seatMenu = document.getElementById('ticketing2')
-	 seatMenu.style.display = "none";
+		resetSelectedInfo("changeMovie");
+
     }
     const movieNo = document.getElementById('movieNo' + index);
     const movieInfo = document.getElementById('movieInfo');
@@ -216,6 +184,7 @@ function createTimeDiv(list){
 
     if (window.selectedDate && window.selectedDate !== selectedDate) {
       window.selectedDate.style.backgroundColor = '';
+      resetSelectedInfo("changeDate");
     }
 
     const movieDate = document.getElementById('movieDate' + index);
@@ -275,39 +244,6 @@ function changeTimeInfo(list){
     }
 }
 
-// 예매 -상영관, 시간 선택
-//const selectedTimeButtons = document.getElementsByClassName("selectTime");
-//
-//Array.from(selectedTimeButtons).forEach(function (button) {
-//    button.addEventListener('click', function() {
-//      const selectedTheater = this.closest('div[id^="theater"]').querySelector('div:first-child').innerText;
-//      button.parentNode.style.backgroundColor = '#EDD711';
-// 
-//      if (window.selectedTime && window.selectedTime !== button) {
-//          window.selectedTime.parentNode.style.backgroundColor = '';
-//      }
-//
-//
-//      const timeInfo = document.getElementById('timeInfo');
-//      timeInfo.innerText = button.innerText;
-//	
-//	  const theaterInfo = document.getElementById('theaterInfo');
-//	  theaterInfo.innerText = selectedTheater
-//
-//      window.selectedTime = button;
-//
-//      ticketData.selectedTime = button.innerText;
-//      ticketData.selectedTheater = theaterInfo.innerText;
-//
-//      const seatMenu = document.getElementById('ticketing2')
-//
-//      if(ticketData.selectedTime !== null){
-//        seatMenu.style.cssText = 'display : block;'  
-//      }
-//
-//      console.log(ticketData);
-//    });
-//});
     
 // 좌석 선택 - 몇 명인지, 몇번 좌석인지
 document.querySelectorAll('.seat div').forEach(seat => {
@@ -360,11 +296,40 @@ function handleSeatClick(event) {
 }
 
 // 다른 항목 선택시 선택정보 초기화
-function resetSelectedInfo(){
-	
+function resetSelectedInfo(index){
+	// 영화 재선택시
+	if(index == "changeMovie"){
+		setDisplay(['selectComplete','time', 'arrow2', 'ticketing2'], 'none');
+		clearContent(['dateInfo','timeInfo', 'theaterInfo', 'reservedInfo', 'seatInfo', 'payInfo']);
+	}
+	// 날짜 재선택시
+	if(index == "changeDate"){
+		setDisplay(['selectComplete','ticketing2'], 'none');
+		clearContent(['timeInfo', 'theaterInfo', 'reservedInfo', 'seatInfo', 'payInfo']);
+	}
+	// 상영시간 재선택시
+	if(index == 3){
+		
+	}
 }
 
+function setDisplay(elementIds, displayValue) {
+    elementIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = displayValue;
+        }
+    });
+}
 
+function clearContent(elementIds) {
+    elementIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.innerText = "";
+        }
+    });
+}
 
 /*---------------------------예매 선택 정보 -끝*/
 
