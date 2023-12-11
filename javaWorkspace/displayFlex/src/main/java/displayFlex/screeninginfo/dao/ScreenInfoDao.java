@@ -156,16 +156,14 @@ public class ScreenInfoDao {
 	 * @throws SQLException 
 	 */
 	public int isExistScreeningInfo(ScreenInfoDto screenInfoDto, Connection con) throws SQLException {
-		query = "SELECT COUNT(ST.SCREENING_TIME_NO) FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE SI.THEATER_NO = ? AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ? AND (((TO_CHAR(ST.START_TIME, 'HH24:MI') < ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') > ?) OR (TO_CHAR(ST.START_TIME, 'HH24:MI') < ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') > ?) OR(TO_CHAR(ST.START_TIME, 'HH24:MI') > ? AND TO_CHAR(ST.END_TIME, 'HH24:MI') < ?)))";
+		query = "SELECT ST.* FROM SCREENING_INFO SI INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE SI.THEATER_NO = ? AND TO_CHAR(SI.START_DATE, 'YYYY-MM-DD') = ? AND ((TO_CHAR(ST.START_TIME, 'HH24:MI') BETWEEN ? AND ?) OR(TO_CHAR(ST.END_TIME, 'HH24:MI') BETWEEN ? AND ?))";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, screenInfoDto.getTheater());
 		pstmt.setString(2, screenInfoDto.getDate());
 		pstmt.setString(3, screenInfoDto.getStartTime());
-		pstmt.setString(4, screenInfoDto.getStartTime());
-		pstmt.setString(5, screenInfoDto.getEndTime());
+		pstmt.setString(4, screenInfoDto.getEndTime());
+		pstmt.setString(5, screenInfoDto.getStartTime());
 		pstmt.setString(6, screenInfoDto.getEndTime());
-		pstmt.setString(7, screenInfoDto.getStartTime());
-		pstmt.setString(8, screenInfoDto.getEndTime());
 		
 		ResultSet rs = pstmt.executeQuery();
 		int count = 0;
