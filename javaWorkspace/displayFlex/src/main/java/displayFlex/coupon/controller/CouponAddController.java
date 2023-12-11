@@ -56,7 +56,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 		
 			
 			
-			req.getSession().setAttribute("alertMsg", "게시글 작성 성공 !");
+//			req.getSession().setAttribute("alertMsg", "게시글 작성 성공 !");
 			
 			resp.sendRedirect("/cinema/coupon/couponlist");
 			

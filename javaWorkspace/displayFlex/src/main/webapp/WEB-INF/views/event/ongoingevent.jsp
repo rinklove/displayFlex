@@ -41,7 +41,15 @@
             <a style=text-decoration:none; href="/cinema/event/eventdetail"><div class="content_area">
                 <h1>이벤트 게시글1</h1>
                 <div>
-                    <div class="content_title" >이벤트 게시글 제목1</div>
+                    <div class="content_title" >
+                        <div id="coupon_name">
+                            <!-- <% 
+                           if(eventDtoList!= null){
+                           for(EveonDto dto : eventDtoList){ %>
+                               <div><%=dto.getEventTitle() %></div>
+                              
+                               <% }} %>
+                    </div> -->
                     
                 </div>
             </div>

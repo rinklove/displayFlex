@@ -32,7 +32,7 @@
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 					</select> -->
-					&nbsp;&nbsp;<input type="text" name="searchValue" placeholder="쿠폰조회">
+					&nbsp;&nbsp;<input type="text" name="searchValue" placeholder="조회하기 버튼을 눌러주세요.">
 					<input type="submit" value="조회하기">
 				</form>
 			</div>
@@ -46,7 +46,7 @@
                 <div style="color: white; font-size:large">쿠폰이름</div>
                 <div style="color: white; font-size:large">쿠폰사용기간</div>
                 <div style="color: white; font-size:large">쿠폰정보</div>
-                <div style="color: white; font-size:large">쿠폰사용여부</div>
+                <div style="color: white; font-size:large">쿠폰할인금액</div>
             </div>
             <div class="coupon_content">
               
@@ -64,7 +64,7 @@
                 <% 
                 if(couponVoList != null){
                 for(CouponVo vo : couponVoList){ %>
-                   <div><%=vo.getCouponValidePeriod() %></div>
+                   <div><%=vo.getCouponValidePeriod() %>까지 사용가능</div>
                    <% }} %>
                 </div>
     			
@@ -77,11 +77,11 @@
                 </div>
                 
     			
-                <div id="coupon_status">
+                <div id="coupon_discount">
                 <% 
                 if(couponVoList != null){
                 for(CouponVo vo : couponVoList){ %>
-                   <div><%=vo.getCouponStatus() %></div>
+                   <div><%=vo.getCouponDiscount() %>원할인</div>
                     <% }} %>
                 </div>
                 
