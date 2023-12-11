@@ -34,9 +34,16 @@ public class StoreMenuListController extends HttpServlet{
 			//result (StoreList를 JSON 문자열로 바꿔서 내보내기)
 			Gson gson = new Gson();
 			String str = gson.toJson(voList); //객체를 JSON형식문자열 변환 함수 호출
-			req.setCharacterEncoding("UTF-8"); //한글처리
-			PrintWriter out = resp.getWriter(); // 문자열 내보내기를 위한 통로 준비 (JSP 필요없음)
-			out.write(str);  // JSON 으로 변환된 문자열을 내보냄
+//			PrintWriter out = resp.getWriter(); // 문자열 내보내기를 위한 통로 준비 (JSP 필요없음)
+//			out.write(str);  // JSON 으로 변환된 문자열을 내보냄
+			
+			resp.setContentType("application/json");
+		    resp.setCharacterEncoding("UTF-8");
+		    resp.getWriter().write(str);
+		    
+			req.setAttribute("cate", voList);
+			req.getRequestDispatcher("/WEB-INF/views/store/menuList.jsp").forward(req, resp);
+			
 			
 		}catch(Exception e) {
 			System.out.println("[ERROR-S002] 스토어 메뉴목록 불러오기 실패...");

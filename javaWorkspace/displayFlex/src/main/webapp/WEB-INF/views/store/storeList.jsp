@@ -35,7 +35,7 @@
 				<div><button><span>${vo.category}</span></button></div>
 				</c:forEach>
 			</div>
-			<div class="itemPoto">
+			<div class="itemPhoto">
 				<c:forEach items="${storeVoList}" var="vo">
 					<div>
 						<a href="/cinema/store/product">
