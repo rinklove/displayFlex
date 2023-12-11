@@ -71,7 +71,7 @@ function renderData(data) {
 			  const reviewDiv = document.createElement('div');
 			  reviewDiv.classList.add('p-3');
 			  reviewDiv.classList.add('mt-3');
-			  reviewDiv.classList.add('bg-secondary-subtle');
+			  reviewDiv.classList.add('bg-f0f2f2');
 		        const firstDiv = document.createElement('div');
 		       	firstDiv.classList.add('p-2');
 		       	
