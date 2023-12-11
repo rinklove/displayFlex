@@ -86,7 +86,7 @@ public class TicketSelectDao {
 	// 상영시간(상영관) 받아오기
 	public List<ScreeningDateVo> getScreeningTimeList(Connection conn, String movieNo) throws Exception {
 
-		String sql = "SELECT TO_CHAR(T.START_TIME, 'HH24:MI') AS TIME, I.THEATER_NO FROM SCREENING_TIME T JOIN SCREENING_INFO I ON T.SCREENING_INFO_NO = I.SCREENING_INFO_NO WHERE I.MOVIE_NO = ?";
+		String sql = "SELECT TO_CHAR(T.START_TIME, 'HH24:MI') AS TIME, I.THEATER_NO, T.SCREENING_TIME_NO FROM SCREENING_TIME T JOIN SCREENING_INFO I ON T.SCREENING_INFO_NO = I.SCREENING_INFO_NO WHERE I.MOVIE_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, movieNo);
 		ResultSet rs = pstmt.executeQuery();
@@ -95,9 +95,11 @@ public class TicketSelectDao {
 		while(rs.next()) {
 			String time = rs.getString("TIME");
 			String theaterNo = rs.getString("THEATER_NO");
+			String screeningTimeNo = rs.getString("SCREENING_TIME_NO");
 			System.out.println("time : " + time);
+			System.out.println("screeningTimeNo : " + screeningTimeNo);
 			
-			ScreeningDateVo vo = new ScreeningDateVo(time, theaterNo);
+			ScreeningDateVo vo = new ScreeningDateVo(time, theaterNo, screeningTimeNo);
 			
 			screeningTimeList.add(vo);
 		}
@@ -106,6 +108,29 @@ public class TicketSelectDao {
 		return screeningTimeList;
 	}
 
-	
 	// 좌석정보 받아오기
+	public List<String> getSeatInfo(String theaterNo, String screeningTimeNo, Connection conn) throws Exception {
+		
+		String sql = "SELECT S.SEAT_NO FROM SEAT S INNER JOIN TICKET T ON S.SEAT_UNIQUE_NO = T.SEAT_UNIQUE_NO WHERE S.THEATER_NO = ? AND T.SCREENING_TIME_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, theaterNo);
+		pstmt.setString(2, screeningTimeNo);
+
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<String> reservedSeatInfo = new ArrayList<String>();
+		
+		while(rs.next()) {
+			String x = rs.getString("SEAT_NO");
+			reservedSeatInfo.add(x);
+		}
+		
+		
+		
+		
+		
+		return reservedSeatInfo;
+	}
+
+	
 }
