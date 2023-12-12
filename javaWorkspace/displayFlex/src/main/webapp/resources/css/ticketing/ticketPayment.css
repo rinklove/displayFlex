@@ -92,6 +92,14 @@ main {
     font-weight: bold;
 }
 /* 할인혜택 */
+#gradeDiscount{
+	margin-top : 25px;
+}
+
+#specialDiscount{
+	margin-top: 60px;
+}
+
 #gradeDiscount > div:first-child > span, #specialDiscount > div:first-child > span {
     font-size: 25px;
     margin-top: 10px;

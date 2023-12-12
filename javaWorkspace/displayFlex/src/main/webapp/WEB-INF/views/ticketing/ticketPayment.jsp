@@ -1,5 +1,12 @@
+<%@page import="com.google.gson.Gson"%>
+<%@page import="displayFlex.ticketing.payment.vo.SelectCouponVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	List<SelectCouponVo> couponList	= (List<SelectCouponVo>)request.getAttribute("couponList");
+	String gsonList = (String)request.getAttribute("gsonList");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -45,11 +52,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% for(int i = 0; i < 20; i++){%>
+                            	<tr>
+                            		<td><input type="radio" name="discount" value="null" checked="checked">  선택안함</td>
+                            	</tr>
+                                <% for(SelectCouponVo vo : couponList){%>
                                 <tr>
-                                    <td><input class="form-check-input" type="checkbox" value="coupon<%= i %>" id="flexCheckDefault" name ="couponCheck" onclick="checkbox(this);">쿠폰<%= i %></td>
-                                    <td>쿠폰번호...</td>
-                                    <td>2010-11-10</td>
+                                    <td>
+                                    	<input type="radio" name="discount" value="<%= vo.getRetainedNo() %>">
+                                    	<%= vo.getName() %>    <%= vo.getDiscount() %>
+                                    </td>
+                                    <td><%= vo.getRetainedNo() %></td>
+                                    <td><%= vo.getCouponEnddate() %></td>
                                 </tr>
                                 <% } %>
                             </tbody>
@@ -74,13 +87,13 @@
                       <div id="step-discount">
                         <div id="gradeDiscount">
                           <div><span>등급할인</span></div>
-                          <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">VIP 할인</span>
+                          <span><input type="radio" name="discount" value="VIP 할인">VIP 할인</span>
                         </div>
                         <div id="specialDiscount">
                           <div><span>우대사항</span></div>
-                          <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">어린이</span>
-                          <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">경로할인</span>
-                          <span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">장애인</span>
+                          <span><input type="radio" name="discount" value="어린이 할인">어린이</span>
+                          <span><input type="radio" name="discount" value="경로 할인">경로할인</span>
+                          <span><input type="radio" name="discount" value="장애인 할인">장애인</span>
                         </div>
                       </div>
                     </div>
@@ -155,7 +168,7 @@
 			    <img src="../resources/image/ticketing/flexLogo.png" alt="포스터" id="posterImg">
 		    </div>
         <div id="ticket-movieName">
-            <span id="movieInfo">벼랑 위의 포뇨</span>
+            <span id="movieInfo"></span>
         </div>
         <div id="ticket-movieInfo">
             <table>
