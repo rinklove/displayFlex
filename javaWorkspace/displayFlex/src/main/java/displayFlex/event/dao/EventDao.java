@@ -17,28 +17,10 @@ public class EventDao {
 	public int createEvent(Connection conn, EventDto dto) throws Exception {
 	      
 	      //SQL
+		
 			String sql = "INSERT INTO EVENT\r\n"
-					+ "            (EVENT_NO\r\n"
-					+ "            , EVENTTYPE_NO\r\n"
-					+ "            , MEMBER_NO\r\n"
-					+ "            , EVENT_TITLE\r\n"
-					+ "            , EVENT_CONTENTS\r\n"
-					+ "            , EVENT_PREPARATIONDATE\r\n"
-					+ "            , EVENT_PROGRESS\r\n"
-					+ "            , EVENT_STARTDATE\r\n"
-					+ "            , EVENT_ENDDATE\r\n"
-					+ "            , EVENT_HIT)\r\n"
-					+ "VALUES \r\n"
-					+ "(           SEQ_EVENT.NEXTVAL  \r\n"
-					+ "            ,?\r\n"
-					+ "            ,?\r\n"
-					+ "            , ?\r\n"
-					+ "            , ?\r\n"
-					+ "            , ?\r\n"
-					+ "            , ?\r\n"
-					+ "            , ?\r\n"
-					+ "            , ?\r\n"
-					+ "            , ?);";
+					+ "(EVENT_NO, EVENTTYPE_NO, MEMBER_NO, EVENT_TITLE, EVENT_CONTENTS, EVENT_PREPARATIONDATE, EVENT_REPORTINGDATE, EVENT_PROGRESS, EVENT_STARTDATE, EVENT_ENDDATE, EVENT_HIT)\r\n"
+					+ "VALUES (SEQ_EVENT.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 				PreparedStatement pstmt= conn.prepareStatement(sql);
 				pstmt.setString(1, dto.getEventtypeNo());
@@ -46,10 +28,11 @@ public class EventDao {
 				pstmt.setString(3, dto.getEventTitle());
 				pstmt.setString(4, dto.getEventContents());
 				pstmt.setString(5, dto.getEventPreparationdate());
-				pstmt.setString(6, dto.getEventProgress());
-				pstmt.setString(7, dto.getEventStartdate());
-				pstmt.setString(8, dto.getEventEnddate());
-				pstmt.setString(9, dto.getEventHit());
+				pstmt.setString(6, dto.getEventReportingdate());
+				pstmt.setString(7, dto.getEventProgress());
+				pstmt.setString(8, dto.getEventStartdate());
+				pstmt.setString(9, dto.getEventEnddate());
+				pstmt.setString(10, dto.getEventHit());
 				
 				int result = pstmt.executeUpdate();
 				
@@ -74,7 +57,11 @@ public class EventDao {
 	      		+ "       ,A. EVENT_ENDDATE\r\n"
 	      		+ "       ,A. EVENT_HIT\r\n"
 	      		+ "       FROM EVENT A\r\n"
-	      		+ "        ORDER BY EVENT_NO;   ";
+	      		+ "        ORDER BY EVENT_NO";
+	      
+	      
+	      
+	      
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 //	      pstmt.setInt(1, pvo.getStartRow());
 //	      pstmt.setInt(2, pvo.getLastRow());
@@ -89,19 +76,28 @@ public class EventDao {
 	         String eventTypeNo= rs.getString("EVENTTYPE_NO");
 	         String memberNo = rs.getString("MEMBER_NO");
 	         String eventTitle = rs.getString("EVENT_TITLE");
-	         String creationDate = rs.getString("EVENT_CONTENTS");
-	         String validPeriod = rs.getString("VALIDPERIOD");
-	         String info = rs.getString("COUPON_INFO");
+	         String eventContents = rs.getString("EVENT_CONTENTS");
+	         String eventPreparationDate = rs.getString("EVENT_PREPARATIONDATE");
+	         String eventReportingDate = rs.getString("EVENT_REPORTINGDATE");
+	         String eventProgress = rs.getString("EVENT_PROGRESS");
+	         String eventStartDate = rs.getString("EVENT_STARTDATE");
+	         String eventEndDate = rs.getString("EVENT_ENDDATE");
+	         String eventHit = rs.getString("EVENT_HIT");
 	         
 	         
 	         EventDto dto = new EventDto();
-	         vo.setCouponNo(no);
-	         vo.setCouponType(type);
-	         vo.setCouponDiscount(discount);
-	         vo.setCouponName(name);
-	         vo.setCouponCreationDate(creationDate);
-	         vo.setCouponValidePeriod(validPeriod);
-	         vo.setCouponInfo(info);
+	         dto.setEventNo(eventNo);
+	         dto.setEventtypeNo(eventTypeNo);
+	         dto.setMemberNo(memberNo);
+	         dto.setEventTitle(eventTitle);
+	         dto.setEventContents(eventContents);
+	         dto.setEventPreparationdate(eventPreparationDate);
+	         dto.setEventReportingdate(eventReportingDate);
+	         dto.setEventProgress(eventProgress);
+	         dto.setEventStartdate(eventStartDate);
+	         dto.setEventEnddate(eventEndDate);
+	         dto.setEventHit(eventHit);
+	         
 	         
 	         
 	         eventDtoList.add(dto);
@@ -113,97 +109,6 @@ public class EventDao {
 	      JDBCTemplate.close(pstmt);
 	      JDBCTemplate.close(rs);
 	      
-	      return couponVoList;
+	      return eventDtoList;
 	   }
 }//class
-				
-//	      String sql = "INSERT INTO COUPON\r\n"
-//	      		+ "                (\r\n"
-//	      		+ "                 NO --1\r\n"
-//	      		+ "                , TYPE --2\r\n"
-//	      		+ "                , DISCOUNT\r\n"
-//	      		+ "                , NAME\r\n"
-//	      		+ "                , CREATIONDATE\r\n"
-//	      		+ "                , VALIDPERIOD\r\n"
-//	      		+ "                , COUPON_INFO\r\n"
-//	      		+ "                )\r\n"
-//	      		+ "                \r\n"
-//	      		+ "        VALUES(\r\n"
-//	      		+ "                (SELECT MAX(NO) + 1 FROM COUPON)--1\r\n"
-//	      		+ "                ,?--2 type\r\n"
-//	      		+ "                ,?--3 discoupon\r\n"
-//	      		+ "                ,?--4 name\r\n"
-//	      		+ "                ,?--5 creationdate\r\n"
-//	      		+ "                ,?--6 validperiod\r\n"
-//	      		+ "                ,?--7 info\r\n"
-//	      		+ "                )";
-//	      PreparedStatement pstmt = conn.prepareStatement(sql);
-//	      pstmt.setString(1, vo.getCouponType());
-//	      pstmt.setString(2, vo.getCouponDiscount());
-//	      pstmt.setString(3, vo.getCouponName());
-//	      pstmt.setString(4, vo.getCouponCreationDate());
-//	      pstmt.setString(5, vo.getCouponValidePeriod());
-//	      pstmt.setString(6, vo.getCouponInfo());
-	      
-	      //
-	    
-	      
-	      
-	   
-	//이벤트 조회
-//	public List<EventDto> selectEventList(Connection conn) throws Exception{
-//	      
-//	      //SQL
-//	      String sql = "select\r\n"
-//	      		+ "     a.NO\r\n"
-//	      		+ "    ,a.TYPE\r\n"
-//	      		+ "    ,a.DISCOUNT\r\n"
-//	      		+ "    ,a.NAME\r\n"
-//	      		+ "    ,a.CREATIONDATE\r\n"
-//	      		+ "    ,a.VALIDPERIOD\r\n"
-//	      		+ "    ,a.COUPON_INFO\r\n"
-//	      		+ " from coupon a \r\n"
-//	      		+ " order by no";
-//	      PreparedStatement pstmt = conn.prepareStatement(sql);
-////	      pstmt.setInt(1, pvo.getStartRow());
-////	      pstmt.setInt(2, pvo.getLastRow());
-//	      
-//	      ResultSet rs = pstmt.executeQuery();
-//	   
-//	      //rs
-//	      List<EventDto> eventDtoList = new ArrayList<EventDto>();
-//	      while(rs.next()) {
-//	         
-//	         String no = rs.getString("NO");
-//	         String type= rs.getString("TYPE");
-//	         String discount = rs.getString("DISCOUNT");
-//	         String name = rs.getString("NAME");
-//	         String creationDate = rs.getString("CREATIONDATE");
-//	         String validPeriod = rs.getString("VALIDPERIOD");
-//	         String info = rs.getString("COUPON_INFO");
-//	         
-//	         
-//	         EventDto dto = new EventDto();
-//	         vo.setCouponNo(no);
-//	         vo.setCouponType(type);
-//	         vo.setCouponDiscount(discount);
-//	         vo.setCouponName(name);
-//	         vo.setCouponCreationDate(creationDate);
-//	         vo.setCouponValidePeriod(validPeriod);
-//	         vo.setCouponInfo(info);
-//	         
-//	         
-//	         eventDtoList.add(dto);
-//	         
-//	      }
-//	      
-//	      
-//	      //close
-//	      JDBCTemplate.close(pstmt);
-//	      JDBCTemplate.close(rs);
-//	      
-//	      return eventDtoList;
-//	   }
-	
-	
-

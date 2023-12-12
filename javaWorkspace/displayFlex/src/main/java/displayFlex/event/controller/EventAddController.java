@@ -40,8 +40,8 @@ public class EventAddController extends HttpServlet {
 			System.out.println("i_edate----[" + edate + "]");
 			System.out.println("t_contents----[" + contents + "]");
 			System.out.println("r_AffDis----[" + AffDis + "]");
-			System.out.println("r_PreMee----[" + PreMee + "]");
-			System.out.println("r_StaGre----[" + StaGre + "]");
+//			System.out.println("r_PreMee----[" + PreMee + "]");
+//			System.out.println("r_StaGre----[" + StaGre + "]");
 
 			EventDto dto = new EventDto();
 
@@ -50,8 +50,8 @@ public class EventAddController extends HttpServlet {
 			dto.setEventEnddate(edate);
 			dto.setEventContents(contents);
 			dto.setEventtypeNo(AffDis);
-			dto.setEventtypeNo(PreMee);
-			dto.setEventtypeNo(StaGre);
+//			dto.setEventtypeNo(PreMee);
+//			dto.setEventtypeNo(StaGre);
 
 			int result = service.eventCreate(dto);
 
@@ -66,7 +66,7 @@ public class EventAddController extends HttpServlet {
 			// req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req,
 			// resp);
 		}
-
 	}
-
 }
+
+

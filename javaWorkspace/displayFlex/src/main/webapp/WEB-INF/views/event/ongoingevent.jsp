@@ -1,6 +1,19 @@
+<%@page import="java.util.Map"%>
+<%@page import="displayFlex.event.dto.EventDto"%>
+<%@page import="java.util.List"%>
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/cinema/resources/css/event/ongoingevent.css">
+ <%
+    	List<EventDto> eventDtoList = (List<EventDto>) request.getAttribute("eventDtoList");
+    	Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
+    %>
+
+
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -39,20 +52,19 @@
         </div>
         <div id="main_content">
             <a style=text-decoration:none; href="/cinema/event/eventdetail"><div class="content_area">
-                <h1>이벤트 게시글1</h1>
-                <div>
+                <h1>이벤트 게시글 사진1</h1>
                     <div class="content_title" >
                         <div id="coupon_name">
-                            <!-- <% 
-                           if(eventDtoList!= null){
-                           for(EveonDto dto : eventDtoList){ %>
-                               <div><%=dto.getEventTitle() %></div>
-                              
-                               <% }} %>
-                    </div> -->
+                        <% 
+                        if(eventDtoList != null){
+                        for(EventDto dto : eventDtoList){ %>
+                    <div><%=dto.getEventTitle()%></div>
+                   
+                    <% }} %>
                     
-                </div>
-            </div>
+                    
+                        </div>
+                    </div>
             </a>
 
             <div class="content_area">

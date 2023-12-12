@@ -14,7 +14,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-	<form action="/cinema/event/event" method="post"
+	<form action="/cinema/admin/event/add" method="post"
 		entype="multipart/form-data"> 
 		<div class="product">
 			<div></div>
@@ -49,10 +49,15 @@
 							</div>
 							<div>이벤트분류</div>
 							<span> 
-								<input type="radio" value="제휴/할인" name="r_AffDis"> 제휴/할인
-							    <input type="radio" value="시사회/간담회" name="r_PreMee"> 시사회/간담회
-								<input type="radio" value="무대인사" name="r_StaGre"> 무대인사 
-								<br>
+								<div>
+									<select name="s_eventTypeNo" id="diskind" >
+										<option value=""  style="color: gray;" >이벤트종류선택</option>
+										<option value="제휴/할인" name = "">제휴/할인</option>
+										<option value="시사회/간담회">시사회/간담회</option>
+										<option value="무대인사">무대인사</option>
+											
+									</select>
+								</div>		
 								
 							</span>
 						</div>

@@ -39,7 +39,7 @@ public class EventService {
 
 		// dao
 		EventDao dao = new EventDao();
-		List<EventDto> eventDaoList = dao.selectEventList(conn);
+		List<EventDto> eventDtoList = dao.selectEventList(conn);
 
 		// close
 		JDBCTemplate.close(conn);
