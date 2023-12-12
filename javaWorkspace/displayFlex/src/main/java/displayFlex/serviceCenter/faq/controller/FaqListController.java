@@ -49,12 +49,11 @@ public class FaqListController extends HttpServlet {
 				int pageLimit = 2;									//페이징 영역 페이지갯수
 				int faqLimit = 6;									//한 페이지에 보여줄 게시글 갯수
 				PageVo pvo = new PageVo(listCount, currentPage, pageLimit, faqLimit);
+				
 				faqVoList = fs.selectFaqList(pvo);
 				categoryList = cs.selectAllCategoryList();
 				req.setAttribute("pvo", pvo);
 			}
-			
-			
 			
 			// result (==view)
 			req.setAttribute("faqVoList", faqVoList);

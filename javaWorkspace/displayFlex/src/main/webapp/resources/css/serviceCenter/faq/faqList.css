@@ -181,13 +181,13 @@ button {
     display: inline-block;
 } */
 
-legend{
+/* legend{
     position: absolute;
     overflow: hidden;
     width: 1px;
     height: 1px;
     clip: rect(1px, 1px, 1px, 1px);
-}
+} */
 
 #search_wrap input[type="text"] {
     width: 440px;
@@ -202,7 +202,7 @@ input[type="text"] {
     border: 1px solid #DDD;
 }
 
-#search_wrap #btn_col1 {
+#search_wrap input[type=submit] {
     display: inline-block;
     box-sizing: border-box;
     border-radius: 4px;
