@@ -5,6 +5,7 @@ import java.util.List;
 
 import displayFlex.ticketing.payment.dao.PaymentDao;
 import displayFlex.ticketing.payment.vo.SelectCouponVo;
+import displayFlex.ticketing.payment.vo.UserGradeVo;
 import test.JDBCTemplate;
 
 public class PaymentService {
@@ -28,6 +29,19 @@ public class PaymentService {
 		PaymentDao dao = new PaymentDao();
 		
 		SelectCouponVo vo = dao.getSelectCouponInfo(selectedRetainedNo, conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+	}
+
+	public UserGradeVo getUserGrade(String memberNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PaymentDao dao = new PaymentDao();
+		
+		UserGradeVo vo = dao.getUserGrade(memberNo, conn);
 		
 		JDBCTemplate.close(conn);
 		

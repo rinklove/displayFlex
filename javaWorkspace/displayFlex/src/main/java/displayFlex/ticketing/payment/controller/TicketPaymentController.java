@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import displayFlex.member.MemberVo;
 import displayFlex.ticketing.payment.service.PaymentService;
 import displayFlex.ticketing.payment.vo.SelectCouponVo;
+import displayFlex.ticketing.payment.vo.UserGradeVo;
 
 @WebServlet("/ticket/payment")
 public class TicketPaymentController extends HttpServlet {
@@ -36,8 +37,9 @@ public class TicketPaymentController extends HttpServlet {
 
 			PaymentService ps = new PaymentService();
 			List<SelectCouponVo> couponList = ps.getCouponList(memberNo);	
+			UserGradeVo vo = ps.getUserGrade(memberNo);
+			req.setAttribute("userGradeVo", vo);
 			req.setAttribute("couponList", couponList);
-			
 			req.getRequestDispatcher("/WEB-INF/views/ticketing/ticketPayment.jsp").forward(req, resp);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -53,16 +55,18 @@ public class TicketPaymentController extends HttpServlet {
 //			StringBuilder stringBuilder = new StringBuilder();
 			
 	        String selectedRetainedNo = reader.readLine();
-
-	        PaymentService ps = new PaymentService();
-	        SelectCouponVo vo = ps.getSelectCouponInfo(selectedRetainedNo); 
 	        
-	        Gson gson = new Gson();
-	        String gsonVo = gson.toJson(vo);
-	        resp.setCharacterEncoding("UTF-8");
-	       	PrintWriter out = resp.getWriter();
-	       	out.write(gsonVo);
-	      
+	        if(selectedRetainedNo.matches("\\d+")) {
+	        	System.out.println(selectedRetainedNo);
+	        	PaymentService ps = new PaymentService();
+	        	SelectCouponVo vo = ps.getSelectCouponInfo(selectedRetainedNo); 
+	        	
+	        	Gson gson = new Gson();
+	        	String gsonVo = gson.toJson(vo);
+	        	resp.setCharacterEncoding("UTF-8");
+	        	PrintWriter out = resp.getWriter();
+	        	out.write(gsonVo);	        	
+	        }
 //	        Gson gson = new GsonBuilder().create();
 //	        SelectCouponVo vo = gson.fromJson(line, SelectCouponVo.class);
 //	       
@@ -74,3 +78,4 @@ public class TicketPaymentController extends HttpServlet {
 	}
 	
 }
+

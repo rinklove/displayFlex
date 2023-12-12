@@ -1,3 +1,4 @@
+<%@page import="displayFlex.ticketing.payment.vo.UserGradeVo"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="displayFlex.ticketing.payment.vo.SelectCouponVo"%>
 <%@page import="java.util.List"%>
@@ -5,8 +6,32 @@
     pageEncoding="UTF-8"%>
 <%
 	List<SelectCouponVo> couponList	= (List<SelectCouponVo>)request.getAttribute("couponList");
-	String gsonList = (String)request.getAttribute("gsonList");
+	UserGradeVo gradeVo = (UserGradeVo)request.getAttribute("userGradeVo");
+	String gradeNo = gradeVo.getGradeNo();
+	String previlegedYn = gradeVo.getPrevilegedYn();
+	String registerNo = gradeVo.getRegisterNo();
 %>
+
+<script>
+
+window.onload = () => {
+	const gradeNo = <%=gradeNo %>;
+	const previlegedYn = "<%=previlegedYn %>";
+	const registerNo = <%=registerNo%>;
+	console.log(gradeNo+previlegedYn+registerNo );
+
+	
+	if(gradeNo !== 1){
+		document.getElementById("discount_vip").disabled = true;
+	}
+	
+// 	if(){
+		
+// 	}
+	
+}
+
+</script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -53,7 +78,7 @@
                             </thead>
                             <tbody>
                             	<tr>
-                            		<td><input type="radio" name="discount" value="null" checked="checked">  선택안함</td>
+                            		<td><input type="radio" name="discount" value="null" checked="checked" id="noCoupon">  선택안함</td>
                             	</tr>
                                 <% for(SelectCouponVo vo : couponList){%>
                                 <tr>
@@ -87,13 +112,15 @@
                       <div id="step-discount">
                         <div id="gradeDiscount">
                           <div><span>등급할인</span></div>
-                          <span><input type="radio" name="discount" value="VIP 할인">VIP 할인</span>
+
+                          <span><input type="radio" name="discount" value="VIP 할인" id="discount_vip">VIP 할인</span>
+
                         </div>
                         <div id="specialDiscount">
                           <div><span>우대사항</span></div>
-                          <span><input type="radio" name="discount" value="어린이 할인">어린이</span>
-                          <span><input type="radio" name="discount" value="경로 할인">경로할인</span>
-                          <span><input type="radio" name="discount" value="장애인 할인">장애인</span>
+                          <span><input type="radio" name="discount" value="어린이 할인" id="discount_child">어린이</span>
+                          <span><input type="radio" name="discount" value="경로 할인" id="discount_older">경로할인</span>
+                          <span><input type="radio" name="discount" value="장애인 할인" id="discount_disabled">장애인</span>
                         </div>
                       </div>
                     </div>
@@ -154,7 +181,7 @@
                 <div id="totalPayment">
                     <div>
                         <div><span>최종 결제 금액</span></div>
-                        <div></div>
+                        <div>여기 뭘 넣어</div>
                         <div><span id="totalPayment-value">0</span><span>원</span></div>
                     </div>
                 </div>
