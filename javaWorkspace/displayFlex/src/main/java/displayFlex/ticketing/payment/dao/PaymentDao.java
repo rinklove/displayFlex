@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import displayFlex.ticketing.payment.vo.SelectCouponVo;
+import displayFlex.ticketing.payment.vo.UserGradeVo;
 import test.JDBCTemplate;
 
 public class PaymentDao {
@@ -38,6 +39,55 @@ public class PaymentDao {
 		JDBCTemplate.close(pstmt);
 		
 		return couponList;
+	}
+
+	public SelectCouponVo getSelectCouponInfo(String selectedRetainedNo, Connection conn) throws Exception {
+
+		String sql = "SELECT RC.COUPON_NO, C.NAME, C.DISCOUNT FROM RETAINED_COUPON RC JOIN COUPON C ON RC.COUPON_NO = C.NO WHERE RC.RETAINED_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, selectedRetainedNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		SelectCouponVo vo = null;
+		
+		if(rs.next()) {
+			String retainedNo = selectedRetainedNo;
+			String couponNo = rs.getString("COUPON_NO");
+			String name = rs.getString("NAME");
+			String discount = rs.getString("DISCOUNT");
+
+			vo = new SelectCouponVo(retainedNo, couponNo, name, discount);
+		}
+		
+		
+		System.out.println(vo);
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return vo;
+	}
+
+	public UserGradeVo getUserGrade(String memberNo, Connection conn) throws Exception {
+		
+		String sql = "SELECT GRADE_NO, PREVILEGED_YN, REGISTER_NO FROM MEMBER WHERE MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memberNo);
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		UserGradeVo vo = null;
+		if(rs.next()) {
+			String gradeNo = rs.getString("GRADE_NO");
+			String previlegedYn = rs.getString("PREVILEGED_YN");
+			String registerNo = rs.getString("REGISTER_NO");
+			
+			vo = new UserGradeVo(gradeNo, previlegedYn, registerNo);
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return vo;
 	}
 
 }

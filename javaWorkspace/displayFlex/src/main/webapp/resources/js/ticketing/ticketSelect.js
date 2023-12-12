@@ -262,16 +262,10 @@ document.querySelectorAll('.seat div').forEach(seat => {
 function handleSeatClick(event) {
   	const selectedSeat = event.currentTarget;
   
-//  const row = selectedSeat.parentElement.querySelector('.seatRow').textContent; 
-//  const seatNumber = selectedSeat.textContent;
-//  const seatName = row + seatNumber;
   	const seatName = event.currentTarget.id;
 
-//  	const isSelected = selectedSeat.classList.contains('selected');
-
-//  if (isSelected) {
 	if (seatData.includes(seatName)){
-//    selectedSeat.classList.remove('selected');
+		
     const button = selectedSeat.querySelector('button');
     button.style.backgroundColor = '';
     
@@ -280,7 +274,6 @@ function handleSeatClick(event) {
     resetSelectedInfo("changeSeat");
     
   } else {
-//    selectedSeat.classList.add('selected');
     const button = selectedSeat.querySelector('button');
     button.style.backgroundColor = '#EDD711';
 
@@ -299,9 +292,9 @@ function handleSeatClick(event) {
   reservedInfo.innerText = totalReserved;
   // 총 금액
   const payInfo = document.getElementById('payInfo');
-  const totalAmount = totalReserved * 8000;
-  ticketData.totalAmount = totalAmount;
-  payInfo.innerText = totalAmount;
+  const paymentAmount = totalReserved * 8000;
+  ticketData.paymentAmount = paymentAmount;
+  payInfo.innerText = paymentAmount;
   console.log("마지막" + ticketData);
   sessionStorage.setItem("ticketData", JSON.stringify(ticketData)); 
   

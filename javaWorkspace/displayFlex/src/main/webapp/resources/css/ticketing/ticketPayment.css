@@ -326,6 +326,9 @@ main {
 #totalPayment > div > div:nth-of-type(2){
     background-color: white;
     border-bottom: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
