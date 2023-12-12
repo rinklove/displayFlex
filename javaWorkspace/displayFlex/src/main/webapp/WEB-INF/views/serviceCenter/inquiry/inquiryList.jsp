@@ -51,6 +51,7 @@
                             <th id="thread2">제목</th>
                             <th id="thread3">작성자</th>
                             <th id="thread4">등록일</th>
+                            <th id="thread5">답변상태</th>
                         </tr>
                     </thead>
                     <tbody id="tab">
@@ -60,6 +61,7 @@
                     		<td><%= vo.getTitle() %></td>
                     		<td><%= vo.getWriterNick() %></td>
                     		<td><%= vo.getEnrollDate() %></td>
+                    		<td><%= vo.getState() %></td>
                     	</tr>
                     <% } %>
                     	

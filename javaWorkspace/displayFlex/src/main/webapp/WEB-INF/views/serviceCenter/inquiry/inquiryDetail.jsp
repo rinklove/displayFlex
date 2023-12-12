@@ -1,7 +1,7 @@
 <%@page import="displayFlex.serviceCenter.inquiry.vo.InquiryVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
     	InquiryVo vo = (InquiryVo) request.getAttribute("vo");
     	String currPage = (String)request.getAttribute("currPage");
@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryDetail.css">
-<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry.js"></script>
+<script type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -60,7 +60,7 @@
                                     <span class="cont"><%= vo.getEnrollDate() %></span>
                                     <span class="tit">답변여부</span>
                                     <span class="mid">|</span>
-                                    <span class="cont">O</span>
+                                    <span class="cont"><%= vo.getState() %></span>
                                 </td>
                             </tr>
                             <tr id="tb_content">
@@ -74,22 +74,30 @@
                             </tr>
                             <tr id="tb_link">
                                 <td>
-                                    <a href="" id="">
-                                        <span class="tb_next">다음글</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr id="tb_link">
-                                <td>
-                                    <a href="" id="">
-                                        <span class="tb_back">이전글</span>
-                                    </a>
+                                	<div id="reTitle">
+                                        <span>
+                                        	<%= vo.getReTitle() %>
+                                        </span>
+                                        <span>
+                                        	<%= vo.getReEnrollDate() %>
+                                        </span>
+                                        <c:if test="${not empty vo.reTitle }">
+	                                        <span>
+	                                        	<a id="admin-inquiry-update">수정</a>
+	                                        </span>
+                                        </c:if>
+                                    </div>
+                                    <div id="reContents">
+                                        <p>
+                                        	<%= vo.getReContent() %>
+                                        </p>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <div id="list_btn">
-                        <a href="/cinema/serviceCenter/inquiryList?pno=<%= currPage %>">목록</a>
+                        <a href="/cinema/admin/serviceCenter/inquiryList?pno=<%= currPage %>">목록</a>
                     </div>
                 </div>
             </div>
