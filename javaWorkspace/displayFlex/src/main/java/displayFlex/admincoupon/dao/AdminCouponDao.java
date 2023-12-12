@@ -3,6 +3,7 @@ package displayFlex.admincoupon.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,8 +68,14 @@ public class AdminCouponDao {
 	      		+ " from coupon a \r\n"
 	      		+ " order by no";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
+	      
+	      
+	      
 //	      pstmt.setInt(1, pvo.getStartRow());
 //	      pstmt.setInt(2, pvo.getLastRow());
+	      
+	      
+	      
 	      
 	      ResultSet rs = pstmt.executeQuery();
 	   
@@ -98,6 +105,24 @@ public class AdminCouponDao {
 	         couponVoList.add(vo);
 	         
 	      }
+	      
+	      
+	      
+//	      public int selectBoardCount(Connection con) throws SQLException {
+//	  		query = "SELECT COUNT(*) FROM COUPON";
+//	  		
+//	  		PreparedStatement pstmt = con.prepareStatement(query);
+//	  		ResultSet rs = pstmt.executeQuery();
+//	  		int result = 0;
+//	  		
+//	  		if(rs.next()) {
+//	  			result = rs.getInt(1);
+//	  		}
+//	  		
+//	  		JDBCTemplate.close(rs);
+//	  		JDBCTemplate.close(pstmt);
+//	  		return result;
+//	  	}
 	      
 	      
 	      //close

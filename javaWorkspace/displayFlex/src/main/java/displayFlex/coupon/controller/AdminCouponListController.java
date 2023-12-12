@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import displayFlex.admincoupon.service.AdminCouponService;
 import displayFlex.coupon.vo.CouponVo;
+import displayFlex.util.page.vo.PageVo;
 
 @WebServlet("/admin/coupon/list")
 public class AdminCouponListController extends HttpServlet {
@@ -20,6 +21,11 @@ public class AdminCouponListController extends HttpServlet {
 		
 		try {
 			AdminCouponService acs = new AdminCouponService();
+			
+			
+			
+			
+			
 			
 //			// data
 //			int listCount = acs.selectBoardCount();		//전체 게시글 갯수
@@ -31,7 +37,14 @@ public class AdminCouponListController extends HttpServlet {
 //			int pageLimit = 5;
 //			int boardLimit = 10;
 //			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
-//			
+			
+			
+			
+			
+			
+			
+			
+			
 			// service
 			List<CouponVo> couponVoList = acs.selectCouponList();
 			

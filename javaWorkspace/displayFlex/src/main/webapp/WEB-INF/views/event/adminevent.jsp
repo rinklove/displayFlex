@@ -52,9 +52,9 @@
 								<div>
 									<select name="s_eventTypeNo" id="diskind" >
 										<option value=""  style="color: gray;" >이벤트종류선택</option>
-										<option value="제휴/할인" name = "">제휴/할인</option>
-										<option value="시사회/간담회">시사회/간담회</option>
-										<option value="무대인사">무대인사</option>
+										<option value="1" name = "">제휴/할인</option>
+										<option value="2">시사회/간담회</option>
+										<option value="3">무대인사</option>
 											
 									</select>
 								</div>		
