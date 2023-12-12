@@ -25,13 +25,12 @@ public class TicketPaymentController extends HttpServlet {
 		try {
 			HttpSession session = req.getSession();
 			MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
-			System.out.println(session.getAttribute("loginMember")); 
-//			String memberNo = memberVo.getMemberNo();
+
+			String memberNo = memberVo.getMemberNo();
 
 			PaymentService ps = new PaymentService();
-//			List<SelectCouponVo> couponList = ps.getCouponList(memberNo);	
-			
-//			req.setAttribute("couponList", couponList);
+			List<SelectCouponVo> couponList = ps.getCouponList(memberNo);	
+			req.setAttribute("couponList", couponList);
 			
 			req.getRequestDispatcher("/WEB-INF/views/ticketing/ticketPayment.jsp").forward(req, resp);
 		} catch(Exception e) {

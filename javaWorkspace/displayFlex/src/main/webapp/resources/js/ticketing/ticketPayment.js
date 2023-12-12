@@ -23,26 +23,37 @@ paymentAmount.innerText = ticketData.totalAmount;
 totalPayment.innerText = ticketData.totalAmount;
 posterImg.src = ticketData.posterImg;
 
-sessionStorage.clear();
+
 
 function openPopup(url){
     const ticketPopup = window.open(url, '티켓','width=600, height=569');
 }
 
-function checkbox(coupon){
-	
-	const checkCoupon = document.getElementsByName("couponCheck");
-  	checkCoupon.forEach((cc) => {
-   	 cc.checked = false;
-  	})
-	coupon.checked = true;
+const checkedCoupon = document.getElementsByName('discount');
 
-	ticketData.appliedCoupon = coupon.defaultValue;
-	console.log(ticketData);
+checkedCoupon.forEach((checkbox) => {
+    checkbox.addEventListener('change', function() {
+		
+//		console.log(x);
+			
+        if (checkbox.checked) {
+	        const x = checkbox.value;
+            console.log(x + "체크했다.......");
+        }   
   
-	const discountDetails = document.getElementById("discountDetails");
-  	discountDetails.innerText = ticketData.appliedCoupon;
-  	
-}
-
+  
+  		fetch("http://localhost:9002/cinema/ticket")
+  		.then((resp) =>{ return resp.json() })
+  		.then()
+        const discountDetails = document.getElementById("discountDetails");
+        
+//        if(checkbox.value === 'null'){
+//			discountDetails.innerText = "쿠폰 또는 혜택을 선택하세요";
+//		}
+//        
+        const discountValue = document.getElementById("discount-value");
+        
+        const totalPaymentValue = document.getElementById("totalPayment-value");
+    });
+});
 
