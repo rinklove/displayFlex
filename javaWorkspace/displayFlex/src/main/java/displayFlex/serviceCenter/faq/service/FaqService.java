@@ -154,6 +154,139 @@ public class FaqService {
 		return cnt;
 	
 	}
+
+	//faq 작성
+	public int write(FaqVo vo) throws Exception {
+		
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		FaqDao dao = new FaqDao();
+		int result = dao.write(conn, vo);
+		
+		// tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
+
+	//카테고리 리스트 조회
+	public List<CategoryVo> getCategoryList() throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		FaqDao dao = new FaqDao();
+		List<CategoryVo> voList = dao.getCategoryList(conn);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return voList;
+		
+	}
+
+
+	//faq 수정 (화면)
+	public Map<String, Object> edit(String faqNo) throws Exception {
+
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		FaqDao dao = new FaqDao();
+		FaqVo vo = dao.selectFaqByNo(conn , faqNo);
+		
+		List<CategoryVo> categoryVoList = dao.selectAllCategoryList(conn);
+		
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("vo", vo);
+		m.put("categoryVoList", categoryVoList);
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return m;
+	}
+
+	
+	//faq 수정
+	public int edit(FaqVo vo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		FaqDao dao = new FaqDao();
+		int result = dao.updateFaqByNo(conn , vo);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
+
+	//faq 삭제
+	public int delete(String faqNo, String memberNo) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		FaqDao dao = new FaqDao();
+		int result = dao.delete(conn , faqNo , memberNo);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+
+		return result;
+	
+	}
+
+
+	// faq 리스트(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
+//	public List<FaqVo> selectFaqListdataByCategory(String categoryNo) throws Exception {
+//		
+//		//conn
+//		Connection conn = JDBCTemplate.getConnection();
+//		
+//		//dao
+//		FaqDao dao = new FaqDao();
+//		List<FaqVo> faqVoList = dao.selectFaqListdataByCategory(conn, categoryNo);
+//		
+//		//close
+//		JDBCTemplate.close(conn);
+//		
+//		return faqVoList;
+//	
+//	}
 	
 	
 

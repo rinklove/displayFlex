@@ -12,7 +12,7 @@
      	PageVo pvo = (PageVo)request.getAttribute("pvo");
      	List<CategoryVo> categoryList = (List<CategoryVo>) request.getAttribute("categoryList");
      	Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
-     	%>
+     %>
     
 <!DOCTYPE html>
 <html>
@@ -31,7 +31,7 @@
             <div id="title_top">
                 <h1>고객센터</h1>
                 <c:if test="${loginMember.adminYn eq 'Y'}">
-	                <button onclick="location.href=/cinema/admin/faqAdd">등록</button>
+	                <button onclick="location.href='/cinema/admin/faqAdd'">등록</button>
                 </c:if>
             </div>
             <div id="tab_tit">
@@ -79,7 +79,7 @@
 	                </div>
                 <fieldset id="search_wrap">
                 	<form action="/cinema/serviceCenter/faqSearch" method="get">
-	                    <input type="text" name="searchType" placeholder="검색어를 입력해주세요." id="seachKeyword">
+	                    <input type="text" name="searchValue" placeholder="검색어를 입력해주세요." id="seachKeyword">
 	                    <input type="submit" name="searchValue id="btn_col1" value="검색">
 	                    <div id="help_wrap" style="text-align: left;">
 	                        <p>더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면?</p>
@@ -142,41 +142,28 @@
 	
 	<!-- faqList.jsp -->
     <script>
-    	function clickCategory(categoryNo){
-    		
-    	}
-    	
-    	<% if(searchMap != null){ %>
-		function setSearchArea(){
-			
-			// 옵션태그 셋팅
-			const optionTagArr = document.querySelectorAll("#search_wrap");
-			const searchType = "<%= searchMap.get("searchType") %>";
-			for(let i = 0; i < optionTagArr.length; ++i){
-				if( optionTagArr[i].value === searchType ){
-					optionTagArr[i].selected = true;
-					break;
-				}
-			}
-			
-			// 인풋태그 셋팅
-			const searchValueTag = document.querySelector("#search_wrap input[name=searchValue]");
-			searchValueTag.value = "<%= searchMap.get("searchValue") %>";
-			
-		}
-		setSearchArea();
-		
-		function setPageArea(){
-			const aTagArr = document.querySelectorAll("#paging a");
-			for(let i = 0 ; i < aTagArr.length; ++i){
-				aTagArr[i].href = aTagArr[i].href.replace("list" , "search"); 
-				aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
-				aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
-			}
-		}
-		setPageArea();
-	<% } %>
-    </script>
+	    function clickCategory(categoryNo) {
+	        // 추가 구현이 필요한 경우 함수 내용을 작성하세요.
+	    }
+	
+	    <% if(searchMap != null) { %>
+	    function setSearchArea() {
+	        // 인풋태그 셋팅
+	        const searchValueTag = document.querySelector("#search_wrap input[name=searchValue]");
+	        searchValueTag.value = "<%= searchMap.get("searchValue") %>";
+	    }
+	    setSearchArea();
+	
+	    function setPageArea() {
+	        const aTagArr = document.querySelectorAll("#paging a");
+	        for (let i = 0; i < aTagArr.length; ++i) {
+	            aTagArr[i].href = aTagArr[i].href.replace("list", "search");
+	            aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
+	        }
+	    }
+	    setPageArea();
+	    <% } %>
+	</script>
 
 	
 

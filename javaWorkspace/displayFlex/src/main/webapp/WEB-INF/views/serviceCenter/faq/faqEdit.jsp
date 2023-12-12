@@ -1,9 +1,13 @@
+<%@page import="displayFlex.serviceCenter.faq.vo.FaqVo"%>
 <%@page import="displayFlex.serviceCenter.faq.vo.CategoryVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <% List<CategoryVo> categoryVoList = (List<CategoryVo>) request.getAttribute("categoryVoList"); %>
+    <% 
+    	FaqVo vo = (FaqVo) request.getAttribute("vo");
+    	List<CategoryVo> categoryVoList = (List<CategoryVo>) request.getAttribute("categoryVoList"); 
+    %>
     
 <!DOCTYPE html>
 <html>
@@ -18,7 +22,7 @@
 
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-	<form action="/cinema/admin/faqAdd" method="post">
+	<form action="/cinema/admin/faqEdit" method="post">
 	    <main>
 	        <div id="contents">
 	            <div id="title_top">
@@ -53,6 +57,7 @@
 	                            </th>
 	                            <td>
 	                                <select name="category" id="iDdivisionCode">
+	                                    
 	                                    <% for(CategoryVo categoryVo : categoryVoList) { %>
 											<option value="<%= categoryVo.getFaqCategoryNo() %>"><%= categoryVo.getCategoryName() %></option>
 										<% } %>
@@ -73,7 +78,7 @@
 	                            </th>
 	                            <td>
 	                                <div class="bx_textarea">
-	                                    <input type="text" name="title" class="ty2" placeholder="제목을 입력해주세요" id="iDtitle">
+	                                    <input type="text" name="title" class="ty2" placeholder="제목을 입력해주세요" id="iDtitle" value="<%= vo.getTitle() %>">
 	                                    <span class="txt_count">
 	                                        <em id="strongContentsCount_title">0</em>
 	                                        /한글
@@ -89,8 +94,9 @@
 	                            </th>
 	                            <td>
 	                                <div class="bx_textarea">
-	                                    <textarea name="content" class="ty2" id="iDcontents" cols="10" rows="10" title="문의내용을 입력해주세요" 
-	                                    placeholder="내용에 개인정보(개인번호, 계좌번호, 주민번호)가 포함되지 않도록 유의하여 입력해주세요"></textarea>
+	                                    <textarea name="content" class="ty2" id="iDcontents" cols="10" rows="10" title="문의내용을 입력해주세요">
+	                                    	<%= vo.getContent() %>
+	                                    </textarea> 
 	                                    <br>
 	                                    <div class="txt_red txt_color01">
 	                                        <img src="/cinema/resources/image/faqIcon/caution_.png" alt="주의 아이콘" width="14px">
@@ -110,13 +116,28 @@
 	                    </tbody>
 	                </table>
 	                <div id="btn_wrap">
-	                    <input class="cancle" type="submit" value="취소">
-	                    <input class="ok" type="submit" value="확인">
+	                    <input class="submit" type="submit" value="수정">
 	                </div>
 	            </div>
 	        </div>
     	</main>
+    	 <input type="hidden" name="faqNo" value="<%= vo.getFaqNo() %>">
 	</form>
+	
+	<script>
+	
+		function setOptionSelected() {
+		    const optionTag = document.querySeleterAll("#iDdivisionCode option");
+		    for(let i = 0; i < optionTagArr.length; i++){
+		        const optionTag = optionTagArr[i];
+		        if(optionTag.value == <%= vo.getFaqCategoryNo() %>) {
+		            optionTagArr[].selected = true;
+		        }
+		    }
+		}
+
+	setOptionSelected();
+	</script>
 
 </body>
 </html>
