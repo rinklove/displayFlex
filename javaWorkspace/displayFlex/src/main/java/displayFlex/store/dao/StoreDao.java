@@ -43,7 +43,7 @@ public class StoreDao {
 		List<StoreVo> storeVoList = new ArrayList<StoreVo>();
 		
 		//sql
-		String sql = "SELECT P.PRODUCT_NO , C.CATE_NAME CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.CATE_NAME LIKE '베스트' AND P.DEL_YN = 'N'";
+		String sql = "SELECT P.PRODUCT_NO , C.CATE_NAME CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.CATE_NAME LIKE '추천메뉴' AND P.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -152,6 +152,28 @@ public class StoreDao {
 		return vo;
 	
 	}//selectMenuListByNo
+
+	// 제품 등록글 작성 로직
+	public int storeEnroll(Connection conn, StoreVo vo) throws Exception {
+
+		//sql
+		String sql = "INSERT INTO PRODUCT (PRODUCT_NO, PRODUCT_CATE_NO, IMAGE, TITLE, PRICE, PRODUCT_ELEMENT, SHORT_DESCRIPTION) VALUES (SEQ_PRODUCT.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getCategory());
+		pstmt.setString(2, vo.getImage());
+		pstmt.setString(3, vo.getTitle());
+		pstmt.setString(4, vo.getPrice());
+		pstmt.setString(5, vo.getProductElement());
+		pstmt.setString(6, vo.getShortDescription());
+		int result = pstmt.executeUpdate();
+		
+		//rs
+		
+		//close
+		JDBCTemplate.close(pstmt);
+		return result;
+		
+	}
 
 
 }//class

@@ -49,7 +49,7 @@ public class StoreMenuListController extends HttpServlet{
 			System.out.println("[ERROR-S002] 스토어 메뉴목록 불러오기 실패...");
 			e.printStackTrace();
 			req.setAttribute("errorMsg", "스토어 메뉴목록 불러오기 실패...");
-			req.getRequestDispatcher("/WEB-INF/views/common.error.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 	
 	}//doGet
