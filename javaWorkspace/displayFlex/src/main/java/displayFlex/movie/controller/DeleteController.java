@@ -31,9 +31,10 @@ public class DeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String movieNo = request.getParameter("movieNo");
 		try {
-			MemberVo loginMember = (MemberVo) request.getSession().getAttribute("loginMember");
-			if(loginMember == null || loginMember.getAdminYn().equals("N")) {
-				throw new Exception("관리자만 이용가능한 기능입니다.");
+			//해당 영화가 상영 중인지 체크하기
+			int isScreening = movieService.isScreening(movieNo);
+			if(isScreening != 0) {
+				throw new Exception("현재 상영중인 영화는 삭제할 수 없습니다.");
 			}
 			
 			int result = movieService.deleteMovieByNo(movieNo);

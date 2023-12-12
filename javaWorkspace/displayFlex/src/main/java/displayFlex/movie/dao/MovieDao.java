@@ -529,5 +529,44 @@ public class MovieDao {
 		return result;
 	}
 
+	/**
+	 * 현재 영화가 상영중인지
+	 * @param movieNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int isScreening(String movieNo, Connection con) throws SQLException {
+		query ="SELECT COUNT(ST.SCREENING_TIME_NO) FROM SCREENING_TIME ST INNER JOIN SCREENING_INFO SI ON ST.SCREENING_INFO_NO = SI.SCREENING_INFO_NO WHERE SI.MOVIE_NO = ? AND ST.END_TIME > SYSDATE";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, movieNo);
+		
+		ResultSet rs = pstmt.executeQuery();
+		int count = 0;
+		if(rs.next()) {
+			count = rs.getInt(1);
+		}
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return count;
+	}
+
+	/**
+	 * 리뷰 삭제
+	 * @param movieNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteReviewsByNo(String movieNo, Connection con) throws SQLException {
+		query ="DELETE FROM REVIEW WHERE MOVIE_NO = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, movieNo);
+		int result = pstmt.executeUpdate();
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
 	
 }
