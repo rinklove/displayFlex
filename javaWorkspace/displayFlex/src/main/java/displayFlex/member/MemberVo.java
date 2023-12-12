@@ -16,6 +16,7 @@ public class MemberVo {
 	public String privilegedYn;
 	public String registerNo;
 	public String gradeScore;
+	
 	public String getMemberNo() {
 		return memberNo;
 	}

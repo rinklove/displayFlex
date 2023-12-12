@@ -24,24 +24,20 @@
         <table>
             <tr style="border-top: 3px solid black;">
               <td>아이디</td>
-              <td><input type="text" placeholder="아이디"></td>
+              <td><input type="text" name="memberId" placeholder="아이디"></td>
             </tr>
             <tr>
               <td>이름</td>
-              <td><input type="text" placeholder="이름"></td>
+              <td><input type="text" name="memberName" placeholder="이름"></td>
             </tr>
             <tr>
               <td>휴대폰번호</td>
-              <td><input type="phone" placeholder="-포함 13자리"><button style="width: 100px; height: 35px;">인증요청</button></td>
+              <td><input type="tel" name="memberPhoneNum" placeholder="-포함 13자리"></td>
              </tr>
-            <tr>
-              <td>인증번호</td>
-              <td><input type="number" placeholder="6자리"><button style="width: 100px; height: 35px;">인증완료</button></td>
-            </tr>
         </table>
       </div>
       <div class="container-sixth">※ 휴대폰 번호가 변경되었다면 고객센터로 문의 바랍니다.</div>
-      <div class="container-seventh"><button type="submit">비밀번호 찾기</button></div>
+      <div class="container-seventh"><button type="button" onclick="location.href='/cinema/member/pwdFindConfirm'">비밀번호 찾기</button></div>
     </div>
     <footer></footer>
       

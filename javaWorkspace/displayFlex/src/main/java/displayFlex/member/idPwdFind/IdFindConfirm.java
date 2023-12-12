@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class IdFindConfirm extends HttpServlet {
 	
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void service (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/views/member/idFindConfirm.jsp").forward(req, resp);
 	}
 

@@ -1,6 +1,7 @@
 package displayFlex.member;
 
 import java.sql.Connection;
+import java.util.List;
 
 import test.JDBCTemplate;
 
@@ -56,6 +57,66 @@ public class MemberService {
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public MemberVo selectId(MemberVo vo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		MemberVo result = dao.selectId(conn, vo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
+	public boolean checkIdDup(String memberId) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		boolean result = dao.checkIdDup(conn, memberId);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public MemberVo SelectPwd(MemberVo vo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		MemberVo result = dao.SelectPwd(conn, vo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public boolean check(String memberName, String memberPhoneNum) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		boolean result = dao.check(conn, memberName, memberPhoneNum);
+		
+		//close
 		JDBCTemplate.close(conn);
 		
 		return result;

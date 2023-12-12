@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +18,11 @@
           <div class="main-first-font">아이디 찾기 결과</div>
           <div class="line"></div>
           <div class="main-option"><span>이름</span>이우철</div>
-          <div class="main-option"><span>아이디</span>user**<button>아이디 보내기</button></div>
+          <div class="main-option"><span>아이디</span></div>
+          
           <div class="refer">회원 이메일로 아이디를 보내드립니다.</div>
           <div class="line"></div>
-          <div class="main-button"><button>아이디 찾기</button><button>비밀번호 찾기</button><button>돌아가기</button></div>
+          <div class="main-button"><button type="button" onclick="location.href='/cinema/member/pwdFind'">비밀번호 찾기</button><button type="button" onclick="location.href='/cinema/home'">돌아가기</button></div>
       </div>
     </div>
 
