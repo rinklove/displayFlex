@@ -83,4 +83,27 @@ public class StoreService {
 	
 	}
 
+	// 제품 등록글 작성 로직
+	public int storeEnroll(StoreVo vo) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		StoreDao dao = new StoreDao();
+		int result = dao.storeEnroll(conn, vo);
+		
+		//tx
+		if(result ==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		return result;
+	
+	}
+
 }//class

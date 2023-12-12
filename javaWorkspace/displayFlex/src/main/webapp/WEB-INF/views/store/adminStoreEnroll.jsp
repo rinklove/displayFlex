@@ -14,8 +14,9 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
+	<!-- form태그의 enctype이 텍스트와 이미지 모두 존재하므로 "multipart/mixed stream" 사용! -->
 	<form action="/cinema/admin/store/enroll" method="post"
-		entype="multipart/form-data">
+		enctype="multipart/form-data">
 		<div class="product">
 			<div></div>
 			<div class="product-main">
@@ -30,36 +31,37 @@
 							<i class="fa-solid fa-circle-plus"></i>
 						</div>
 						<div>
-							<input type="file" id="upload" accept="image/*" onchange="previewImage(event)">
+							<input type="file" id="upload" name="image" accept="image/*" onchange="previewImage(event)">
 						</div>
 					</div>
 					<div id="detail">
 						<div>
-							<input type="text" placeholder="ex)우리 패키지">
+							<!-- post 방식으로 데이터처리하려면 반드시 name 값을 만들어서 자바에 getParameter 에 가져가야한다!!!! -->
+							<input type="text" name="title" placeholder="ex)우리 패키지">
 						</div>
 						<div id="description">
 							<div>가격</div>
 							<div>
-								<input type="text" placeholder="61,000원">
+								<input type="text" name="price" placeholder="61,000원">
 							</div>
 							<div>상품구성</div>
 							<div>
-								<input type="text" placeholder="일반 영화 관람권 4매+더블콤보 1개">
+								<input type="text" name="productElement" placeholder="일반 영화 관람권 4매+더블콤보 1개">
 							</div>
 							<div>제품설명</div>
 							<div>
-								<textarea id="productDetail" cols="20" rows="5"
+								<textarea id="productDetail" name="shortDescription" cols="20" rows="5"
 									placeholder="일반 영화를 관람할 수 있는 영화 관람권 4매와 맛있는 팝콘과 콜라를 먹을 수 있는 우리 패키지"></textarea>
 							</div>
 							<div>분류</div>
 							<span> 
-								<input type="checkbox" value="snack" name="type"> 베스트 
-							    <input type="checkbox" value="snack" name="type"> 기프트카드
-								<input type="checkbox" value="photocard" name="type"> 콤보 
+								<input type="radio" value="1" name="category"> 추천메뉴 
+							    <input type="radio" value="2" name="category"> 기프트카드
+								<input type="radio" value="3" name="category"> 콤보 
 								<br>
-								<input type="checkbox" value="combo" name="type"> 팝콘 
-							    <input type="checkbox" value="popcorn" name="type"> 음료 
-								<input type="checkbox" value="drink" name="type"> 스낵
+								<input type="radio" value="4" name="category"> 팝콘 
+							    <input type="radio" value="5" name="category"> 음료 
+								<input type="radio" value="6" name="category"> 스낵
 							</span>
 						</div>
 					</div>

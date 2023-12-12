@@ -13,7 +13,9 @@ function previewImage(event) {
         reader.onload = function (e) {
             // Set the source of the preview div to the data URL of the selected image
             preview.style.backgroundImage = 'url(' + e.target.result + ')';
-        	preview.style.backgroundSize = 'cover';
+            // 사진 미리보기 업로드시 사진 비율 유지하면서 div 사이즈에 맞춰 보이기
+        	preview.style.backgroundSize = 'contain';
+        	preview.style.backgroundRepeat = 'no-repeat';
         };
 
         // Read the selected file as a data URL
