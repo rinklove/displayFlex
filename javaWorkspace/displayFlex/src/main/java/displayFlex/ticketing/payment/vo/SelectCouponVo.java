@@ -54,6 +54,16 @@ public class SelectCouponVo {
 		this.discount = discount;
 		this.couponEnddate = couponEnddate;
 	}
+	
+	
+
+	public SelectCouponVo(String retainedNo, String couponNo, String name, String discount) {
+		super();
+		this.retainedNo = retainedNo;
+		this.couponNo = couponNo;
+		this.name = name;
+		this.discount = discount;
+	}
 	public SelectCouponVo() {
 		super();
 		// TODO Auto-generated constructor stub

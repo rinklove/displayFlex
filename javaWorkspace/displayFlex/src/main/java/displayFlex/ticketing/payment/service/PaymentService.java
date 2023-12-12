@@ -21,4 +21,17 @@ public class PaymentService {
 		return couponList;
 	}
 
+	public SelectCouponVo getSelectCouponInfo(String selectedRetainedNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PaymentDao dao = new PaymentDao();
+		
+		SelectCouponVo vo = dao.getSelectCouponInfo(selectedRetainedNo, conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return vo;
+	}
+
 }

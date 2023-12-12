@@ -40,4 +40,30 @@ public class PaymentDao {
 		return couponList;
 	}
 
+	public SelectCouponVo getSelectCouponInfo(String selectedRetainedNo, Connection conn) throws Exception {
+
+		String sql = "SELECT RC.COUPON_NO, C.NAME, C.DISCOUNT FROM RETAINED_COUPON RC JOIN COUPON C ON RC.COUPON_NO = C.NO WHERE RC.RETAINED_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, selectedRetainedNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		SelectCouponVo vo = null;
+		
+		if(rs.next()) {
+			String retainedNo = selectedRetainedNo;
+			String couponNo = rs.getString("COUPON_NO");
+			String name = rs.getString("NAME");
+			String discount = rs.getString("DISCOUNT");
+
+			vo = new SelectCouponVo(retainedNo, couponNo, name, discount);
+		}
+		
+		
+		System.out.println(vo);
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return vo;
+	}
+
 }
