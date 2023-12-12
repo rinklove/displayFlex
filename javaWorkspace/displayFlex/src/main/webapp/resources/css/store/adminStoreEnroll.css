@@ -70,6 +70,7 @@
 
 #imgPreview{
 	background-color: #D9D9D9;
+	object-fit: contain;
 }
 
 #product-detail> div >div:nth-child(2){

@@ -13,6 +13,7 @@ function previewImage(event) {
         reader.onload = function (e) {
             // Set the source of the preview div to the data URL of the selected image
             preview.style.backgroundImage = 'url(' + e.target.result + ')';
+        	preview.style.backgroundSize = 'cover';
         };
 
         // Read the selected file as a data URL
