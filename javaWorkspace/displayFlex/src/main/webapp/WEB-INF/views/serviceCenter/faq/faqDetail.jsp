@@ -17,6 +17,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/faq/faqDetail.css">
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/faq.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -25,14 +26,14 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%>
-                <a href="<c:if test='${not empty vo}'>/cinema/serviceCenter/FaqEdit?no=${vo.getFaqNo()}</c:if>">수정</a>
-				<a href="<c:if test='${not empty vo}'>/cinema/serviceCenter/FaqDelete?no=${vo.getFaqNo()}</c:if>">삭제</a>
-                <%-- </c:if> --%>
+                <c:if test="${loginMember.adminYn eq 'Y'}">
+	                <a href="<c:if test='${not empty vo}'>/cinema/admin/faqEdit?faqNo=${vo.getFaqNo()}</c:if>">수정</a>
+					<a href="<c:if test='${not empty vo}'>/cinema/admin/faqDelete?faqNo=${vo.getFaqNo()}</c:if>">삭제</a>
+                </c:if>
             </div>
             <div id="tab_tit">
                 <nav>
-                    <a href="/cinema/serviceCenter/faqList?categoryNo=1">FAQ</a>
+                    <a href="/cinema/serviceCenter/faqList">FAQ</a>
                     <a href="/cinema/serviceCenter/noticeList">공지사항</a>
                     <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>
                     <a href="/cinema/serviceCenter/recommendList">상영요청</a>
@@ -59,6 +60,9 @@
                                     <span class="tit">등록일</span>
                                     <span class="mid">|</span>
                                     <span class="cont"><%= vo.getEnrollDate() %></span>
+                                    <span class="tit">수정일</span>
+                                    <span class="mid">|</span>
+                                    <span class="cont"><%= vo.getModifyDate() %></span>
                                     <span class="tit">조회수</span>
                                     <span class="mid">|</span>
                                     <span class="cont"><%= vo.getHit() %></span>

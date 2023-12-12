@@ -29,7 +29,7 @@ public class NoticeAddController extends HttpServlet {
             throw new Exception("공지사항 등록 실패");
          }
          
-         NoticeService bs = new NoticeService();
+         NoticeService ns = new NoticeService();
          req.getRequestDispatcher("/WEB-INF/views/serviceCenter/notice/noticeAdd.jsp").forward(req, resp);
          
       } catch(Exception e) {
@@ -46,7 +46,7 @@ public class NoticeAddController extends HttpServlet {
       
       try {
          //인코딩
-//            req.setCharacterEncoding("UTF-8");   //필터에서 인코딩 처리 해줌
+//       req.setCharacterEncoding("UTF-8");   //필터에서 인코딩 처리 해줌
          
          HttpSession session = req.getSession();
          
