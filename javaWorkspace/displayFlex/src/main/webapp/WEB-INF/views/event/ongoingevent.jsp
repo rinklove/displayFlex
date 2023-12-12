@@ -36,7 +36,7 @@
             <div id="event_title2"><a href="/cinema/event/event" class="event" style="text-decoration: underline;">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
         </div>
         <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
-				<div><div id="enroll" style="float: left;"><button onclick="location.href='/cinema/event/adminevent'">등록</button></div>
+				<div><div id="enroll" style="float: left;"><button onclick="location.href='/cinema/admin/event/adminevent'">등록</button></div>
 				<div id="delete"><button>삭제</button></div>
 				<%-- </c:if> --%>
                 </div>
@@ -51,46 +51,35 @@
             </div>
         </div>
         <div id="main_content">
-            <a style=text-decoration:none; href="/cinema/event/eventdetail"><div class="content_area">
-                <h1>이벤트 게시글 사진1</h1>
-                    <div class="content_title" >
-                        <div id="coupon_name">
-                        <% 
-                        if(eventDtoList != null){
-                        for(EventDto dto : eventDtoList){ %>
-                    <div><%=dto.getEventTitle()%></div>
+
+            <div class="content-section">
+               <DIV> <h2> <% 
+                if(eventDtoList!= null){
+                for(EventDto dto : eventDtoList){ %>
+                    <div><%=dto.getEventTitle() %></div>
                    
-                    <% }} %>
-                    
-                    
-                        </div>
-                    </div>
-            </a>
-
-            <div class="content_area">
-                <h1>이벤트 게시글 사진2</h1>
-                <div>
-                    <div class="content_title">이벤트 게시글 제목2</div>
-                    
-                </div>
+                    <% }} %></h2>
+                </DIV>
             </div>
-
-            <div class="content_area">
-                <h1>이벤트 게시글 사진3</h1>
-                <div>
-                    <div class="content_title">이벤트 게시글 제목3</div>
-                    
-                </div>
+        
+            <div class="content-section">
+               
+                <h2>게시글사진</h2>
+                <p>게시글내용</p>
             </div>
-
-            <div class="content_area">
-                <h1>이벤트 게시글 사진4</h1>
-                <div>
-                    <div class="content_title">이벤트 게시글 제목4</div>
-                    
-                </div>
-
+            <div class="content-section">
+                <h2>게시글사진</h2>
+                <p>게시글내용</p>
             </div>
+        
+            <div class="content-section">
+                <h2>게시글사진</h2>
+                <p>게시글내용</p>
+            </div>
+        
+        
+
+
         </div>
     </div>
     

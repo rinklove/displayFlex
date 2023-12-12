@@ -18,9 +18,7 @@ public class EventDao {
 	      
 	      //SQL
 		
-			String sql = "INSERT INTO EVENT\r\n"
-					+ "(EVENT_NO, EVENTTYPE_NO, MEMBER_NO, EVENT_TITLE, EVENT_CONTENTS, EVENT_PREPARATIONDATE, EVENT_REPORTINGDATE, EVENT_PROGRESS, EVENT_STARTDATE, EVENT_ENDDATE, EVENT_HIT)\r\n"
-					+ "VALUES (SEQ_EVENT.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql ="INSERT INTO EVENT (EVENT_NO ,EVENTTYPE_NO ,MEMBER_NO ,EVENT_TITLE ,EVENT_CONTENTS ,EVENT_PREPARATIONDATE ,EVENT_REPORTINGDATE ,EVENT_PROGRESS ,EVENT_STARTDATE ,EVENT_ENDDATE ,EVENT_HIT) VALUES (SEQ_EVENT.NEXTVAL, ?, ?, ?, ?, ? ,?, ?, ? , ?, ?)";    //이거 
 		
 				PreparedStatement pstmt= conn.prepareStatement(sql);
 				pstmt.setString(1, dto.getEventtypeNo());
@@ -44,20 +42,7 @@ public class EventDao {
 	public List<EventDto> selectEventList(Connection conn) throws Exception{
 	      
 	      //SQL
-	      String sql = "SELECT \r\n"
-	      		+ "       A.EVENT_NO\r\n"
-	      		+ "       ,A. EVENTTYPE_NO\r\n"
-	      		+ "       ,A. MEMBER_NO\r\n"
-	      		+ "       ,A. EVENT_TITLE\r\n"
-	      		+ "       ,A. EVENT_CONTENTS\r\n"
-	      		+ "       ,A. EVENT_PREPARATIONDATE\r\n"
-	      		+ "       ,A. EVENT_REPORTINGDATE\r\n"
-	      		+ "       ,A. EVENT_PROGRESS\r\n"
-	      		+ "       ,A. EVENT_STARTDATE\r\n"
-	      		+ "       ,A. EVENT_ENDDATE\r\n"
-	      		+ "       ,A. EVENT_HIT\r\n"
-	      		+ "       FROM EVENT A\r\n"
-	      		+ "        ORDER BY EVENT_NO";
+	      String sql = "SELECT A.EVENT_NO ,A.EVENTTYPE_NO , A.MEMBER_NO ,A.EVENT_TITLE ,A.EVENT_CONTENTS ,A.EVENT_PREPARATIONDATE ,A.EVENT_REPORTINGDATE ,A.EVENT_PROGRESS ,A.EVENT_STARTDATE ,A.EVENT_ENDDATE ,A.EVENT_HIT FROM EVENT A ORDER BY EVENT_NO";
 	      
 	      
 	      

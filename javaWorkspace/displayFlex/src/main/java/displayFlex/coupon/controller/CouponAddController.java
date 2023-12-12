@@ -24,7 +24,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 		try {
 					
 			//인코딩
-//			req.setCharacterEncoding("UTF-8");	//필터에서 인코딩 처리 해줌
+			req.setCharacterEncoding("UTF-8");	//필터에서 인코딩 처리 해줌
 			
 			HttpSession session = req.getSession();
 			

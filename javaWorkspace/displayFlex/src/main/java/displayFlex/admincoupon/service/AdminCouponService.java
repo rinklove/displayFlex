@@ -1,6 +1,7 @@
 package displayFlex.admincoupon.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import displayFlex.admincoupon.dao.AdminCouponDao;
@@ -46,6 +47,14 @@ public class AdminCouponService {
 		return couponVoList;
 
 	}
-	
-	
-}//class
+
+//	public int selectBoardCount() throws SQLException {
+//		Connection con = JDBCTemplate.getConnection();
+//
+//		int count =  AdminCouponDao.selectBoardCount(con);
+//
+//		JDBCTemplate.close(con);
+//		return count;
+//	}
+
+}// class

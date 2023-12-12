@@ -22,7 +22,7 @@ public class EventAddController extends HttpServlet {
 		try {
 
 			// 인코딩
-//			req.setCharacterEncoding("UTF-8");	//필터에서 인코딩 처리 해줌
+			req.setCharacterEncoding("UTF-8");	//필터에서 인코딩 처리 해줌
 
 			HttpSession session = req.getSession();
 
@@ -30,16 +30,19 @@ public class EventAddController extends HttpServlet {
 			String title = req.getParameter("i_title");
 			String sdate = req.getParameter("i_sdate");
 			String edate = req.getParameter("i_edate");
+			String eventTypeNo = req.getParameter("s_eventTypeNo");
 			String contents = req.getParameter("t_contents");
-			String AffDis = req.getParameter("r_AffDis");
-			String PreMee = req.getParameter("r_PreMee");
-			String StaGre = req.getParameter("r_StaGre");
+//			String AffDis = req.getParameter("r_AffDis");
+//			String PreMee = req.getParameter("r_PreMee");
+//			String StaGre = req.getParameter("r_StaGre");
 
 			System.out.println("i_title----[" + title + "]");
 			System.out.println("i_sdate----[" + sdate + "]");
 			System.out.println("i_edate----[" + edate + "]");
+			System.out.println("s_eventTypeNo----[" + eventTypeNo + "]");
+			
 			System.out.println("t_contents----[" + contents + "]");
-			System.out.println("r_AffDis----[" + AffDis + "]");
+//			System.out.println("r_AffDis----[" + AffDis + "]");
 //			System.out.println("r_PreMee----[" + PreMee + "]");
 //			System.out.println("r_StaGre----[" + StaGre + "]");
 
@@ -48,8 +51,11 @@ public class EventAddController extends HttpServlet {
 			dto.setEventTitle(title);
 			dto.setEventStartdate(edate);
 			dto.setEventEnddate(edate);
+			
+			dto.setEventtypeNo(eventTypeNo);
+		
 			dto.setEventContents(contents);
-			dto.setEventtypeNo(AffDis);
+//			dto.setEventtypeNo(AffDis);
 //			dto.setEventtypeNo(PreMee);
 //			dto.setEventtypeNo(StaGre);
 
