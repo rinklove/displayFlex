@@ -1,7 +1,14 @@
+<%@page import="java.util.Map"%>
+<%@page import="displayFlex.event.dto.EventDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/cinema/resources/css/event/ongoingeventdetail.css">
 
+<%
+    EventDto eventDtoDetail = (EventDto) request.getAttribute("eventDtoDetail");
+    Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +31,7 @@ a:hover, a:active { text-decoration: none; }
         </div>
         <hr id="jul2">
 
-        <div id="title_name"> &nbsp;&nbsp;&nbsp; [진행중이벤트] ex)100 당첨 어쩌고 어쩌고 이벤트 </div>
+        <div id="title_name"> &nbsp;&nbsp;&nbsp; <%=eventDtoDetail.getEventTitle() %> </div>
 
         <div id="main_content">
 

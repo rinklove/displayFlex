@@ -43,7 +43,7 @@
             <li><i class="fa-solid fa-film"></i>&nbsp;&nbsp;<a href="/cinema/ticket/select">영화예매</a></li>
             <li><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;<a href="/cinema/movie/list">영화검색</a></li>
             <li><i class="fa-solid fa-store"></i>&nbsp;&nbsp;<a href="/cinema/store">스토어</a></li>
-            <li><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;<a href="/cinema/event/event">이벤트</a></li>
+            <li><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;<a href="/cinema/event/eventlist">이벤트</a></li>
             <li><i class="fa-solid fa-headset"></i>&nbsp;&nbsp;<a href="/cinema/serviceCenter/faqList?category=영화관이용">고객센터</a></li>
             <li><i class="fa-solid fa-wallet"></i>&nbsp;&nbsp;<a href="/cinema/sale/saleinfo">할인혜택</a></li>
             <li><i class="fa-solid fa-video"></i>&nbsp;&nbsp;<a href="/cinema/admin/screen-info/list">상영정보</a></li>

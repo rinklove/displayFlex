@@ -35,13 +35,25 @@
         <div><div id="event_title"> &nbsp;&nbsp;진행중 이벤트  
             <div id="event_title2"><a href="/cinema/event/event" class="event" style="text-decoration: underline;">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
         </div>
-        <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
-				<div><div id="enroll" style="float: left;"><button onclick="location.href='/cinema/admin/event/adminevent'">등록</button></div>
-				<div id="delete"><button>삭제</button></div>
-				<%-- </c:if> --%>
-                </div>
+         
+            <div><div id="enroll" style="float: left;">
+                <c:if test="${not empty loginMember && loginMember.adminYn eq 'Y'}">
+                <button onclick="location.href='/cinema/admin/event/adminevent'">등록</button>
+            </c:if>
+            </div>
+            <div id="delete"><c:if test="${not empty loginMember && loginMember.adminYn eq 'Y'}"><button>삭제</button></c:if></div>
+				
+        </div>
         </div>
         <hr id="jul2">
+        <!-- <form action="/cinema/event/eventlist" method="get">
+            <!-- <select name="searchType">
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+            </select> -->
+            <!-- &nbsp;&nbsp;<input type="text" name="searchValue" placeholder="조회하기 버튼을 눌러주세요.">
+            <input type="submit" value="조회하기">
+        </form> -->
         <div id="main_top">
             <div id="main_title">
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/event" style="color: white; text-decoration: underline;">전체</a></div>
@@ -51,30 +63,47 @@
             </div>
         </div>
         <div id="main_content">
-
+            
             <div class="content-section">
                <DIV> <h2> <% 
                 if(eventDtoList!= null){
                 for(EventDto dto : eventDtoList){ %>
-                    <div><%=dto.getEventTitle() %></div>
+                    <div><a href="/cinema/event/eventdetail?eventNo=<%= dto.getEventNo()%>"> <%=dto.getEventTitle() %></a></div>
+                    
+                    
                    
                     <% }} %></h2>
                 </DIV>
             </div>
         
             <div class="content-section">
-               
-                <h2>게시글사진</h2>
-                <p>게시글내용</p>
+                <DIV> <h2> <% 
+                    if(eventDtoList!= null){
+                    for(EventDto dto : eventDtoList){
+                        if(dto.getEventtypeNo().equals("2")) {%>
+                        <div><%=dto.getEventTitle() %></div>
+                       
+                        <% }} }%></h2>
+                    </DIV>
             </div>
             <div class="content-section">
-                <h2>게시글사진</h2>
-                <p>게시글내용</p>
+                <DIV> <h2> <% 
+                    if(eventDtoList!= null){
+                    for(EventDto dto : eventDtoList){ %>
+                        <div><%=dto.getEventTitle() %></div>
+                       
+                        <% }} %></h2>
+                    </DIV>
             </div>
         
             <div class="content-section">
-                <h2>게시글사진</h2>
-                <p>게시글내용</p>
+                <DIV> <h2> <% 
+                    if(eventDtoList!= null){
+                    for(EventDto dto : eventDtoList){ %>
+                        <div><%=dto.getEventTitle() %></div>
+                       
+                        <% }} %></h2>
+                    </DIV>
             </div>
         
         

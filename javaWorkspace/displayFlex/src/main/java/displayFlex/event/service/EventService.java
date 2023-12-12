@@ -47,6 +47,21 @@ public class EventService {
 		return eventDtoList;
 
 	}
+	public EventDto EventDetail(String EventNo) throws Exception {
+
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+
+		// dao
+		EventDao dao = new EventDao();
+		EventDto eventDtoList = dao.selectEvenDetail(conn, EventNo);
+
+		// close
+		JDBCTemplate.close(conn);
+
+		return eventDtoList;
+
+	}
 	
 
 }
