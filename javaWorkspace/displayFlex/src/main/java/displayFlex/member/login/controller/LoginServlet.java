@@ -1,4 +1,4 @@
-package displayFlex.member.login;
+package displayFlex.member.login.controller;
 
 import java.io.IOException;
 

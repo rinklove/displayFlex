@@ -164,7 +164,7 @@ public class MypageDao {
 	public int getInquiryCountBySearch(Connection conn, Map<String, String> m) throws Exception {
 		
 		//sql
-		String sql = "SELECT COUNT(*) FROM INQUIRY WHERE DELETE_YN = 'N' AND \" + m.get(\"searchType\") + \" LIKE '%' || ? || '%'";
+		String sql = "SELECT COUNT(*) FROM INQUIRY WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.get("searchType"));
 		ResultSet rs = pstmt.executeQuery();
@@ -186,7 +186,7 @@ public class MypageDao {
 		String searchType = m.get("searchType");
 		
 		//sql
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.ONETOONE_NO , I.MEMBER_NO , I.TITLE , I.CONTENT , I.ENROLL_DATE , I.DELETE_YN , I.RE_TITLE , I.RE_CONTENT , I.RE_ENROLL_DATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.DELETE_YN = 'N' AND + searchType + LIKE '%' || ? || '%' ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.ONETOONE_NO , I.MEMBER_NO , I.TITLE , I.CONTENT , I.ENROLL_DATE , I.DELETE_YN , I.RE_TITLE , I.RE_CONTENT , I.RE_ENROLL_DATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.DELETE_YN = 'N' AND I."+ searchType +" LIKE '%' || ? || '%' ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.get("searchValue"));
 		pstmt.setString(2, "1");
@@ -301,7 +301,7 @@ public class MypageDao {
 	public int getCouponCountBySearch(Connection conn, Map<String, String> m) throws Exception {
 		
 		//sql
-		String sql = "SELECT COUNT(*) FROM COUPON WHERE \" + m.get(\"searchType\") + \" LIKE '%' || ? || '%'";
+		String sql = "SELECT COUNT(*) FROM COUPON WHERE " + m.get("searchType") + " LIKE '%' || ? || '%'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.get("searchType"));
 		ResultSet rs = pstmt.executeQuery();

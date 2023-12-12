@@ -23,18 +23,13 @@
             <div class="main-option">
               <span>회원정보</span>
               <div class="main-option2">
-                <div>dldncjfdla@naver.com
-                  <button>이메일로 받기</button>
-                </div>
-                <div>010-****-****
-                  <button class="button2">핸드폰으로 받기</button>
-                </div>
+                <div>이메일 : </div>
+                <div>비밀번호 : </div>
               </div>
             </div>
-            <div class="refer">회원 이메일과 휴대전화로 임시 비밀번호를 보내드립니다.</div>
-            <div class="refer">임시 비밀번호로 로그인 후, 새 비밀번호로 변경하시기 바랍니다.</div>
+            <div class="refer">찾으신 비밀번호로 로그인 후, 새 비밀번호로 변경하시기 바랍니다.</div>
             <div class="line"></div>
-            <div class="main-button"><button>돌아가기</button></div>
+            <div class="main-button"><button type="button" onclick="location.href='/cinema/home'">돌아가기</button></div>
         </div>
         
   </div>

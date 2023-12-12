@@ -2,10 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%
-	MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
-%>  
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +14,6 @@
 <body>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-
     <div id="wrap">
         <form action="/cinema/member/login" method="post">
             <div id="loginArea">

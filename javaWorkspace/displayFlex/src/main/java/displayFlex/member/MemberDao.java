@@ -3,7 +3,11 @@ package displayFlex.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import displayFlex.event.dto.EventDto;
 import test.JDBCTemplate;
 
 public class MemberDao {
@@ -75,6 +79,105 @@ public class MemberDao {
 		JDBCTemplate.close(pstmt);
 		
 		return result;
+	}
+
+	public MemberVo selectId(Connection conn, MemberVo vo) throws Exception {
+	    //sql
+	    String sql = "SELECT MEMBER_ID, MEMBER_NAME, MEMBER_PHONENUM FROM MEMBER WHERE MEMBER_NAME = ? AND MEMBER_PHONENUM = ?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, vo.getMemberName());
+	    pstmt.setString(2, vo.getMemberPhoneNum());
+	    ResultSet rs = pstmt.executeQuery();
+
+	    //rs
+	    MemberVo dto = null;
+	    while(rs.next()) {
+
+	        String memberId = rs.getString("MEMBER_ID");
+	        String memberName = rs.getString("MEMBER_NAME");
+	        String memberPhoneNum = rs.getString("MEMBER_PHONENUM");
+
+	       dto = new MemberVo(); // 반복문 안에서 객체를 생성하여 각 회원 정보를 담아야 함
+	        dto.setMemberId(memberId);
+	        dto.setMemberName(memberName);
+	        dto.setMemberPhoneNum(memberPhoneNum);
+
+	    }
+
+	    JDBCTemplate.close(rs);
+	    JDBCTemplate.close(pstmt);
+
+	    return dto;
+	}
+	
+	public boolean checkIdDup(Connection conn, String memberId) throws Exception {
+		
+		//sql
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memberId);
+		ResultSet rs = pstmt.executeQuery();
+		
+		boolean result = true;
+		if(rs.next()) {
+			result = false;
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
+	public MemberVo SelectPwd(Connection conn, MemberVo vo) throws Exception {
+		 //sql
+	    String sql = "SELECT MEMBER_ID, MEMBER_NAME, MEMBER_PHONENUM, MEMBER_PWD FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_NAME = ? AND MEMBER_PHONENUM = ?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, vo.getMemberId());
+	    pstmt.setString(2, vo.getMemberName());
+	    pstmt.setString(3, vo.getMemberPhoneNum());
+	    ResultSet rs = pstmt.executeQuery();
+
+	    //rs
+	    while(rs.next()) {
+
+	        String memberId = rs.getString("MEMBER_ID");
+	        String memberName = rs.getString("MEMBER_NAME");
+	        String memberPwd = rs.getString("MEMBER_PWD");
+	        String memberPhoneNum = rs.getString("MEMBER_PHONENUM");
+
+	        MemberVo dto = new MemberVo(); // 반복문 안에서 객체를 생성하여 각 회원 정보를 담아야 함
+	        dto.setMemberId(memberId);
+	        dto.setMemberName(memberName);
+	        dto.setMemberName(memberPwd);
+	        dto.setMemberPhoneNum(memberPhoneNum);
+
+	    }
+
+	    JDBCTemplate.close(rs);
+	    JDBCTemplate.close(pstmt);
+
+	    return vo;
+	}
+
+	public boolean check(Connection conn, String memberName , String memberPhoneNum) throws Exception {
+		
+		//sql
+				String sql = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ? AND MEMBER_PHONENUM = ?";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, memberName);
+				pstmt.setString(2, memberPhoneNum);
+				ResultSet rs = pstmt.executeQuery();
+				
+				boolean result = false;
+				if(rs.next()) {
+					result = true;
+				}
+				
+				JDBCTemplate.close(rs);
+				JDBCTemplate.close(pstmt);
+				
+				return result;
 	}
 
 }
