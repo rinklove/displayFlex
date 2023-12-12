@@ -21,7 +21,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/faq/faqList.css">
-
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/faq.js"></script>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -30,11 +30,9 @@
         <div id="contents">
             <div id="title_top">
                 <h1>고객센터</h1>
-                <%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
-                <%-- <% if(loginMember != null) { %> --%>
+                <c:if test="${loginMember.adminYn eq 'Y'}">
 	                <button onclick="location.href=/cinema/admin/faqAdd">등록</button>
-                <%-- <% } %> --%>
-                <%-- </c:if> --%>
+                </c:if>
             </div>
             <div id="tab_tit">
                 <nav>
@@ -54,27 +52,27 @@
             </div>
             <div id="tab_con">
                 	<div id="faq_icon_wrap">
-	                    <button id="icon_01" onclick="clickIcon" >
+	                    <button id="icon_01">
 	                        <img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">
 	                        영화관 이용
 	                    </button>
-	                    <button id="icon_02" onclick="clickIcon">
+	                    <button id="icon_02">
 	                        <img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">
 	                        회원
 	                    </button>
-	                    <button id="icon_03" onclick="clickIcon">
+	                    <button id="icon_03">
 	                        <img src="/cinema/resources/image/faqIcon/star.png" alt="별 아이콘">
 	                        등급
 	                    </button>
-	                    <button id="icon_04" onclick="clickIcon">
+	                    <button id="icon_04">
 	                        <img src="/cinema/resources/image/faqIcon/ticket.png" alt="티켓 아이콘">
 							쿠폰
 	                    </button>
-	                    <button id="icon_05" onclick="clickIcon">
+	                    <button id="icon_05">
 	                        <img src="/cinema/resources/image/faqIcon/popcorn.png" alt="팝콘 아이콘">
 							스토어
 	                    </button>
-	                    <button id="icon_06" onclick="clickIcon">
+	                    <button id="icon_06">
 	                        <img src="/cinema/resources/image/faqIcon/ribbon.png" alt="리본 아이콘">
 							이벤트
 	                    </button>
@@ -82,7 +80,7 @@
                 <fieldset id="search_wrap">
                 	<form action="/cinema/serviceCenter/faqSearch" method="get">
 	                    <input type="text" name="searchType" placeholder="검색어를 입력해주세요." id="seachKeyword">
-	                    <button type="button" id="btn_col1">검색</button>
+	                    <input type="submit" name="searchValue id="btn_col1" value="검색">
 	                    <div id="help_wrap" style="text-align: left;">
 	                        <p>더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면?</p>
 	                        <a href="/cinema/serviceCenter/inquiryWrite" style="font-weight: bold; color: #000000;">1:1문의 바로가기</a>
@@ -147,19 +145,40 @@
     	function clickCategory(categoryNo){
     		
     	}
+    	
+    	<% if(searchMap != null){ %>
+		function setSearchArea(){
+			
+			// 옵션태그 셋팅
+			const optionTagArr = document.querySelectorAll("#search_wrap");
+			const searchType = "<%= searchMap.get("searchType") %>";
+			for(let i = 0; i < optionTagArr.length; ++i){
+				if( optionTagArr[i].value === searchType ){
+					optionTagArr[i].selected = true;
+					break;
+				}
+			}
+			
+			// 인풋태그 셋팅
+			const searchValueTag = document.querySelector("#search_wrap input[name=searchValue]");
+			searchValueTag.value = "<%= searchMap.get("searchValue") %>";
+			
+		}
+		setSearchArea();
+		
+		function setPageArea(){
+			const aTagArr = document.querySelectorAll("#paging a");
+			for(let i = 0 ; i < aTagArr.length; ++i){
+				aTagArr[i].href = aTagArr[i].href.replace("list" , "search"); 
+				aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
+				aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
+			}
+		}
+		setPageArea();
+	<% } %>
     </script>
 
 	
 
-    <!-- <script>
-        function clickIcon(button) {
-            const bottons = document.querySelectorAll('#faq_icon_wrap button');
-            bottons.forEach(function (btn) {
-                btn.classList.remove('active');
-            });
-        button.classList.add('active');
-        
-        }
-    </script> -->
 </body>
 </html>

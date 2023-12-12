@@ -185,15 +185,20 @@ public class FaqDao {
 			String content = rs.getString("CONTENT");
 			String hit = rs.getString("HIT");
 			String enrollDate = rs.getString("ENROLL_DATE");
-			String categoryName = rs.getString("Category_Name");
+			String modifyDate = rs.getString("MODIFY_DATE");
+			String categoryName = rs.getString("CATEGOTY_NAME");
 	         
 			vo = new FaqVo();
+			vo.setFaqNo(faqNo);
 			vo.setTitle(title);
 			vo.setFaqCategoryNo(faqCateforyNo);
 			vo.setContent(content);
 			vo.setHit(hit);
 			vo.setEnrollDate(enrollDate);
+			vo.setModifyDate(modifyDate);
 			vo.setCategoryName(categoryName);
+			
+			System.out.println("dao 's vo ::: " + vo);
 		         
 	    }
 	    
@@ -229,7 +234,7 @@ public class FaqDao {
 		String searchType = m.get("searchType");
 		
 		// SQL
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT FAQ_NO , FAQ_CATEGORY_NO , TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE , HIT FROM FAQ WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%' ORDER BY FAQ_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT FAQ_NO , FAQ_CATEGORY_NO , TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE , HIT FROM FAQ WHERE DELETE_YN = 'N' AND " + searchType + " LIKE '%' || ? || '%' ORDER BY FAQ_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.get("searchValue"));
 		pstmt.setInt(2, pvo.getStartRow());

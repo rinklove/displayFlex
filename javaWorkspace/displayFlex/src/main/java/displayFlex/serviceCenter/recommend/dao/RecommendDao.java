@@ -298,7 +298,6 @@ public class RecommendDao {
 			
 		}
 		
-		
 		//close
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);

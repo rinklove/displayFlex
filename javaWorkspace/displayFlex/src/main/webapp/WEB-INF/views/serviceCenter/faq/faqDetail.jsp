@@ -65,13 +65,9 @@
                                 </td>
                             </tr>
                             <tr id="tb_content">
-                                <td>
+                                <td colspan="2">
                                     <div id="noticeContents">
-                                        <p>
-                                        	<br>
-                                            <%= vo.getContent() %>
-                                            <br>
-                                        </p>
+                                    	<%= vo.getContent() %>
                                     </div>
                                 </td>
                             </tr>
