@@ -12,7 +12,7 @@ public class InquiryVo {
 	private String reTitle;
 	private String reContent;
 	private String reEnrollDate;
-	
+	private String state;
 	/**
 	 * 
 	 */
@@ -32,8 +32,11 @@ public class InquiryVo {
 	 * @param reContent
 	 * @param reEnrollDate
 	 */
+	
+	
+
 	public InquiryVo(String onetooneNo, String memberNo, String writerNick, String title, String content,
-			String enrollDate, String deleteYn, String reTitle, String reContent, String reEnrollDate) {
+			String enrollDate, String deleteYn, String reTitle, String reContent, String reEnrollDate, String state) {
 		super();
 		this.onetooneNo = onetooneNo;
 		this.memberNo = memberNo;
@@ -45,6 +48,35 @@ public class InquiryVo {
 		this.reTitle = reTitle;
 		this.reContent = reContent;
 		this.reEnrollDate = reEnrollDate;
+		this.state = state;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	/**
+	 * 1:1문의 리스트용 생성자
+	 * @param onetooneNo
+	 * @param memberNo
+	 * @param writerNick
+	 * @param title
+	 * @param enrollDate
+	 * @param state
+	 */
+	public InquiryVo(String onetooneNo, String memberNo, String writerNick, String title, String enrollDate,
+			String state) {
+		super();
+		this.onetooneNo = onetooneNo;
+		this.memberNo = memberNo;
+		this.writerNick = writerNick;
+		this.title = title;
+		this.enrollDate = enrollDate;
+		this.state = state;
 	}
 
 	public String getOnetooneNo() {

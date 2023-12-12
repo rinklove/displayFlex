@@ -1,11 +1,13 @@
 package displayFlex.serviceCenter.inquiry.service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import displayFlex.serviceCenter.inquiry.dao.InquiryDao;
+import displayFlex.serviceCenter.inquiry.dto.UpdateDto;
 import displayFlex.serviceCenter.inquiry.vo.InquiryVo;
 import displayFlex.serviceCenter.notice.dao.NoticeDao;
 import displayFlex.serviceCenter.notice.vo.NoticeVo;
@@ -89,6 +91,24 @@ public class InquiryService {
 		
 		return result;
 	
+	}
+
+	/**
+	 * 답글 수정하기
+	 * @param updateInquiry
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int updateInquiry(UpdateDto updateInquiry) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		InquiryDao dao = new InquiryDao();
+		int result = dao.updateInquiry(updateInquiry, con);
+		
+		if(result == 1) JDBCTemplate.commit(con);
+		else JDBCTemplate.rollback(con);
+		JDBCTemplate.close(con);
+		return result;
 	}
 
 }

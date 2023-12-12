@@ -15,7 +15,7 @@ import displayFlex.serviceCenter.notice.service.NoticeService;
 import displayFlex.serviceCenter.notice.vo.NoticeVo;
 import displayFlex.util.page.vo.PageVo;
 
-@WebServlet("/serviceCenter/inquiryList")
+@WebServlet("/admin/serviceCenter/inquiryList")
 public class InquiryListController extends HttpServlet {
 	
 	//1:1 문의 화면

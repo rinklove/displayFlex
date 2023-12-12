@@ -226,17 +226,18 @@ public class MovieService {
 		int result = movieDao.deleteStillImageByNo(movieNo, con);
 		
 		if(result != 0) {
+			//영화 장르
 			result = movieDao.deleteMovieCate(movieNo, con);
 			
 			if(result != 0) {
+				result = movieDao.deleteReviewsByNo(movieNo, con);
 				result = movieDao.deleteMovieByNo(movieNo, con);		
 				
 				if(result != 0) {
 					JDBCTemplate.commit(con);
 				} else {
 					JDBCTemplate.rollback(con);
-				}
-				
+				}			
 			} else {
 				JDBCTemplate.rollback(con);
 			}
@@ -244,6 +245,20 @@ public class MovieService {
 		
 		JDBCTemplate.close(con);
 		return result;
+	}
+
+	/**
+	 * 현재 상영정보가 존재하는 지
+	 * @param movieNo
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int isScreening(String movieNo) throws SQLException {
+		Connection con = JDBCTemplate.getConnection();
+		
+		int count = movieDao.isScreening(movieNo, con);
+		JDBCTemplate.close(con);
+		return count;
 	}
 
 	

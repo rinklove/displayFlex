@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
 	String x = (String) session.getAttribute("alertMsg");
 	session.removeAttribute("alertMsg");
@@ -36,7 +36,14 @@
 	                <nav>
 	                    <a href="/cinema/serviceCenter/faqList">FAQ</a>
 	                    <a href="/cinema/serviceCenter/noticeList">공지사항</a>
-	                    <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>
+	                    <c:choose>
+		                    <c:when test="${loginMember.adminYn eq 'Y' }">
+			                    <a href="/cinema/admin/serviceCenter/inquiryList?pno=1">1:1 문의 내역</a>
+		                    </c:when>
+		                    <c:otherwise>
+			                    <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>
+		                    </c:otherwise>
+	                    </c:choose>
 	                    <a href="/cinema/serviceCenter/recommendList">상영요청</a>
 	                </nav>
 	            </div>
@@ -115,7 +122,7 @@
 	                    </tbody>
 	                </table>
 	                <div id="btn_wrap">
-	                    <input class="cancle" type="submit" value="취소">
+	                    <input class="cancle" type="button" onclick="history.back();" value="취소">
 	                    <input class="ok" type="submit" value="확인">
 	                </div>
 	            </div>
