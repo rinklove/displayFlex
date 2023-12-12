@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import displayFlex.movie.dto.MovieListDto;
 import displayFlex.movie.service.MovieService;
 import displayFlex.movie.vo.GenreCategoryVo;
@@ -64,11 +66,14 @@ public class MovieSearchController extends HttpServlet {
 			if(selectedQuery.contains("&pno")) {
 				selectedQuery = request.getQueryString().substring(0, selectedQuery.lastIndexOf("&"));				
 			}
-			List<String> list = Arrays.asList(genres);
 
 			request.setAttribute("genreList", genreList);
-			request.setAttribute("selectGenre", list);	
+			request.setAttribute("selectGenre", genres);	
 			request.setAttribute("selectGrade", grade);
+			
+			Gson gson = new Gson();
+			request.setAttribute("a", gson.toJson(genreList));
+			request.setAttribute("b", gson.toJson(genres));
 
 			request.setAttribute("screenGradeList", screenGradeList);
 			request.setAttribute("pageVo", page);

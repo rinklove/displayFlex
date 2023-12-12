@@ -27,16 +27,8 @@
                     <td><span class="fs-6 fw-bold mx-2 mt-3 d-flex align-content-center">장르</span></td>
                     <td>
                         <c:forEach var="genreElement" items="${genreList}" >
-<%-- 	                        <c:choose>
-								<c:when test="<%selectGenre.indexOf(${genreElement.genreCateNo}) != -1 && selectGenre != null %>">
-			                        <input type="checkbox" class="btn-check" name="genres" id="${genreElement.cateName}" value="${genreElement.genreCateNo}" autocomplete="off" checked="checked">
-									<label class="btn btn-outline-danger rounded-pill m-1" for="${genreElement.cateName}">${genreElement.cateName}</label>							
-								</c:when>
-								<c:otherwise> --%>
-			                        <input type="checkbox" class="btn-check" name="genres" id="${genreElement.cateName}" value="${genreElement.genreCateNo}" autocomplete="off">
-									<label class="btn btn-outline-danger rounded-pill m-1" for="${genreElement.cateName}">${genreElement.cateName}</label>							
-<%-- 								</c:otherwise>
-	                        </c:choose> --%>
+	                        <input type="checkbox" class="btn-check" name="genres" id="${genreElement.cateName}" value="${genreElement.genreCateNo}" autocomplete="off">
+							<label class="btn btn-outline-danger rounded-pill m-1" for="${genreElement.cateName}">${genreElement.cateName}</label>							
                         </c:forEach>
                     </td>
                 </tr>
@@ -71,8 +63,7 @@
 <div class="result-container">
 	<div class="df jc-sb mx-20">
         <span class="title"><strong>검색 결과</strong></span>
-        <span class="title"><a href="${pageContext.request.contextPath }/admin/movie/add">영화 등록하기</a></span>
-        <c:if test="${loginMember eq 'Y' }">
+        <c:if test="${not empty loginMember && loginMember.adminYn eq 'Y'}">
 	        <span class="title"><a href="${pageContext.request.contextPath }/admin/movie/add" class="text-decoration-none text-black">영화 등록하기</a></span>
         </c:if>
     </div>
@@ -120,5 +111,32 @@
         </c:if>
     </div>
 </div>
+
+	<script>
+	
+		const checkBoxTagArr = document.querySelectorAll("input[name=genres]");
+		const checkBoxMap = {};
+		for(let i = 0 ; i < checkBoxTagArr.length; ++i){
+			checkBoxTag = checkBoxTagArr[i];
+			checkBoxMap[checkBoxTag.value] = checkBoxTag;
+		}
+
+		const aStr = '${a}';
+		const bStr = '${b}';
+		
+		const a = JSON.parse(aStr);
+		const b = JSON.parse(bStr);
+		
+		b.forEach( (x)=>{
+			for(let i = 0; i < a.length; ++i){
+				const vo = a[i];
+				if(vo.genreCateNo === x){
+					checkBoxMap[vo.genreCateNo].checked = true;
+				}
+			}
+		} );
+		
+	</script>
+
 </body>
 </html>	

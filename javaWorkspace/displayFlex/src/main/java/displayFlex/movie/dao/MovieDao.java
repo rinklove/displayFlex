@@ -475,7 +475,59 @@ public class MovieDao {
 		return count;
 	}
 
-	
-	
+	/**
+	 * 영화 삭제하기
+	 * @param movieNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteMovieByNo(String movieNo, Connection con) throws SQLException {
+		query = "DELETE FROM MOVIE WHERE MOVIE_NO = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		
+		pstmt.setString(1, movieNo);
+		int result = pstmt.executeUpdate();
+		System.out.println("movie.result = " + result);
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
 
+	/**
+	 * 스틸이미지 제거
+	 * @param movieNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteStillImageByNo(String movieNo, Connection con) throws SQLException {
+		query ="DELETE FROM STILL_IMAGE_FILE WHERE MOVIE_NO = ? ";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		
+		pstmt.setString(1, movieNo);
+		int result = pstmt.executeUpdate();
+		System.out.println("movieStillImage.result = " + result);
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
+	/**
+	 * 영화 장르 삭제
+	 * @param movieNo
+	 * @param con
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int deleteMovieCate(String movieNo, Connection con) throws SQLException {
+		query ="DELETE FROM MOVIE_CATE WHERE MOVIE_NO = ? ";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		
+		pstmt.setString(1, movieNo);
+		int result = pstmt.executeUpdate();
+		System.out.println("movieCate.result = " + result);
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
+	
 }

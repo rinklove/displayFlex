@@ -62,7 +62,7 @@
 <div class="result-container">
 	<div class="df jc-sb mx-20">
         <span class="title"><strong>검색 결과</strong></span>
-        <c:if test="${loginMember eq 'Y' }">
+        <c:if test="${not empty loginMember && loginMember.adminYn eq 'Y' }">
 	        <span class="title"><a href="${pageContext.request.contextPath }/admin/movie/add" class="text-decoration-none text-black">영화 등록하기</a></span>
         </c:if>
     </div>
