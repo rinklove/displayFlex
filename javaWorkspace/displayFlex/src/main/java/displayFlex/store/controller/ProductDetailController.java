@@ -41,7 +41,7 @@ public class ProductDetailController extends HttpServlet{
 		
 	}
 	
-	//제픔 디테일 관리자용
+	//제품 디테일 관리자용
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

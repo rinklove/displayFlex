@@ -31,7 +31,10 @@
 							<i class="fa-solid fa-circle-plus"></i>
 						</div>
 						<div>
-							<input type="file" id="upload" name="image" accept="image/*" onchange="previewImage(event)">
+							<!-- Add a hidden field to store the image path -->
+                            <input type="hidden" id="imagePath" name="image" value="">
+                            <!-- image name이 "f"인것은 컨트롤러에서 Part f = req.getPart("f"); 로 "f" 설정했기 때문이다!!! -->
+							<input type="file" id="upload" name="f" accept="image/*" onchange="previewImage(event)">
 						</div>
 					</div>
 					<div id="detail">
@@ -63,6 +66,11 @@
 							    <input type="radio" value="5" name="category"> 음료 
 								<input type="radio" value="6" name="category"> 스낵
 							</span>
+							<div>공개여부</div>
+							<span> 
+								<input type="radio" value="N" name="delYn"> 공개 
+							    <input type="radio" value="Y" name="delYn"> 비공개
+							</span>
 						</div>
 					</div>
 				</div>
@@ -79,5 +87,6 @@
 			<div></div>
 		</div>
 	</form>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
