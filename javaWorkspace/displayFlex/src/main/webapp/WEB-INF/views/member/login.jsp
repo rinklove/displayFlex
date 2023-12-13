@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,7 @@
     <div id="wrap">
         <form action="/cinema/member/login" method="post">
             <div id="loginArea">
+           		<div class="loginArea-width"><img src="/cinema/resources/image/find/1.svg"></div>
                 <div class="loginArea-width"><label for="loginPage"><input type="text" id="loginPage" placeholder="로그인 / 회원가입"></label></div>
                 <% if(loginMember == null) { %>
                 <div class="loginArea-width"><input type="text" name="memberId" id="memberId" placeholder="아이디"></div>
@@ -24,11 +26,9 @@
                 <div class="check-box">
                     <input class="form-check-input" type="checkbox" value="rememberMe" id="rememberMe" name="rememberMe">
                     <label class="form-check-label" for="rememberMe">아이디 저장</label></div>
-           
                 <div class="form-check-confirm">
                     <div class="form-check-confirm-b1">
                     	<input type="submit" value="로그인" id="logincheck"></div>
-                        
                     </div>
                     <div class="form-check-confirm-b2">
                  <div><a href="/cinema/member/join">회원가입</a></div>

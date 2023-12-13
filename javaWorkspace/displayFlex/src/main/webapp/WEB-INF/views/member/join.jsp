@@ -21,10 +21,6 @@
     <form action="/cinema/member/join" method="post" onsubmit="return validateForm();">
     <table>
         <tbody>
-        	<tr>
-                <td><label for="gradeNo">회원등급</label></td>
-                <td><input type="text" id="gradeNo" name="gradeNo" required></td>
-            </tr>
             <tr>
                 <td><label for="userid">아이디</label></td>
                 <td><input type="text" id="memberId" name="memberId" placeholder="영문, 숫자 조합(6~12자)" required></td>
