@@ -36,5 +36,33 @@
 	margin: 0;
 	background-color: white;
 	display: grid;
-	grid-template-rows: 1fr 1fr;
+	grid-template-rows: 1fr 2fr;
 }
+
+.event > div:first-child {
+	margin: 50px;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 70px;
+	border-bottom: 1px solid grey;
+}
+
+#eventLetter{
+	font-size: 50px;
+	font-style: italic;
+}
+
+.event > div:nth-child(2) {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.event > div:nth-child(2) > div {
+	height: 300px;
+	width: 400px;
+	background-color: green;
+	
+}
+
+
+

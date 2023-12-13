@@ -113,11 +113,11 @@ public class StoreDao {
 	}
 
 
-	// 스토어메뉴 리스트(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
+	// 스토어메뉴 리스트 (유저용)(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
 	public List<StoreVo> storeMenuList(Connection conn, String cate) throws Exception{
 
 		//SQL
-		String sql = "SELECT P.PRODUCT_NO , C.CATE_NAME CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.CATE_NAME LIKE ?";
+		String sql = "SELECT P.PRODUCT_NO , C.CATE_NAME CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.CATE_NAME LIKE ? AND P.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, cate);
 		ResultSet rs = pstmt.executeQuery();
@@ -149,13 +149,13 @@ public class StoreDao {
 	}
 
 	
-	// 스토어 메뉴 리스트(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)  (관리자용)
-	public List<StoreVo> storeMenuListAdmin(Connection conn, String cate2) throws Exception {
+	// 스토어 메뉴 리스트 (관리자용)(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)  (관리자용)
+	public List<StoreVo> storeMenuListAdmin(Connection conn, String cate) throws Exception {
 		
 		//SQL
 		String sql = "SELECT P.PRODUCT_NO , C.CATE_NAME CATEGORY , P.MEMBER_NO MEMBER_NO , P.IMAGE , P.TITLE , P.PRICE , P.PRODUCT_ELEMENT , P.ENROLL_DATE , P.DEL_YN , P.SHORT_DESCRIPTION FROM PRODUCT P JOIN PRODUCT_CATEGORY C ON C.PRODUCT_CATE_NO = P.PRODUCT_CATE_NO JOIN MEMBER M ON M.MEMBER_NO = P.MEMBER_NO WHERE C.CATE_NAME LIKE ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, cate2);
+		pstmt.setString(1, cate);
 		ResultSet rs = pstmt.executeQuery();
 		
 		//rs
@@ -257,7 +257,7 @@ public class StoreDao {
 	public int updateMenuByNo(Connection conn, StoreVo vo) throws Exception {
 		
 		//sql
-		String sql = "UPDATE PRODUCT SET PRODUCT_CATE_NO=? , IMAGE= ? , TITLE=? , PRICE=? , PRODUCT_ELEMENT=? , SHORT_DESCRIPTION=? , DEL_YN=? WHERE PRODUCT_NO=?";
+		String sql = "UPDATE PRODUCT SET PRODUCT_CATE_NO=? , IMAGE= ? , TITLE=? , PRICE=? , PRODUCT_ELEMENT=? , SHORT_DESCRIPTION=? , DEL_YN=?,  ENROLL_DATE=LOCALTIMESTAMP WHERE PRODUCT_NO=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getCategory());
 		pstmt.setString(2, vo.getImage());

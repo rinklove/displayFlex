@@ -62,7 +62,7 @@ public class StoreService {
 		
 	}
 
-	// 스토어메뉴 리스트(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
+	// 스토어메뉴 리스트 (유저용)(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
 	public List<StoreVo> storeMenuList(String cate) throws Exception {
 		
 		//conn
@@ -81,15 +81,15 @@ public class StoreService {
 	}
 	
 
-	// 스토어 메뉴 리스트(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)  (관리자용)
-	public List<StoreVo> storeMenuListAdmin(String cate2) throws Exception {
+	// 스토어 메뉴 리스트 (관리자용)(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)  (관리자용)
+	public List<StoreVo> storeMenuListAdmin(String cate) throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		StoreDao dao = new StoreDao();
-		List<StoreVo> list = dao.storeMenuListAdmin(conn, cate2);
+		List<StoreVo> list = dao.storeMenuListAdmin(conn, cate);
 		
 		//tx
 		

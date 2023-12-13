@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import displayFlex.member.MemberVo;
 import displayFlex.store.service.StoreService;
 import displayFlex.store.vo.StoreVo;
 
@@ -25,12 +26,30 @@ public class StoreMenuListController extends HttpServlet{
 		
 		// 메뉴 목록조회해서 JSON 형태로 문자열 내보내기
 		try {
-			//data
-			String cate = req.getParameter("category");  //카테고리에 해당하는 문자열 가져오기
-			
 			//service
 			StoreService ss = new StoreService();
-			List <StoreVo> voList = ss.storeMenuList(cate);
+			List <StoreVo> voList = null;
+			
+			//data
+			String cate = req.getParameter("category");  //카테고리에 해당하는 문자열 가져오기
+			MemberVo loginMember = (MemberVo)req.getSession().getAttribute("loginMember");
+			
+			//List <StoreVo> voList = ss.storeMenuList(cate);
+
+			if(loginMember == null || loginMember.getAdminYn().equals("N")) {
+				
+				//storeVoList = 사용자용 쿼리 실행하러 이동하기(위쪽 메뉴 리스트 출력용)
+				voList = ss.storeMenuList(cate);
+				req.setAttribute("cate", voList);
+				
+			} else {
+				
+				//storeVoList = 관리자용 쿼리 실행하러 이동하기(위쪽 메뉴 리스트 출력용)
+				voList = ss.storeMenuListAdmin(cate);
+				req.setAttribute("cate", voList);
+				
+			}
+			
 			
 			//result (StoreList를 JSON 문자열로 바꿔서 내보내기)
 			Gson gson = new Gson();
@@ -42,7 +61,7 @@ public class StoreMenuListController extends HttpServlet{
 		    resp.setCharacterEncoding("UTF-8");
 		    resp.getWriter().write(str);
 		    
-			req.setAttribute("cate", voList);
+			//req.setAttribute("cate", voList);
 			req.getRequestDispatcher("/WEB-INF/views/store/menuList.jsp").forward(req, resp);
 			
 			

@@ -66,6 +66,8 @@ public class ProductEditController extends HttpServlet {
 			String productElement = req.getParameter("productElement");
 			String shortDescription = req.getParameter("shortDescription");
 			String image = req.getParameter("image");
+			String delYn = req.getParameter("delYn");
+			String enrollDate = req.getParameter("enrollDate");
 			System.out.println(image);
 
 			// 파일 업로드 준비
@@ -109,19 +111,20 @@ public class ProductEditController extends HttpServlet {
 			vo.setShortDescription(shortDescription);
 			vo.setCategory(category);
 			vo.setImage(image);
+			vo.setDelYn(delYn);
+			vo.setEnrollDate(enrollDate);
 			
 			// service
 			StoreService ss = new StoreService();
 			int result = ss.edit(vo);
 
+			System.out.println(vo);
 
 			// result == view
 			if (result != 1) {
 				throw new Exception("result 가 1이 아님 ,,,,");
 			}
-			HttpSession session = req.getSession();
-			session.setAttribute("alertMsg", "제품 수정 성공 !");
-			resp.sendRedirect("/cinema/store/edit?no=" + no);
+			resp.sendRedirect("/cinema/store/product?no=" + no);
 
 		} catch (Exception e) {
 			System.out.println("[ERROR-S006] 제품 수정 실패 ...");

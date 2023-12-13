@@ -29,7 +29,7 @@
 				<div id="product-detail">
 					<div>
 						<div >
-							<img id="imgPreview" alt="기존 이미지" src="${ vo.image }">
+							<img id="imgPreview" alt="기존 이미지" src="${ vo.image }" width="400" height="400">
 						</div>
 						<div>
 							<!-- Add a hidden field to store the image path -->
@@ -46,7 +46,7 @@
 						<div id="description">
 							<div>가격</div>
 							<div>
-								<input type="text" name="price" placeholder="61,000원" value="${ vo.price }">
+								<input type="text" id="price" name="price" placeholder="61,000원" value="${ vo.price }" oninput="onlyNumber();">
 							</div>
 							<div>상품구성</div>
 							<div>
@@ -59,13 +59,13 @@
 							</div>
 							<div>분류</div>
 							<span> 
-								<input type="radio" value="1" name="category" <c:if test="${vo.category eq '1'}">checked="checked"</c:if>> 추천메뉴 
-							    <input type="radio" value="2" name="category" <c:if test="${vo.category eq '2'}">checked="checked"</c:if>> 기프트카드
-								<input type="radio" value="3" name="category" <c:if test="${vo.category eq '3'}">checked="checked"</c:if>> 콤보 
+								<input type="radio" value="1" name="category" <c:if test="${vo.category eq '추천메뉴'}">checked="checked"</c:if>> 추천메뉴 
+							    <input type="radio" value="2" name="category" <c:if test="${vo.category eq '기프트카드'}">checked="checked"</c:if>> 기프트카드
+								<input type="radio" value="3" name="category" <c:if test="${vo.category eq '콤보'}">checked="checked"</c:if>> 콤보 
 								<br>
-								<input type="radio" value="4" name="category" <c:if test="${vo.category eq '4'}">checked="checked"</c:if>> 팝콘 
-							    <input type="radio" value="5" name="category" <c:if test="${vo.category eq '5'}">checked="checked"</c:if>> 음료 
-								<input type="radio" value="6" name="category" <c:if test="${vo.category eq '6'}">checked="checked"</c:if>> 스낵
+								<input type="radio" value="4" name="category" <c:if test="${vo.category eq '팝콘'}">checked="checked"</c:if>> 팝콘 
+							    <input type="radio" value="5" name="category" <c:if test="${vo.category eq '음료'}">checked="checked"</c:if>> 음료 
+								<input type="radio" value="6" name="category" <c:if test="${vo.category eq '스낵'}">checked="checked"</c:if>> 스낵
 							</span>
 							<div>공개여부</div>
 							<span> 
@@ -87,6 +87,7 @@
 
 			<div></div>
 		</div>
+		<input type="hidden" name="no" value="${ vo.productNo }">
 	</form>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

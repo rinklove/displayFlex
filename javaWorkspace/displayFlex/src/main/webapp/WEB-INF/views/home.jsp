@@ -31,11 +31,18 @@
         </div>
 	    <div class="info">
 	    	<div>다시 보고 싶으신 영화가 있으신가요?</div>
-	    	<div><span><a href="/cinema/serviceCenter/recommendWrite">여기를 클릭</a>해서 다시 보고 싶은 영화를 요청하세요!</span></div>
+	    	<div><span><a href="/cinema/serviceCenter/recommendList">여기를 클릭</a>해서 다시 보고 싶은 영화를 요청하세요!</span></div>
 	    </div>
 	    <div class="event">
-	    	<div>1</div>
-	    	<div>2</div>
+	    	<div>
+	    		<div id="eventLetter"><b>Event</b></div>
+	    		<div><a href="/cinema/event/eventlist">더보기►</a></div>
+	    	</div>
+	    	<div>
+	    		<div><img width="400" height="300" src="/cinema/resources/image/event/NamSanPreMee1.jpg" alt="NamSanPreMee1.jpg"></div>
+	    		<div><img width="400" height="300" src="/cinema/resources/image/event/BookAffDis.jpg" alt="BookAffDis.jpg"></div>
+	    		<div><img width="400" height="300" src="/cinema/resources/image/event/HarryPreMee.jpg" alt="HarryPreMee.jpg"></div>
+	    	</div>
 	    </div>
 
     </div>

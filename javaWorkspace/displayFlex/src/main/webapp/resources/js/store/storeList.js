@@ -23,34 +23,22 @@ window.onload = () => {
 		.then( ( data )=>{ 
 			const itemPhoto = document.querySelector('.itemPhoto');
 			itemPhoto.innerHTML = data;
+			
+			// 세 자리마다 쉼표 추가
+          	const priceElements = document.querySelectorAll('#third > b');
+          	priceElements.forEach((priceElement) => {
+            const formattedValue = Number(priceElement.innerText).toLocaleString();
+            // 가격 업데이트
+            priceElement.innerText = formattedValue + "원";
+			});
 			} )
 		.catch( ()=>{ alert("리스트 불러오기 실패..."); });
 		})
 	}
 	
-}
+};
 
 
-
-
-
-
-
-const menu = document.querySelector("#smallMenu > div:first-child > button");
-
-function handleMenuClick(){
-    const currentColor = menu.style.color;  
-    let newColor;
-    if(currentColor === "#0C4667"){
-        newColor = "#abc95f";
-    }else{
-        newColor = "#0C4667";
-    }
-
-    menu.style.color = newColor;
-}
-
-menu.addEventListener("click", handleMenuClick);
 
 
 
