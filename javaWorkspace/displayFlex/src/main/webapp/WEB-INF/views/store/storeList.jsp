@@ -25,10 +25,10 @@
 		<div class="store-main">
 			<div id="top">
 				<div><h1>스토어</h1></div>
-				<%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
+				<c:if test="${loginMember.adminYn eq 'Y'}">
 				<div id="enroll"><button onclick="location.href='/cinema/admin/store/enroll'">등록</button></div>
 				<!-- <div id="delete"><button>삭제</button></div> -->
-				<%-- </c:if> --%>
+				</c:if>
 			</div>
 			<div id="smallMenu">
 				<c:forEach items="${storeVoList2}" var="vo">
@@ -40,7 +40,7 @@
 					<div>
                         <!-- 제발 a 태그 주소 잘 받아와야한다!!!! 쫌!!!! -->
 						<a href="/cinema/store/product?no=${vo.productNo }">
-						<img src="${vo.image}" alt="product222" width="200" height="200">
+						<img src="${vo.image}" alt="product" width="200" height="200">
 						<br>
 						<span id="first"><b>${vo.title}</b></span>
 						</a>

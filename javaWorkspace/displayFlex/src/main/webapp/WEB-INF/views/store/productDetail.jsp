@@ -18,13 +18,13 @@
 		<div class="product-main">
 			<div>
 				<div><h1>${ vo.category }</h1></div>
-				<%-- <c:if test="${loginMember.adminYn eq 'Y'}"> --%> 
-				<div id="enroll"><button onclick="location.href='/cinema/admin/store/edit'">수정</button></div>
-				<div id="delete"><button onclick="">삭제</button></div>
-				<%-- </c:if> --%>
+				<c:if test="${loginMember.adminYn eq 'Y'}"> 
+				<!-- 제발 경로좀 제대로 작성해라!!!! -->
+				<div id="enroll"><button onclick="location.href='/cinema/admin/store/edit?no=${vo.productNo}'">수정</button></div>
+				<div id="delete"><button onclick="location.href='/cinema/admin/store/delete?no=${vo.productNo}'">삭제</button></div>
+				</c:if>
 			</div>
 			<div id="product-detail">
-				<!-- 아래 사진경로의 경우 앞에 "/ciname/"가 붙어야 제대로된 경로가 된다!! -->
 				<div><img src="${vo.image}" alt="product" width="400" height="400"></div>
 				<div id="detail">
 					<h1>

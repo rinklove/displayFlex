@@ -11,7 +11,7 @@ import test.JDBCTemplate;
 
 public class StoreService {
 	
-	// 스토어 메뉴 리스트(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)  
+	// 스토어 메뉴 리스트(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)  (유저용)
 	public List<StoreVo> selectMenuList() throws Exception{
 		
 		//conn
@@ -27,7 +27,7 @@ public class StoreService {
 		
 	}// selectMenuList
 
-	// 스토어 리스트
+	// 스토어 리스트(유저용)
 	public List<StoreVo> selectStoreList() throws Exception{
 
 		
@@ -43,6 +43,23 @@ public class StoreService {
 		JDBCTemplate.close(conn);
 		return storeVoList;
 	
+	}
+	
+	//스토어 리스트 관리자용
+	public List<StoreVo> selectStoreListAdmin() throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+
+		//dao
+		StoreDao dao = new StoreDao();
+		List<StoreVo> list2 = dao.selectStoreListAdmin(conn);
+		
+		
+		//close
+		JDBCTemplate.close(conn);
+		return list2;
+		
 	}
 
 	// 스토어메뉴 리스트(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
@@ -62,6 +79,26 @@ public class StoreService {
 		
 		return list;
 	}
+	
+
+	// 스토어 메뉴 리스트(위에 보이는 메뉴 JSTL사용해 반복문 돌리기용)  (관리자용)
+	public List<StoreVo> storeMenuListAdmin(String cate2) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		StoreDao dao = new StoreDao();
+		List<StoreVo> list = dao.storeMenuListAdmin(conn, cate2);
+		
+		//tx
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
 
 	//제품 디테일 화면 보여주기
 	public Map<String, Object> selectMenuListByNo(String no) throws Exception{
@@ -147,5 +184,30 @@ public class StoreService {
 		return result;
 	
 	}
+
+	// 제품 삭제 화면
+	public int delete(String no) throws Exception{
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		StoreDao dao = new StoreDao();
+		int result = dao.delete(conn, no);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		return result;
+	
+	
+	}
+
 
 }//class
