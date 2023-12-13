@@ -25,5 +25,21 @@ function previewImage(event) {
         // Clear the preview if no file is selected
         preview.style.backgroundImage = 'none';
     }
-}
+};
+
+
+function onlyNumber(){
+	let priceInput = document.getElementById("price");
+	
+	// 숫자 이외의 문자 제거
+	let value = priceInput.value = priceInput.value.replace(/[^0-9]/g, '');
+	
+	// 세 자리마다 쉼표 추가
+    var formattedValue = Number(value).toLocaleString(); 
+	
+	// 입력값 업데이트
+    priceInput.value = formattedValue + "원";
+	
+};
+
 

@@ -27,7 +27,7 @@
 				</div>
 				<div id="product-detail">
 					<div>
-						<div id="imgPreview">
+						<div id="imgPreview" width="400" height="400">
 							<i class="fa-solid fa-circle-plus"></i>
 						</div>
 						<div>
@@ -45,7 +45,7 @@
 						<div id="description">
 							<div>가격</div>
 							<div>
-								<input type="text" name="price" placeholder="61,000원">
+								<input type="text" id="price" name="price" placeholder="61,000원" oninput="onlyNumber();">
 							</div>
 							<div>상품구성</div>
 							<div>
