@@ -267,7 +267,7 @@ public class NoticeDao {
 	public int updateNoticeByNo(Connection conn, NoticeVo vo) throws Exception {
 		
 		// SQL
-	    String sql = "UPDATE NOTICE SET TITLE = ? , CONTENT = ? , MODIFY_DATE = SYSDATE , HIT = ? WHERE NOTICE_NO = ? AND DELETE_YN = 'N'";
+	    String sql = "UPDATE NOTICE SET TITLE = ? , CONTENT = ? , MODIFY_DATE = LOCALTIMESTAMP , HIT = ? WHERE NOTICE_NO = ? AND DELETE_YN = 'N'";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1, vo.getTitle());
 	    pstmt.setString(2, vo.getContent());

@@ -39,7 +39,7 @@ public class RecommendService {
 		
 		// dao
 		RecommendDao dao = new RecommendDao();
-		int cnt = dao.selectNoticeCount(conn);
+		int cnt = dao.selectRecommendCount(conn);
 		
 		// close
 		JDBCTemplate.close(conn);
@@ -179,6 +179,30 @@ public class RecommendService {
 		
 		return result;
 		
+	}
+
+	//삭제
+	public int delete(String recommendMvNo, String memberNo) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		RecommendDao dao = new RecommendDao();
+		int result = dao.delete(conn , recommendMvNo , memberNo);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+
+		return result;
+				
 	}
 
 }

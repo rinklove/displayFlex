@@ -29,6 +29,7 @@
 
 
 	<form action="/cinema/serviceCenter/recommendEdit" method="post">
+		<input type="hidden" name="recommendMvNo" value="<%= vo.getRecommendMvNo() %>">
 		<main>
         <div id="contents">
             <div id="title_top">
