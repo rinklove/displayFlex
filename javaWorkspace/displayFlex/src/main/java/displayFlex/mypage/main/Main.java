@@ -21,22 +21,23 @@ public class Main extends HttpServlet {
 		try {
 			req.getRequestDispatcher("/WEB-INF/views/mypage/main.jsp").forward(req, resp);
 			
-			String memberNick = req.getParameter("memberNick");
-			
-			MemberVo vo = new MemberVo();
-			vo.setMemberNick(memberNick);
-			
-			MemberService ms = new MemberService();
-			MemberVo loginMember = ms.login(vo);
-			
-			//result
-			if(loginMember == null) {
-				throw new Exception("로그인 실패...!");
-			}
-				
-			HttpSession session = req.getSession();
-			session.setAttribute("alertMsg", "로그인 성공!");
-			session.setAttribute("loginMember", loginMember);
+//			String memberNick = req.getParameter("memberNick");
+//			System.out.println(memberNick);
+//			
+//			MemberVo vo = new MemberVo();
+//			vo.setMemberNick(memberNick);
+//			
+//			MemberService ms = new MemberService();
+//			MemberVo loginMember = ms.login(vo);
+//			
+//			//result
+//			if(loginMember == null) {
+//				throw new Exception("로그인 실패...!");
+//			}
+//				
+//			HttpSession session = req.getSession();
+//			session.setAttribute("alertMsg", "로그인 성공!");
+//			session.setAttribute("loginMember", loginMember);
 			
 		}catch(Exception e) {
 			System.out.println("[ERROR-M002] 로그인 중 예외 발생...!!");

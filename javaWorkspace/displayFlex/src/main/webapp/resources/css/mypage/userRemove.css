@@ -19,6 +19,7 @@
 }
 
 .wrap-main {
+	
     display: grid;
     grid-template-rows: 5fr 1fr;
     width: 100%;

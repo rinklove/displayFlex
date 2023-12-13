@@ -43,9 +43,11 @@ public class IdFindServlet extends HttpServlet {
 		    System.out.println(result);
 		    
 		    if(result != null) {
-				resp.sendRedirect("/cinema/member/idFindConfirm");
+		    	req.setAttribute("vo", result);
+		    	req.getRequestDispatcher("/WEB-INF/views/member/idFindConfirm.jsp").forward(req, resp);
 		    }else {
-		    	throw new Exception();
+		    	req.setAttribute("errorMsg", "일치하는 회원 정보가 없습니다.");
+		    	req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		    }
 		    	
 		} catch(Exception e) {

@@ -14,7 +14,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="main">
-<form class= "wrap" action="/cinema/views/mypage/userRemove">
+	<div class="wrap">
     <div class="wrap-main">
         <div>
             <div class="wrap-main-first-font">회원 탈퇴를 신청하기 전, 다음 내용을 꼭 확인해주세요.</div>
@@ -27,9 +27,14 @@
 </div>
             <div class="wrap-main-third-font"><input type="button" id="bt1">안내사항을 모두 확인하였으며, 이에 동의합니다.</div>
         </div>
-        <div class="button-class"><input type="button" value="FLEX 회원 탈퇴" id="bt2"><input type="button" value="취소" id="bt3"></div>
+        <div class="button-class">
+        <%if(loginMember != null) { %>
+        <button onclick="location.href='/cinema/mypage/correct/userRemove?memberNo=<%= loginMember.getMemberNo() %>'">회원탈퇴</button>
+        <input type="submit" value="취소" id="bt3" onclick ="location.href='/cinema/mypage/main'">
+        <% } %>
+        </div>
     </div>
+  </div>
 </div>
-</form>
 </body>
 </html>

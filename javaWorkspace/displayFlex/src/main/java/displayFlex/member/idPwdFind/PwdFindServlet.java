@@ -16,6 +16,13 @@ public class PwdFindServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/views/member/pwdFind.jsp").forward(req, resp);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		try {
 		    MemberService ms = new MemberService();
 
@@ -30,7 +37,7 @@ public class PwdFindServlet extends HttpServlet {
 
 		    MemberVo result = ms.SelectPwd(vo);
 
-		    if (result != null && result.equals(vo)) {
+		    if (result != null) {
 		    	req.setAttribute("vo", result);
 		    	req.getRequestDispatcher("/WEB-INF/views/member/pwdFindConfirm.jsp").forward(req, resp);
 		    } else {
@@ -45,7 +52,8 @@ public class PwdFindServlet extends HttpServlet {
 		    req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 	}
+		
+	}
 	
 
-}
 

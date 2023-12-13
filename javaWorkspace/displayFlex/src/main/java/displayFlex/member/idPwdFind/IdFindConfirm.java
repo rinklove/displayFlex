@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import displayFlex.member.MemberService;
+import displayFlex.member.MemberVo;
+
 @WebServlet("/member/idFindConfirm")
 public class IdFindConfirm extends HttpServlet {
 	
 	@Override
 	protected void service (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/views/member/idFindConfirm.jsp").forward(req, resp);
+		
 	}
-
 }

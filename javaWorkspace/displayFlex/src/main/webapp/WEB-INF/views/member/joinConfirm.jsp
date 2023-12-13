@@ -14,7 +14,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="main">
-<form class= "wrap" action="/cinema/views/member/joinConfirm">
+<div class="wrap">
     <div class="wrap-main">
         <div><img src="/cinema/resources/image/member/loginConfirm.png"></div>
         <div>가입완료</div>
@@ -23,9 +23,9 @@
             <div class="wrap-main-second-font">회원가입 절차가 모두 완료되었습니다.</div>
             <div class="wrap-main-second-font">로그인 후 편리하고 안전한 보안 서비스를 확인해 보세요.</div>
         </div>
-        <div><input type="button" value="확인"></div>
+        <div><input type="button" value="확인" onclick="location.href='/cinema/home'"></div>
     </div>
+  </div>
 </div>
-</form>
 </body>
 </html>

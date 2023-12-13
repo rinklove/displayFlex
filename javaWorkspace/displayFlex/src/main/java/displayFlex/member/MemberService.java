@@ -2,6 +2,7 @@ package displayFlex.member;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import test.JDBCTemplate;
 
@@ -121,5 +122,69 @@ public class MemberService {
 		
 		return result;
 	}
+
+	public boolean Pwdcheck(String memberId, String memberName, String memberPhoneNum) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		boolean result = dao.pwdCheck(conn, memberId, memberName, memberPhoneNum);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+
+	}
+
+	public int edit(String memberNo, String memberNewPwd) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		
+		int result = dao.edit(conn, memberNo, memberNewPwd);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+	public int delete(String memberNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		MemberDao dao = new MemberDao();
+		
+		int result = dao.delete(conn, memberNo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
+
+//	public MemberVo idFindConfirm(String memberId) throws Exception {
+//		
+//		//conn
+//		Connection conn = JDBCTemplate.getConnection();
+//		
+//		//dao
+//		MemberDao dao = new MemberDao();
+//		MemberVo result = dao.idFindComfirm(conn, memberId);
+//		
+//		//close
+//		JDBCTemplate.close(conn);
+//		
+//		
+//		return result;
+//	}
 
 }
