@@ -62,13 +62,6 @@
 			setPageArea();
 		<% } %>
 
-		/* // 각 공지사항의 상세조회 페이지로 이동하는 함수
-		function goToNoticeDetail(noticeNo) {
-			// 공지사항 상세조회 페이지 URL을 생성
-			var url = "/cinema/serviceCenter/noticeDetail?noticeNo=" + noticeNo;
-			// 페이지 이동
-			window.location.href = url;
-		} */
     </script>
  	</c:if>
 
@@ -85,7 +78,7 @@
             </div>
             <div id="tab_tit">
                 <nav>
-                    <a href="/cinema/serviceCenter/faqList">FAQ</a>
+                    <a href="/cinema/serviceCenter/faqList?category=영화관이용">FAQ</a>
                     <a href="/cinema/serviceCenter/noticeList">공지사항</a>
                     <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>
                     <a href="/cinema/serviceCenter/recommendList">상영요청</a>

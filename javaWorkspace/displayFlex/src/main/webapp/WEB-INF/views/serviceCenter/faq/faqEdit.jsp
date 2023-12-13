@@ -19,7 +19,6 @@
 
 </head>
 <body>
-
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<form action="/cinema/admin/faqEdit" method="post">

@@ -22,7 +22,7 @@ public class FaqDao {
 	public List<FaqVo> selectFaqList(Connection conn , PageVo pvo) throws Exception {
 
 		//sql
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM , T.* FROM (SELECT F.FAQ_NO ,F.FAQ_CATEGORY_NO ,F.TITLE ,F.CONTENT ,F.HIT ,F.ENROLL_DATE ,F.MODIFY_DATE , FC.DIVISION AS CATEGORY_NAME FROM FAQ F JOIN FAQ_CATEGORY FC ON F.FAQ_CATEGORY_NO = FC.FAQ_CATEGORY_NO WHERE F.DELETE_YN = 'N' ORDER BY FAQ_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM , T.* FROM (SELECT F.FAQ_NO ,F.FAQ_CATEGORY_NO ,F.TITLE ,F.CONTENT ,F.HIT ,F.ENROLL_DATE ,F.MODIFY_DATE , FC.DIVISION AS CATEGORY_NAME FROM FAQ F JOIN FAQ_CATEGORY FC ON F.FAQ_CATEGORY_NO = FC.FAQ_CATEGORY_NO WHERE FC.DIVISION = ? AND F.DELETE_YN = 'N' ORDER BY FAQ_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getStartRow());
 	    pstmt.setInt(2, pvo.getLastRow());
@@ -77,14 +77,14 @@ public class FaqDao {
                 while (rs.next()) {
                 	String faqNo = rs.getString("FAQ_NO");
         			String faqCategoryNo = rs.getString("FAQ_CATEGORY_NO");
-        			String category_name = rs.getString("CATEGORY_NAME");
+        			String categoryName = rs.getString("CATEGORY_NAME");
         			String title = rs.getString("TITLE");
         			String enrollDate = rs.getString("ENROLL_DATE");
         			
         			FaqVo vo = new FaqVo();
         			vo.setFaqNo(faqNo);
-        			vo.setCategoryName(faqCategoryNo);
-//        			vo.setFaqCategoryNo(faqCategoryNo);
+        			vo.setFaqCategoryNo(faqCategoryNo);
+        			vo.setCategoryName(categoryName);
         			vo.setTitle(title);
         			vo.setEnrollDate(enrollDate);
         			
@@ -98,7 +98,7 @@ public class FaqDao {
 
     // 카테고리에 따른 전체 FAQ 갯수 조회
     public int selectFaqCountByCategory(Connection conn, String categoryNo) throws Exception {
-        String sql = "SELECT COUNT(*) as cnt FROM FAQ WHERE FAQ_CATEGORY_NO = ? AND DELETE_YN = 'N'";
+        String sql = "SELECT COUNT(F.FAQ_NO) FROM FAQ F INNER JOIN FAQ_CATEGORY FC ON F.FAQ_CATEGORY_NO = FC.FAQ_CATEGORY_NO WHERE FC.DIVISION = ? AND F.DELETE_YN = 'N'";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, categoryNo);
 

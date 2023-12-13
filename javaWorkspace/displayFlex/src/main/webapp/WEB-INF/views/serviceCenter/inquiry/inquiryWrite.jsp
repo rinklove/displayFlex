@@ -38,7 +38,7 @@
 	                    <a href="/cinema/serviceCenter/noticeList">공지사항</a>
 	                    <c:choose>
 		                    <c:when test="${loginMember.adminYn eq 'Y' }">
-			                    <a href="/cinema/admin/serviceCenter/inquiryList?pno=1">1:1 문의 내역</a>
+			                    <a href="/cinema/admin/serviceCenter/inquiryList?pno=1">1:1 문의</a>
 		                    </c:when>
 		                    <c:otherwise>
 			                    <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>

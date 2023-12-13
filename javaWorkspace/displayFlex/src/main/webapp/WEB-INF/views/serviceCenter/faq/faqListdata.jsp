@@ -13,7 +13,6 @@
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/faq/faqListdata.css">
 
-	
 	<table id="tb_acc_wrap">
 		<colgroup>
 		    <col style="width: 20%;">
@@ -31,26 +30,26 @@
 		<% for(FaqVo vo : faqVoList){ %>
 		<tr>
 			<td><%= vo.getFaqNo() %></td>
-		<td><%= vo.getTitle() %></td>
-		<td><%= vo.getEnrollDate() %></td>
+			<td><%= vo.getTitle() %></td>
+			<td><%= vo.getEnrollDate() %></td>
 		</tr>
 		<% } %>
 		    </tbody>
 	</table>
 	<div id="paging">
 			<% if(pvo.getStartPage() != 1){ %>
-		<a href="/cinema/serviceCenter/faqList?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+		<a onclick="aa(<%= pvo.getStartPage()-1 %>);">이전</a>
 		<% } %>
 		
 		<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
 		<% if( i == pvo.getCurrentPage() ){ %>
 		<span><%= i %></span>
 		<% } else { %>
-		<a href="/cinema/serviceCenter/faqList?pno=<%= i %>"><%= i %></a>
+		<a onclick="aa(<%= i %>);"><%= i %></a>
 		<% } %>
 		<% } %>
 		
 		<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
-		<a href="/cinema/serviceCenter/faqList?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+		<a onclick="aa(<%= pvo.getEndPage()+1 %>);">다음</a>	
 		<% } %>
 	</div>
