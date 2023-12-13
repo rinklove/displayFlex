@@ -10,6 +10,8 @@
     	List<RecommendVo> recommendVoList = (List<RecommendVo>) request.getAttribute("recommendVoList");
     	PageVo pvo = (PageVo)request.getAttribute("pvo");
     	Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
+    	String x = (String) session.getAttribute("alertMsg");
+    	session.removeAttribute("alertMsg");
     %>
     
 <!DOCTYPE html>
@@ -25,6 +27,13 @@
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+    <c:set var="msg"  value="<%= x %>" />
+ 	<c:if test="${not empty msg}">
+	<script>
+		alert('<%= x %> ');
+	</script>
+ 	</c:if>    
+
 	<main>
         <div id="contents">
             <div id="title_top">
@@ -35,7 +44,7 @@
             </div>
             <div id="tab_tit">
                 <nav>
-                    <a href="/cinema/serviceCenter/faqList">FAQ</a>
+                    <a href="/cinema/serviceCenter/faqList?category=영화관이용">FAQ</a>
                     <a href="/cinema/serviceCenter/noticeList">공지사항</a>
                     <a href="/cinema/serviceCenter/inquiryWrite">1:1 문의</a>
                     <a href="/cinema/serviceCenter/recommendList">상영요청</a>

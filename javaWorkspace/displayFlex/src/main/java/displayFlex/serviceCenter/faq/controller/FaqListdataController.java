@@ -22,37 +22,29 @@ public class FaqListdataController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		resp.setContentType("text/html");
 		try {
 			FaqService fs = new FaqService();
 			CategoryService cs = new CategoryService();
 			
 			//data
 			String categoryNo = req.getParameter("category");
-			int listCount;
-			List<FaqVo> faqVoList;
-			List<CategoryVo> categoryList;
 			
-			if(categoryNo != null) {
-				listCount = fs.selectFaqCountByCategory(categoryNo);
-				faqVoList = fs.selectFaqListByCategory(categoryNo);
-				categoryList = cs.selectFaqCategoryList();
-			} else {
-				listCount = fs.selectFaqCount();					//전체 게시글 갯수
-				String currentPage_ = req.getParameter("pno");
-				if(currentPage_ == null) {
-					currentPage_ = "1";
-				}
-				int currentPage = Integer.parseInt(currentPage_);	//현재 페이지
-				int pageLimit = 5;									//페이징 영역 페이지갯수
-				int faqLimit = 7;									//한 페이지에 보여줄 게시글 갯수
-				PageVo pvo = new PageVo(listCount, currentPage, pageLimit, faqLimit);
-				
-				faqVoList = fs.selectFaqList(pvo);
-				categoryList = cs.selectAllCategoryList();
-				req.setAttribute("pvo", pvo);
+			int listCount = fs.selectFaqCountByCategory(categoryNo);
+			String currentPage_ = req.getParameter("pno");
+			if(currentPage_ == null) {
+				currentPage_ = "1";
 			}
+			int currentPage = Integer.parseInt(currentPage_);	//현재 페이지
+			int pageLimit = 5;									//페이징 영역 페이지갯수
+			int faqLimit = 7;									//한 페이지에 보여줄 게시글 갯수
+			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, faqLimit);
 			
+			List<FaqVo> faqVoList = fs.selectFaqListByCategory(categoryNo, pvo);
+			List<CategoryVo> categoryList = cs.selectFaqCategoryList();
+
+			req.setAttribute("categoryNo", categoryNo);
+			req.setAttribute("pvo", pvo);
 			req.setAttribute("faqVoList", faqVoList);
 			req.setAttribute("categoryList", categoryList);
 			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/faq/faqListdata.jsp").forward(req, resp);

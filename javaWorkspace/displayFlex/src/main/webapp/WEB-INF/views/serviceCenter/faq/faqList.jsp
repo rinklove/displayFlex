@@ -12,6 +12,8 @@
      	PageVo pvo = (PageVo)request.getAttribute("pvo");
      	List<CategoryVo> categoryList = (List<CategoryVo>) request.getAttribute("categoryList");
      	Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
+     	String x = (String) session.getAttribute("alertMsg");
+    	session.removeAttribute("alertMsg");
      %>
     
 <!DOCTYPE html>
@@ -21,10 +23,19 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/faq/faqList.css">
-<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/faq.js"></script>
+<script type="text/javascript" src="/cinema/resources/js/serviceCenter/faq.js"></script>
 </head>
 <body>
+ 		
+
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+	<c:set var="msg" value="<%= x %>" />
+	<c:if test="${not empty msg}">
+		 <script>
+		        alert('<%= x %>');
+		</script>
+	</c:if>
 	
     <main>
         <div id="contents">
@@ -37,7 +48,7 @@
             <div id="tab_tit">
                 <nav>
                     <div id="top_tab1">
-                        <a href="/cinema/serviceCenter/faqList">FAQ</a>
+                        <a href="/cinema/serviceCenter/faqList?category=영화관이용"">FAQ</a>
                     </div>
                     <div id="top_tab2">
                         <a href="/cinema/serviceCenter/noticeList">공지사항</a>
@@ -54,7 +65,7 @@
                 	<div id="faq_icon_wrap">
 	                    <button id="icon_01">
 	                        <img src="/cinema/resources/image/faqIcon/cinema_2yong.png" alt="영화관 이용">
-	                        영화관 이용
+	                        영화관이용
 	                    </button>
 	                    <button id="icon_02">
 	                        <img src="/cinema/resources/image/faqIcon/member.png" alt="사람 아이콘">
@@ -114,19 +125,19 @@
                     </table>
                     <div id="paging">
                     	<% if(pvo.getStartPage() != 1){ %>
-                    		<a href="/cinema/serviceCenter/faqList?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+                    		<a href="/cinema/serviceCenter/faqList?category=영화관이용&pno=<%= pvo.getStartPage()-1 %>">이전</a>
                     	<% } %>
                     	
                     	<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
 							<% if( i == pvo.getCurrentPage() ){ %>
 								<span><%= i %></span>
 							<% } else { %>
-								<a href="/cinema/serviceCenter/faqList?pno=<%= i %>"><%= i %></a>
+								<a href="/cinema/serviceCenter/faqList?category=영화관이용&pno=<%= i %>"><%= i %></a>
 							<% } %>
 						<% } %>
 						
 						<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
-							<a href="/cinema/serviceCenter/faqList?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+							<a href="/cinema/serviceCenter/faqList?category=영화관이용&pno=<%= pvo.getEndPage()+1 %>">다음</a>	
 						<% } %>
                     	
                         
@@ -163,7 +174,11 @@
 	    }
 	    setPageArea();
 	    <% } %>
+	    
+	    
+	    
 	</script>
+
 
 	
 

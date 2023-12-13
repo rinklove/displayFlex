@@ -44,12 +44,12 @@ public class FaqService {
     }
 
     // 카테고리에 따른 FAQ 목록 조회
-    public List<FaqVo> selectFaqListByCategory(String categoryNo) throws Exception {
+    public List<FaqVo> selectFaqListByCategory(String categoryNo, PageVo pvo) throws Exception {
         
     	Connection conn = JDBCTemplate.getConnection();
     	
         FaqDao dao = new FaqDao();
-        List<FaqVo> faqVoList = dao.selectFaqListByCategory(conn, categoryNo, null);
+        List<FaqVo> faqVoList = dao.selectFaqListByCategory(conn, categoryNo, pvo);
         
         JDBCTemplate.close(conn);
         
