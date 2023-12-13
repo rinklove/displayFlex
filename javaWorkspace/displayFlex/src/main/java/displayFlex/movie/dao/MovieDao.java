@@ -95,7 +95,7 @@ public class MovieDao {
 	 * @throws SQLException 
 	 */
 	public List<MovieListDto> getAllMovieList(PageVo page, Connection con) throws SQLException {
-		query = "SELECT A.* , SG.NAME FROM ( SELECT ROW_NUMBER() OVER(ORDER BY M.WRITE_DATE DESC) RNUM , M.MOVIE_NO , M.MOVIE_NAME , M.SCREEN_GRADE_NO , TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE , M.MOVIE_IMAGE , M.RUNNING_TIME , M.RATE , M.GENRE FROM MOVIE M ) A INNER JOIN SCREEN_GRADE SG ON A.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO WHERE A.RNUM BETWEEN ? AND ?";
+		query = "SELECT A.* , SG.NAME FROM ( SELECT ROW_NUMBER() OVER(ORDER BY M.MOVIE_NO ASC) RNUM , M.MOVIE_NO , M.MOVIE_NAME , M.SCREEN_GRADE_NO , TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE , M.MOVIE_IMAGE , M.RUNNING_TIME , M.RATE , M.GENRE FROM MOVIE M ) A INNER JOIN SCREEN_GRADE SG ON A.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO WHERE A.RNUM BETWEEN ? AND ? ORDER BY A.RNUM";
 		
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setInt(1, page.getStartRow());
@@ -254,7 +254,7 @@ public class MovieDao {
 	 * @throws SQLException 
 	 */
 	public List<MovieListDto> findMoiveListByCondition(String[] genres, String grade, PageVo page, Connection con) throws SQLException {
-		StringBuilder dynamicQuery = new StringBuilder("SELECT A.*, SG.NAME FROM ( SELECT ROW_NUMBER() OVER(ORDER BY M.WRITE_DATE DESC) RNUM ,  M.MOVIE_NO , M.MOVIE_NAME , M.SCREEN_GRADE_NO , TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE , M.MOVIE_IMAGE , M.RUNNING_TIME , M.RATE , M.GENRE FROM MOVIE M WHERE M.MOVIE_NO IN (SELECT DISTINCT O.MOVIE_NO FROM MOVIE O ");
+		StringBuilder dynamicQuery = new StringBuilder("SELECT A.*, SG.NAME FROM ( SELECT ROW_NUMBER() OVER(ORDER BY M.MOVIE_NO ASC) RNUM ,  M.MOVIE_NO , M.MOVIE_NAME , M.SCREEN_GRADE_NO , TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE , M.MOVIE_IMAGE , M.RUNNING_TIME , M.RATE , M.GENRE FROM MOVIE M WHERE M.MOVIE_NO IN (SELECT DISTINCT O.MOVIE_NO FROM MOVIE O ");
 		int index = 1;
 		
 		//조건에 따라 쿼리문 동적 생성
@@ -284,7 +284,7 @@ public class MovieDao {
 			dynamicQuery.append("M.SCREEN_GRADE_NO = ? ");
 		}
 		
-		dynamicQuery.append(")) A INNER JOIN SCREEN_GRADE SG ON A.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO WHERE A.RNUM BETWEEN ? AND ?");
+		dynamicQuery.append(")) A INNER JOIN SCREEN_GRADE SG ON A.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO WHERE A.RNUM BETWEEN ? AND ? ORDER BY A.RNUM");
 		
 		PreparedStatement pstmt = con.prepareStatement(dynamicQuery.toString());
 		
