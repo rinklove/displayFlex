@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import displayFlex.store.service.StoreService;
@@ -35,13 +36,13 @@ public class ProductEditController extends HttpServlet {
 			StoreService ss = new StoreService();
 			Map<String, Object> m = ss.edit(no);
 			StoreVo vo = (StoreVo) m.get("vo");
-			
 			//result
 			if(vo == null) {
-				throw new Exception();
+				throw new Exception("제품 수정용 vo가 null값이다.");
 			}
+	        
 			req.setAttribute("vo", vo);
-			req.getRequestDispatcher("/WEB-INF/views/store/adminStoreEnroll.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/store/adminProductEdit.jsp").forward(req, resp);
 
 		} catch (Exception e) {
 			System.out.println("제품 수정하기 화면 조회 에러 ...");
@@ -64,10 +65,11 @@ public class ProductEditController extends HttpServlet {
 			String price = req.getParameter("price");
 			String productElement = req.getParameter("productElement");
 			String shortDescription = req.getParameter("shortDescription");
+			String image = req.getParameter("image");
+			System.out.println(image);
 
 			// 파일 업로드 준비
 			Part f = req.getPart("f");
-			String image = null;
 			
 
 			// 파일이 업로드 됐는지 확인
@@ -117,9 +119,9 @@ public class ProductEditController extends HttpServlet {
 			if (result != 1) {
 				throw new Exception("result 가 1이 아님 ,,,,");
 			}
-			
-			req.getSession().setAttribute("alertMsg", "제품 수정 성공 !");
-			resp.sendRedirect("/cinema/store/product?no=" + no);
+			HttpSession session = req.getSession();
+			session.setAttribute("alertMsg", "제품 수정 성공 !");
+			resp.sendRedirect("/cinema/store/edit?no=" + no);
 
 		} catch (Exception e) {
 			System.out.println("[ERROR-S006] 제품 수정 실패 ...");

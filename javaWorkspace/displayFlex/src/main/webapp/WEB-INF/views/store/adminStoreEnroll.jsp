@@ -32,7 +32,7 @@
 						</div>
 						<div>
 							<!-- Add a hidden field to store the image path -->
-                            <input type="hidden" id="imagePath" name="image" value="">
+                            <input type="hidden" id="imagePath" name="image" value="${ vo.image }">
                             <!-- image name이 "f"인것은 컨트롤러에서 Part f = req.getPart("f"); 로 "f" 설정했기 때문이다!!! -->
 							<input type="file" id="upload" name="f" accept="image/*" onchange="previewImage(event)">
 						</div>

@@ -19,6 +19,7 @@ import displayFlex.store.vo.StoreVo;
 @WebServlet("/store/menu")
 public class StoreMenuListController extends HttpServlet{
 
+	// 스토어메뉴 리스트(fetch, gson 사용해서 클릭시 해당메뉴 데이터 보내는 데이터용)
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

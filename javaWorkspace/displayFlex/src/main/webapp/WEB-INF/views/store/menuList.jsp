@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script defer src="/cinema/resources/js/store/storeList.js"></script>
  
-
 <c:forEach var="vo" items="${cate}">
 	<div>
 		<a href="/cinema/store/product?no=${vo.productNo }">

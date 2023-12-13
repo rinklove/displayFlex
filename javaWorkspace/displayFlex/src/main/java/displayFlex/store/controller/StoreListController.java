@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import displayFlex.member.MemberVo;
 import displayFlex.store.service.StoreService;
 import displayFlex.store.vo.StoreVo;
 
@@ -21,24 +23,29 @@ public class StoreListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			
-			//data
-			
 			//service
 			StoreService ss = new StoreService();
-			List<StoreVo> storeVoList = ss.selectStoreList();
-			List<StoreVo> storeVoList2 = ss.selectMenuList();
 			
-			//result (==view)
+			List<StoreVo> storeVoList = null;
+			List<StoreVo> storeVoList2 = ss.selectMenuList(); // 위쪽 메뉴 리스트들 출력용
 			
-			//확인용
-//			System.out.println("==========스토어 리스트======");
-//			for(StoreVo storeVo : storeVoList) {
-//				System.out.println(storeVo);
-//			}
-			
-			req.setAttribute("storeVoList", storeVoList);
-			req.setAttribute("storeVoList2", storeVoList2);
+			//data
+			MemberVo loginMember = (MemberVo)req.getSession().getAttribute("loginMember");
+
+			if(loginMember == null || loginMember.getAdminYn().equals("N")) {
+				
+				//storeVoList = 사용자용 쿼리 실행하러 이동하기(아래 메뉴 리스트 출력용)
+				storeVoList = ss.selectStoreList();
+				req.setAttribute("storeVoList", storeVoList);
+				
+			} else {
+				
+				//storeVoList = 관리자용 쿼리 실행하러 이동하기(아래 메뉴 리스트 출력용)
+				storeVoList = ss.selectStoreListAdmin();
+				req.setAttribute("storeVoList", storeVoList);
+				
+			}
+			req.setAttribute("storeVoList2", storeVoList2);	
 			req.getRequestDispatcher("/WEB-INF/views/store/storeList.jsp").forward(req, resp);
 			
 		}catch(Exception e) {
@@ -50,13 +57,6 @@ public class StoreListController extends HttpServlet{
 		
 	
 	}//doGet
-	
-	//스토어 관리자용
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	
-	}
 	
 	
 }//class
