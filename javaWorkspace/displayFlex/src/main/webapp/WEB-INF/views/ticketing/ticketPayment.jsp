@@ -9,7 +9,7 @@
 	UserGradeVo gradeVo = (UserGradeVo)request.getAttribute("userGradeVo");
 	String gradeNo = gradeVo.getGradeNo();
 	String previlegedYn = gradeVo.getPrevilegedYn();
-	String registerNo = gradeVo.getRegisterNo();
+	String age = gradeVo.getAge();
 %>
 
 <script>
@@ -17,17 +17,23 @@
 window.onload = () => {
 	const gradeNo = <%=gradeNo %>;
 	const previlegedYn = "<%=previlegedYn %>";
-	const registerNo = <%=registerNo%>;
-	console.log(gradeNo+previlegedYn+registerNo );
-
+	const age = <%=age%>;
 	
 	if(gradeNo !== 1){
 		document.getElementById("discount_vip").disabled = true;
-	}
+	}	
 	
-// 	if(){
-		
-// 	}
+	if(age > 8){
+		document.getElementById("discount_child").disabled = true;
+	}
+
+	if(age < 65){
+		document.getElementById("discount_older").disabled = true;
+	}
+
+	if(previlegedYn === "N"){
+		document.getElementById("discount_disabled").disabled = true;
+	}
 	
 }
 
@@ -38,11 +44,15 @@ window.onload = () => {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script src="../resources/bootstrap-5.3.2-dist/js/bootstrap.js"></script>
     <link rel="stylesheet" href="../resources/css/ticketing/ticketPayment.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../resources/bootstrap-5.3.2-dist/css/bootstrap.css">
     <script defer src="../resources/js/ticketing/ticketPayment.js"> </script>
+
 
     <title>예매페이지-결제</title>
 
@@ -141,20 +151,20 @@ window.onload = () => {
                       <div id="step-payment">
                         <div><h4>결제 방법</h4></div>
                         <div id="paymentMethod">
-                          <div id="kakaoPay"><button><span><img src="../resources/image/ticketing/payment_icon_yellow_small.png" alt="카카오페이"></span></button></div>
-                          <div><button><span>결제수단2</span></button></div>
-                          <div><button><span>결제수단3</span></button></div>
-                          <div><button><span>결제수단4</span></button></div>
-                          
-                          <div><button><span>결제수단5</span></button></div>
-                          <div><button><span>결제수단6</span></button></div>
-                          <div><button><span>결제수단7</span></button></div>
-                          <div><button><span>결제수단8</span></button></div>
-                          
-                          <div><button><span>결제수단9</span></button></div>
-                          <div><button><span>결제수단10</span></button></div>
-                          <div><button><span>결제수단11</span></button></div>
-                          <div><button><span>결제수단12</span></button></div>
+                          <div id="kakaoPay">
+                          	<input type="radio" id="radioButton1" name="paymentGroup" checked="checked">
+                          	<label for="radioButton1" class="custom-radio">
+                          		<img src="../resources/image/ticketing/payment_icon_yellow_small.png" alt="카카오페이">
+                          	</label>
+                          </div>
+                          <div>	
+                          	<input type="radio" id="radioButton2" name="paymentGroup">
+							<label for="radioButton2" class="custom-radio">결제ㅋㅋ</label>
+                          </div>
+                          <div>	
+                          	<input type="radio" id="radioButton3" name="paymentGroup">
+							<label for="radioButton3" class="custom-radio">결제ㅋㅋㅎㅎ</label>
+                          </div>
                         </div>
                       	<div>뭘 넣지..........</div>
                       </div>
@@ -193,24 +203,37 @@ window.onload = () => {
     <div id="selectInfo">
         <div id="ticket-posterImg">
 			    <img src="../resources/image/ticketing/flexLogo.png" alt="포스터" id="posterImg">
-		    </div>
+		</div>
         <div id="ticket-movieName">
-            <span id="movieInfo"></span>
+            <span id="movieInfo">
+<!--             	영화이름 들어가는곳 -->
+            </span>
         </div>
         <div id="ticket-movieInfo">
             <table>
                 <tbody>
                     <tr>
                         <td>일시</td>
-                        <td><span id="dateInfo"></span><span id="timeInfo"></span></td>
+                        <td>
+                        <span id="dateInfo">
+<!--                          날짜 정보 들어가는곳 -->
+                        </span>
+                        <span id="timeInfo">
+<!--                         		시간정보 들어가는곳 -->
+                        </span></td>
                     </tr>
                     <tr>
                         <td>상영관</td>
-                        <td><span id="theaterInfo"></span></td>
+                        <td><span id="theaterInfo">
+<!--                         	상영관 번호 들어가는곳 -->
+                        </span></td>
                     </tr>
                     <tr>
                         <td>인원</td>
-                        <td id="reservedInfo"></td>
+                        <td id="reservedInfo">
+<!--                         	몇명인지  -->
+                        
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -224,7 +247,9 @@ window.onload = () => {
                     </tr>
                     <tr>
                         <td>좌석번호</td>
-                        <td id="seatInfo"></td>
+                        <td id="seatInfo">
+<!--                         	선택한 좌석 번호 -->
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -240,17 +265,19 @@ window.onload = () => {
             </table>
         </div>
         <div id="ticket-payButton">
-            <button type="button" onclick="openPopup('/cinema/ticket/popup');">
+            <button id="kakapay">
+<!--             onclick="openPopup('/cinema/ticket/popup'); -->
                 <i class="bi bi-arrow-right-circle-fill"></i>
                 <span>결제하기</span>
             </button>
         </div>
     </div>
 
-    <footer>
-        푸터영역
+<!--     <footer> -->
+<!--         푸터영역 -->
 
-    </footer>
-
+<!--     </footer> -->
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<!--     <script src="../resources/js/ticketing/pay.js"></script> -->
 </body>
 </html>

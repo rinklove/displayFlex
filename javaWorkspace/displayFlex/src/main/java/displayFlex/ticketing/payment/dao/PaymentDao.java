@@ -69,7 +69,7 @@ public class PaymentDao {
 
 	public UserGradeVo getUserGrade(String memberNo, Connection conn) throws Exception {
 		
-		String sql = "SELECT GRADE_NO, PREVILEGED_YN, REGISTER_NO FROM MEMBER WHERE MEMBER_NO = ?";
+		String sql = "SELECT GRADE_NO , PREVILEGED_YN , CASE WHEN TO_NUMBER(SUBSTR(REGISTER_NO, 8, 1)) IN (3, 4) THEN TRUNC((SYSDATE - TO_DATE('20' || SUBSTR(REGISTER_NO, 1, 6), 'YYYYMMDD')) / 365) ELSE TRUNC((SYSDATE - TO_DATE('19' || SUBSTR(REGISTER_NO, 1, 6), 'YYYYMMDD')) / 365) END AS AGE FROM MEMBER WHERE MEMBER_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 		
@@ -79,9 +79,9 @@ public class PaymentDao {
 		if(rs.next()) {
 			String gradeNo = rs.getString("GRADE_NO");
 			String previlegedYn = rs.getString("PREVILEGED_YN");
-			String registerNo = rs.getString("REGISTER_NO");
+			String age = rs.getString("AGE");
 			
-			vo = new UserGradeVo(gradeNo, previlegedYn, registerNo);
+			vo = new UserGradeVo(gradeNo, previlegedYn, age);
 		}
 		
 		JDBCTemplate.close(rs);
