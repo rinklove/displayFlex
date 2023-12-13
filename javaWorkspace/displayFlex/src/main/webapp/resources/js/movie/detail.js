@@ -138,13 +138,13 @@ const showReviews = () => {
 const checkContent =()=> {
 	
 	const ratingValue = document.getElementById('rating-value');
-	if(ratingValue.value === 0) {
+	if(ratingValue.value == 0) {
 		alert('별점은 1점부터 넣을 수 있습니다.');
 		return false;
 	}
 	
 	const reviewContent = document.getElementById('review-content');
-	if(reviewContent.innerText.innerText.trim() === 0) {
+	if(reviewContent.value.length === 0) {
 		alert('리뷰 내용을 입력해주세요');
 		reviewContent.focus();
 		return false;
