@@ -1,4 +1,4 @@
-package displayFlex.member.login.controller;
+package displayFlex.mypage.user;
 
 import java.io.IOException;
 
@@ -9,18 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/member/logout")
-public class LogoutController extends HttpServlet {
+import displayFlex.member.MemberService;
 
-	// 로그아웃 처리
+@WebServlet("/mypage/correct/userRemove")
+public class UserRemoveController extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/WEB-INF/views/mypage/userRemove.jsp").forward(req, resp);
 		
-		
-		req.getSession().invalidate();	
-		HttpSession session = req.getSession();
-		session.setAttribute("alertMsg", "실행 성공!");
-		resp.sendRedirect("/cinema/home");
 	}
 	
+
+
 }

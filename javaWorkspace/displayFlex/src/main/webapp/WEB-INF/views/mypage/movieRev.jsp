@@ -29,11 +29,23 @@
 			<div class="main-second">이우철님의 지난 3개월동안 예매한 영화티켓 내역입니다.</div>
 			<div class="main-third">
 				<div class="main-third-t1">조회기간 선택</div>
-				<div class="main-third-t2">기간별 <button>7일</button><button>15일</button><button>30일</button></div>
+				<div class="main-third-t2">
+				     <form method="get" action="/cinema/mypage/movieRev">
+				        <input type="hidden" name="pno" value="<%= pvo.getCurrentPage() %>">
+				        <button type="submit" name="dateFilter" value="7days">7일</button>
+				        <button type="submit" name="dateFilter" value="15days">15일</button>
+				        <button type="submit" name="dateFilter" value="30days">30일</button>
+				        <button type="submit" name="dateFilter" value="custom">직접설정</button>
+				    </form>
+				</div>
 				<div class="main-third-t3">
 				<div>예매일자별</div>
-				<form><input type='date' id='currentDate'/><div>~</div><input type='date' id='currentDate'/>
-				</form>
+					<form>
+				        <input type='date' name='startDate' id='startDate'/>
+				        <div>~</div>
+				        <input type='date' name='endDate' id='endDate'/>
+				        <button type="submit" name="dateFilter" value="custom">조회</button>
+				    </form>
 				</div>
 			</div>
 			<div>
@@ -65,7 +77,7 @@
 			<div class="page-area">
 			
 			<% if(pvo.getStartPage() != 1){ %>
-				<a href="/cinema/mypage/movieDev?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+				<a href="/cinema/mypage/movieRev?pno=<%= pvo.getStartPage()-1 %>">이전</a>
 			<% } %>
 			
 			<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
@@ -73,13 +85,13 @@
 				<% if( i == pvo.getCurrentPage() ){ %>
 					<span><%= i %></span>
 				<% }else{ %>
-					<a href="/cinema/mypage/movieDev?pno=<%= i %>"><%= i %></a>
+					<a href="/cinema/mypage/movieRev?pno=<%= i %>"><%= i %></a>
 				<% } %>
 				
 			<% } %>
 			
 			<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
-				<a href="/cinema/mypage/movieDev?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+				<a href="/cinema/mypage/movieRev?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
 			<% } %>
 		
 		</div>
@@ -105,7 +117,7 @@
 	function handleClick(event){
 		const tr = event.currentTarget;
 		const no = tr.children[0].innerText;
-		location.href = 'http://localhost:9002/cinema/mypage/movieDev?paymentsNo=' + no + '&currentPage=<%= pvo.getCurrentPage() %>';	
+		location.href = 'http://localhost:9002/cinema/mypage/movieRev?paymentsNo=' + no + '&currentPage=<%= pvo.getCurrentPage() %>';	
 	}
   
   </script>

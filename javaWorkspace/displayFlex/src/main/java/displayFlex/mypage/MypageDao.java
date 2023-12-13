@@ -126,10 +126,13 @@ public class MypageDao {
 
 	public List<InquiryVo> selectInquiryList(Connection conn, PageVo pvo) throws Exception {
 		
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.ONETOONE_NO , I.MEMBER_NO , I.TITLE , I.RE_TITLE , I.ENROLL_DATE , I.RE_ENROLL_DATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.DELETE_YN = 'N' AND M.ADMIN_YN = 'N' ) T ) WHERE RNUM BETWEEN ? AND ?";
+		InquiryVo vo = new InquiryVo();
+		
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.ONETOONE_NO , I.MEMBER_NO , I.TITLE , I.RE_TITLE , I.ENROLL_DATE , I.RE_ENROLL_DATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.MEMBER_NO = ? AND I.DELETE_YN = 'N' AND M.ADMIN_YN = 'N' ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, pvo.getStartRow());
-		pstmt.setInt(2, pvo.getLastRow());
+		pstmt.setString(1, vo.getMemberNo());
+		pstmt.setInt(2, pvo.getStartRow());
+		pstmt.setInt(3, pvo.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<InquiryVo> inquiryVoList = new ArrayList<InquiryVo>();
@@ -142,7 +145,6 @@ public class MypageDao {
 			String enrollDate = rs.getString("ENROLL_DATE");
 			String reEnrollDate = rs.getString("RE_ENROLL_DATE");
 			
-			InquiryVo vo = new InquiryVo();
 			
 			vo.setOnetooneNo(onetooneNo);
 			vo.setMemberNo(memberNo);
@@ -229,10 +231,12 @@ public class MypageDao {
 	public List<MoviePaymentVo> selectMoviePaymentList(Connection conn, PageVo pvo) throws Exception {
 		
 		//sql
-				String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT P.PAYMENTS_NO , P.MEMBER_NO , P.PAYMENT_DATE , P.PRICE , P.MOVIE_NAME FROM MOVIE_PAYMENT P JOIN MOVIE M ON P.MOVIE_NAME = M.MOVIE_NAME ) T ) WHERE RNUM BETWEEN ? AND ?";
+				String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT P.PAYMENTS_NO, P.MEMBER_NO, P.PAYMENT_DATE, P.PRICE, M.MOVIE_NAME FROM MOVIE_PAYMENT P JOIN TICKET T ON P.PAYMENTS_NO = T.PAYMENTS_NO JOIN SCREENING_TIME S ON T.SCREENING_TIME_NO = S.SCREENING_TIME_NO JOIN SCREENING_INFO I ON S.SCREENING_INFO_NO = I.SCREENING_INFO_NO JOIN MOVIE M ON I.MOVIE_NO = M.MOVIE_NO WHERE P.PAYMENT_DATE BETWEEN TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') ) T ) WHERE RNUM BETWEEN ? AND ?";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, pvo.getStartRow());
-				pstmt.setInt(2, pvo.getLastRow());
+				pstmt.setString(1, pvo.getStartDate());
+				pstmt.setString(2, pvo.getEndDate());
+				pstmt.setInt(3, pvo.getStartRow());
+				pstmt.setInt(4, pvo.getLastRow());
 				ResultSet rs = pstmt.executeQuery();
 				
 				//rs
@@ -265,7 +269,7 @@ public class MypageDao {
 	public List<CouponVo> selectCouponList(Connection conn, PageVo pvo) throws Exception {
 		
 		//sql
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT C.NO , C.TYPE , C.NAME , C.CREATIONDATE , C.VALIDPERIOD FROM COUPON C JOIN RETAINED_COUPON R ON C.NO = R.RETAINED_NO ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.RETAINED_NO , R.COUPON_NO , C.NAME , R.RETAINED_DATE , R.COUPON_ENDDATE FROM RETAINED_COUPON R JOIN COUPON C ON R.COUPON_NO = C.NO ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getStartRow());
 		pstmt.setInt(2, pvo.getLastRow());
@@ -274,18 +278,18 @@ public class MypageDao {
 		//rs
 		List<CouponVo> couponVoList = new ArrayList<CouponVo>();
 		while(rs.next()) {
-			String no = rs.getString("NO");
-			String type = rs.getString("TYPE");
+			String retainedNo = rs.getString("RETAINED_NO");
+			String couponNo = rs.getString("COUPON_NO");
 			String name = rs.getString("NAME");
-			String creationdate = rs.getString("CREATIONDATE");
-			String validperiod = rs.getString("VALIDPERIOD");
+			String retainedDate = rs.getString("RETAINED_DATE");
+			String couponEnddate = rs.getString("COUPON_ENDDATE");
 			
 			CouponVo vo = new CouponVo();
-			vo.setNo(no);
+			vo.setRetainedNo(retainedNo);
+			vo.setCouponNo(couponNo);
 			vo.setName(name);
-			vo.setType(type);
-			vo.setCreationdate(creationdate);
-			vo.setValidperiod(validperiod);
+			vo.setRetainedDate(retainedDate);
+			vo.setCouponEnddate(couponEnddate);
 			
 			couponVoList.add(vo);
 
@@ -332,18 +336,22 @@ public class MypageDao {
 		List<CouponVo> couponVoList = new ArrayList<CouponVo>();
 			while(rs.next()) {
 				
-				String no = rs.getString("NO");
+				String retainedNo = rs.getString("RETAINED_NO");
+				String couponNo = rs.getString("COUPON_NO");
 				String name = rs.getString("NAME");
-				String type = rs.getString("TYPE");
-				String creationdate = rs.getString("CREATIONDATE");
-				String validperiod = rs.getString("VALIDPERIOD");
+				String retainedDate = rs.getString("RETAINED_DATE");
+				String couponEnddate = rs.getString("COUPON_ENDDATE");
+				String memberNo = rs.getString("MEMBER_NO");
+				String couponStatus = rs.getString("COUPON_STATUS");
 				
 				CouponVo vo = new CouponVo();
-				vo.setNo(no);
+				vo.setRetainedNo(retainedNo);
+				vo.setCouponNo(couponNo);
 				vo.setName(name);
-				vo.setType(type);
-				vo.setCreationdate(creationdate);
-				vo.setValidperiod(validperiod);
+				vo.setRetainedDate(retainedDate);
+				vo.setCouponEnddate(couponEnddate);
+				vo.setMemberNo(memberNo);
+				vo.setCouponStatus(couponStatus);
 				
 				couponVoList.add(vo);
 			}

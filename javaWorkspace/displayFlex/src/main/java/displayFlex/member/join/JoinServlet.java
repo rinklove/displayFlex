@@ -49,8 +49,6 @@ public class JoinServlet extends HttpServlet {
 			int result = ms.join(vo);
 			
 			if(result == 1) {
-				HttpSession session = req.getSession();
-				session.setAttribute("alertMsg", "회원가입 성공!");
 				resp.sendRedirect("/cinema/member/joinConfirm");
 			}else {
 				throw new Exception("result 값이 1이 아님...!");
@@ -58,7 +56,7 @@ public class JoinServlet extends HttpServlet {
 		}catch(Exception e) {
 			System.out.println("회원가입 중 에러 발생...");
 			System.out.println(e.getMessage());
-			req.setAttribute("errorMsg", "회원가입");
+			req.setAttribute("errorMsg", "회원가입 실패...!");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 		

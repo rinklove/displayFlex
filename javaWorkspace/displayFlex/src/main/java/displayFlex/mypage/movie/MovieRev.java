@@ -33,6 +33,31 @@ public class MovieRev extends HttpServlet {
 			int boardLimit = 10;
 			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 			
+			
+            // 조회 기간 설정
+			String dateFilter = req.getParameter("dateFilter");
+			if (dateFilter != null) {
+			    switch (dateFilter) {
+			        case "7days":
+			            pvo.setStartDateFilter(7);
+			            break;
+			        case "15days":
+			            pvo.setStartDateFilter(15);
+			            break;
+			        case "30days":
+			            pvo.setStartDateFilter(30);
+			            break;
+			        case "custom":
+			            String startDate = req.getParameter("startDate");
+			            String endDate = req.getParameter("endDate");
+			            pvo.setStartDate(startDate);
+			            pvo.setEndDate(endDate);
+			            break;
+			        default:
+			            break;
+			    }
+			}
+			
 			//service
 			List<MoviePaymentVo> moviePaymentVoList = ms.selectMoviePaymentList(pvo);
 			
