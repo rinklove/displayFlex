@@ -42,9 +42,9 @@ public class CouponHistory extends HttpServlet {
 			
 			req.getRequestDispatcher("/WEB-INF/views/mypage/coupon.jsp").forward(req, resp);
 		}catch(Exception e) {
-			System.out.println("[ERROR-B001] 이벤트 게시글 목록 조회 중 에러 발생...!");
+			System.out.println("[ERROR-B001] 쿠폰내역 조회 중 에러 발생...!");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "이벤트 목록 조회 에러");
+			req.setAttribute("errorMsg", "쿠폰내역 조회 중 에러");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 	}
 }

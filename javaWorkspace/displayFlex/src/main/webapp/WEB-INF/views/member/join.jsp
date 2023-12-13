@@ -70,9 +70,7 @@
     <div id="message">
         <p class="invalid">비밀번호는 다음 조건을 충족해야 합니다:</p>
         <ul>
-            <li id="length" class="invalid">8자 이상</li>
-            <li id="uppercase" class="invalid">최소한 1개의 대문자</li>
-            <li id="number" class="invalid">최소한 1개의 숫자</li>
+            <li id="length" class="invalid">비밀번호 8자 이상</li>
             <li id="match" class="invalid">비밀번호 일치</li>
         </ul>
     </div>
@@ -81,9 +79,11 @@
 </form>
 </div>
    <footer></footer>
+   
 <script>
 function validateForm() {
     var password = document.getElementById("memberPwd");
+    var confirmPassword = document.getElementById("memberPwd2");
     var message = document.getElementById("message");
 
     // 비밀번호 길이 체크
@@ -91,24 +91,18 @@ function validateForm() {
     document.getElementById("length").classList.toggle("valid", length);
     document.getElementById("length").classList.toggle("invalid", !length);
 
-    // 대문자 포함 여부 체크
-    var uppercase = /[A-Z]/.test(memberPwd.value);
-    document.getElementById("uppercase").classList.toggle("valid", uppercase);
-    document.getElementById("uppercase").classList.toggle("invalid", !uppercase);
-
-    // 숫자 포함 여부 체크
-    var number = /\d/.test(memberPwd.value);
-    document.getElementById("number").classList.toggle("valid", number);
-    document.getElementById("number").classList.toggle("invalid", !number);
-
     // 비밀번호 일치 여부 체크
-    var match = memberPwd.value === memberPwd.value;
+    var match = password.value === confirmPassword.value;
     document.getElementById("match").classList.toggle("valid", match);
     document.getElementById("match").classList.toggle("invalid", !match);
 
     // 메시지 표시 여부 결정
-    message.style.display = length && uppercase && number && match ? "none" : "block";
+    message.style.display = length && match ? "none" : "block";
+
+    // 폼 전송 여부 결정
+    return length && match;
 }
 </script>
+
 </body>
 </html>

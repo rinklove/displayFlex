@@ -109,6 +109,11 @@ body {
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
   }
+  
+   .main-table-body > tr:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
 
   .main-third{
     display: flex;

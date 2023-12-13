@@ -28,7 +28,7 @@
 
 <div class="container">
 <h1>회원정보 수정</h1>
-<h3>회원님의 소중한 정보를 안전하게 관리하세요</h3>
+<h3>회원님의 소중한 정보를 안전하게 관리하세요 <button type="button" onclick="location.href='/cinema/mypage/correct/userRemove'">회원탈퇴</button></h3>
 <form action="/cinema/mypage/correct/edit" id="signupForm" method="post">
     <table>
         <tbody>
@@ -48,14 +48,14 @@
             </tr>
             <tr>
                 <td><label for="nickname">닉네임</label></td>
-                <td>nick**
+                <td><%= loginMember.getMemberNick() %></td>
                 <td></td>
-                <td><input type="hidden" name="memberNo" value="<%= loginMember.getMemberNo() %>"></td> 
+                <td></td> 
                 <td></td>
             </tr>
             <tr>
                 <td><label for="email">이메일주소</label></td>
-                <td>dldncjfdla@naver.com</td>
+                <td><%= loginMember.getMemberEmail() %></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <td><label for="phone">핸드폰번호</label></td>
-                <td class="hi">010-****-****<br><div colspan="2" class="last">휴대전화번호는 본인 인증된 정보로 자동 적용 됩니다. </div><br><div class="last">휴대전화번호로 예매, 쿠폰, 이벤트 등 제공받으실 수 있습니다.</div></td>
+                <td class="hi"><%= loginMember.getMemberPhoneNum() %><br><div colspan="2" class="last">휴대전화번호는 본인 인증된 정보로 자동 적용 됩니다. </div><br><div class="last">휴대전화번호로 예매, 쿠폰, 이벤트 등 제공받으실 수 있습니다.</div></td>
                 <td></td>
                 <td></td>
                 <td></td>

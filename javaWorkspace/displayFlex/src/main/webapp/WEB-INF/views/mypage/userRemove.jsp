@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +26,14 @@
           	  <div>· 개인정보보호 처리법에 의거하여 탈퇴 후 1개월 지난 후에 재가입이 가능합니다.</div>
           	  <div>· 그동안 FLEX를 이용해주셔서 감사합니다.</div>
 </div>
-            <div class="wrap-main-third-font"><input type="button" id="bt1">안내사항을 모두 확인하였으며, 이에 동의합니다.</div>
+            <div class="wrap-main-third-font"> 
+            <input type="checkbox" id="my_checkbox" name="my_checkbox" value="my_checkbox"/>
+            <label>안내사항을 모두 확인하였으며, 이에 동의합니다.</label>
+            </div>
         </div>
         <div class="button-class">
         <%if(loginMember != null) { %>
-        <button onclick="location.href='/cinema/mypage/correct/userRemove?memberNo=<%= loginMember.getMemberNo() %>'">회원탈퇴</button>
+        <button onclick="location.href='/cinema/mypage/delete?memberNo=<%= loginMember.getMemberNo() %>'">회원탈퇴</button>
         <input type="submit" value="취소" id="bt3" onclick ="location.href='/cinema/mypage/main'">
         <% } %>
         </div>
@@ -38,3 +42,20 @@
 </div>
 </body>
 </html>
+
+<script>
+
+function is_checked() {
+	  
+	  // 1. checkbox element를 찾습니다.
+	  const checkbox = document.getElementById('my_checkbox');
+
+	  // 2. checked 속성을 체크합니다.
+	  const is_checked = checkbox.checked;
+
+	  // 3. 결과를 출력합니다.
+	  document.getElementById('result').innerText = is_checked;
+	  
+	}
+
+</script>

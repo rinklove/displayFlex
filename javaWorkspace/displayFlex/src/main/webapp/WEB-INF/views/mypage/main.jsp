@@ -29,7 +29,7 @@
             <div class="main-text">마이페이지</div>
             <div class="main-menu">
                 <div class="main-menu-area">
-                    <div><a href="/cinema/mypage/movieDev"><img src="/cinema/resources/image/mypage/1.svg"></a></div>
+                    <div><a href="/cinema/mypage/movieRev"><img src="/cinema/resources/image/mypage/1.svg"></a></div>
                     <div>나의 예매내역</div>
                     <div>회원님이 예매하신 영화내역 
                         및 정보를 확인할 수 있습니다.</div>

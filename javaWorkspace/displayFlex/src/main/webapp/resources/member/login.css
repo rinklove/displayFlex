@@ -20,7 +20,7 @@ form{
 #wrap{
     display: grid;
     width: 1000px;
-    height: 600px;
+/*    height: 600px;*/
     align-items: center;
     text-align: center;
     justify-items: center;
@@ -46,7 +46,7 @@ form{
 
 input{
     width : 80%;
-    height : 50px;
+    height : 60px;
     font-size: 30px;
 }
 
@@ -90,12 +90,11 @@ display: flex;
 
 input[type=submit] {
     background-color: lightgray;
-    width: 50%;
+    width: 95%;
 }
 
 .form-check-confirm{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     width: 75%;
 }
 
@@ -113,6 +112,14 @@ input[type=submit] {
     font-weight: bold;
     color: white;
     background-color: rgb(73, 172, 73);
+}
+
+.form-check-confirm-b2 {
+	display: flex;
+    gap: 50px;
+    width: 100%;
+    margin-top: -20px;
+    justify-content: center;
 }
 
 .form-check-confirm-b2 > input {

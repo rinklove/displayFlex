@@ -2,23 +2,20 @@ package displayFlex.mypage;
 
 public class CouponVo {
 	
-	private String no;
-	private String type;
+	private String retainedNo;
+	private String memberNo;
+	private String couponNo;
+	private String retainedDate;
+	private String couponStatus;
+	private String couponEnddate;
+	private String couponDelete;
 	private String name;
-	private String creationdate;
-	private String validperiod;
 	
-	public String getNo() {
-		return no;
+	public String getRetainedNo() {
+		return retainedNo;
 	}
-	public void setNo(String no) {
-		this.no = no;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
+	public void setRetainedNo(String retainedNo) {
+		this.retainedNo = retainedNo;
 	}
 	public String getName() {
 		return name;
@@ -26,25 +23,53 @@ public class CouponVo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCreationdate() {
-		return creationdate;
+	public String getMemberNo() {
+		return memberNo;
 	}
-	public void setCreationdate(String creationdate) {
-		this.creationdate = creationdate;
+	public void setMemberNo(String memberNo) {
+		this.memberNo = memberNo;
 	}
-	public String getValidperiod() {
-		return validperiod;
+	public String getCouponNo() {
+		return couponNo;
 	}
-	public void setValidperiod(String validperiod) {
-		this.validperiod = validperiod;
+	public void setCouponNo(String couponNo) {
+		this.couponNo = couponNo;
 	}
-	public CouponVo(String no, String type, String name, String creationdate, String validperiod) {
+	public String getRetainedDate() {
+		return retainedDate;
+	}
+	public void setRetainedDate(String retainedDate) {
+		this.retainedDate = retainedDate;
+	}
+	public String getCouponStatus() {
+		return couponStatus;
+	}
+	public void setCouponStatus(String couponStatus) {
+		this.couponStatus = couponStatus;
+	}
+	public String getCouponEnddate() {
+		return couponEnddate;
+	}
+	public void setCouponEnddate(String couponEnddate) {
+		this.couponEnddate = couponEnddate;
+	}
+	public String getCouponDelete() {
+		return couponDelete;
+	}
+	public void setCouponDelete(String couponDelete) {
+		this.couponDelete = couponDelete;
+	}
+	public CouponVo(String retainedNo, String memberNo, String couponNo, String retainedDate, String couponStatus,
+			String couponEnddate, String couponDelete, String name) {
 		super();
-		this.no = no;
-		this.type = type;
+		this.retainedNo = retainedNo;
+		this.memberNo = memberNo;
+		this.couponNo = couponNo;
+		this.retainedDate = retainedDate;
+		this.couponStatus = couponStatus;
+		this.couponEnddate = couponEnddate;
+		this.couponDelete = couponDelete;
 		this.name = name;
-		this.creationdate = creationdate;
-		this.validperiod = validperiod;
 	}
 	public CouponVo() {
 		super();
@@ -52,7 +77,9 @@ public class CouponVo {
 	}
 	@Override
 	public String toString() {
-		return "CouponVo [no=" + no + ", type=" + type + ", name=" + name + ", creationdate=" + creationdate
-				+ ", validperiod=" + validperiod + "]";
+		return "CouponVo [retainedNo=" + retainedNo + ", memberNo=" + memberNo + ", couponNo=" + couponNo
+				+ ", retainedDate=" + retainedDate + ", couponStatus=" + couponStatus + ", couponEnddate="
+				+ couponEnddate + ", couponDelete=" + couponDelete + "]";
 	}
+	
 }

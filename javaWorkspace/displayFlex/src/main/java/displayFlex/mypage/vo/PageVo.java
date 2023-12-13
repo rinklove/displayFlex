@@ -13,6 +13,10 @@ public class PageVo {
 	
 	private int startRow;		//조회할 첫번째 행 번호(ROWNUM)
 	private int lastRow;		//조회할 마지막 행 번호(ROWNUM)
+	private int startDateFilter;
+    private String startDate;  // 추가
+    private String endDate;    // 추가
+
 	
 	public PageVo(int listCount , int currentPage, int pageLimit , int allLimit) {
 		this.listCount = listCount;
@@ -70,5 +74,31 @@ public class PageVo {
 	public int getEndPage() {
 		return endPage;
 	}
+	
+	public int getStartDateFilter() {
+        return startDateFilter;
+    }
+	
+	 public void setStartDateFilter(int startDateFilter) {
+	        this.startDateFilter = startDateFilter;
+	    }
+	 
+	 // 추가된 메서드
+	    public void setStartDate(String startDate) {
+	        this.startDate = startDate;
+	    }
+
+	    public void setEndDate(String endDate) {
+	        this.endDate = endDate;
+	    }
+
+	    // 추가된 메서드
+	    public String getStartDate() {
+	        return startDate;
+	    }
+
+	    public String getEndDate() {
+	        return endDate;
+	    }
 
 }
