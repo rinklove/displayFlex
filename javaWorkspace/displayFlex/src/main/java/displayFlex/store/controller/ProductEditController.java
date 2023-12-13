@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,37 +13,46 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import displayFlex.store.service.StoreService;
 import displayFlex.store.vo.StoreVo;
 
-@WebServlet("/admin/store/enroll")
-
+@WebServlet("/admin/store/edit")
 //@MultipartConfig 가 있어야 jsp에서 폼태그로 데이터 전송이 가능하다!!
 @MultipartConfig(maxFileSize = 1024 * 1024/* 1MB */ * 10, maxRequestSize = 1024 * 1024 * 50)
-public class AdminStoreEnrollController extends HttpServlet {
+public class ProductEditController extends HttpServlet {
 
-	// 제품 등록 화면
+	// 제품 수정 화면
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
+			//data
+			String no = req.getParameter("no");
+			
+			//service
 			StoreService ss = new StoreService();
-			List<StoreVo> storeVoList = ss.selectStoreList();
-			req.setAttribute("storeVoList", storeVoList);
+			Map<String, Object> m = ss.edit(no);
+			StoreVo vo = (StoreVo) m.get("vo");
+			
+			//result
+			if(vo == null) {
+				throw new Exception();
+			}
+			req.setAttribute("vo", vo);
 			req.getRequestDispatcher("/WEB-INF/views/store/adminStoreEnroll.jsp").forward(req, resp);
 
 		} catch (Exception e) {
+			System.out.println("제품 수정하기 화면 조회 에러 ...");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "제품 등록 화면 실패...");
+			req.setAttribute("errorMsg", "제품 수정 화면 에러...");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 
 	}// doGet
 
-	// 제품 등록글 작성 로직
+	// 제품 상세글 수정 로직
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -54,7 +64,6 @@ public class AdminStoreEnrollController extends HttpServlet {
 			String price = req.getParameter("price");
 			String productElement = req.getParameter("productElement");
 			String shortDescription = req.getParameter("shortDescription");
-			String delYn = req.getParameter("delYn");
 
 			// 파일 업로드 준비
 			Part f = req.getPart("f");
@@ -91,18 +100,17 @@ public class AdminStoreEnrollController extends HttpServlet {
 			
 			// StoreVo 값 셋팅
 			StoreVo vo = new StoreVo();
-			vo.setMemberNo(no);
+			vo.setProductNo(no);
 			vo.setTitle(title);
 			vo.setPrice(price);
 			vo.setProductElement(productElement);
 			vo.setShortDescription(shortDescription);
 			vo.setCategory(category);
 			vo.setImage(image);
-			vo.setDelYn(delYn);
 			
 			// service
 			StoreService ss = new StoreService();
-			int result = ss.storeEnroll(vo);
+			int result = ss.edit(vo);
 
 
 			// result == view
@@ -110,11 +118,11 @@ public class AdminStoreEnrollController extends HttpServlet {
 				throw new Exception("result 가 1이 아님 ,,,,");
 			}
 			
-			req.getSession().setAttribute("alertMsg", "제품 등록 성공 !");
-			resp.sendRedirect("/cinema/store");
+			req.getSession().setAttribute("alertMsg", "제품 수정 성공 !");
+			resp.sendRedirect("/cinema/store/product?no=" + no);
 
 		} catch (Exception e) {
-			System.out.println("[ERROR-S005] 제품 등록 실패 ...");
+			System.out.println("[ERROR-S006] 제품 수정 실패 ...");
 			e.printStackTrace();
 			req.setAttribute("errorMsg", "제품 등록 실패 ...");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
@@ -123,4 +131,6 @@ public class AdminStoreEnrollController extends HttpServlet {
 
 	}
 
-}// class
+	
+	
+}//class

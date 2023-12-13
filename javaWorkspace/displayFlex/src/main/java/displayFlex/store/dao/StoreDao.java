@@ -155,9 +155,11 @@ public class StoreDao {
 
 	// 제품 등록글 작성 로직
 	public int storeEnroll(Connection conn, StoreVo vo) throws Exception {
+		
+		System.out.println("dao : " + vo);
 
 		//sql
-		String sql = "INSERT INTO PRODUCT (PRODUCT_NO, PRODUCT_CATE_NO, IMAGE, TITLE, PRICE, PRODUCT_ELEMENT, SHORT_DESCRIPTION) VALUES (SEQ_PRODUCT.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO PRODUCT (PRODUCT_NO, PRODUCT_CATE_NO, IMAGE, TITLE, PRICE, PRODUCT_ELEMENT, SHORT_DESCRIPTION, DEL_YN) VALUES (SEQ_PRODUCT.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getCategory());
 		pstmt.setString(2, vo.getImage());
@@ -165,6 +167,7 @@ public class StoreDao {
 		pstmt.setString(4, vo.getPrice());
 		pstmt.setString(5, vo.getProductElement());
 		pstmt.setString(6, vo.getShortDescription());
+		pstmt.setString(7, vo.getDelYn());
 		int result = pstmt.executeUpdate();
 		
 		//rs
@@ -173,6 +176,28 @@ public class StoreDao {
 		JDBCTemplate.close(pstmt);
 		return result;
 		
+	}
+
+	// 제품 상세글 수정 로직
+	public int updateMenuByNo(Connection conn, StoreVo vo) throws Exception {
+		
+		//sql
+		String sql = "UPDATE PRODUCT SET PRODUCT_CATE_NO=? , IMAGE= ? , TITLE=? , PRICE=? , PRODUCT_ELEMENT=? , SHORT_DESCRIPTION=? , DEL_YN=? WHERE PRODUCT_NO=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getCategory());
+		pstmt.setString(2, vo.getImage());
+		pstmt.setString(3, vo.getTitle());
+		pstmt.setString(4, vo.getPrice());
+		pstmt.setString(5, vo.getProductElement());
+		pstmt.setString(6, vo.getShortDescription());
+		pstmt.setString(7, vo.getDelYn());
+		pstmt.setString(8, vo.getProductNo());
+		int result = pstmt.executeUpdate();
+		
+		//close
+		JDBCTemplate.close(pstmt);
+		return result;
+	
 	}
 
 

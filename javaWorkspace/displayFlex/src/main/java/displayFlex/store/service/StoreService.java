@@ -106,4 +106,46 @@ public class StoreService {
 	
 	}
 
+	// 제품 수정 화면
+	public Map<String, Object> edit(String no) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		StoreDao dao = new StoreDao();
+		StoreVo vo = dao.selectMenuListByNo(conn, no);
+		
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("vo", vo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		return m;
+
+	}
+
+	// 제품 상세글 수정 로직
+	public int edit(StoreVo vo) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		StoreDao dao = new StoreDao();
+		int result = dao.updateMenuByNo(conn, vo);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		return result;
+	
+	}
+
 }//class
