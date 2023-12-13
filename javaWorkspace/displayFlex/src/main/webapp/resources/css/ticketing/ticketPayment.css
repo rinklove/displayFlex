@@ -140,6 +140,9 @@ main {
     padding: 4px;
     width: 100%;
     height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #paymentMethod > div > button {
@@ -152,6 +155,35 @@ main {
 	align-items: center;
 	justify-content: center;
 }
+
+
+/*결제방법 라디오버튼*/
+
+input[name="paymentGroup"] {
+    display: none;
+}
+
+
+.custom-radio {
+    display: inline-block;
+	border-radius: 10px;
+	width: 80%;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid black;
+    color: black;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+input[name="paymentGroup"]:checked + label {
+    border: 2px solid #3498db;
+
+}
+
+
+/*라디오버튼 끝*/
 
 #kakaoPay img {
 	width: 60px;
@@ -375,6 +407,7 @@ main {
     min-width: 996px;
     height: 128px;
     background-color: #1d1d1c;
+
 }
 
 #selectInfo > div{
@@ -404,11 +437,13 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+
 } 
 
 #ticket-movieName > span, #ticket-payInfo > table > tbody > tr > td:last-child, #ticket-seatInfo > table > tbody > tr > td:last-child, #ticket-movieInfo > table > tbody > tr > td:last-child{
     font-weight: bold;
     font-size: 18px;
+    color: white;
 }
 
 #ticket-payButton {
@@ -440,6 +475,11 @@ main {
 
 #timeInfo{
     margin-left: 10px;
+    color: white;
+}
+
+#dateInfo, #theaterInfo, #reservedInfo, #ticket-movieInfo td, #ticket-seatInfo td {
+	color: white;
 }
 
 /*------------------------------------ 하단 결제바 끝 */
@@ -447,11 +487,11 @@ main {
 
 /* 푸터 */
 
-footer {
-    width: 100%;
-    height: 350px;
-    background-color: #f8f8f8;
-}
+/*footer {*/
+/*    width: 100%;*/
+/*    height: 350px;*/
+/*    background-color: #f8f8f8;*/
+/*}*/
 
 .bi-arrow-right-circle-fill, .bi-arrow-right-circle-fill::before {
     font-size: 50px;

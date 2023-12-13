@@ -32,7 +32,18 @@ public class TicketPaymentController extends HttpServlet {
 		try {
 			HttpSession session = req.getSession();
 			MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
+			
+			if(memberVo == null) {
+				
+//				resp.sendRedirect(req.getContextPath() + "/member/login");
+				resp.setContentType("text/html; charset=UTF-8");
+				resp.setCharacterEncoding("UTF-8");
 
+				resp.getWriter().println("<script>alert('로그인 후 진행하실 수 있습니다.'); location.href='http://localhost:9002/cinema/member/login';</script>");
+				
+				return;
+			}
+			
 			String memberNo = memberVo.getMemberNo();
 
 			PaymentService ps = new PaymentService();

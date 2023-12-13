@@ -273,10 +273,7 @@
         </div>
     </div>
 
-    <footer>
-        푸터영역
-
-    </footer>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 </body>
 </html>
