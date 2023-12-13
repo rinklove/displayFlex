@@ -9,22 +9,46 @@
     <link rel="stylesheet" href="../resources/css/ticketing/ticketPopup.css">
     <title>예매 정보</title>
 
+
+<script>
+
+window.onload = () => {
+	let ticketData = JSON.parse(sessionStorage.getItem("ticketData"));
+	
+	
+	const imgUrl = document.getElementById("imgUrl");
+	const movieName = document.getElementById("movieName");
+	const theaterNo = document.getElementById("theaterNo");
+	const screeningDate = document.getElementById("screeningDate");
+	const reservedInfo = document.getElementById("reservedInfo");
+	const seatInfo = document.getElementById("seatInfo");
+	const payAmount = document.getElementById("payAmount");
+	
+	imgUrl.src = ticketData.posterImg;
+    movieName.innerText = ticketData.selectedMovie;
+    theaterNo.innerText = ticketData.selectedTheater;
+    screeningDate.innerText = ticketData.selectedDate + "  " + ticketData.selectedTime;
+    reservedInfo.innerText = ticketData.totalReserved;
+    seatInfo.innerText = ticketData.selectedSeat;
+    payAmount.innerText = ticketData.totalAmount;
+
+}
+</script>
+
 </head>
+
+
 
 <body>
     <div id="ticketPopup">
         <div><span>예매완료</span></div>
         <div id="ticket">
             <div id="movieImg">
-            	<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="영화이미지">
+            	<img src="http://file.koreafilm.or.kr/thm/02/00/01/14/tn_DPF000702.jpg" alt="영화이미지" id="imgUrl">
             </div>
             <div id="ticketInfo">
             	<table>
                     <tbody>
-                        <tr>
-                            <th>티켓번호</th>
-                            <td id="ticketNo">1</td>
-                        </tr>
                         <tr>
                             <th>영화</th>
                             <td id="movieName">벼랑 위의 포뇨</td>
@@ -51,7 +75,7 @@
                         </tr>
                         <tr>
                             <th>결제수단</th>
-                            <td id="payMethod">신용카드</td>
+                            <td id="payMethod">카카오페이</td>
                         </tr>
                     </tbody>
                 </table>

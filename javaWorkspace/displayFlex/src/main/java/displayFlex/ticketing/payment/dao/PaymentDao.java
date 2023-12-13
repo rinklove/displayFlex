@@ -94,11 +94,15 @@ public class PaymentDao {
 	public int setMoviePayment(PaymentVo paymentVo, Connection conn) throws Exception {
 		
 		String sql = "INSERT INTO MOVIE_PAYMENT(PAYMENTS_NO, MEMBER_NO, COUPON_NO, PRICE) VALUES(SEQ_MOVIE_PAYMENT.NEXTVAL, ?, ?, ?)";
+
+		String[] selectedSeat = paymentVo.getSelectedSeat();
+		
+		int amount = Integer.parseInt(paymentVo.getTotalAmount())/selectedSeat.length;
 		
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, paymentVo.getMemberNo());
 		pstmt.setString(2, paymentVo.getRetainedNo());
-		pstmt.setString(3, paymentVo.getTotalAmount());
+		pstmt.setInt(3, amount);
 		
 		int result = pstmt.executeUpdate();
 		
@@ -121,14 +125,13 @@ public class PaymentDao {
 		return couponResult;
 	}
 
-	public int setTicket(String foreignKey, PaymentVo paymentVo, Connection conn) throws Exception {
+	public int setTicket(String seatNo, String foreignKey, PaymentVo paymentVo, Connection conn) throws Exception {
 		
-		String sql ="";
+		String sql ="INSERT INTO TICKET(TICKET_NO, SEAT_UNIQUE_NO, PAYMENTS_NO, SCREENING_TIME_NO) VALUES(SEQ_TICKET.NEXTVAL, ?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, sql);
-		pstmt.setString(2, sql);
-		pstmt.setString(3, sql);
-		pstmt.setString(4, sql);
+		pstmt.setString(1, seatNo);
+		pstmt.setString(2, foreignKey);
+		pstmt.setString(3, paymentVo.getSelectedTimeNo());
 	
 		int ticketResult = pstmt.executeUpdate();
 		
@@ -152,6 +155,26 @@ public class PaymentDao {
 		JDBCTemplate.close(rs);
 		
 		return foreignKey;
+	}
+
+	public String getSeatNo(String theater, String seat, Connection conn) throws Exception {
+		
+		String sql = "SELECT SEAT_UNIQUE_NO FROM SEAT WHERE THEATER_NO = ? AND SEAT_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, theater);
+		pstmt.setString(2, seat);
+		ResultSet rs = pstmt.executeQuery();
+		
+		String seatNo = null;
+		if(rs.next()) {
+			seatNo = rs.getString("SEAT_UNIQUE_NO");
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		
+		return seatNo;
 	}
 
 }
