@@ -146,7 +146,7 @@ public class InquiryDao {
 	 * @throws SQLException 
 	 */
 	public int updateInquiry(UpdateDto updateInquiry, Connection con) throws SQLException {
-		String query = "UPDATE INQUIRY SET RE_CONTENT = ?, RE_ENROLL_DATE= SYSDATE WHERE ONETOONE_NO = ?";
+		String query = "UPDATE INQUIRY SET RE_CONTENT = ?, RE_ENROLL_DATE= LOCALTIMESTAMP WHERE ONETOONE_NO = ?";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, updateInquiry.getRecontent());
 		pstmt.setString(2, updateInquiry.getNo());

@@ -1,4 +1,4 @@
-package displayFlex.serviceCenter.notice.controller;
+package displayFlex.serviceCenter.recommend.controller;
 
 import java.io.IOException;
 
@@ -10,17 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import displayFlex.member.MemberVo;
 import displayFlex.serviceCenter.notice.service.NoticeService;
+import displayFlex.serviceCenter.recommend.service.RecommendService;
 
-@WebServlet("/admin/noticeDelete")
-public class NoticeDeleteController extends HttpServlet {
+@WebServlet("/serviceCenter/recommendDelete")
+public class RecommendDeleteController extends HttpServlet {
 	
-	// 게시글 삭제
-	// UPDATE NOTICE SET STATUS = 'X' WHERE NO = ? and writer_no = ?
+	//삭제
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		try {
 			// data
-			String noticeNo = req.getParameter("noticeNo");
+			String recommendMvNo = req.getParameter("recommendMvNo");
 			
 			MemberVo loginMember = (MemberVo) req.getSession().getAttribute("loginMember");
 			if(loginMember == null) {
@@ -29,23 +30,24 @@ public class NoticeDeleteController extends HttpServlet {
 			String memberNo = loginMember.getMemberNo();
 			
 			// service
-			NoticeService ns = new NoticeService();
-			int result = ns.delete(noticeNo, memberNo);
+			RecommendService rs = new RecommendService();
+			int result = rs.delete(recommendMvNo, memberNo);
 			
 			// result == view
 			if(result != 1) {
-				throw new Exception("공지사항 삭제 중 에러 발생");
+				throw new Exception("상영요청글 삭제 중 에러 발생");
 			}
 			// 게시글 삭제 성공 => 게시글 목록으로 이동
-			req.getSession().setAttribute("alertMsg", "공지사항 게시글 삭제 성공!");
-			resp.sendRedirect("/cinema/serviceCenter/noticeList");
+			req.getSession().setAttribute("alertMsg", "상영요청글 게시글 삭제 성공!");
+			resp.sendRedirect("/cinema/serviceCenter/recommendList");
 			
-		}catch(Exception e) {
-			System.out.println("[ERROR-B004] 공지사항 삭제 중 에러 발생 ...");
+		} catch (Exception e) {
+			System.out.println("[ERROR-B004] 상영요청글 삭제 중 에러 발생 ...");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "공지사항 삭제 중 에러 발생 ...");
+			req.setAttribute("errorMsg", "상영요청글 삭제 중 에러 발생 ...");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
-	}//doGet
+	
+	}
 
 }

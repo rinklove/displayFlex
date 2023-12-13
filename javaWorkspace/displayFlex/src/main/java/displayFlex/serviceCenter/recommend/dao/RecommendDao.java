@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import displayFlex.serviceCenter.inquiry.vo.InquiryVo;
-import displayFlex.serviceCenter.notice.vo.NoticeVo;
 import displayFlex.serviceCenter.recommend.vo.RecommendVo;
 import displayFlex.util.page.vo.PageVo;
 import test.JDBCTemplate;
@@ -63,7 +61,7 @@ public class RecommendDao {
    }
 
    //전체 게시글 갯수 조회
-   public int selectNoticeCount(Connection conn) throws Exception  {
+   public int selectRecommendCount(Connection conn) throws Exception  {
       
       //SQL
       String sql = "SELECT COUNT(*) AS CNT FROM RECOMMEND_MV WHERE DELETE_YN = 'N'";
@@ -223,44 +221,6 @@ public class RecommendDao {
 
 
 	//게시글 번호로 게시글 1개 조회
-	public NoticeVo selectNoticeByNo(Connection conn, String noticeNo) throws Exception {
-		
-		
-		//SQL
-	    String sql = "SELECT NOTICE_NO, TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE, HIT FROM NOTICE WHERE NOTICE_NO = ? AND DELETE_YN = 'N'";
-	    PreparedStatement pstmt = conn.prepareStatement(sql);
-	    pstmt.setString(1, noticeNo);
-	    ResultSet rs = pstmt.executeQuery();
-	      
-	    //rs
-	    NoticeVo vo = null;
-	    if(rs.next()) {
-			String title = rs.getString("TITLE");
-			String content = rs.getString("CONTENT");
-			String enrollDate = rs.getString("ENROLL_DATE");
-			String modifyDate = rs.getString("MODIFY_DATE");
-			String hit = rs.getString("HIT");
-	         
-			vo = new NoticeVo();
-			vo.setNoticeNo(noticeNo);
-			vo.setTitle(title);
-			vo.setContent(content);
-			vo.setEnrollDate(enrollDate);
-			vo.setModifyDate(modifyDate);
-			vo.setHit(hit);
-		         
-			System.out.println("dao 's vo ::: " + vo);
-	    }
-	    
-		//close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
-		
-		return vo;
-	
-	}
-
-	//게시글 번호로 게시글 1개 조회
 	public RecommendVo selectRecommendByNo(Connection conn, String recommendMvNo) throws Exception {
 
 		//SQL
@@ -341,6 +301,23 @@ public class RecommendDao {
 	   
 	    return result;
 	
+	}
+   
+
+	//삭제
+	public int delete(Connection conn, String recommendMvNo, String memberNo) throws Exception {
+
+		//SQL
+	    String sql = "UPDATE RECOMMEND_MV SET DELETE_YN = 'Y' WHERE RECOMMEND_MV_NO = ?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, recommendMvNo);
+	    int result = pstmt.executeUpdate();
+	      
+	    //close
+	    JDBCTemplate.close(pstmt);
+	      
+	    return result;
+	    
 	}
    
    

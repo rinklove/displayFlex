@@ -384,7 +384,7 @@ public class FaqDao {
 	public int updateFaqByNo(Connection conn, FaqVo vo) throws Exception {
 
 		// SQL
-		String sql = "UPDATE FAQ SET FAQ_CATEGORY_NO = ? , TITLE = ? , CONTENT = ? , MODIFY_DATE = SYSDATE WHERE FAQ_NO = ? AND DELETE_YN = 'N'";
+		String sql = "UPDATE FAQ SET FAQ_CATEGORY_NO = ? , TITLE = ? , CONTENT = ? , MODIFY_DATE = LOCALTIMESTAMP WHERE FAQ_NO = ? AND DELETE_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getFaqCategoryNo());
 		pstmt.setString(2, vo.getTitle());
