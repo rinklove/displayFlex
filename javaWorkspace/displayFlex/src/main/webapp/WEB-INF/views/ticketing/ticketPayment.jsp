@@ -273,11 +273,7 @@ window.onload = () => {
         </div>
     </div>
 
-<!--     <footer> -->
-<!--         푸터영역 -->
-
-<!--     </footer> -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-<!--     <script src="../resources/js/ticketing/pay.js"></script> -->
+
 </body>
 </html>

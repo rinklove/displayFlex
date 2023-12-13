@@ -41,15 +41,19 @@ public class KakaoPay extends HttpServlet {
 
 	        String requestBody = buffer.toString();
 	        // 읽어온 데이터 처리
-	        Gson g = new Gson();
-	        PaymentVo paymentVo = g.fromJson(requestBody, PaymentVo.class);
+	        Gson gson = new Gson();
+	        PaymentVo paymentVo = gson.fromJson(requestBody, PaymentVo.class);
 	        paymentVo.setMemberNo(memberNo);
-	        System.out.println(paymentVo);
+//	        System.out.println(paymentVo);
 	        
 	        PaymentService ps = new PaymentService();
 	        int result = ps.setMoviePayment(paymentVo);
 	        
-	        System.out.println(result);
+	        if(result == 1) {
+	        	out.write("success");
+	        } else {
+	        	out.write("fail");
+	        }
 	        
 		} catch (Exception e) {
 			e.printStackTrace();

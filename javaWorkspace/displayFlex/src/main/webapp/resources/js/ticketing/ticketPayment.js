@@ -28,10 +28,6 @@ posterImg.src = ticketData.posterImg;
 
 
 
-function openPopup(url){
-    const ticketPopup = window.open(url, '티켓','width=600, height=569');
-}
-
 const checkedCoupon = document.getElementsByName('discount');
 
 checkedCoupon.forEach((checkbox) => {
@@ -107,6 +103,7 @@ checkedCoupon.forEach((checkbox) => {
 		    discountValue.innerHTML = ticketData.discount;
 		    totalPaymentValue.innerHTML = ticketData.paymentAmount;
 		    
+		    sessionStorage.setItem("ticketData", JSON.stringify(ticketData)); 
 		}
         
         
@@ -171,8 +168,18 @@ function kakaoPay() {
                 if (rsp.success) { 
                     console.log(rsp);
                     paymentSuccess();
-					console.log("결제성공ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
-					
+					const url = "http://localhost:9002/cinema/ticket/popup";
+      				const popup = openPopup(url);
+      				
+      				if (popup) {
+						console.log("팝업창 열리고");
+          				popup.addEventListener('beforeunload', function () {
+						console.log("이벤트 잘 받아오나..?");
+            			window.location.href = "http://localhost:9002/cinema/home";
+          			});
+          			}
+
+
 //                    if (response.status == 200) { // DB저장 성공시
 //                        alert('결제 완료!')
 //                        location.href("/http://localhost:9002/cinema/ticket/popup");
@@ -181,6 +188,7 @@ function kakaoPay() {
 //                        alert(`error:[${response.status}]\n결제요청이 승인된 경우 관리자에게 문의바랍니다.`);
 //                        // DB저장 실패시 status에 따라 추가적인 작업 가능성
 //                    }
+					
                 } else if (rsp.success == false) { // 결제 실패시
                     alert(rsp.error_msg)
                 }
@@ -201,6 +209,14 @@ function paymentSuccess(){
 		})
 	.then((resp) =>{ return resp.json() })
 	.then((x) => {
-		  console.log("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
+		console.log(x);
+
 	 })	
 }
+
+
+function openPopup(url){
+    const ticketPopup = window.open(url, '티켓','width=600, height=569');
+}
+
+

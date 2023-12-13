@@ -55,28 +55,57 @@ public class PaymentService {
 		
 		PaymentDao dao = new PaymentDao();
 		
-		int payResult = dao.setMoviePayment(paymentVo, conn);
+		String[] selectedSeat = paymentVo.getSelectedSeat();
 		
-		if(payResult == 1) {
-			int couponResult = dao.setCouponStatus(paymentVo.getRetainedNo(), conn);
-			JDBCTemplate.commit(conn);
-			
-			if(couponResult == 1) {
-				String foreignKey = dao.getForeignKey(paymentVo, conn);
-				
-				int ticketResult = dao.setTicket(foreignKey, paymentVo, conn);
-				
+		int result = 0;
+		for(String seat : selectedSeat) {
+					
+			int payResult = dao.setMoviePayment(paymentVo, conn);
+					
+			if(payResult == 1) {
+				int couponResult = 0;
+				if(paymentVo.getRetainedNo() != null) {
+					couponResult = dao.setCouponStatus(paymentVo.getRetainedNo(), conn);					
+				} else {
+					couponResult = 1;
+				}
 				JDBCTemplate.commit(conn);
+				
+				if(couponResult == 1) {
+					JDBCTemplate.commit(conn);
+					String foreignKey = dao.getForeignKey(paymentVo, conn);
+					String seatNo = dao.getSeatNo(paymentVo.getSelectedTheater(), seat, conn);
+					
+//					if(foreignKey == null) {
+//						throw new Exception("외래키가 없다...........");
+//					}
+//					
+//					if(seatNo == null) {
+//						throw new Exception("시트넘버가 없다.........");
+//					}
+					
+					int ticketResult = dao.setTicket(seatNo, foreignKey, paymentVo, conn);
+					
+					if(ticketResult == 1) {
+						JDBCTemplate.commit(conn);
+						result = 1;
+					} else {
+						JDBCTemplate.rollback(conn);
+//						throw new Exception("티켓리절트가 0이다........");
+					} 
+				} else {
+					JDBCTemplate.rollback(conn);
+//					throw new Exception("쿠폰리절트가 0이다........");
+				} 
 			} else {
 				JDBCTemplate.rollback(conn);
-			} 
-		} else {
-			JDBCTemplate.rollback(conn);
+//				throw new Exception("페이리절트가 0이다........");
+			}
 		}
 		
 		JDBCTemplate.close(conn);
 		
-		return 1;
+		return result;
 	}
 
 }
