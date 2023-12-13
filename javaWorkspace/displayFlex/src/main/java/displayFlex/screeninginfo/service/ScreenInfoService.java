@@ -57,6 +57,7 @@ public class ScreenInfoService {
 		Connection con = JDBCTemplate.getConnection();
 		int result = 0;
 		for(int index = 0; index < infoList.size(); index++) {
+			result = 0;
 			String findNo = infoDao.getInfoNoByCondition(infoList.get(index), con);
 
 			//신규로 추가하는 경우

@@ -461,7 +461,7 @@ public class MovieDao {
 	 * @throws SQLException 
 	 */
 	public int checkScreeningByNo(String movieNo, Connection con) throws SQLException {
-		query = "SELECT COUNT(SI.MOVIE_NO) FROM MOVIE M LEFT OUTER JOIN SCREENING_INFO SI ON M.MOVIE_NO = SI.MOVIE_NO INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE M.MOVIE_NO = ? AND ST.END_TIME > SYSDATE";
+		query = "SELECT COUNT(SI.MOVIE_NO) FROM MOVIE M LEFT OUTER JOIN SCREENING_INFO SI ON M.MOVIE_NO = SI.MOVIE_NO INNER JOIN SCREENING_TIME ST ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO WHERE M.MOVIE_NO = ? AND ST.END_TIME > LOCALTIMESTAMP";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, movieNo);
 		
@@ -537,7 +537,7 @@ public class MovieDao {
 	 * @throws SQLException 
 	 */
 	public int isScreening(String movieNo, Connection con) throws SQLException {
-		query ="SELECT COUNT(ST.SCREENING_TIME_NO) FROM SCREENING_TIME ST INNER JOIN SCREENING_INFO SI ON ST.SCREENING_INFO_NO = SI.SCREENING_INFO_NO WHERE SI.MOVIE_NO = ? AND ST.END_TIME > SYSDATE";
+		query ="SELECT COUNT(ST.SCREENING_TIME_NO) FROM SCREENING_TIME ST INNER JOIN SCREENING_INFO SI ON ST.SCREENING_INFO_NO = SI.SCREENING_INFO_NO WHERE SI.MOVIE_NO = ? AND ST.END_TIME > LOCALTIMESTAMP";
 		PreparedStatement pstmt = con.prepareStatement(query);
 		pstmt.setString(1, movieNo);
 		
