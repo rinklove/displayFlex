@@ -32,7 +32,7 @@
 					</div>
 					<div id="detail">
 						<div>
-							<input value="이벤트제목" name="i_title" style="width: 20em;" width="50em" type="text" size=20 placeholder="ex.감독과의 대화입니다. 대화 대화">
+							<input  name="i_title" style="width: 20em;" width="50em" type="text" size=20 placeholder="이벤트 제목">
 						</div>
 						<div id="description">
 							<div>이벤트기간</div>
@@ -45,7 +45,7 @@
 							<div>이벤트 내용</div>
 							<div>
 								<textarea id="productDetail" name="t_contents" cols="50" rows="5" value = "이벤트내용"
-									placeholder="영화 감독과의 대화 대화 대화 대화 "></textarea>
+									placeholder="이벤트 내용을 작성해주세요. "></textarea>
 							</div>
 							<div>이벤트분류</div>
 							<span> 

@@ -22,9 +22,10 @@
     <%@ include file="/WEB-INF/views/common/header.jsp" %>   
 	<div class="bw"> 
         <hr id="jul1">
+        
         <div id="coupon_title"> &nbsp;&nbsp;&nbsp;&nbsp;FLEX 할인쿠폰 내역</div>
         <hr id="jul2">
-        <div style="color: blue; font-size: 25px; font-weight: bold; padding: 1%;" > &nbsp;FLEX 할인쿠폰 보유내역</div>
+        <!-- <div style="color: blue; font-size: 25px; font-weight: bold; padding: 1%;" > &nbsp;FLEX 할인쿠폰 보유내역</div> -->
         
         <div class="search-area">
 				<form action="/cinema/admin/coupon/list" method="get">
@@ -35,6 +36,14 @@
 					&nbsp;&nbsp;<input type="text" name="searchValue" placeholder="조회하기 버튼을 눌러주세요.">
 					<input type="submit" value="조회하기">
 				</form>
+                <div><div id="enroll" style="float: left;">
+                    <c:if test="${not empty loginMember && loginMember.adminYn eq 'Y'}">
+                        &nbsp; &nbsp;<button onclick="location.href='/cinema/coupon/admincoupon'">쿠폰등록</button>
+                </c:if>
+                </div>
+                <div id="delete"><c:if test="${not empty loginMember && loginMember.adminYn eq 'Y'}"><button>쿠폰삭제</button></c:if></div>
+                    
+            </div>
 			</div>
 			
         

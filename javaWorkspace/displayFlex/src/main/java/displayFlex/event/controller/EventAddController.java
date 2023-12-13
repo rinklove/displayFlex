@@ -3,6 +3,7 @@ package displayFlex.event.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +12,17 @@ import javax.servlet.http.HttpSession;
 
 import displayFlex.event.dto.EventDto;
 import displayFlex.event.service.EventService;
+@MultipartConfig(
+		maxFileSize = 1024 * 1024 * 10  ,
+		maxRequestSize = 1024*1024*10 * 5
+	)
+
+
 
 @WebServlet("/admin/event/add")
 public class EventAddController extends HttpServlet {
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		EventService service = new EventService();
 
@@ -63,7 +70,7 @@ public class EventAddController extends HttpServlet {
 
 //			req.getSession().setAttribute("alertMsg", "게시글 작성 성공 !");
 
-			resp.sendRedirect("/cinema/event/event");
+			resp.sendRedirect("/cinema/event/eventlist");
 
 		} catch (Exception e) {
 			System.out.println("[ERROR-B002] 게시글 작성 실패 ...");

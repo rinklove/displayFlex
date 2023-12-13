@@ -33,7 +33,7 @@
     <div class="bw"> 
         <hr id="jul1">      
         <div><div id="event_title"> &nbsp;&nbsp;진행중 이벤트  
-            <div id="event_title2"><a href="/cinema/event/event" class="event" style="text-decoration: underline;">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
+            <div id="event_title2"><a href="/cinema/event/eventlist" class="event" style="text-decoration: underline;">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
         </div>
          
             <div><div id="enroll" style="float: left;">
@@ -56,7 +56,7 @@
         </form> -->
         <div id="main_top">
             <div id="main_title">
-                <div style="color: white; font-size:xx-large"><a href="/cinema/event/event" style="color: white; text-decoration: underline;">전체</a></div>
+                <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventlist" style="color: white; text-decoration: underline;">전체</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventAffDis" style="color: white; text-decoration: none;">제휴/할인</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventPreMee" style="color: white; text-decoration: none;">시사회/간담회</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventStaGre" style="color: white; text-decoration: none;">무대인사</a></div>
@@ -64,19 +64,25 @@
         </div>
         <div id="main_content">
             
-            <div class="content-section">
-               <DIV> <h2> <% 
-                if(eventDtoList!= null){
-                for(EventDto dto : eventDtoList){ %>
-                    <div><a href="/cinema/event/eventdetail?eventNo=<%= dto.getEventNo()%>"> <%=dto.getEventTitle() %></a></div>
-                    
-                    
-                   
-                    <% }} %></h2>
-                </DIV>
-            </div>
+            <% if(eventDtoList!= null) { %>
+                <%  for(EventDto dto : eventDtoList){ %>
+                    <div class="content-section">
+                        <DIV> 
+                            <h2> 
+                                <div>게시글 이미지, 있다 치고 ㅎㅎ</div>
+                                <br>
+                            <div>
+                                <a href="/cinema/event/eventdetail?eventNo=<%= dto.getEventNo()%>"> <%=dto.getEventTitle() %></a>
+                            </div>
+                            </h2>
+                        </DIV>
+                    </div>
+                        <% }} %>
         
-            <div class="content-section">
+             <!-- <div class="content-section">
+             
+
+
                 <DIV> <h2> <% 
                     if(eventDtoList!= null){
                     for(EventDto dto : eventDtoList){
@@ -84,27 +90,37 @@
                         <div><%=dto.getEventTitle() %></div>
                        
                         <% }} }%></h2>
-                    </DIV>
+                </DIV>
             </div>
+
             <div class="content-section">
+               
+
+                
                 <DIV> <h2> <% 
                     if(eventDtoList!= null){
-                    for(EventDto dto : eventDtoList){ %>
+                    for(EventDto dto : eventDtoList){
+                        if(dto.getEventtypeNo().equals("3")) {%>
                         <div><%=dto.getEventTitle() %></div>
                        
-                        <% }} %></h2>
-                    </DIV>
+                        <% }} }%></h2>
+                </DIV>
             </div>
         
             <div class="content-section">
+
+               
+
+
                 <DIV> <h2> <% 
                     if(eventDtoList!= null){
-                    for(EventDto dto : eventDtoList){ %>
+                    for(EventDto dto : eventDtoList){
+                        if(dto.getEventtypeNo().equals("4")) {%>
                         <div><%=dto.getEventTitle() %></div>
                        
-                        <% }} %></h2>
-                    </DIV>
-            </div>
+                        <% }} }%></h2>
+                </DIV>
+            </div>  -->
         
         
 

@@ -20,12 +20,12 @@
     <div class="bw"> 
         <hr id="jul1">      
         <div id="event_title"> &nbsp;&nbsp;&nbsp;&nbsp;진행중 이벤트  
-            <div id="event_title2"><a href="/cinema/event/event" class="event" style="text-decoration: underline;">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
+            <div id="event_title2"><a href="/cinema/event/eventlist" class="event" style="text-decoration: underline;">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
         </div>
         <hr id="jul2">
         <div id="main_top">
             <div id="main_title">
-                <div style="color: white; font-size:xx-large"><a href="/cinema/event/event" style="color: white; text-decoration: none;">전체</a></div>
+                <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventlist" style="color: white; text-decoration: none;">전체</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventAffDis" style="color: white; text-decoration: underline;">제휴/할인</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventPreMee" style="color: white; text-decoration: none;">시사회/간담회</a></div>
                 <div style="color: white; font-size:xx-large"><a href="/cinema/event/eventStaGre" style="color: white; text-decoration: none;">무대인사</a></div>
