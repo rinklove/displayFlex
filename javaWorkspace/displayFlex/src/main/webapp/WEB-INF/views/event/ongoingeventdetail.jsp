@@ -35,7 +35,7 @@ a:hover, a:active { text-decoration: none; }
 
         <div id="main_content">
 
-            <div><%=eventDtoDetail.getEventContents() %> </div>
+            <span style="font-size: large;"><%=eventDtoDetail.getEventContents() %> </span>
         </div>
         
 

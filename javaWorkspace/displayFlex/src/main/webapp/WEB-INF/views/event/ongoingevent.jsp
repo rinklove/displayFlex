@@ -69,10 +69,10 @@
                     <div class="content-section">
                         <DIV> 
                             <h2> 
-                                <div>게시글 이미지, 있다 치고 ㅎㅎ</div>
+                                <div style="text-align: center; font-weight: 100;" >[게시글 이미지]</div>
                                 <br>
-                            <div>
-                                <a href="/cinema/event/eventdetail?eventNo=<%= dto.getEventNo()%>"> <%=dto.getEventTitle() %></a>
+                            <div style="text-align: center;">
+                                <a href="/cinema/event/eventdetail?eventNo=<%= dto.getEventNo()%>"> 제목 : <%=dto.getEventTitle() %></a>
                             </div>
                             </h2>
                         </DIV>

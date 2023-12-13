@@ -12,24 +12,20 @@ import javax.servlet.http.HttpSession;
 
 import displayFlex.event.dto.EventDto;
 import displayFlex.event.service.EventService;
-@MultipartConfig(
-		maxFileSize = 1024 * 1024 * 10  ,
-		maxRequestSize = 1024*1024*10 * 5
-	)
 
-
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 10 * 5)
 
 @WebServlet("/admin/event/add")
 public class EventAddController extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		EventService service = new EventService();
 
 		try {
 
 			// 인코딩
-			req.setCharacterEncoding("UTF-8");	//필터에서 인코딩 처리 해줌
+			req.setCharacterEncoding("UTF-8"); // 필터에서 인코딩 처리 해줌
 
 			HttpSession session = req.getSession();
 
@@ -47,7 +43,7 @@ public class EventAddController extends HttpServlet {
 			System.out.println("i_sdate----[" + sdate + "]");
 			System.out.println("i_edate----[" + edate + "]");
 			System.out.println("s_eventTypeNo----[" + eventTypeNo + "]");
-			
+
 			System.out.println("t_contents----[" + contents + "]");
 //			System.out.println("r_AffDis----[" + AffDis + "]");
 //			System.out.println("r_PreMee----[" + PreMee + "]");
@@ -58,9 +54,9 @@ public class EventAddController extends HttpServlet {
 			dto.setEventTitle(title);
 			dto.setEventStartdate(edate);
 			dto.setEventEnddate(edate);
-			
+
 			dto.setEventtypeNo(eventTypeNo);
-		
+
 			dto.setEventContents(contents);
 //			dto.setEventtypeNo(AffDis);
 //			dto.setEventtypeNo(PreMee);
@@ -81,5 +77,3 @@ public class EventAddController extends HttpServlet {
 		}
 	}
 }
-
-
