@@ -32,7 +32,7 @@
             <%if(loginMember == null) { %>
             <button onclick="location.href='/cinema/member/login'"><i class="fa-regular fa-user"></i></button>
             <% }else{ %>
-            <button onclick="location.href='/cinema/mypage/main'"><i class="fa-regular fa-user"></i></button>
+            <button onclick="location.href='/cinema/mypage/main'"><i class="fa-solid fa-house-user"></i></button>
             <% } %>
             
             <button onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
@@ -47,6 +47,9 @@
             <li><i class="fa-solid fa-headset"></i>&nbsp;&nbsp;<a href="/cinema/serviceCenter/faqList?category=영화관이용">고객센터</a></li>
             <li><i class="fa-solid fa-wallet"></i>&nbsp;&nbsp;<a href="/cinema/sale/saleinfo">할인혜택</a></li>
             <li><i class="fa-solid fa-video"></i>&nbsp;&nbsp;<a href="/cinema/admin/screen-info/list">상영정보</a></li>
+            <c:if test="${loginMember.adminYn eq 'Y' }">
+            	<li><i class="fa-solid fa-video"></i>&nbsp;&nbsp;<a href="/cinema/admin/coupon/list?searchValue=">쿠폰</a></li>
+            </c:if>
         </ul>
     </div>
 </header-area>

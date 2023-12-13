@@ -26,16 +26,16 @@ a:hover, a:active { text-decoration: none; }
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
     <div class="bw"> 
         <hr id="jul1">
-        <div id="event_title"> &nbsp;&nbsp;&nbsp;&nbsp;진행중 이벤트
-            <div id="event_title2"><a href="/cinema/event/event" class="ongoing">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
+        <div id="event_title"> &nbsp;&nbsp;진행중 이벤트
+            <div id="event_title2"><a href="/cinema/event/eventlist" class="ongoing">진행중 이벤트</a> | <a href="/cinema/event/pastevent" class="past">지난 이벤트</a></div>
         </div>
         <hr id="jul2">
 
-        <div id="title_name"> &nbsp;&nbsp;&nbsp; <%=eventDtoDetail.getEventTitle() %> </div>
+        <div id="title_name"> &nbsp;&nbsp;&nbsp; [ <%=eventDtoDetail.getEventTitle() %> ] </div>
 
         <div id="main_content">
 
-            <p>진행중 이벤트 게시글 내용</p>
+            <div><%=eventDtoDetail.getEventContents() %> </div>
         </div>
         
 
