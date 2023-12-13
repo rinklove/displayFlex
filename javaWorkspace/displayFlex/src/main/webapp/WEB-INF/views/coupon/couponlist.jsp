@@ -33,8 +33,8 @@
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 					</select> -->
-					&nbsp;&nbsp;<input type="text" name="searchValue" placeholder="조회하기 버튼을 눌러주세요.">
-					<input type="submit" value="조회하기">
+					<!-- &nbsp;&nbsp;<input type="text" name="searchValue" placeholder="조회하기 버튼을 눌러주세요.">
+					<input type="submit" value="조회하기"> -->
 				</form>
                 <div><div id="enroll" style="float: left;">
                     <c:if test="${not empty loginMember && loginMember.adminYn eq 'Y'}">
