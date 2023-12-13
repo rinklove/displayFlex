@@ -165,10 +165,13 @@ public class MypageDao {
 
 	public int getInquiryCountBySearch(Connection conn, Map<String, String> m) throws Exception {
 		
+		InquiryVo vo = new InquiryVo();
+		
 		//sql
-		String sql = "SELECT COUNT(*) FROM INQUIRY WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
+		String sql = "SELECT COUNT(*) FROM INQUIRY WHERE MEMBER_NO = ? AND DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, m.get("searchType"));
+		pstmt.setString(1, vo.getMemberNo());
+		pstmt.setString(2, m.get("searchType"));
 		ResultSet rs = pstmt.executeQuery();
 		
 		int cnt = 0;
@@ -186,13 +189,15 @@ public class MypageDao {
 	public List<InquiryVo> search(Connection conn, Map<String, String> m, PageVo pvo) throws Exception {
 		
 		String searchType = m.get("searchType");
+		InquiryVo vo = new InquiryVo();
 		
 		//sql
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.ONETOONE_NO , I.MEMBER_NO , I.TITLE , I.CONTENT , I.ENROLL_DATE , I.DELETE_YN , I.RE_TITLE , I.RE_CONTENT , I.RE_ENROLL_DATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.DELETE_YN = 'N' AND I."+ searchType +" LIKE '%' || ? || '%' ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT I.ONETOONE_NO , I.MEMBER_NO , I.TITLE , I.CONTENT , I.ENROLL_DATE , I.DELETE_YN , I.RE_TITLE , I.RE_CONTENT , I.RE_ENROLL_DATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.MEMBER_NO = ? AND I.DELETE_YN = 'N' AND I."+ searchType +" LIKE '%' || ? || '%' ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, m.get("searchValue"));
-		pstmt.setString(2, "1");
-		pstmt.setString(3, "10");
+		pstmt.setString(1, vo.getMemberNo());
+		pstmt.setString(2, m.get("searchValue"));
+		pstmt.setString(3, "1");
+		pstmt.setString(4, "10");
 		ResultSet rs = pstmt.executeQuery();
 		
 		//rs
@@ -209,7 +214,7 @@ public class MypageDao {
 				String reContent = rs.getString("RE_CONTENT");
 				String reEnrollDate = rs.getString("RE_ENROLL_DATE");
 				
-				InquiryVo vo = new InquiryVo();
+				
 				vo.setOnetooneNo(onetooneNo);
 				vo.setMemberNo(memberNo);
 				vo.setTitle(title);
@@ -230,49 +235,75 @@ public class MypageDao {
 
 	public List<MoviePaymentVo> selectMoviePaymentList(Connection conn, PageVo pvo) throws Exception {
 		
-		//sql
-				String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT P.PAYMENTS_NO, P.MEMBER_NO, P.PAYMENT_DATE, P.PRICE, M.MOVIE_NAME FROM MOVIE_PAYMENT P JOIN TICKET T ON P.PAYMENTS_NO = T.PAYMENTS_NO JOIN SCREENING_TIME S ON T.SCREENING_TIME_NO = S.SCREENING_TIME_NO JOIN SCREENING_INFO I ON S.SCREENING_INFO_NO = I.SCREENING_INFO_NO JOIN MOVIE M ON I.MOVIE_NO = M.MOVIE_NO WHERE P.PAYMENT_DATE BETWEEN TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') ) T ) WHERE RNUM BETWEEN ? AND ?";
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, pvo.getStartDate());
-				pstmt.setString(2, pvo.getEndDate());
-				pstmt.setInt(3, pvo.getStartRow());
-				pstmt.setInt(4, pvo.getLastRow());
-				ResultSet rs = pstmt.executeQuery();
-				
-				//rs
-				List<MoviePaymentVo> moviePaymentVoList = new ArrayList<MoviePaymentVo>();
-				while(rs.next()) {
-					String paymentsNo = rs.getString("PAYMENTS_NO");
-					String memberNo = rs.getString("MEMBER_NO");
-					String movieName = rs.getString("MOVIE_NAME");
-					String paymentDate = rs.getString("PAYMENT_DATE");
-					String price = rs.getString("PRICE");
-					
-					MoviePaymentVo vo = new MoviePaymentVo();
-					vo.setPaymentsNo(paymentsNo);
-					vo.setMemberNo(memberNo);
-					vo.setMovieName(movieName);
-					vo.setPaymentDate(paymentDate);
-					vo.setPrice(price);
-					
-					moviePaymentVoList.add(vo);
+	       MoviePaymentVo paymentVo = new MoviePaymentVo();		
+		String sql = "SELECT T.* FROM ( SELECT ROW_NUMBER() OVER(ORDER BY TO_CHAR(P.PAYMENT_DATE, 'YYYY-MM-DD HH24:MI:SS') DESC) RNUM, " +
+                "TO_CHAR(P.PAYMENT_DATE, 'YYYY-MM-DD HH24:MI:SS') PAYMENT_DATE, P.PRICE, M.MOVIE_NAME " +
+                "FROM MOVIE_PAYMENT P INNER JOIN TICKET T ON P.PAYMENTS_NO = T.PAYMENTS_NO " +
+                "INNER JOIN SCREENING_TIME ST ON T.SCREENING_TIME_NO = ST.SCREENING_TIME_NO " +
+                "INNER JOIN SCREENING_INFO SI ON ST.SCREENING_INFO_NO = SI.SCREENING_INFO_NO " +
+                "INNER JOIN MOVIE M ON SI.MOVIE_NO = M.MOVIE_NO " +
+                "WHERE P.MEMBER_NO = ? ";
 
-				}
-				
-				JDBCTemplate.close(rs);
-				JDBCTemplate.close(pstmt);
-				
-				return moviePaymentVoList;
-		
+   // 기간 설정이 있을 경우에만 추가
+   if (pvo.getStartDateFilter() > 0) {
+       sql += "AND P.PAYMENT_DATE >= SYSDATE - ? ";
+   } else if (pvo.getStartDate() != null && pvo.getEndDate() != null) {
+       sql += "AND P.PAYMENT_DATE BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD') ";
+   }
+
+   sql += "GROUP BY TO_CHAR(P.PAYMENT_DATE, 'YYYY-MM-DD HH24:MI:SS'), P.PRICE, M.MOVIE_NAME ) T WHERE T.RNUM BETWEEN ? AND ?";
+
+   PreparedStatement pstmt = conn.prepareStatement(sql);
+
+   // 파라미터 바인딩
+   int parameterIndex = 1;
+   pstmt.setString(parameterIndex++, paymentVo.getMemberNo());
+
+   // 기간 설정이 있을 경우에만 추가
+   if (pvo.getStartDateFilter() > 0) {
+       pstmt.setInt(parameterIndex++, pvo.getStartDateFilter());
+   } else if (pvo.getStartDate() != null && pvo.getEndDate() != null) {
+       pstmt.setString(parameterIndex++, pvo.getStartDate());
+       pstmt.setString(parameterIndex++, pvo.getEndDate());
+   }
+
+   pstmt.setInt(parameterIndex++, pvo.getStartRow());
+   pstmt.setInt(parameterIndex, pvo.getLastRow());
+
+   ResultSet rs = pstmt.executeQuery();
+
+   // 결과 처리
+   List<MoviePaymentVo> moviePaymentVoList = new ArrayList<>();
+   while (rs.next()) {
+
+       paymentVo.setPaymentsNo(rs.getString("PAYMENTS_NO"));
+       paymentVo.setMemberNo(rs.getString("MEMBER_NO"));
+       paymentVo.setMovieName(rs.getString("MOVIE_NAME"));
+       paymentVo.setPaymentDate(rs.getString("PAYMENT_DATE"));
+       paymentVo.setPrice(rs.getString("PRICE"));
+
+       moviePaymentVoList.add(paymentVo);
+   }
+
+   JDBCTemplate.close(rs);
+   JDBCTemplate.close(pstmt);
+
+   return moviePaymentVoList;
 	}
+          
+    
+		
 
 	public List<CouponVo> selectCouponList(Connection conn, PageVo pvo) throws Exception {
 		
+		CouponVo vo = new CouponVo();
+		
 		//sql
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.RETAINED_NO , R.COUPON_NO , C.NAME , R.RETAINED_DATE , R.COUPON_ENDDATE FROM RETAINED_COUPON R JOIN COUPON C ON R.COUPON_NO = C.NO ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT R.RETAINED_NO , R.COUPON_NO , C.NAME , R.RETAINED_DATE , R.COUPON_ENDDATE FROM RETAINED_COUPON R JOIN COUPON C ON R.COUPON_NO = C.NO ) T ) WHERE C.MEMBER_NO = ? AND RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, pvo.getStartRow());
-		pstmt.setInt(2, pvo.getLastRow());
+		pstmt.setString(1, vo.getMemberNo());
+		pstmt.setInt(2, pvo.getStartRow());
+		pstmt.setInt(3, pvo.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		
 		//rs
@@ -284,7 +315,7 @@ public class MypageDao {
 			String retainedDate = rs.getString("RETAINED_DATE");
 			String couponEnddate = rs.getString("COUPON_ENDDATE");
 			
-			CouponVo vo = new CouponVo();
+			
 			vo.setRetainedNo(retainedNo);
 			vo.setCouponNo(couponNo);
 			vo.setName(name);

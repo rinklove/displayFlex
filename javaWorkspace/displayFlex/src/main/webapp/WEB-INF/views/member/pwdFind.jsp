@@ -17,7 +17,7 @@
       <div class="container-first"><img src="/cinema/resources/image/find/1.svg" alt=""></div>
       <div class="container-second">아이디/비밀번호 찾기</div>
       <div class="container-third">
-        <div class="b1">아이디 찾기</div>
+        <a href="/cinema/member/idFind"><div class="b1">아이디 찾기</div></a>
         <div class="b2">비밀번호 찾기</div>
       </div>
       <div class="container-fourth">간편찾기</div>

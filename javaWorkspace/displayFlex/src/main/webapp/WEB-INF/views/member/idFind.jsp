@@ -20,7 +20,7 @@
       <div class="container-second">아이디/비밀번호 찾기</div>
       <div class="container-third">
         <div class="b1">아이디 찾기</div>
-        <div class="b2">비밀번호 찾기</div>
+        <a href="/cinema/member/pwdFind"><div class="b2">비밀번호 찾기</div></a>
       </div>
       <div class="container-fourth">간편찾기</div>
       <div class="container-fifth">
