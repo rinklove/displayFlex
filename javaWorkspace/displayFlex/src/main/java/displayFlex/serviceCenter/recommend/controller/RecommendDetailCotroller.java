@@ -34,10 +34,11 @@ public class RecommendDetailCotroller extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/recommend/recommendDetail.jsp").forward(req, resp);
 			
 		}catch(Exception e) {
-			System.out.println("[ERROR-B003] 상영요청 상세조회 중 에러 발생 ...");
+			System.out.println("[ERROR-B003] 상영요청 상세조회 중 에러 발생");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "상영요청 상세조회 실패...");
-			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
+			req.getSession().setAttribute("alertMsg", "상영요청 상세 조회에 실패하였습니다.");
+			resp.sendRedirect("/cinema/serviceCenter/recommendDetail");
+			return; 
 		}
 		
 	}

@@ -13,7 +13,8 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryWrite.css">
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>

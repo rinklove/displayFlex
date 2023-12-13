@@ -29,9 +29,9 @@ public class FaqAddController extends HttpServlet {
 	         //로그인 안되어있으면 에러페이지로 보내기
 	         MemberVo loginMember = (MemberVo) req.getSession().getAttribute("loginMember");
 	         if(loginMember == null) {
-	            req.setAttribute("errorMsg" , "잘못된 접근입니다. (관리자 로그인 하고 오세요)");
-	            req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
-	            throw new Exception("faq 등록 실패");
+	            req.getSession().setAttribute("alertMsg", "잘못된 접근입니다. (관리자 로그인 하고 오세요)");
+				resp.sendRedirect("/cinema/admin/faqAdd");
+				return; // 로그인이 안 된 경우는 더 이상 진행하지 않도록 리턴
 	         }
 	         
 	         FaqService fs = new FaqService();
@@ -80,13 +80,13 @@ public class FaqAddController extends HttpServlet {
 	       	 throw new Exception("result 가 1이 아님");
 	        }
 	        
-	        req.getSession().setAttribute("alertMsg", "faq 작성 성공 !");
+	        req.getSession().setAttribute("alertMsg", "FAQ가 등록되었습니다.");
 	        resp.sendRedirect("/cinema/serviceCenter/faqList");
         
 		}catch(Exception e) {
-			System.out.println("[ERROR-B002] faq 작성 실패 ...");
+			System.out.println("[ERROR-B002] faq 작성 실패");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "faq 작성 실패 ...");
+			req.setAttribute("errorMsg", "faq 등록에 실패하였습니다.");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 	

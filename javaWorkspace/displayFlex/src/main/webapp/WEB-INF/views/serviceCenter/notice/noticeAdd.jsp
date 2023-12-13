@@ -9,7 +9,8 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/notice/noticeAdd.css">
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/notice.js"></script>
 </head>
 <body>
 

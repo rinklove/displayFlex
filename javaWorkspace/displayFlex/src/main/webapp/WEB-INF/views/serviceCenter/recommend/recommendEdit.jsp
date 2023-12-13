@@ -18,6 +18,7 @@
 
 </head>
 <body>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<c:set var="msg"  value="<%= x %>" />
  	<c:if test="${not empty msg}">
@@ -26,7 +27,6 @@
 		</script>
  	</c:if>
 
-    <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<form action="/cinema/serviceCenter/recommendEdit" method="post">
 		<main>
@@ -63,7 +63,7 @@
                             </th>
                             <td>
                                 <label>
-                                    <input type="text" name="year" placeholder="예: 2011" style="height: 40px; width: 90px;">
+                                    <input type="text" name="year" placeholder="예: 2011" value="<%= vo.getYear() %>" style="height: 40px; width: 90px; ">
                                     년
                                 </label>
                             </td>

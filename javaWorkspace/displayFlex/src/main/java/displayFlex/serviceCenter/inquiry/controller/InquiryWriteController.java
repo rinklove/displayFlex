@@ -59,7 +59,9 @@ public class InquiryWriteController extends HttpServlet {
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
 			if(loginMember == null) {
-				throw new Exception("로그인 안함");
+				req.getSession().setAttribute("alertMsg", "로그인 후 이용해 주세요.");
+				resp.sendRedirect("/cinema/serviceCenter/inquiryWrite");
+				return; // 로그인이 안 된 경우는 더 이상 진행하지 않도록 리턴
 			}
 			
 			InquiryVo vo = new InquiryVo();
@@ -75,16 +77,16 @@ public class InquiryWriteController extends HttpServlet {
 			
 			// result == view
 			if(result != 1) {
-				throw new Exception("result 가 1이 아님 ,,,,");
+				throw new Exception("result 가 1이 아님");
 			}
 			
-			req.getSession().setAttribute("alertMsg", "1:1 문의 작성 성공 !");
+			req.getSession().setAttribute("alertMsg", "1:1 문의가 작성되었습니다.");
 			resp.sendRedirect("/cinema/serviceCenter/inquiryWrite");
 			
 		}catch(Exception e) {
-			System.out.println("[ERROR-B002] 1:1 문의 작성 실패 ...");
+			System.out.println("[ERROR-B002] 1:1 문의 작성 실패하였습니다.");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "1:1 문의 작성 실패 ...");
+			req.setAttribute("errorMsg", "1:1 문의 작성 실패하였습니다.");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 	
