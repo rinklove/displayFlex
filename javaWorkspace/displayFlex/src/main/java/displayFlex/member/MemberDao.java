@@ -131,7 +131,7 @@ public class MemberDao {
 
 	public MemberVo SelectPwd(Connection conn, MemberVo vo) throws Exception {
 		 //sql
-	    String sql = "SELECT MEMBER_ID, MEMBER_NAME, MEMBER_PHONENUM, MEMBER_PWD FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_NAME = ? AND MEMBER_PHONENUM = ?";
+	    String sql = "SELECT MEMBER_ID, MEMBER_NAME, MEMBER_PHONENUM, MEMBER_PWD, MEMBER_EMAIL FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_NAME = ? AND MEMBER_PHONENUM = ?";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1, vo.getMemberId());
 	    pstmt.setString(2, vo.getMemberName());
@@ -139,45 +139,101 @@ public class MemberDao {
 	    ResultSet rs = pstmt.executeQuery();
 
 	    //rs
+	    
+	    MemberVo dto = null;
 	    while(rs.next()) {
 
 	        String memberId = rs.getString("MEMBER_ID");
 	        String memberName = rs.getString("MEMBER_NAME");
 	        String memberPwd = rs.getString("MEMBER_PWD");
 	        String memberPhoneNum = rs.getString("MEMBER_PHONENUM");
+	        String memberEmail = rs.getString("MEMBER_EMAIL");
 
-	        MemberVo dto = new MemberVo(); // 반복문 안에서 객체를 생성하여 각 회원 정보를 담아야 함
+	        dto = new MemberVo(); // 반복문 안에서 객체를 생성하여 각 회원 정보를 담아야 함
 	        dto.setMemberId(memberId);
 	        dto.setMemberName(memberName);
-	        dto.setMemberName(memberPwd);
+	        dto.setMemberPwd(memberPwd);
 	        dto.setMemberPhoneNum(memberPhoneNum);
+	        dto.setMemberEmail(memberEmail);
 
 	    }
 
 	    JDBCTemplate.close(rs);
 	    JDBCTemplate.close(pstmt);
 
-	    return vo;
+	    return dto;
 	}
 
 	public boolean check(Connection conn, String memberName , String memberPhoneNum) throws Exception {
 		
 		//sql
-				String sql = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ? AND MEMBER_PHONENUM = ?";
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, memberName);
-				pstmt.setString(2, memberPhoneNum);
-				ResultSet rs = pstmt.executeQuery();
-				
-				boolean result = false;
-				if(rs.next()) {
-					result = true;
-				}
-				
-				JDBCTemplate.close(rs);
-				JDBCTemplate.close(pstmt);
-				
-				return result;
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_NAME = ? AND MEMBER_PHONENUM = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memberName);
+		pstmt.setString(2, memberPhoneNum);
+		ResultSet rs = pstmt.executeQuery();
+		
+		boolean result = false;
+		if(rs.next()) {
+			result = true;
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return result;
 	}
+
+	public boolean pwdCheck(Connection conn, String memberId, String memberName, String memberPhoneNum) throws Exception {
+		
+		//sql
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_NAME = ? AND MEMBER_PHONENUM = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memberId);
+		pstmt.setString(2, memberName);
+		pstmt.setString(3, memberPhoneNum);
+		ResultSet rs = pstmt.executeQuery();
+		
+		boolean result = false;
+		if(rs.next()) {
+			result = true;
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+		
+	}
+
+	public int edit(Connection conn, String memberNo, String memberNewPwd) throws Exception {
+		
+		String sql = "UPDATE MEMBER SET MEMBER_PWD = ? WHERE MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memberNewPwd);
+		pstmt.setString(2, memberNo);
+		
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+
+	}
+
+	public int delete(Connection conn, String memberNo) throws Exception {
+		
+		//sql
+		String sql = "UPDATE MEMBER SET DELETE_YN = 'Y' WHERE MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memberNo);
+		int result = pstmt.executeUpdate();
+		
+		//close
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
 
 }

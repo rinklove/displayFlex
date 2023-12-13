@@ -28,8 +28,8 @@
             <div class="main-second">1:1 문의</div>
                 <form action="/cinema/mypage/inquiry/search" method="get">
                     <select name="searchType">
-                        <option value="title">문의제목</option>
-                        <option value="reTitle">답변제목</option>
+                        <option value="TITLE">문의제목</option>
+                        <option value="RE_TITLE">답변제목</option>
                     </select>
                     <input class="main-text-t2" type="text" name="searchValue" placeholder="검색할 내용을 입력하세요">
 					<input class="main-text-t3" type="submit" value="검색하기">

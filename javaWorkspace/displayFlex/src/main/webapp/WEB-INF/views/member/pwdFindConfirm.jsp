@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<% MemberVo vo = (MemberVo) request.getAttribute("vo"); %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +21,13 @@
             <div class="main-first-font">비밀번호 찾기 결과</div>
             <div class="line"></div>
             <div class="main-option">
-              <span>아이디</span>user01
+              <span>아이디</span><%= vo.getMemberId() %>
             </div>
             <div class="main-option">
               <span>회원정보</span>
               <div class="main-option2">
-                <div>이메일 : </div>
-                <div>비밀번호 : </div>
+                <div>이메일 : <%= vo.getMemberEmail() %></div>
+                <div>비밀번호 : <%= vo.getMemberPwd() %></div>
               </div>
             </div>
             <div class="refer">찾으신 비밀번호로 로그인 후, 새 비밀번호로 변경하시기 바랍니다.</div>

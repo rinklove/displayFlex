@@ -39,9 +39,6 @@
             		<br> 
             		님 환영합니다 ~ !
             		<br>
-            		 <div class="form-check-confirm-b3">
-                            <button type="button" onclick="location.href='/cinema/member/logout'">로그아웃</button>
-                    </div>
                <% } %>
             </div>
     </div>
