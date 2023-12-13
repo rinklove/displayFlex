@@ -25,7 +25,9 @@ public class FaqDeleteController extends HttpServlet {
 			
 			MemberVo loginMember = (MemberVo) req.getSession().getAttribute("loginMember");
 			if(loginMember == null) {
-				throw new Exception("잘못된 접근입니다. (로그인 안하고 삭제 ㄴㄴ)");
+				req.getSession().setAttribute("alertMsg", "로그인 후 이용해 주세요.");
+				resp.sendRedirect("/cinema/admin/faqDelete");
+				return; // 로그인이 안 된 경우는 더 이상 진행하지 않도록 리턴
 			}
 			String memberNo = loginMember.getMemberNo();
 			
@@ -35,18 +37,18 @@ public class FaqDeleteController extends HttpServlet {
 			
 			// result == view
 			if(result != 1) {
-				throw new Exception("faq 삭제 중 에러 발생 ...");
+				throw new Exception("FAQ 삭제 중 에러 발생");
 			}
 			
 			// 게시글 삭제 성공 => 게시글 목록으로 이동
-			req.getSession().setAttribute("alertMsg", "faq 삭제 성공!");
+			req.getSession().setAttribute("alertMsg", "FAQ가 삭제되었습니다.");
 			resp.sendRedirect("/cinema/serviceCenter/faqList");
 			
 		}catch(Exception e) {
-			System.out.println("[ERROR-B004] faq 삭제 중 에러 발생 ...");
+			System.out.println("[ERROR-B004] FAQ 삭제 중 에러 발생");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "faq 삭제 중 에러 발생 ...");
-			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
+			req.setAttribute("alertMsg", "FAQ 삭제가 취소되었습니다. (에러 발생)");
+			resp.sendRedirect("/cinema/admin/faqDelete");
 		}
 
 	

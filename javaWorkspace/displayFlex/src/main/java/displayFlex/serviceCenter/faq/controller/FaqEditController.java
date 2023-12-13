@@ -35,17 +35,17 @@ public class FaqEditController extends HttpServlet {
 			
 			//result
 			if(vo == null) {
-				System.out.println(vo);
-//				throw new Exception();
+//				System.out.println(vo);
+				throw new Exception();
 			}
 			
 			req.setAttribute("vo", vo);
 			req.setAttribute("categoryVoList", categoryVoList);
 			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/faq/faqEdit.jsp").forward(req, resp);
 		}catch(Exception e) {
-			System.out.println("faq 수정하기 화면 조회 에러");
+			System.out.println("FAQ 수정하기 화면 조회 에러");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "faq 수정 화면 조회 에러 ...");
+			req.setAttribute("errorMsg", "FAQ 수정 화면 조회 에러");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 		
@@ -80,8 +80,9 @@ public class FaqEditController extends HttpServlet {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "faq 수정 실패 ...");
-			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
+			req.setAttribute("alertMsg", "FAQ 수정 실패하였습니다.");
+			resp.sendRedirect("/cinema/admin/faqEdit");
+			return;
 		}
 
 	}

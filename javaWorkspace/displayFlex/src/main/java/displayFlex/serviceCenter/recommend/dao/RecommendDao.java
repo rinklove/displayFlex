@@ -326,13 +326,14 @@ public class RecommendDao {
 	public int updateRecommendByNo(Connection conn, RecommendVo vo) throws Exception {
 
 		// SQL
-	    String sql = "UPDATE RECOMMEND_MV SET TITLE = ? , CONTENT = ? , MODIFY_DATE = SYSDATE , RECOMMEND_COUNT = ? , HIT = ? WHERE RECOMMEND_MV_NO = ? AND DELETE_YN = 'N'";
+	    String sql = "UPDATE RECOMMEND_MV SET YEAR = ? , TITLE = ? , CONTENT = ? , MODIFY_DATE = SYSDATE , RECOMMEND_COUNT = ? , HIT = ? WHERE RECOMMEND_MV_NO = ? AND DELETE_YN = 'N'";
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
-	    pstmt.setString(1, vo.getTitle());
-	    pstmt.setString(2, vo.getContent());
-	    pstmt.setString(3, vo.getRecommendCount());
-	    pstmt.setString(4, vo.getHit());
-	    pstmt.setString(5, vo.getRecommendMvNo());
+	    pstmt.setString(1, vo.getYear());
+	    pstmt.setString(2, vo.getTitle());
+	    pstmt.setString(3, vo.getContent());
+	    pstmt.setString(4, vo.getRecommendCount());
+	    pstmt.setString(5, vo.getHit());
+	    pstmt.setString(6, vo.getRecommendMvNo());
 	    int result = pstmt.executeUpdate();
 	   
 	    // close

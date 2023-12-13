@@ -13,9 +13,11 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/recommend/recommendWrite.css">
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/recommend.js"></script>
 </head>
 <body>
+    <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<c:set var="msg"  value="<%= x %>" />
  	<c:if test="${not empty msg}">
@@ -24,7 +26,6 @@
 		</script>
  	</c:if>
 
-    <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 	<form action="/cinema/serviceCenter/recommendWrite" method="post">
 		<main>

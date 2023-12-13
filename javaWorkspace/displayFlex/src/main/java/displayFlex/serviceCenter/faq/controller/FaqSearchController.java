@@ -56,10 +56,11 @@ public class FaqSearchController extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/views/serviceCenter/faq/faqList.jsp").forward(req, resp);
 			
 		}catch(Exception e) {
-			System.out.println("[ERROR-B123] faq 검색 중 에러 발생 ...");
+			System.out.println("[ERROR-B123] FAQ 검색 중 에러 발생");
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "faq 검색 중 에러 발생 ...");
-			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
+			req.getSession().setAttribute("alertMsg", "FAQ 검색에 실패하였습니다.");
+			resp.sendRedirect("/cinema/serviceCenter/faqSearch");
+			return; 
 		}
 
 	

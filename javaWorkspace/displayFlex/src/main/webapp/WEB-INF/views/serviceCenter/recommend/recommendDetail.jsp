@@ -27,7 +27,7 @@
                 <h1>고객센터</h1>
                 <c:if test="${not empty loginMember}"> 
 					<button onclick="location.href='/cinema/serviceCenter/recommendEdit?recommendMvNo=<%= vo.getRecommendMvNo() %>'">수정</button>
-	                <button onclick="location.href='/cinemaaerviees/recommendDelete?recommendMvNo=<%= vo.getRecommendMvNo() %>'">삭제</button>
+	                <button onclick="location.href='/cinema/serviceCenter/recommendDelete?recommendMvNo=<%= vo.getRecommendMvNo() %>'">삭제</button>
                 </c:if> 
             </div>
             <div id="tab_tit">

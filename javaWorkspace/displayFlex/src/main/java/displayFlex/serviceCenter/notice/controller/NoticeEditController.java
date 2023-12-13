@@ -49,7 +49,6 @@ public class NoticeEditController extends HttpServlet {
 			//data
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
-//			String category = req.getParameter("category");
 			String noticeNo = req.getParameter("noticeNo");
 			
 			NoticeVo vo = new NoticeVo();
@@ -70,7 +69,7 @@ public class NoticeEditController extends HttpServlet {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			req.setAttribute("errorMsg", "공지사항 수정 실패 ...");
+			req.setAttribute("errorMsg", "공지사항 수정 실패");
 			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
 		}
 	
