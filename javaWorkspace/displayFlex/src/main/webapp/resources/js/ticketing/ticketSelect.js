@@ -296,6 +296,9 @@ function handleSeatClick(event) {
   ticketData.paymentAmount = paymentAmount;
   payInfo.innerText = paymentAmount;
   console.log("마지막" + ticketData);
+  
+  ticketData.totalAmount = paymentAmount;
+  
   sessionStorage.setItem("ticketData", JSON.stringify(ticketData)); 
   
   const selectComplete = document.getElementById('selectComplete'); 

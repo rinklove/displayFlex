@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import displayFlex.ticketing.payment.dao.PaymentDao;
+import displayFlex.ticketing.payment.vo.PaymentVo;
 import displayFlex.ticketing.payment.vo.SelectCouponVo;
 import displayFlex.ticketing.payment.vo.UserGradeVo;
 import test.JDBCTemplate;
@@ -46,6 +47,36 @@ public class PaymentService {
 		JDBCTemplate.close(conn);
 		
 		return vo;
+	}
+
+	public int setMoviePayment(PaymentVo paymentVo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PaymentDao dao = new PaymentDao();
+		
+		int payResult = dao.setMoviePayment(paymentVo, conn);
+		
+		if(payResult == 1) {
+			int couponResult = dao.setCouponStatus(paymentVo.getRetainedNo(), conn);
+			JDBCTemplate.commit(conn);
+			
+			if(couponResult == 1) {
+				String foreignKey = dao.getForeignKey(paymentVo, conn);
+				
+				int ticketResult = dao.setTicket(foreignKey, paymentVo, conn);
+				
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			} 
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return 1;
 	}
 
 }

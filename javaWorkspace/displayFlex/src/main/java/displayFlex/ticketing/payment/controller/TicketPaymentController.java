@@ -63,7 +63,6 @@ public class TicketPaymentController extends HttpServlet {
 		
 		try {
 			BufferedReader reader = req.getReader();
-//			StringBuilder stringBuilder = new StringBuilder();
 			
 	        String selectedRetainedNo = reader.readLine();
 	        
@@ -78,10 +77,7 @@ public class TicketPaymentController extends HttpServlet {
 	        	PrintWriter out = resp.getWriter();
 	        	out.write(gsonVo);	        	
 	        }
-//	        Gson gson = new GsonBuilder().create();
-//	        SelectCouponVo vo = gson.fromJson(line, SelectCouponVo.class);
-//	       
-//	        System.out.println(vo);
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
