@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import displayFlex.ticketing.payment.vo.PaymentVo;
 import displayFlex.ticketing.payment.vo.SelectCouponVo;
 import displayFlex.ticketing.payment.vo.UserGradeVo;
 import test.JDBCTemplate;
@@ -88,6 +89,69 @@ public class PaymentDao {
 		JDBCTemplate.close(pstmt);
 		
 		return vo;
+	}
+
+	public int setMoviePayment(PaymentVo paymentVo, Connection conn) throws Exception {
+		
+		String sql = "INSERT INTO MOVIE_PAYMENT(PAYMENTS_NO, MEMBER_NO, COUPON_NO, PRICE) VALUES(SEQ_MOVIE_PAYMENT.NEXTVAL, ?, ?, ?)";
+		
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, paymentVo.getMemberNo());
+		pstmt.setString(2, paymentVo.getRetainedNo());
+		pstmt.setString(3, paymentVo.getTotalAmount());
+		
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		
+		return result;
+	}
+
+	public int setCouponStatus(String retainedNo, Connection conn) throws Exception {
+		
+		String sql = "UPDATE RETAINED_COUPON SET COUPON_STATUS = 'Y' WHERE RETAINED_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, retainedNo);
+		
+		int couponResult = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return couponResult;
+	}
+
+	public int setTicket(String foreignKey, PaymentVo paymentVo, Connection conn) throws Exception {
+		
+		String sql ="";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, sql);
+		pstmt.setString(2, sql);
+		pstmt.setString(3, sql);
+		pstmt.setString(4, sql);
+	
+		int ticketResult = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return ticketResult;
+	}
+	
+	
+	public String getForeignKey(PaymentVo paymentVo, Connection conn) throws Exception {
+		
+		String sql ="SELECT PAYMENTS_NO FROM MOVIE_PAYMENT ORDER BY PAYMENTS_NO DESC FETCH FIRST 1 ROW ONLY";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		String foreignKey = null;
+		if(rs.next()) {
+			foreignKey = rs.getString("PAYMENTS_NO");
+		}
+		
+		JDBCTemplate.close(pstmt);
+		JDBCTemplate.close(rs);
+		
+		return foreignKey;
 	}
 
 }

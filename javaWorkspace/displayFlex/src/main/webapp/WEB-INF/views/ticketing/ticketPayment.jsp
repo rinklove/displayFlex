@@ -265,7 +265,7 @@ window.onload = () => {
             </table>
         </div>
         <div id="ticket-payButton">
-            <button id="kakapay">
+            <button id="kakaopay" onclick="kakaoPay();">
 <!--             onclick="openPopup('/cinema/ticket/popup'); -->
                 <i class="bi bi-arrow-right-circle-fill"></i>
                 <span>결제하기</span>
