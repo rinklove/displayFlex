@@ -83,7 +83,7 @@ public class MovieAddController extends HttpServlet {
 
 				//메인 페이지용 사진일 경우
 				if(name.equals("mainImage")) {
-					Path filePath = Paths.get("D:"+sep+"java"+sep+"dev"+sep+"semiPrj"+sep+"javaWorkspace"+sep+"displayFlex"+sep+"src"+sep+"main"+sep+"webapp"+sep+ "resources"+sep+"image"+sep+"movie"+sep+"main", fileName);
+					Path filePath = Paths.get(request.getServletContext().getRealPath(sep+ "resources"+sep+"image"+sep+"movie"+sep+"main"), fileName);
 					String mainImagePath = String.valueOf(filePath);
 
 					 try (InputStream input = p.getInputStream()) {
@@ -93,7 +93,7 @@ public class MovieAddController extends HttpServlet {
 				} 
 				// 스틸이미지용일 경우
 				else {
-					Path filePath = Paths.get("D:"+sep+"java"+sep+"dev"+sep+"semiPrj"+sep+"javaWorkspace"+sep+"displayFlex"+sep+"src"+sep+"main"+sep+"webapp"+sep+ "resources"+sep+"image"+sep+"movie"+sep+"stills", fileName);
+					Path filePath = Paths.get(request.getServletContext().getRealPath(sep+ "resources"+sep+"image"+sep+"movie"+sep+"stills"), fileName);
 					String stillImagePath = String.valueOf(filePath);
 
 					 try (InputStream input = p.getInputStream()) {
