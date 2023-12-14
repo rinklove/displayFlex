@@ -35,7 +35,6 @@ public class TicketPaymentController extends HttpServlet {
 			
 			if(memberVo == null) {
 				
-//				resp.sendRedirect(req.getContextPath() + "/member/login");
 				resp.setContentType("text/html; charset=UTF-8");
 				resp.setCharacterEncoding("UTF-8");
 

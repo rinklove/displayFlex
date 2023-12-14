@@ -44,7 +44,6 @@ public class KakaoPay extends HttpServlet {
 	        Gson gson = new Gson();
 	        PaymentVo paymentVo = gson.fromJson(requestBody, PaymentVo.class);
 	        paymentVo.setMemberNo(memberNo);
-//	        System.out.println(paymentVo);
 	        
 	        PaymentService ps = new PaymentService();
 	        int result = ps.setMoviePayment(paymentVo);

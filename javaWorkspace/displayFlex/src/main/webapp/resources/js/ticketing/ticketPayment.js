@@ -36,7 +36,6 @@ checkedCoupon.forEach((checkbox) => {
 					
   
   		if(checkbox.value !== 'null' && !isNaN(checkbox.value)){
-			console.log(checkbox.value + " 할인쿠폰 선택했다...")
 	  		fetch("http://localhost:9002/cinema/ticket/payment", {
 				  method: "POST",
 				  headers: {
@@ -47,25 +46,20 @@ checkedCoupon.forEach((checkbox) => {
 	  		.then((resp) =>{ return resp.json() })
 	  		.then((couponVo) => {
         		const discountDetails = document.getElementById("discountDetails");
-//        		const paymentAmountValue = document.getElementById("paymentAmount-value");
 		        const discountValue = document.getElementById("discount-value");
 		        const totalPaymentValue = document.getElementById("totalPayment-value");
 				
 				ticketData.retainedNo = couponVo.retainedNo;
-				ticketData.discount = parseInt(couponVo.discount);
 				
+				ticketData.discount = parseInt(couponVo.discount);
 				ticketData.totalAmount = ticketData.paymentAmount - ticketData.discount;
 		
 				discountDetails.innerText = couponVo.name;
 				discountValue.innerText = ticketData.discount;
 				totalPaymentValue.innerHTML = ticketData.totalAmount;
-				
-				
-				
-				
+
 				sessionStorage.setItem("ticketData", JSON.stringify(ticketData)); 
 				
-				console.log("쿠폰선택후  >>>> " + ticketData);
 
 			  })
 			  .catch(()=>{
@@ -82,21 +76,7 @@ checkedCoupon.forEach((checkbox) => {
 		    
 		    discountValue.innerHTML = ticketData.discount;
 		    totalPaymentValue.innerHTML = ticketData.paymentAmount - ticketData.discount;
-			
-//			fetch("http://localhost:9002/cinema/ticket/payment", {
-//			    method: "POST",
-//			    headers: {
-//				  	"Content-Type": "application/json"
-//				},
-//					body: checkbox.value
-//				})
-//			.then((resp) =>{ return resp.json() })
-//	  		.then((x) => {
-//				console.log(x);  
-//			})
-//			 
-				
-			
+
 		}     
         if(checkbox.value === 'null'){
 			const discountDetails = document.getElementById("discountDetails");
@@ -113,24 +93,6 @@ checkedCoupon.forEach((checkbox) => {
         
     });
 });
-
-//function totalPayment(discountMethod, discountValue){
-//	// 할인금액 처리
-//	const discountDetails = document.getElementById("discountDetails");
-//	const discountValue = document.getElementById("discount-value");
-//	ticketData.di
-//	ticketData.discount = discountValue;
-//		
-//	
-//	// 최종 결제금액 처리
-//	const totalPaymentValue = document.getElementById("totalPayment-value");
-//	const totalPayment = ticketData.paymentAmount - discountValue;
-//	ticketData.totalPayment = totalPayment;
-//	totalPaymentValue = totalPayment;
-//	
-//	totalPaymentValue.innerHTML = ticketData.paymentAmount;
-//}
-
 
 
 //                                              결제
