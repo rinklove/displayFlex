@@ -16,7 +16,7 @@ window.onload = () => {
 		el.addEventListener("click", () => {
 			console.log(el.innerText);
 			console.log(el);
-		fetch(`http://127.0.0.1:9002/cinema/store/menu?category=${el.innerText}`)
+		fetch(`http://localhost:9002/cinema/store/menu?category=${el.innerText}`)
 		.then( ( resp )=>{
 			console.log(resp);
 			return resp.text();
