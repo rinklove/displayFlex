@@ -48,7 +48,7 @@
             <li><i class="fa-solid fa-wallet"></i>&nbsp;&nbsp;<a href="/cinema/sale/saleinfo">할인혜택</a></li>
             <li><i class="fa-solid fa-video"></i>&nbsp;&nbsp;<a href="/cinema/admin/screen-info/list">상영정보</a></li>
             <c:if test="${loginMember.adminYn eq 'Y' }">
-            	<li><i class="fa-solid fa-video"></i>&nbsp;&nbsp;<a href="/cinema/admin/coupon/list?searchValue=">쿠폰</a></li>
+            	<li><i class="fa-solid fa-gift"></i>&nbsp;&nbsp;<a href="/cinema/admin/coupon/list?searchValue=">쿠폰</a></li>
             </c:if>
         </ul>
     </div>

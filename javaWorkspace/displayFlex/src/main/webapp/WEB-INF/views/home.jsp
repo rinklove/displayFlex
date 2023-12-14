@@ -7,6 +7,7 @@
 %>
 
 <link rel="stylesheet" href="/cinema/resources/css/home.css">
+<script src="/cinema/resources/js/home.js"></script>
 
 <!DOCTYPE html>
 <html>

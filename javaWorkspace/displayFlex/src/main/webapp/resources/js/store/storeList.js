@@ -5,12 +5,6 @@
 window.onload = () => {
 	const buttonArr = document.querySelectorAll('#smallMenu button');
 	
-//	buttonArr.forEach(el => {
-//		el.addEventListener("click", () => {
-//			console.log(el.innerText);			
-//		})
-//	});
-	
 	for (let index = 0; index < buttonArr.length ; index++) {
 		const el = buttonArr[index];
 		el.addEventListener("click", () => {
@@ -30,18 +24,21 @@ window.onload = () => {
 		.catch( ()=>{ alert("리스트 불러오기 실패..."); });
 		})
 	}
-	// Function to format prices
+	// 값 출력문 나오는 것 ","와 "원" 추가하기!
     function formatPrices() {
         const priceElements = document.querySelectorAll('#third b');
 
         priceElements.forEach((element) => {
-            const price = element.innerText.replace(/\D/g, ''); // Remove non-numeric characters
+			
+			// 숫자 아닌것 지우기
+            const price = element.innerText.replace(/\D/g, ''); 
+            
             const formattedPrice = Number(price).toLocaleString() + "원";
             element.innerText = formattedPrice;
         });
     }
 
-    // Initial call to format prices on page load
+    // 페이지에서 가격 초기화를 위한 호출
     formatPrices();
 };
 
