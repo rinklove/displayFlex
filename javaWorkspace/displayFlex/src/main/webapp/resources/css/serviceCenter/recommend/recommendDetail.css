@@ -119,8 +119,8 @@ th, #tb_info td {
     padding-left: 61px;
 }
 
-#tb1_dtl tr#tb_info>td .tit { color: #666666; padding-left: 70px;}
-#tb1_dtl tr#tb_info>td .cont { display: inline; padding-right: 100px;}
+#tb1_dtl tr#tb_info>td .tit { color: #666666; }
+#tb1_dtl tr#tb_info>td .cont { display: inline; padding-right: 50px;}
 /* span{display: flex; justify-content: space-around;} */
 
 #tb_content>td {padding: 90px 50px 160px; border-bottom: 1px solid #EEEEEE;}

@@ -109,6 +109,7 @@
             
         </div>
     </main>
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
     <script>
 	    <% if(searchMap != null){ %>

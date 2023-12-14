@@ -5,7 +5,7 @@ main {
 }
 
 #contents{
-    height: auto;
+    height: 1000px;
     padding: 10px 60px 60px 60px;
     background-color: white;
     /* text-align: center;  */
@@ -191,7 +191,7 @@ button {
 
 #search_wrap input[type="text"] {
     width: 440px;
-    margin-right: 8px;
+    margin: 6px 0 0 10px;
 }
 
 input[type="text"] {
@@ -246,7 +246,7 @@ a {
 
 } */
 #acc{
-    padding: 0 23px;
+    padding: 22px 23px;
 }
 
 #tb_acc_wrap{
@@ -305,7 +305,7 @@ tbody {
 }
 
 #paging {
-    margin: 40px;
+    margin: 60px;
     font-size: 16px;
 }
 
