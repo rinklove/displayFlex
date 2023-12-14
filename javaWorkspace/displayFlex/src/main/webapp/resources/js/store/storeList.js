@@ -15,6 +15,7 @@ window.onload = () => {
 		const el = buttonArr[index];
 		el.addEventListener("click", () => {
 			console.log(el.innerText);
+			console.log(el);
 		fetch(`http://127.0.0.1:9002/cinema/store/menu?category=${el.innerText}`)
 		.then( ( resp )=>{
 			console.log(resp);
@@ -24,18 +25,24 @@ window.onload = () => {
 			const itemPhoto = document.querySelector('.itemPhoto');
 			itemPhoto.innerHTML = data;
 			
-			// 세 자리마다 쉼표 추가
-          	const priceElements = document.querySelectorAll('#third > b');
-          	priceElements.forEach((priceElement) => {
-            const formattedValue = Number(priceElement.innerText).toLocaleString();
-            // 가격 업데이트
-            priceElement.innerText = formattedValue + "원";
-			});
+			formatPrices();
 			} )
 		.catch( ()=>{ alert("리스트 불러오기 실패..."); });
 		})
 	}
-	
+	// Function to format prices
+    function formatPrices() {
+        const priceElements = document.querySelectorAll('#third b');
+
+        priceElements.forEach((element) => {
+            const price = element.innerText.replace(/\D/g, ''); // Remove non-numeric characters
+            const formattedPrice = Number(price).toLocaleString() + "원";
+            element.innerText = formattedPrice;
+        });
+    }
+
+    // Initial call to format prices on page load
+    formatPrices();
 };
 
 

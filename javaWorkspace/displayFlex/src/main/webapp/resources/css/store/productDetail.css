@@ -17,7 +17,7 @@
 	padding-right: 5em;
 	display: grid;
 	align-items: center;
-	grid-template-rows: 100px 7fr 1fr;
+	grid-template-rows: 100px 3fr 1fr;
 }
 
 .product-main > div:first-child{

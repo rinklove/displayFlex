@@ -12,17 +12,17 @@ function previewImage(event) {
 
         reader.onload = function (e) {
             // Set the source of the preview div to the data URL of the selected image
-            preview.style.backgroundImage = 'url(' + e.target.result + ')';
-            // 사진 미리보기 업로드시 사진 비율 유지하면서 div 사이즈에 맞춰 보이기
-        	preview.style.backgroundSize = 'contain';
-        	preview.style.backgroundRepeat = 'no-repeat';
-        };
+            preview.src = e.target.result;
+            // Set other styles if needed
+            preview.style.width = '400px'; // Adjust width as needed
+            preview.style.height = '400px'; // Adjust height as needed
+            };
 
         // Read the selected file as a data URL
         reader.readAsDataURL(input.files[0]);
         plusIcon.style.opacity=0;
     } else {
         // Clear the preview if no file is selected
-        preview.style.backgroundImage = 'none';
+        preview.style.backgroundImage = '';
     }
 }
