@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../resources/css/ticketing/ticketPopup.css">
     <title>예매 정보</title>
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <script>
 
@@ -31,8 +32,11 @@ window.onload = () => {
     reservedInfo.innerText = ticketData.totalReserved;
     seatInfo.innerText = ticketData.selectedSeat;
     payAmount.innerText = ticketData.totalAmount;
-
 }
+    // 캡쳐
+
+	
+
 </script>
 
 </head>
@@ -51,27 +55,39 @@ window.onload = () => {
                     <tbody>
                         <tr>
                             <th>영화</th>
-                            <td id="movieName">벼랑 위의 포뇨</td>
+                            <td id="movieName">
+<!--                             	영화제목 -->
+                            </td>
                         </tr>
                         <tr>
                             <th>상영관</th>
-                            <td id="theaterNo">FLEX 1관</td>
+                            <td id="theaterNo">
+<!--                             	상영관 번호 -->
+                            </td>
                         </tr>
                         <tr>
                             <th>일시</th>
-                            <td id="screeningDate">2023년 11월 10일(금) 10:00</td>
+                            <td id="screeningDate">
+<!--                             	상영 날짜,시간 -->
+                            </td>
                         </tr>
                         <tr>
                             <th>인원</th>
-                            <td id="reservedInfo">2</td>
+                            <td id="reservedInfo">
+<!--                             	예매인원 -->
+                            </td>
                         </tr>
                         <tr>
                             <th>좌석</th>
-                            <td id="seatInfo">C1, C2</td>
+                            <td id="seatInfo">
+<!--                             	예매좌석 -->
+                            </td>
                         </tr>
                         <tr>
                             <th>결제금액</th>
-                            <td id="payAmount">16000원</td>
+                            <td id="payAmount">
+<!--                             	최종 결제한 금액 -->
+                            </td>
                         </tr>
                         <tr>
                             <th>결제수단</th>
