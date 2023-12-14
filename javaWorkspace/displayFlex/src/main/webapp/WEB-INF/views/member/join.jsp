@@ -16,6 +16,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <div class="container">
+	<div><img src="/cinema/resources/image/member/join.png"></div>
     <h1>DISPLAY FLEX 회원가입</h1>
   
     <form action="/cinema/member/join" method="post" onsubmit="return validateForm();">
@@ -71,7 +72,7 @@
         </ul>
     </div>
     <br>
-    <input type="submit" value="회원가입">
+    <input type="submit" class="join" value="회원가입">
 </form>
 </div>
    <footer></footer>

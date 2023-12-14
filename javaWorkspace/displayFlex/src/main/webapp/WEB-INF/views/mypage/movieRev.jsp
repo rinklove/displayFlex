@@ -67,7 +67,7 @@
 				        <button type="submit" name="dateFilter" value="30days">30일</button>
 				</div>
 				<div class="main-third-t3">
-				<div>예매일자별</div>
+				<div>예매일자</div>
 				 <form method="get" action="/cinema/mypage/movieRev">
                     <input type="hidden" name="pno" value="<%= pvo.getCurrentPage() %>">
                     <input type='date' name='startDate' id='startDate'/>
@@ -78,7 +78,7 @@
 				</div>
 			</div>
 			<div>
-			<table border="1">
+			<table>
 				<thead>
 					<tr>
 						<td>결제번호</td>
