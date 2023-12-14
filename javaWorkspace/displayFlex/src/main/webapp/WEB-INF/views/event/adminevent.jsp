@@ -37,7 +37,7 @@
 						<div id="description">
 							<div>이벤트기간</div>
 							<div>
-								<input style="width: 10em; font-size: 15px;"type="date" id="couponUsageStartDate" name="i_sdate" value="2023-12-01">
+								<input style="width: 10em; font-size: 15px;"type="date" id="couponUsageStartDate" name="i_sdate" value="2023-12-15">
                                 <span> to </span>
                                 <input style="width: 10em; font-size: 15px;"type="date" id="couponUsageEndDate" name="i_edate" value="2023-12-31">
 							</div>
