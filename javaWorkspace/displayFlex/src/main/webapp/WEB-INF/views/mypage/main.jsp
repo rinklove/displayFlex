@@ -21,9 +21,9 @@
                 <div><a href="/cinema/home"><img src="/cinema/resources/image/mypage/6.svg"></a></div>
                 <div><%= loginMember.getMemberNick() %>님, 환영합니다.</div>
                 <!-- 수정 필요(향후 sql로 가져와야함) -->
-                <div>VIP 회원</div>   
+                <div></div>   
                 <!-- 수정 필요(향후 데이터 가져와야함) -->
-                <div>포인트 : 0점</div>
+                <div></div>
                  <div class="form-check-confirm-b3"><button type="button" onclick="location.href='/cinema/member/logout'">로그아웃</button></div>
             </div>
             <div class="main-text">마이페이지</div>
