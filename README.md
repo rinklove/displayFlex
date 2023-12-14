@@ -8,7 +8,7 @@
 <table style="width: 100%;">
     <thead>
         <tr>
-            <th style="text-align: center; width: 10%;" >구분</th>
+            <th style="text-align: center; width: 5%;" >구분</th>
             <th style="text-align: center">이우철</th>
             <th style="text-align: center;">김병문</th>
             <th style="text-align: center">김송희</th>
@@ -29,52 +29,41 @@
         </tr>`
         <tr>
             <td style="text-align: center"><span>gitHub</span></td>
-            <td style="text-align: center"><a href="https://github.com/KimByeongMun/KH_KBM"><strong>KIMBBOI</strong></a></td>
+            <td style="text-align: center"><a href="https://github.com/AvailableWoo"><strong>AvailableWoo</strong></a></td>
             <td style="text-align: center"><a href="https://github.com/KIMBBOI"><strong>KimByeongMun</strong></a></td>
             <td style="text-align: center"><a href="https://github.com/KIMBBOI"><strong>KIMBBOI</strong></a></td>
-            <td style="text-align: center"><a href="https://github.com/KIMBBOI"><strong>KIMBBOI</strong></a></td>
-            <td style="text-align: center"><a href="https://github.com/KIMBBOI"><strong>KIMBBOI</strong></a></td>
+            <td style="text-align: center"><a href="https://github.com/Whdbeom"><strong>Whdbeom</strong></a></td>
+            <td style="text-align: center"><a href="https://github.com/JINILEEE"><strong>JINILEEE </strong></a></td>
             <td style="text-align: center"><a href="https://github.com/rinklove"><strong>rinklove</strong></a></td>
         </tr>`
         <tr>
             <td style="text-align: center"><span>Contributions</span></td>
             <td style="text-align: center">
-                <span>None</span>
-                <span></span><br>
+                <span>로그인 및 로그아웃</span><br>
+                <span>회원 관리 관련 기능</span><br>
             </td>
             <td style="text-align: center">
-                <span>VIP 혜택 화면</span><br>
-                <span>우대사항 혜택 화면</span><br>
-                <span>쿠폰 등록</span><br>
-                <span>등록 쿠폰 조회</span><br>
-                <span>이벤트 등록</span><br>
-                <span>이벤트 목록 조회</span><br>
-                <span>이벤트 상세조회</span><br>
+                <span>쿠폰 관련 기능</span><br>
+                <span>이벤트 관련 기능</span><br>
             </td>
             <td style="text-align: center">
-                <span>None</span>
-                <span></span><br>
+                <span>FAQ 관련 기능</span><br>
+                <span>공지사항 관련 기능</span><br>
+                <span>1:1문의 관련 기능</span><br>
+                <span>상영정보 요청 관련 기능</span><br>
             </td>
             <td style="text-align: center">
-                <span>None</span>
-                <span></span><br>
+                <span>영화 예매 관련 기능</span><br>
+                <span>결제 관련 기능</span><br>
             </td>
             <td style="text-align: center">
-                <span>None</span>
-                <span></span><br>
+                <span>스토어 관련 기능</span><br>
+                <span>메인 페이지 관련 기능</span><br>
             </td>
             <td style="text-align: center">
-                <span>영화 등록</span><br>
-                <span>영화 목록 조회</span><br>
-                <span>영화 상세 조회</span><br> 
-                <span>영화 삭제</span><br> 
-                <span>영화 조건 검색</span><br> 
-                <span>리뷰 작성</span><br> 
-                <span>리뷰 조회</span><br> 
-                <span>리뷰 삭제</span><br> 
-                <span>상영정보 작성</span><br> 
-                <span>상영정보 조회</span><br> 
-                <span>상영정보 삭제</span>
+                <span>영화 관련 기능</span><br>
+                <span>리뷰 관련 기능</span><br> 
+                <span>상영정보 관련 기능</span><br>
             </td>
         </tr>`
     </tbody>
@@ -86,7 +75,20 @@
 <br><br>
 
 ## 프로그램 소개
-영화 예매 프로그램
+
+<h1 style="text-align:center;">WHAT IS A DISPLAY FLEX?</h1>
+<br>
+
+<p>
+디스플레이 플렉스는
+첫 상영 때 기회를 놓친 관객들뿐만 아니라,
+또다시 스크린에서의 감동을 느끼고 싶어 하는 관객들을 위한 영화관입니다.
+</p>
+<p>
+2000년대 이후의 '스테디셀러'들을 다시 만나볼 수 있는 기회를 제공합니다. 
+</p>
+
+
 
 <br>
 <br>
@@ -146,13 +148,26 @@
 <br>
 
 ## 주요 기능
-### 공통
- - 로그인
  - 영화 목록 조회
  - 영화 조건 검색(장르, 관람등급을 조합해서 조건에 맞는 영화 검색)
     - 장르별
     - 관람등급별
-### 사용자
- - 예매하기
- - 리뷰 작성/조회
-### 관리자
+ - 영화 정보에 대한 리뷰 작성 및 삭제
+ - 상영 정보 관리 및 검색
+    - 제목별
+    - 상영관별
+    - 상영 날짜별
+    - 상영 시간별
+ - 영화 예매 및 결제
+ - 스토어 상품 관리
+ - 상영 요청 게시글 작성
+ - 각종 고객센터 서비스 이용가능
+    - FAQ
+    - 공지사항
+    - 1:1 문의
+ - 회원 관련 내역 조회(마이페이지 서비스)
+    - 회원 정보 조회 및 수정
+    - 보유 쿠폰 및 사용 쿠폰 조회
+    - 예매 내역 조회(기간별)
+    - 1:1 문의 내역 조회
+ - 쿠폰 및 이벤트 게시글 관리
