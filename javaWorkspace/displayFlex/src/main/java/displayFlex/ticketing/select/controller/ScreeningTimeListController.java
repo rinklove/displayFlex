@@ -24,8 +24,10 @@ public class ScreeningTimeListController extends HttpServlet {
 		
 		try {
 			String movieNo = req.getParameter("movieNo");
+			String selectedDate = req.getParameter("selectedDate");
+
 			TicketSelectService tss = new TicketSelectService();
-			List<ScreeningDateVo> timeList = tss.getScreeningTimeList(movieNo);
+			List<ScreeningDateVo> timeList = tss.getScreeningTimeList(movieNo, selectedDate);
 			
 			List<String> x = new ArrayList<String>(); 
 			for (ScreeningDateVo vo : timeList) {
