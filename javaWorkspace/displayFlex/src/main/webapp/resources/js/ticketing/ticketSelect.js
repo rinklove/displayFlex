@@ -16,7 +16,8 @@ function changeMovieImage(){
 			const posterImg = document.getElementById("posterImg");
 			ticketData.posterImg = movieImgUrl;
 			posterImg.src = movieImgUrl;
-	} );
+			
+	});
 }
 
 // 상영 날짜 정보
@@ -25,7 +26,7 @@ function printDateList(){
 	fetch("http://localhost:9002/cinema/ticket/select/dateList?movieNo=" + sessionStorage.getItem("movieNo"))
 	.then( (resp) => { return resp.json() } ) 
 	.then( (voList) => { 
-            console.log(voList);
+
             const dateList = document.getElementById("dateList");
 
             dateList.innerHTML = "";
@@ -35,9 +36,16 @@ function printDateList(){
 				dateList.appendChild(x);
 				x.innerText = "상영정보가 없습니다.";
 			}
-	
-            voList.forEach((date, index) => {
-                const listItem = createDateList(date, index);
+			const processedStartTimes = processVoList(voList);
+			
+			console.log(processedStartTimes);
+			console.log(voList);
+			sessionStorage.setItem("voList", voList);
+			
+            processedStartTimes.forEach((date, index) => {
+				console.log("forEach 진입date >>" + date);
+				console.log("forEach 진입index >>" + index);
+                const listItem = createDateList(voList, date, index);
                 dateList.appendChild(listItem);
             });
             
@@ -45,18 +53,31 @@ function printDateList(){
         })
 }
 
-// 날짜 li 생성
-function createDateList(date, index) {
-//    console.log("createListItem date : " + date);
-//    console.log("createListItem index : " + index);
+function processVoList(voList) {
+	
+    const processedStartTimes = [];
 
+    for (let i = 0; i < voList.length; i++) {
+        const vo = voList[i];
+        const startTime = vo.startTime;
+//        const screeningInfoNo = vo.screeningInfoNo;
+        if (!processedStartTimes.includes(startTime)) {    
+            processedStartTimes.push(startTime);
+        }
+    }
+    return processedStartTimes;
+}
+
+// 날짜 li 생성
+function createDateList(voList, date, index) {
+	
     const listItem = document.createElement("li");
     listItem.className = "ticketingDate";
 
     const button = document.createElement("button");
     button.type = "button";
     button.onclick = function() {
-        changeDateInfo(index);
+        changeDateInfo(voList, date, index);
     };
 
     const span = document.createElement("span");
@@ -68,12 +89,15 @@ function createDateList(date, index) {
 
     listItem.appendChild(button);
 
+
+	
     return listItem;
 }
 
+
 // 시간 생성 (상영관별..?)
 function printTimeList(){
- 	fetch("http://localhost:9002/cinema/ticket/select/timeList?movieNo=" + sessionStorage.getItem("movieNo"))
+ 	fetch("http://localhost:9002/cinema/ticket/select/timeList?movieNo=" + sessionStorage.getItem("movieNo") +"&selectedDate="+ sessionStorage.getItem("selectedDate"))
 	.then( (resp) => { return resp.json() } ) 
 	.then( (theatersData) => { 
 			console.log(theatersData);
@@ -179,7 +203,7 @@ function setSeat(list){
   }
 
 // 예매 - 날짜 선택
-  function changeDateInfo(index) {
+  function changeDateInfo(voList, date, index) {
 	  
 	
     const selectedDate = document.getElementById('movieDate' + index).parentNode;
@@ -201,7 +225,7 @@ function setSeat(list){
 
     const arrow2 = document.getElementById('arrow2');
     const timeMenu = document.getElementById('time');
-
+		
     if(ticketData.selectedDate !== null){
       arrow2.style.cssText = 'display : flex;'
       timeMenu.style.cssText = 'display : grid;'  
@@ -210,7 +234,7 @@ function setSeat(list){
 	  arrow2.style.cssText = 'display : none;'
       timeMenu.style.cssText = 'display : none;'
 	}
-
+	sessionStorage.setItem("selectedDate", ticketData.selectedDate);
     console.log(ticketData);
     printTimeList();
    }
