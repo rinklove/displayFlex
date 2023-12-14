@@ -42,12 +42,12 @@
                 <div class="main-table-body"><%= dto.getEventEnddate() %></div>
                 <div class="main-table-body"><%= dto.getEventHit() %></div>
             </div>
-            <div></div>
             <div class="main-content"><%= dto.getEventContents() %></div>
         </div>
+        <a href="/cinema/mypage/eventCheck?pno=<%=currentPage %>">목록으로</a>
      </div>
      
-     	<a href="/cinema/mypage/eventCheck?pno=<%=currentPage %>">목록으로</a>
+     	
     <footer></footer>
 
 </body>

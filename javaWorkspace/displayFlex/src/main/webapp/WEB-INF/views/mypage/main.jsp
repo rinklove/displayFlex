@@ -23,7 +23,7 @@
                 <!-- 수정 필요(향후 sql로 가져와야함) -->
                 <div>VIP 회원</div>   
                 <!-- 수정 필요(향후 데이터 가져와야함) -->
-                <div>포인트 : 1,000점</div>
+                <div>포인트 : 0점</div>
                  <div class="form-check-confirm-b3"><button type="button" onclick="location.href='/cinema/member/logout'">로그아웃</button></div>
             </div>
             <div class="main-text">마이페이지</div>

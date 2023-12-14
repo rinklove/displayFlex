@@ -85,6 +85,11 @@ body {
     border-collapse: separate;
     border-spacing: 0 10px;
   }
+  
+  table{
+	border-bottom: 3px solid black;
+
+  }
 
   .thead {
     background-color: #800020;
