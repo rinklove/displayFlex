@@ -26,14 +26,14 @@ public class MypageService {
 		return cnt;
 	}
 
-	public List<EventDto> selectEventList(PageVo pvo) throws Exception {
+	public List<EventDto> selectEventList(PageVo pvo, String memberNo) throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		MypageDao dao = new MypageDao();
-		List<EventDto> eventDtoList = dao.selectEventList(conn, pvo);
+		List<EventDto> eventDtoList = dao.selectEventList(conn, pvo, memberNo);
 		
 		//close
 		JDBCTemplate.close(conn);
@@ -62,14 +62,14 @@ public class MypageService {
 		return dto;
 	}
 
-	public List<InquiryVo> selectInquiryList(PageVo pvo) throws Exception {
+	public List<InquiryVo> selectInquiryList(PageVo pvo, String memberNo) throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		MypageDao dao = new MypageDao();
-		List<InquiryVo> inquiryVoList = dao.selectInquiryList(conn, pvo);
+		List<InquiryVo> inquiryVoList = dao.selectInquiryList(conn, pvo, memberNo);
 		
 		//close
 		JDBCTemplate.close(conn);
@@ -109,13 +109,13 @@ public class MypageService {
 		
 	}
 
-	public List<MoviePaymentVo> selectMoviePaymentList(PageVo pvo) throws Exception {
+	public List<MoviePaymentVo> selectMoviePaymentList(PageVo pvo, String memberNo) throws Exception {
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		MypageDao dao = new MypageDao();
-		List<MoviePaymentVo> moviePaymentVoList = dao.selectMoviePaymentList(conn, pvo);
+		List<MoviePaymentVo> moviePaymentVoList = dao.selectMoviePaymentList(conn, pvo, memberNo);
 		
 		//close
 		JDBCTemplate.close(conn);
@@ -123,14 +123,14 @@ public class MypageService {
 		return moviePaymentVoList;
 	}
 
-	public List<CouponVo> selectCouponList(PageVo pvo) throws Exception {
+	public List<CouponVo> selectCouponList(PageVo pvo, String memberNo) throws Exception {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
 		
 		//dao
 		MypageDao dao = new MypageDao();
-		List<CouponVo> couponVoList = dao.selectCouponList(conn, pvo);
+		List<CouponVo> couponVoList = dao.selectCouponList(conn, pvo, memberNo);
 		
 		//close
 		JDBCTemplate.close(conn);

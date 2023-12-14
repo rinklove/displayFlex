@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import displayFlex.member.MemberVo;
 import displayFlex.mypage.MypageService;
 import displayFlex.mypage.vo.PageVo;
 import displayFlex.serviceCenter.inquiry.vo.InquiryVo;
@@ -32,9 +34,12 @@ public class InquiryHistory extends HttpServlet {
 			int pageLimit = 5;
 			int boardLimit = 10;
 			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+			HttpSession session = req.getSession();
+			MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
+			String memberNo = memberVo.getMemberNo();
 			
 			//service
-			List<InquiryVo> inquiryVoList = ms.selectInquiryList(pvo);
+			List<InquiryVo> inquiryVoList = ms.selectInquiryList(pvo, memberNo);
 			
 			
 			//result

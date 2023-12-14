@@ -14,7 +14,15 @@ public class PageVo {
 	private int startRow;		//조회할 첫번째 행 번호(ROWNUM)
 	private int lastRow;		//조회할 마지막 행 번호(ROWNUM)
 	private int startDateFilter;
-    private String startDate;  // 추가
+	private int DateFilter;
+    public int getDateFilter() {
+		return DateFilter;
+	}
+	public void setDateFilter(int dateFilter) {
+		DateFilter = dateFilter;
+	}
+
+	private String startDate;  // 추가
     private String endDate;    // 추가
 
 	
@@ -100,5 +108,6 @@ public class PageVo {
 	    public String getEndDate() {
 	        return endDate;
 	    }
+	    
 
 }

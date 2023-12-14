@@ -32,7 +32,6 @@
 					<thead class="thead">
 						<tr>
 							<th>이벤트번호</th>
-							<th>회원번호</th>
 							<th>이벤트제목</th>
 							<th>이벤트진행여부</th>
 							<th>이벤트시작일</th>
@@ -44,7 +43,6 @@
 			<% for(EventDto dto : eventDtoList){ %>
 						<tr>
 							<td><%= dto.getEventNo() %></td>
-							<td><%= dto.getMemberNo() %></td>
 							<td><%= dto.getEventTitle() %></td>
 							<td><%= dto.getEventProgress() %></td>
 							<td><%= dto.getEventStartdate() %></td>

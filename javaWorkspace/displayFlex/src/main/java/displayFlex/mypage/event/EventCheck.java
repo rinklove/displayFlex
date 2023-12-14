@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import displayFlex.event.dto.EventDto;
+import displayFlex.member.MemberVo;
 import displayFlex.mypage.MypageService;
 import displayFlex.mypage.vo.PageVo;
 
@@ -34,9 +36,13 @@ public class EventCheck extends HttpServlet {
 			int boardLimit = 10;
 			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 			
-			//service
-			List<EventDto> eventDtoList = ms.selectEventList(pvo);
 			
+			HttpSession session = req.getSession();
+			MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
+			String memberNo = memberVo.getMemberNo();
+			
+			//service
+			List<EventDto> eventDtoList = ms.selectEventList(pvo, memberNo);
 			//result
 			req.setAttribute("eventDtoList", eventDtoList);
 			req.setAttribute("pvo", pvo);

@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import displayFlex.event.dto.EventDto;
+import displayFlex.member.MemberVo;
 import displayFlex.mypage.CouponVo;
 import displayFlex.mypage.MypageService;
 import displayFlex.mypage.vo.PageVo;
@@ -33,8 +35,11 @@ public class CouponHistory extends HttpServlet {
 			int boardLimit = 10;
 			PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 			
+			HttpSession session = req.getSession();
+			MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
+			String memberNo = memberVo.getMemberNo();
 			//service
-			List<CouponVo> couponVoList = ms.selectCouponList(pvo);
+			List<CouponVo> couponVoList = ms.selectCouponList(pvo, memberNo);
 			
 			//result
 			req.setAttribute("couponVoList", couponVoList);
