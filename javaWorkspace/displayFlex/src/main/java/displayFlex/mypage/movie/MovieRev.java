@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import displayFlex.event.dto.EventDto;
+import displayFlex.member.MemberVo;
 import displayFlex.mypage.MoviePaymentVo;
 import displayFlex.mypage.MypageService;
 import displayFlex.mypage.vo.PageVo;
@@ -35,31 +37,29 @@ public class MovieRev extends HttpServlet {
 			
 			
             // 조회 기간 설정
-			String dateFilter = req.getParameter("dateFilter");
-			if (dateFilter != null) {
-			    switch (dateFilter) {
-			        case "7days":
-			            pvo.setStartDateFilter(7);
-			            break;
-			        case "15days":
-			            pvo.setStartDateFilter(15);
-			            break;
-			        case "30days":
-			            pvo.setStartDateFilter(30);
-			            break;
-			        case "custom":
-			            String startDate = req.getParameter("startDate");
-			            String endDate = req.getParameter("endDate");
-			            pvo.setStartDate(startDate);
-			            pvo.setEndDate(endDate);
-			            break;
-			        default:
-			            break;
-			    }
-			}
+            String dateFilter = req.getParameter("dateFilter");
+            if (dateFilter != null) {
+                switch (dateFilter) {
+                    case "7days":
+                        pvo.setStartDateFilter(7);
+                        break;
+                    case "15days":
+                        pvo.setStartDateFilter(15);
+                        break;
+                    case "30days":
+                        pvo.setStartDateFilter(30);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            HttpSession session = req.getSession();
+			MemberVo memberVo = (MemberVo) session.getAttribute("loginMember");
+			String memberNo = memberVo.getMemberNo();
 			
 			//service
-			List<MoviePaymentVo> moviePaymentVoList = ms.selectMoviePaymentList(pvo);
+			List<MoviePaymentVo> moviePaymentVoList = ms.selectMoviePaymentList(pvo, memberNo);
 			
 			//result
 			req.setAttribute("moviePaymentVoList", moviePaymentVoList);

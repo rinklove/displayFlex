@@ -27,17 +27,17 @@
             </div>
             <div class="main-table">
                 <div class="main-table-header">
+                    <div>쿠폰보유번호</div>
+                    <div>회원번호</div>
                     <div>쿠폰번호</div>
-                    <div>쿠폰이름</div>
-                    <div>쿠폰타입</div>
                     <div>쿠폰생성일자</div>
                     <div>쿠폰유효기간</div>
                 </div>
                 <% for(CouponVo vo : couponVoList){ %>
                     <div class="main-table-body">
                         <div><%= vo.getRetainedNo() %></div>
+                        <div><%= vo.getMemberNo() %></div>
                         <div><%= vo.getCouponNo() %></div>
-                        <div><%= vo.getName() %></div>
                         <div><%= vo.getRetainedDate() %></div>
                         <div><%= vo.getCouponEnddate() %></div>
                     </div>
@@ -73,22 +73,14 @@
     function handleClick(event, currentPage) {
         const tr = event.currentTarget;
         const no = tr.children[0].innerText;
-        location.href = 'http://localhost:9002/cinema/mypage/coupon?retainedNo=' + no + '&currentPage=' + currentPage;
+        location.href = 'http://localhost:9002/cinema/mypage/coupon?memberNo=' + memberNo + '&currentPage=' + currentPage;
     }
 
-    // Add event listeners to coupon items in both tables
+    // Add event listeners to coupon items in the first table
     const trArr = document.querySelectorAll(".main-table .main-table-body");
     for (let i = 0; i < trArr.length; ++i) {
         trArr[i].addEventListener('click', (e) => {
             handleClick(e, '<%= pvo.getCurrentPage() %>');
         });
     }
-
-    const trArr2 = document.querySelectorAll(".main-table2 .main-table-body");
-    for (let i = 0; i < trArr2.length; ++i) {
-        trArr2[i].addEventListener('click', (e) => {
-            handleClick(e, '<%= pvo.getCurrentPage() %>');
-        });
-    }
-   
 </script>
