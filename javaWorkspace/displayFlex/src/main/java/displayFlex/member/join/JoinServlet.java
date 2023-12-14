@@ -25,7 +25,6 @@ public class JoinServlet extends HttpServlet {
 		
 		try {
 			//data
-			String gradeNo = req.getParameter("gradeNo");
 			String memberId = req.getParameter("memberId");
 			String memberPwd = req.getParameter("memberPwd");
 			String memberNick = req.getParameter("memberNick");
@@ -35,7 +34,6 @@ public class JoinServlet extends HttpServlet {
 			String memberEmail = req.getParameter("memberEmail");
 			
 			MemberVo vo = new MemberVo();
-			vo.setGradeNo(gradeNo);
 			vo.setMemberId(memberId);
 			vo.setMemberPwd(memberPwd);
 			vo.setMemberNick(memberNick);
