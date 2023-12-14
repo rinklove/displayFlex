@@ -1,16 +1,5 @@
-const trArr = document.querySelectorAll("#tab > tr");
-	for(let i = 0 ; i < trArr.length; ++i){
-		trArr[i].addEventListener('click' , handleClick);
-	}
-
-function handleClick(event){
-	const tr = event.currentTarget;
-	const noticeNo = tr.children[0].innerText;
-	location.href = '/cinema/serviceCenter/noticeDetail?noticeNo=' + noticeNo + '&currPage=<%= pvo.getCurrentPage() %>';	
-}
-
-
-// 제목 입력 텍스트박스 이벤트 핸들러
+// window.onload = () => {
+    // 제목 입력 텍스트박스 이벤트 핸들러
 jQuery("#iDtitle").on("input", function () {
     // 바이트수 세기
     var length = jQuery(this).val().replace(/\s/g, "").replace(/\n/g, "").length; // 공백과 개행 문자 제거
@@ -37,6 +26,8 @@ jQuery("#iDcontents").on("input", function () {
         return false;
     }
 });
+// }
+
 
 
    	

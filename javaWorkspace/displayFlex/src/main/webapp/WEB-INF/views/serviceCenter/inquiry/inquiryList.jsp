@@ -17,7 +17,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryList.css">
-<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry/inquiryList.js"></script>
 
 </head>
 <body>

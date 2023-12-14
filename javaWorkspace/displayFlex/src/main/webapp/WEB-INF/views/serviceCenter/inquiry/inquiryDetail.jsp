@@ -16,7 +16,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryDetail.css">
-<script type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry.js"></script>
+<script type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry/inquiryDetail.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>

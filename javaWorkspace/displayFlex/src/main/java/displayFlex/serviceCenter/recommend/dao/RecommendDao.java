@@ -148,7 +148,7 @@ public class RecommendDao {
         List<RecommendVo> recommendVoList = new ArrayList<RecommendVo>();
         while (rs.next()) {
             String recommendMvNo = rs.getString("RECOMMEND_MV_NO");
-            String writerNick = rs.getString("WRITER_NICK");
+//            String writerNick = rs.getString("WRITER_NICK");
             String year = rs.getString("YEAR");
             String title = rs.getString("TITLE");
             String content = rs.getString("CONTENT");
@@ -159,7 +159,7 @@ public class RecommendDao {
 
             RecommendVo vo = new RecommendVo();
             vo.setRecommendMvNo(recommendMvNo);
-            vo.setWriterNick(writerNick);
+//            vo.setWriterNick(writerNick);
             vo.setYear(year);
             vo.setTitle(title);
             vo.setContent(content);
@@ -182,9 +182,10 @@ public class RecommendDao {
    public int getRecommendCountBySearch(Connection conn, Map<String, String> m) throws Exception {
       
       // SQL
-      String sql = "SELECT COUNT(*) FROM RECOMMEND_MV WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
+      String sql = "SELECT COUNT(*) FROM RECOMMEND_MV WHERE DELETE_YN = 'N' AND (TITLE LIKE '%' || ? || '%' OR CONTENT LIKE '%' || ? || '%')";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, m.get("searchValue"));
+      pstmt.setString(2, m.get("searchValue"));
       ResultSet rs = pstmt.executeQuery();
       
       // rs
