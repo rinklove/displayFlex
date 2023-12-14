@@ -195,8 +195,9 @@ input[name="paymentGroup"]:checked + label {
 	margin-top: 10px;
 	padding: 5px;
 	height: 75px;
-	background-color: red;
+	background-color: rgb(192, 192, 192);
 	border-radius: 10px;
+/*	font-size: 100px;*/
 }
 
 
@@ -217,6 +218,8 @@ input[name="paymentGroup"]:checked + label {
     border-left: 1px solid black;
     display: flex;
     justify-content: center;
+    position: relative;
+    height: 1000px;
 }
 
 #paymentInfo {
@@ -224,6 +227,8 @@ input[name="paymentGroup"]:checked + label {
     width: 250px;
     height: 650px;
     grid-row-gap: 10px;
+    position: sticky;
+    top: 0px;
 }
 
 #paymentAmount {
@@ -345,7 +350,8 @@ input[name="paymentGroup"]:checked + label {
     border: 1px solid black;
     border-radius: 10px;
     overflow: hidden;
-    grid-template-rows: 59fr 234fr 94fr;
+/*    grid-template-rows: 59fr 234fr 94fr;*/
+    grid-template-rows: 59fr 94fr;
     
 }
 
@@ -355,16 +361,16 @@ input[name="paymentGroup"]:checked + label {
     border-bottom: 1px solid black;
 }
 
+/*#totalPayment > div > div:nth-of-type(2){*/
+/*    background-color: white;*/
+/*    border-bottom: 1px solid black;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+
 #totalPayment > div > div:nth-of-type(2){
-    background-color: white;
-    border-bottom: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-#totalPayment > div > div:nth-of-type(3){
     display: flex;
     align-items: center;
     justify-content: right;
@@ -372,7 +378,7 @@ input[name="paymentGroup"]:checked + label {
     padding-right: 15px;
 }
 
-#totalPayment > div > div:nth-child(3) > span:first-child {
+#totalPayment > div > div:nth-child(2) > span:first-child {
     color: #FFE56B;
     text-align: right;
     font-size: 25px;
@@ -381,7 +387,7 @@ input[name="paymentGroup"]:checked + label {
     line-height: normal;
 }
 
-#totalPayment > div > div:nth-child(3) > span:last-child {
+#totalPayment > div > div:nth-child(2) > span:last-child {
     color: #FFE56B;
     text-align: right;
     font-size: 16px;

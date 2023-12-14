@@ -166,7 +166,7 @@ window.onload = () => {
 							<label for="radioButton3" class="custom-radio">결제ㅋㅋㅎㅎ</label>
                           </div>
                         </div>
-                      	<div>뭘 넣지..........</div>
+                      	<div></div>
                       </div>
                     </div>
                   </div>
@@ -191,7 +191,9 @@ window.onload = () => {
                 <div id="totalPayment">
                     <div>
                         <div><span>최종 결제 금액</span></div>
-                        <div>여기 뭘 넣어</div>
+<!--                         <div id="pay-description"> -->
+<!-- 							뭘 넣지? -->
+<!-- 						</div> -->
                         <div><span id="totalPayment-value">0</span><span>원</span></div>
                     </div>
                 </div>
@@ -266,7 +268,6 @@ window.onload = () => {
         </div>
         <div id="ticket-payButton">
             <button id="kakaopay" onclick="kakaoPay();">
-<!--             onclick="openPopup('/cinema/ticket/popup'); -->
                 <i class="bi bi-arrow-right-circle-fill"></i>
                 <span>결제하기</span>
             </button>

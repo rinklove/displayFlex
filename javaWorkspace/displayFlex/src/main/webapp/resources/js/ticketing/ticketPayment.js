@@ -14,6 +14,7 @@ const discountValue = document.getElementById("discount-value");
 const totalPayment = document.getElementById("totalPayment-value");
 const posterImg = document.getElementById("posterImg");
 
+
 //현재 적용된 할인 금액
 
 movieInfo.innerText = ticketData.selectedMovie;
@@ -58,7 +59,10 @@ checkedCoupon.forEach((checkbox) => {
 				discountDetails.innerText = couponVo.name;
 				discountValue.innerText = ticketData.discount;
 				totalPaymentValue.innerHTML = ticketData.totalAmount;
-	
+				
+				
+				
+				
 				sessionStorage.setItem("ticketData", JSON.stringify(ticketData)); 
 				
 				console.log("쿠폰선택후  >>>> " + ticketData);
@@ -168,16 +172,12 @@ function kakaoPay() {
                 if (rsp.success) { 
                     console.log(rsp);
                     paymentSuccess();
-					const url = "http://localhost:9002/cinema/ticket/popup";
+
+            		window.location.href = "http://localhost:9002/cinema/home";
+            		
+      				const url = "http://localhost:9002/cinema/ticket/popup";
       				const popup = openPopup(url);
-      				
-      				if (popup) {
-						console.log("팝업창 열리고");
-          				popup.addEventListener('beforeunload', function () {
-						console.log("이벤트 잘 받아오나..?");
-            			window.location.href = "http://localhost:9002/cinema/home";
-          			});
-          			}
+					sessionStorage.clear();
 
 
 //                    if (response.status == 200) { // DB저장 성공시
