@@ -47,25 +47,26 @@ public class NoticeService {
 
 	// 공지사항 검색
 	public List<NoticeVo> search(Map<String, String> m, PageVo pvo) throws Exception {
-		
-		// conn
-		Connection conn = JDBCTemplate.getConnection();
-		
-		// DAO
-		NoticeDao dao = new NoticeDao();
-		List<NoticeVo> noticeVoList = null;
-		
-		if(m.get("searchType").equals("titcon")) {
-			dao.searchByTitleAndContent(conn , m , pvo);
-		}else {
-			noticeVoList = dao.search(conn , m, pvo);
-		}
-		
-		//close
-		JDBCTemplate.close(conn);
-		
-		return noticeVoList;
+
+	    // conn
+	    Connection conn = JDBCTemplate.getConnection();
+
+	    // DAO
+	    NoticeDao dao = new NoticeDao();
+	    List<NoticeVo> noticeVoList = null;
+
+	    if (m.get("searchType").equals("titcon")) {
+	        noticeVoList = dao.searchByTitleAndContent(conn, m, pvo); // 수정된 부분
+	    } else {
+	        noticeVoList = dao.search(conn, m, pvo);
+	    }
+
+	    // close
+	    JDBCTemplate.close(conn);
+
+	    return noticeVoList;
 	}
+
 
 	// 게시글 갯수 조회 (검색값에 따라)
 	public int selectSearchNoticeCount(Map<String, String> m) throws Exception {

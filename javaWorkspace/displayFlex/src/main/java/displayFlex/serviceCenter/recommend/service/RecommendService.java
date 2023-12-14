@@ -59,7 +59,7 @@ public class RecommendService {
 		List<RecommendVo> recommendVoList = null;
 		
 		if(m.get("searchType").equals("titcon")) {
-			dao.searchByTitleAndContent(conn , m , pvo);
+			recommendVoList = dao.searchByTitleAndContent(conn , m , pvo);
 		}else {
 			recommendVoList = dao.search(conn , m, pvo);
 		}

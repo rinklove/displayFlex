@@ -78,41 +78,42 @@ public class NoticeDao {
 	//공지사항 검색
 	public List<NoticeVo> search(Connection conn, Map<String, String> m, PageVo pvo)  throws Exception {
 
-		String searchType = m.get("searchType");
-		
-		// SQL
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT NOTICE_NO , TITLE , CONTENT , ENROLL_DATE , MODIFY_DATE , HIT FROM NOTICE WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%' ORDER BY NOTICE_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, m.get("searchValue"));
-		pstmt.setInt(2, pvo.getStartRow());
-		pstmt.setInt(3, pvo.getLastRow());
-		ResultSet rs = pstmt.executeQuery();
-		
-		// rs
-	      List<NoticeVo> noticeVoList = new ArrayList<NoticeVo>();
-	      while(rs.next()) {
-	         String noticeNo = rs.getString("NOTICE_NO");
-	         String title = rs.getString("TITLE");
-	         String content = rs.getString("CONTENT");
-	         String enrollDate = rs.getString("ENROLL_DATE");
-	         String modifyDate = rs.getString("MODIFY_DATE");
-	         String hit = rs.getString("HIT");
-	         
-	         NoticeVo vo = new NoticeVo();
-	         vo.setNoticeNo(noticeNo);
-	         vo.setTitle(title);
-	         vo.setContent(content);
-	         vo.setEnrollDate(enrollDate);
-	         vo.setModifyDate(modifyDate);
-	         vo.setHit(hit);
-	         
-	         noticeVoList.add(vo);
-	      }
-	
-		// close
+
+	    // SQL
+	    String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT NOTICE_NO, TITLE, CONTENT, ENROLL_DATE, MODIFY_DATE, HIT FROM NOTICE WHERE DELETE_YN = 'N' AND (TITLE LIKE '%' || ? || '%' OR CONTENT LIKE '%' || ? || '%') ORDER BY NOTICE_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, m.get("searchValue"));
+	    pstmt.setString(2, m.get("searchValue"));
+	    pstmt.setInt(3, pvo.getStartRow());
+	    pstmt.setInt(4, pvo.getLastRow());
+	    ResultSet rs = pstmt.executeQuery();
+
+	    // rs
+	    List<NoticeVo> noticeVoList = new ArrayList<NoticeVo>();
+	    while (rs.next()) {
+	        String noticeNo = rs.getString("NOTICE_NO");
+	        String title = rs.getString("TITLE");
+	        String content = rs.getString("CONTENT");
+	        String enrollDate = rs.getString("ENROLL_DATE");
+	        String modifyDate = rs.getString("MODIFY_DATE");
+	        String hit = rs.getString("HIT");
+
+	        NoticeVo vo = new NoticeVo();
+	        vo.setNoticeNo(noticeNo);
+	        vo.setTitle(title);
+	        vo.setContent(content);
+	        vo.setEnrollDate(enrollDate);
+	        vo.setModifyDate(modifyDate);
+	        vo.setHit(hit);
+
+	        noticeVoList.add(vo);
+	    }
+
+	    // close
 	    JDBCTemplate.close(rs);
 	    JDBCTemplate.close(pstmt);
-	      
+
 	    return noticeVoList;
 	
 	}
@@ -120,13 +121,13 @@ public class NoticeDao {
 	//공지사항 검색 (제목+내용)
 	public List<NoticeVo> searchByTitleAndContent(Connection conn, Map<String, String> m, PageVo pvo) throws Exception {
 		
-        String sql = "SELECT * FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT NOTICE_NO, TITLE, CONTENT, ENROLL_DATE, MODIFY_DATE, HIT FROM NOTICE WHERE DELETE_YN = 'N' AND (TITLE LIKE '%' || ? || '%' OR CONTENT LIKE '%' || ? || '%') ORDER BY NOTICE_NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, m.get("searchValue"));
-        pstmt.setString(2, m.get("searchValue"));
-        pstmt.setInt(3, pvo.getStartRow());
-        pstmt.setInt(4, pvo.getLastRow());
-        ResultSet rs = pstmt.executeQuery();
+		String sql = "SELECT * FROM (SELECT ROWNUM RNUM, T.* FROM (SELECT NOTICE_NO, TITLE, CONTENT, ENROLL_DATE, MODIFY_DATE, HIT FROM NOTICE WHERE DELETE_YN = 'N' AND (TITLE LIKE '%' || ? || '%' OR CONTENT LIKE '%' || ? || '%') ORDER BY NOTICE_NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, "searchValue");
+		pstmt.setString(2, "searchValue");
+		pstmt.setInt(3, pvo.getStartRow());
+		pstmt.setInt(4, pvo.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
 
         List<NoticeVo> noticeVoList = new ArrayList<NoticeVo>();
         while (rs.next()) {
@@ -158,23 +159,26 @@ public class NoticeDao {
 	// 게시글 갯수 조회 (검색값에 따라)
 	public int getNoticeCountBySearch(Connection conn, Map<String, String> m) throws Exception {
 		
-		// SQL
-		String sql = "SELECT COUNT(*) FROM NOTICE WHERE DELETE_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, m.get("searchValue"));
-		ResultSet rs = pstmt.executeQuery();
-		
-		// rs
-		int cnt = 0;
-		if(rs.next()) {
-			cnt = rs.getInt(1);
-		}
-		
-		// close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
-		
-		return cnt;
+		 // SQL
+	    String sql = "SELECT COUNT(*) FROM NOTICE WHERE DELETE_YN = 'N' AND (TITLE LIKE '%' || ? || '%' OR CONTENT LIKE '%' || ? || '%')";
+
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, m.get("searchValue"));
+	    pstmt.setString(2, m.get("searchValue"));
+	    ResultSet rs = pstmt.executeQuery();
+
+	    // rs
+	    int cnt = 0;
+	    if (rs.next()) {
+	        cnt = rs.getInt(1);
+	    }
+
+	    // close
+	    JDBCTemplate.close(rs);
+	    JDBCTemplate.close(pstmt);
+
+	    return cnt;
+	
 	}
 
 	//공지사항 작성

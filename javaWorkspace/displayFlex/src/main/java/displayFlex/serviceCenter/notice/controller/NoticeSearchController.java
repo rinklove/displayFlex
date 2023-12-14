@@ -28,7 +28,8 @@ public class NoticeSearchController extends HttpServlet {
 			// data
 			String searchType = req.getParameter("searchType");
 			String searchValue = req.getParameter("searchValue");
-			
+			System.out.println("searchType = " + searchType);
+			System.out.println("searchValue = " + searchValue);
 			Map<String, String> m = new HashMap<String, String>();
 			m.put("searchType", searchType);
 			m.put("searchValue", searchValue);
