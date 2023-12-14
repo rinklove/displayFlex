@@ -32,7 +32,7 @@
 					</h1>
 					<div id="description">
 						<div>가격</div>
-						<div>${vo.price}</div>
+						<div><script>document.write(Number(${vo.price}).toLocaleString() + "원")</script></div>
 						<div>상품구성</div>
 						<div>${vo.productElement}</div>
 						<div>제품설명</div>
@@ -40,11 +40,13 @@
 					</div>
 				</div>
 			</div>
+			
 			<button onclick="location.href='/cinema/store'">목록으로</button>
-
 		</div>
 
 		<div></div>
 	</div>
+	<%-- <%@ include file="/WEB-INF/views/common/footer.jsp" %> --%>
+	
 </body>
 </html>

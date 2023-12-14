@@ -109,8 +109,6 @@ public class AdminStoreEnrollController extends HttpServlet {
 			if (result != 1) {
 				throw new Exception("result 가 1이 아님 ,,,,");
 			}
-			
-			req.getSession().setAttribute("alertMsg", "제품 등록 성공 !");
 			resp.sendRedirect("/cinema/store");
 
 		} catch (Exception e) {

@@ -48,7 +48,7 @@
 						<span id="second">${vo.productElement}</span>
 						<br>
 						<br>
-						<span id="third"><b>${vo.price}</b></span>
+						<span id="third"><b><script>document.write(Number(${vo.price}).toLocaleString() + "원")</script></b></span>
 					</div>
 				</c:forEach>
 					<div></div>

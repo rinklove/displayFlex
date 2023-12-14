@@ -5,7 +5,7 @@
 	href="/cinema/resources/css/store/adminStoreEnroll.css">
 <script src="https://kit.fontawesome.com/08e9cd3338.js"
 	crossorigin="anonymous"></script>
-<script defer src="/cinema/resources/js/store/adminStoreEnroll.js"></script>
+<script defer src="/cinema/resources/js/store/adminProductEdit.js"></script>
 <!DOCTYPE html>
 <html>
 <head>

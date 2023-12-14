@@ -35,10 +35,10 @@ function onlyNumber(){
 	let value = priceInput.value = priceInput.value.replace(/[^0-9]/g, '');
 	
 	// 세 자리마다 쉼표 추가
-    var formattedValue = Number(value).toLocaleString(); 
+    //var formattedValue = Number(value).toLocaleString(); 
 	
 	// 입력값 업데이트
-    priceInput.value = formattedValue + "원";
+    //priceInput.value = formattedValue + "원";
 	
 };
 

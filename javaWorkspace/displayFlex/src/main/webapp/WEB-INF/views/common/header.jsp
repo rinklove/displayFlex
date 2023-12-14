@@ -23,8 +23,8 @@
         <div></div>
         <div class="search">
             <div>
-                <button onclick="/cinema/home"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input type="search" id="search" placeholder="검색어를 입력하세요.">
+               <!--  <button onclick="/cinema/home"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="search" id="search" placeholder="검색어를 입력하세요."> -->
             </div>
         </div>
         <div class="icon">

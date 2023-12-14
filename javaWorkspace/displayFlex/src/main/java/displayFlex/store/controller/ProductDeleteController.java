@@ -35,8 +35,6 @@ public class ProductDeleteController extends HttpServlet {
 			}
 			
 			// 제품 삭제 성공 => 리스트 페이지로 이동
-			HttpSession session = req.getSession();
-			session.setAttribute("alertMsg", "제품 삭제 성공!");
 			resp.sendRedirect("/cinema/store");
 
 		} catch (Exception e) {

@@ -5,6 +5,7 @@
 <script src="https://kit.fontawesome.com/08e9cd3338.js"
 	crossorigin="anonymous"></script>
 <script defer src="/cinema/resources/js/store/adminStoreEnroll.js"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
 						<div id="description">
 							<div>가격</div>
 							<div>
-								<input type="text" id="price" name="price" placeholder="61,000원" oninput="onlyNumber();">
+								<input type="text" id="price" name="price" placeholder="61000" oninput="onlyNumber();">
 							</div>
 							<div>상품구성</div>
 							<div>
@@ -89,4 +90,5 @@
 	</form>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
+
 </html>
