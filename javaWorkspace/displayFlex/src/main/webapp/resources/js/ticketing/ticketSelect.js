@@ -43,8 +43,6 @@ function printDateList(){
 			sessionStorage.setItem("voList", voList);
 			
             processedStartTimes.forEach((date, index) => {
-				console.log("forEach 진입date >>" + date);
-				console.log("forEach 진입index >>" + index);
                 const listItem = createDateList(voList, date, index);
                 dateList.appendChild(listItem);
             });
@@ -60,7 +58,6 @@ function processVoList(voList) {
     for (let i = 0; i < voList.length; i++) {
         const vo = voList[i];
         const startTime = vo.startTime;
-//        const screeningInfoNo = vo.screeningInfoNo;
         if (!processedStartTimes.includes(startTime)) {    
             processedStartTimes.push(startTime);
         }
