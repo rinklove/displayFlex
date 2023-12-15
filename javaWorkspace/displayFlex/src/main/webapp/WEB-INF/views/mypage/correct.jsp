@@ -28,7 +28,11 @@
 
 <div class="container">
 <h1>회원정보 수정</h1>
-<h3>회원님의 소중한 정보를 안전하게 관리하세요 <button type="button" onclick="location.href='/cinema/mypage/correct/userRemove'">회원탈퇴</button></h3>
+<div class="first">
+<h3>회원님의 소중한 정보를 안전하게 관리하세요</h3>
+<div><button type="button" onclick="location.href='/cinema/mypage/correct/userRemove'">회원탈퇴</button></div>
+</div>
+
 <form action="/cinema/mypage/correct/edit" id="signupForm" method="post">
     <table>
         <tbody>

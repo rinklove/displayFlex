@@ -72,20 +72,6 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr id="tb_link">
-                                <td>
-                                    <a href="" id="">
-                                        <span class="tb_next">다음글</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr id="tb_link">
-                                <td>
-                                    <a href="" id="">
-                                        <span class="tb_back">이전글</span>
-                                    </a>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <div id="list_btn">
@@ -96,7 +82,7 @@
         </div>
     </main>
     
-    
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 </body>
 </html>

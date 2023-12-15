@@ -11,7 +11,7 @@ main {
 
 #contents {
     height: auto;
-    padding: 10px 60px 60px 60px;
+    padding: 30px 60px 60px 60px;
     background-color: white;
     /* text-align: center;  */
 }
@@ -101,19 +101,20 @@ th, #tb_info td {
 }
 
 #tb1_dtl tr#tb_info>td .tit { color: #666666; padding-left: 70px;}
-#tb1_dtl tr#tb_info>td .cont { display: inline; padding-right: 100px;}
+#tb1_dtl tr#tb_info>td .cont { display: inline; padding-right: 54px;}
 /* span{display: flex; justify-content: space-around;} */
 
-#tb_content>td {padding: 60px 60px; border-bottom: 1px solid #EEEEEE;}
+#tb_content>td {padding: 90px 50px 160px; border-bottom: 1px solid #EEEEEE;}
 /* #tbl_dtl th, #tbl_dtl td {text-align: left; } */
 p{margin: 0; text-align: left;}
-#noticeContents p{font-size: 15px; text-align: left;}
+#noticeContents p{font-size: 16px; text-align: left; margin: 50px 0;}
 
 
 #tb1_dtl tr#tb_link>td a {
     /* display: block; */
     padding: 1.5px 10px 1.5px 10px;
     font-weight: 400;
+
     color: #333333;
     background-color: #e8e8e8;
     /* border-bottom: 1px solid #e5e5e5; */
@@ -163,12 +164,26 @@ a, a:link {
     background-color: #790000;
 }
 
-#reContents p {
-    /* margin: 10px; */
-    padding: 30px 0 20px 10px;
+
+#reTitle {
+    padding: 35px 10px;
     font-size: 17px;
 }
 
+#reTitle :nth-child(1) {
+    margin-right: 30px;
+    padding: 0 10px 20px 0;
+}
+
+#reContents {
+    border-top: 1px solid #EEEEEE;
+}
+
+
+#reContents p {
+    /* margin: 10px; */
+    padding: 30px 0 20px 10px;
+}
 
 
 

@@ -61,19 +61,23 @@ public class TicketSelectDao {
 	// 상영날짜 받아오기
 	public List<ScreeningDateVo> getScreeningList(Connection conn, String movieNo) throws Exception {
 		System.out.println("movieNo : " + movieNo);
-		String sql = "SELECT DISTINCT TO_CHAR(T.START_TIME, 'YYYY-MM-DD') AS START_TIME FROM SCREENING_TIME T JOIN SCREENING_INFO I ON T.SCREENING_INFO_NO = I.SCREENING_INFO_NO WHERE I.MOVIE_NO = ?";
+		String sql = "SELECT DISTINCT TO_CHAR(T.START_TIME, 'YYYY-MM-DD') AS START_TIME, I.SCREENING_INFO_NO  FROM SCREENING_TIME T JOIN SCREENING_INFO I ON T.SCREENING_INFO_NO = I.SCREENING_INFO_NO WHERE I.MOVIE_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, movieNo);
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<ScreeningDateVo> screeningList = new ArrayList<ScreeningDateVo>();
 		while(rs.next()) {
-//			String screeningInfoNo = rs.getString("SCREENING_INFO_NO");
+			String screeningInfoNo = rs.getString("SCREENING_INFO_NO");
 //			String theaterNo = rs.getString("THEATER_NO");
 //			String screeningTimeNo = rs.getString("SCREENING_TIME_NO");			
 			String date = rs.getString("START_TIME");
 			System.out.println("date : " + date);
-			ScreeningDateVo vo = new ScreeningDateVo(date);
+			ScreeningDateVo vo = new ScreeningDateVo();
+			
+			vo.setScreeningInfoNo(screeningInfoNo);
+			vo.setStartTime(date);
+			
 			screeningList.add(vo);
 		}
 //		System.out.println("screeningList" + screeningList);
@@ -84,15 +88,18 @@ public class TicketSelectDao {
 	}
 
 	// 상영시간(상영관) 받아오기
-	public List<ScreeningDateVo> getScreeningTimeList(Connection conn, String movieNo) throws Exception {
+	public List<ScreeningDateVo> getScreeningTimeList(Connection conn, String movieNo, String selectedDate) throws Exception {
 
-		String sql = "SELECT TO_CHAR(T.START_TIME, 'HH24:MI') AS TIME, I.THEATER_NO, T.SCREENING_TIME_NO FROM SCREENING_TIME T JOIN SCREENING_INFO I ON T.SCREENING_INFO_NO = I.SCREENING_INFO_NO WHERE I.MOVIE_NO = ?";
+		String sql = "SELECT TO_CHAR(T.START_TIME, 'HH24:MI') AS TIME, I.THEATER_NO, T.SCREENING_TIME_NO FROM SCREENING_TIME T JOIN SCREENING_INFO I ON T.SCREENING_INFO_NO = I.SCREENING_INFO_NO WHERE I.MOVIE_NO = ? AND TO_CHAR(T.START_TIME, 'YYYY-MM-DD') = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, movieNo);
+		pstmt.setString(2, selectedDate);
+		System.out.println("selectedDate>>>>>>>>>>>> : " +  selectedDate );
 		ResultSet rs = pstmt.executeQuery();
-		
+	
 		List<ScreeningDateVo> screeningTimeList = new ArrayList<ScreeningDateVo>();
 		while(rs.next()) {
+			System.out.println("와일문 들어감ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
 			String time = rs.getString("TIME");
 			String theaterNo = rs.getString("THEATER_NO");
 			String screeningTimeNo = rs.getString("SCREENING_TIME_NO");
@@ -100,7 +107,7 @@ public class TicketSelectDao {
 			System.out.println("screeningTimeNo : " + screeningTimeNo);
 			
 			ScreeningDateVo vo = new ScreeningDateVo(time, theaterNo, screeningTimeNo);
-			
+			System.out.println("rsnext >>>>>>>>>" + time);
 			screeningTimeList.add(vo);
 		}
 		

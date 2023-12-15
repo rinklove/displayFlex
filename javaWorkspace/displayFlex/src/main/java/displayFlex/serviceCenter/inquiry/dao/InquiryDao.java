@@ -19,7 +19,7 @@ public class InquiryDao {
 	public List<InquiryVo> selectInquiryList(Connection conn, PageVo pvo) throws Exception {
 
 		//sql
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM , T.* FROM ( SELECT I.ONETOONE_NO , I.TITLE , I.CONTENT , I.ENROLL_DATE , M.MEMBER_ID AS WRITER_NICK , CASE WHEN RE_TITLE IS NULL THEN '대기' ELSE '완료' END AS STATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.DELETE_YN = 'N' ORDER BY ONETOONE_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM , T.* FROM ( SELECT I.ONETOONE_NO , I.TITLE , I.CONTENT , I.ENROLL_DATE , M.MEMBER_ID AS WRITER_NICK , CASE WHEN RE_CONTENT = '답변을 남겨주세요.' THEN '대기' ELSE '완료' END AS STATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.DELETE_YN = 'N' ORDER BY ONETOONE_NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getStartRow());
 	    pstmt.setInt(2, pvo.getLastRow());
@@ -80,7 +80,7 @@ public class InquiryDao {
 	public InquiryVo selectInquiryByNo(Connection conn, String onetooneNo) throws Exception {
 
 	      //SQL
-	      String sql = "SELECT I.ONETOONE_NO ,I.MEMBER_NO , M.MEMBER_ID AS WRITER_NICK , I.TITLE ,I.CONTENT , I.ENROLL_DATE , I.RE_TITLE , I.RE_CONTENT , I.RE_ENROLL_DATE , CASE WHEN I.RE_TITLE IS NULL THEN '대기' ELSE '완료' END AS STATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.ONETOONE_NO = ? AND I.DELETE_YN = 'N'";
+	      String sql = "SELECT I.ONETOONE_NO ,I.MEMBER_NO , M.MEMBER_ID AS WRITER_NICK , I.TITLE ,I.CONTENT , I.ENROLL_DATE , I.RE_TITLE , I.RE_CONTENT , I.RE_ENROLL_DATE , CASE WHEN I.RE_CONTENT = '답변을 남겨주세요.' THEN '대기' ELSE '완료' END AS STATE FROM INQUIRY I JOIN MEMBER M ON I.MEMBER_NO = M.MEMBER_NO WHERE I.ONETOONE_NO = ? AND I.DELETE_YN = 'N'";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, onetooneNo);
 	      ResultSet rs = pstmt.executeQuery();

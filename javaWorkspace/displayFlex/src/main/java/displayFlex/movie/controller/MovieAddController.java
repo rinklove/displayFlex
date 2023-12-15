@@ -80,21 +80,23 @@ public class MovieAddController extends HttpServlet {
 			for(Part p : parts) {
 	            String name = p.getName();            
 	            String fileName = UUID.randomUUID().toString() +"_"+getFileName(p);
+        
 
-	            //메인 페이지용 사진일 경우
-	            if(name.equals("mainImage")) {
-	               Path filePath = Paths.get(request.getServletContext().getRealPath(sep+ "resources"+sep+"image"+sep+"movie"+sep+"main"), fileName);
-	               String mainImagePath = String.valueOf(filePath);
+				//메인 페이지용 사진일 경우
+				if(name.equals("mainImage")) {
+					Path filePath = Paths.get(request.getServletContext().getRealPath(sep+ "resources"+sep+"image"+sep+"movie"+sep+"main"), fileName);
+					String mainImagePath = String.valueOf(filePath);
 
-	                try (InputStream input = p.getInputStream()) {
-	                         Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
-	                     }
-	                mainImage = mainImagePath.substring(mainImagePath.indexOf("resources"));
-	            } 
-	            // 스틸이미지용일 경우
-	            else {
-	               Path filePath = Paths.get(request.getServletContext().getRealPath(sep+ "resources"+sep+"image"+sep+"movie"+sep+"stills"), fileName);
-	               String stillImagePath = String.valueOf(filePath);
+					 try (InputStream input = p.getInputStream()) {
+			                Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
+			            }
+					 mainImage = mainImagePath.substring(mainImagePath.indexOf("resources"));
+				} 
+				// 스틸이미지용일 경우
+				else {
+					Path filePath = Paths.get(request.getServletContext().getRealPath(sep+ "resources"+sep+"image"+sep+"movie"+sep+"stills"), fileName);
+					String stillImagePath = String.valueOf(filePath);
+
 
 	                try (InputStream input = p.getInputStream()) {
 	                         Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);

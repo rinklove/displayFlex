@@ -64,25 +64,19 @@ public class PaymentService {
 					
 			if(payResult == 1) {
 				int couponResult = 0;
+				
 				if(paymentVo.getRetainedNo() != null) {
 					couponResult = dao.setCouponStatus(paymentVo.getRetainedNo(), conn);					
 				} else {
 					couponResult = 1;
 				}
+				
 				JDBCTemplate.commit(conn);
 				
 				if(couponResult == 1) {
 					JDBCTemplate.commit(conn);
 					String foreignKey = dao.getForeignKey(paymentVo, conn);
 					String seatNo = dao.getSeatNo(paymentVo.getSelectedTheater(), seat, conn);
-					
-//					if(foreignKey == null) {
-//						throw new Exception("외래키가 없다...........");
-//					}
-//					
-//					if(seatNo == null) {
-//						throw new Exception("시트넘버가 없다.........");
-//					}
 					
 					int ticketResult = dao.setTicket(seatNo, foreignKey, paymentVo, conn);
 					
@@ -91,15 +85,12 @@ public class PaymentService {
 						result = 1;
 					} else {
 						JDBCTemplate.rollback(conn);
-//						throw new Exception("티켓리절트가 0이다........");
 					} 
 				} else {
 					JDBCTemplate.rollback(conn);
-//					throw new Exception("쿠폰리절트가 0이다........");
 				} 
 			} else {
 				JDBCTemplate.rollback(conn);
-//				throw new Exception("페이리절트가 0이다........");
 			}
 		}
 		
