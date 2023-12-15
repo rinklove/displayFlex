@@ -114,10 +114,11 @@ p{margin: 0; text-align: left;}
     /* display: block; */
     padding: 1.5px 10px 1.5px 10px;
     font-weight: 400;
-    color: #fefefe;
-    background-color: #dea5a5;
+
+    color: #333333;
+    background-color: #e8e8e8;
     /* border-bottom: 1px solid #e5e5e5; */
-    border: 2px solid #790000;
+    border: 2px solid #2e2e2e;
     border-radius: 4px;
     text-align: center;
 }
@@ -163,6 +164,7 @@ a, a:link {
     background-color: #790000;
 }
 
+
 #reTitle {
     padding: 35px 10px;
     font-size: 17px;
@@ -176,6 +178,7 @@ a, a:link {
 #reContents {
     border-top: 1px solid #EEEEEE;
 }
+
 
 #reContents p {
     /* margin: 10px; */

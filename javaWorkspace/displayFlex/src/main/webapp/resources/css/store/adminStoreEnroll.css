@@ -152,3 +152,7 @@ span{
 	display: flex;
 	justify-content: center;
 }
+
+footer{
+	margin-top: 400px;
+}
