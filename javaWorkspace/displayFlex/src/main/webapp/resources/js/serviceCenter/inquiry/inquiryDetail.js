@@ -14,7 +14,7 @@ window.onload = () => {
 	}
 	
 	const updateA = document.getElementById('admin-inquiry-update');
-updateA.addEventListener("click", () => {
+	updateA.addEventListener("click", () => {
 	updateA.remove();
 	const reContentDiv = document.getElementById('reContents');
 	const reContent = document.querySelector('#reContents > p').innerText;

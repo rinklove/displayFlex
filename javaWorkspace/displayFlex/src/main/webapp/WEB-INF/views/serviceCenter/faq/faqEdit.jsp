@@ -123,6 +123,8 @@
     	 <input type="hidden" name="faqNo" value="<%= vo.getFaqNo() %>">
 	</form>
 	
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	
 	<script>
 	
 		function setOptionSelected() {

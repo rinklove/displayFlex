@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="/cinema/resources/css/serviceCenter/inquiry/inquiryWrite.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiryWrite.js"></script>
+<script defer type="text/javascript" src="/cinema/resources/js/serviceCenter/inquiry/inquiryWrite.js"></script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -130,5 +130,6 @@
 	        </div>
 		</main>
 	</form>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

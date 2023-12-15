@@ -97,5 +97,6 @@
 		</main>
         <input type="hidden" name="noticeNo" value="<%= vo.getNoticeNo() %>">
 	</form>
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

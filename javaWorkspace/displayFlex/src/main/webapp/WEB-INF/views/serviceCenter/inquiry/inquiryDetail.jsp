@@ -78,9 +78,11 @@
                                         <span>
                                         	<%= vo.getReTitle() %>
                                         </span>
-                                        <span>
-                                        	<%= vo.getReEnrollDate() %>
-                                        </span>
+                                        <c:if test="${not empty vo.reEnrollDate }">
+	                                        <span style="margin-right: 16px;">
+	                                        	<%= vo.getReEnrollDate() %>
+	                                        </span>
+                                        </c:if>
                                         <c:if test="${not empty vo.reTitle }">
 	                                        <span>
 	                                        	<a id="admin-inquiry-update">수정</a>
@@ -104,10 +106,7 @@
         </div>
     </main>
     
-    
-    <script>
-    	
-    </script>
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
 </body>
 </html>

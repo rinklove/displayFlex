@@ -133,9 +133,10 @@
 					<% } %>
                 </div>
             </div>
-            
         </div>
     </main>
+    
+    <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     
     <script type="text/javascript">
     const trArr = document.querySelectorAll("#tab > tr");
