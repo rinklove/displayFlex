@@ -19,6 +19,23 @@ public class ReviewDao {
 	
 	/**
 	 * 특정 영화에 대한 리뷰 가져오기
+  	 * SELECT 
+    	   	A.*
+	 	, M.MEMBER_NICK 
+   	   FROM ( 
+       			SELECT 
+	  			R.MOVIE_NO
+      				, R.REVIEW_NO
+	  			, R.MEMBER_NO
+      				, R.CONTENT
+				, TO_CHAR(R.WRITE_DATE, 'YYYY-MM-DD HH24:MI') WRITE_DATE
+     				, R.RATE 
+	 			, ROW_NUMBER() OVER(ORDER BY R.WRITE_DATE DESC) RNUM 
+     			FROM REVIEW R 
+			WHERE R.DEL_YN = 'N' AND R.MOVIE_NO = ? 
+   	   ) A INNER JOIN MEMBER M 
+       	   ON A.MEMBER_NO = M.MEMBER_NO 
+	   WHERE A.RNUM BETWEEN ? AND ?
 	 * @param movieNo
 	 * @param pageable 
 	 * @param con
