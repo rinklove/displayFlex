@@ -89,6 +89,25 @@ public class MovieDao {
 
 	/**
 	 * 영화 목록 가져오기
+  	 * SELECT 
+    	   	A.* 
+      	   	, SG.NAME 
+	   FROM ( 
+  	  	SELECT 
+    	 		ROW_NUMBER() OVER(ORDER BY M.MOVIE_NO ASC) RNUM 
+      	 		, M.MOVIE_NO 
+			, M.MOVIE_NAME 
+   			, M.SCREEN_GRADE_NO 
+      			, TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE 
+	 		, M.MOVIE_IMAGE 
+    			, M.RUNNING_TIME 
+       			, M.RATE 
+	  		, M.GENRE
+     		FROM MOVIE M 
+       	   ) A 
+	   INNER JOIN SCREEN_GRADE SG 
+  	   ON A.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO 
+	   WHERE A.RNUM BETWEEN ? AND ? ORDER BY A.RNUM
 	 * @param page
 	 * @param con
 	 * @return
@@ -123,6 +142,22 @@ public class MovieDao {
 
 	/**
 	 * 영화 상세 정보 가져오기
+  	 * SELECT 
+    		M.MOVIE_NO
+      		, M.MOVIE_NAME
+		, SG.NAME
+  		, M.ACTORS
+    		, M.STORY
+      		, M.RATE
+		, M.MAIN_DIRECTOR
+  		, M.MOVIE_IMAGE
+    		, M.RUNNING_TIME,TO_CHAR(M.RELEASE_DATE, 'YYYY-MM-DD') RELEASE_DATE
+      		, M.GENRE
+		, M.NATION 
+  	   FROM MOVIE M 
+     	   INNER JOIN SCREEN_GRADE SG 
+	   ON M.SCREEN_GRADE_NO = SG.SCREEN_GRADE_NO 
+	   WHERE M.MOVIE_NO = ?
 	 * @param movieNo
 	 * @param con
 	 * @return
@@ -178,6 +213,9 @@ public class MovieDao {
 
 	/**
 	 * 조건에 맞는 영화 개수 가져오기
+  	 * 
+    	   SELECT COUNT(DISTINCT M.MOVIE_NO) 
+	   FROM MOVIE M 
 	 * @param genres
 	 * @param grade
 	 * @param con
@@ -199,14 +237,14 @@ public class MovieDao {
 		if(genres != null) {
 			dynamicQuery.append("MC.GENRE_CATE_NO IN (");
 
-	        for (int i = 0; i < genres.length; i++) {
-	            dynamicQuery.append("?");
-	            if (i < genres.length - 1) {
-	                dynamicQuery.append(", ");
-	            } else {
-	            	dynamicQuery.append(") ");
-	            }
-	        }
+	        	for (int i = 0; i < genres.length; i++) {
+	            		dynamicQuery.append("?");
+	            		if (i < genres.length - 1) {
+	                		dynamicQuery.append(", ");
+	            		} else {
+	            			dynamicQuery.append(") ");
+	            		}
+	        	}
 		}
 		
 		if(genres != null && grade != null) {
@@ -246,6 +284,23 @@ public class MovieDao {
 
 	/**
 	 * 조건에 맞는 영화 리스트 가져오기
+  	 * 
+    	   SELECT 
+	   	A.*
+        	, SG.NAME 
+	   FROM ( 
+    		SELECT 
+      			ROW_NUMBER() OVER(ORDER BY M.MOVIE_NO ASC) RNUM 
+	 		,  M.MOVIE_NO 
+    			, M.MOVIE_NAME 
+       			, M.SCREEN_GRADE_NO 
+	  		, TO_CHAR(M.RELEASE_DATE, 'YYYY.MM.DD') RELEASE_DATE 
+     			, M.MOVIE_IMAGE 
+			, M.RUNNING_TIME 
+   			, M.RATE 
+      			, M.GENRE 
+	   FROM MOVIE M 
+    	   WHERE M.MOVIE_NO IN (SELECT DISTINCT O.MOVIE_NO FROM MOVIE O ~ 
 	 * @param genres
 	 * @param grade
 	 * @param page
@@ -455,6 +510,14 @@ public class MovieDao {
 
 	/**
 	 * 영화가 상영중인지 체크하기
+  	 * SELECT 
+    	   	COUNT(SI.MOVIE_NO) 
+	   FROM MOVIE M 
+	   LEFT OUTER JOIN SCREENING_INFO SI
+    	   ON M.MOVIE_NO = SI.MOVIE_NO
+	   INNER JOIN SCREENING_TIME ST
+    	   ON SI.SCREENING_INFO_NO = ST.SCREENING_INFO_NO
+	   WHERE M.MOVIE_NO = ? AND ST.END_TIME > LOCALTIMESTAMP
 	 * @param movieNo
 	 * @param con
 	 * @return
