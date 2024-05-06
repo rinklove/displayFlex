@@ -59,27 +59,27 @@ public class MovieAddController extends HttpServlet {
 		try {
 			
 			String movieCd = request.getParameter("movieCd");				//영화 코드
-			String title = request.getParameter("title");								//영화 제목
-			String director = request.getParameter("director");					//감독
-			String poster = request.getParameter("poster");						//포스터
-			String genre = request.getParameter("genre");						//장르
+			String title = request.getParameter("title");					//영화 제목
+			String director = request.getParameter("director");				//감독
+			String poster = request.getParameter("poster");					//포스터
+			String genre = request.getParameter("genre");					//장르
 			String releaseDate = request.getParameter("releaseDate");			//개봉일
-			String screenGrade = request.getParameter("screenGrade");		//관람 등급 번호
-			String runningTime = request.getParameter("runningTime");		//상영 시간
-			String actor = request.getParameter("actor");							//배우
-			String rate = request.getParameter("rate");								//평점
-			String nation = request.getParameter("nation");						//국가
+			String screenGrade = request.getParameter("screenGrade");			//관람 등급 번호
+			String runningTime = request.getParameter("runningTime");			//상영 시간
+			String actor = request.getParameter("actor");					//배우
+			String rate = request.getParameter("rate");					//평점
+			String nation = request.getParameter("nation");					//국가
 			
-			String story = request.getParameter("story");							//줄거리
-			String mainImage = null; 													//메인 페이지용 이미지 경로
+			String story = request.getParameter("story");					//줄거리
+			String mainImage = null; 							//메인 페이지용 이미지 경로
 			List<Part> parts = (request.getParts().stream().filter(element -> element.getName().equals("mainImage") || element.getName().equals("stillImage") )).toList();
 			List<String> stillImageUrl = Arrays.stream(request.getParameterValues("stillImageUrl")).filter(el -> !el.equals("")).toList(); //스틸 이미지 파일 url 경로
 			
 			System.out.println(stillImageUrl);
 			String sep = File.separator;
 			for(Part p : parts) {
-	            String name = p.getName();            
-	            String fileName = UUID.randomUUID().toString() +"_"+getFileName(p);
+	            		String name = p.getName();            
+	            		String fileName = UUID.randomUUID().toString() +"_"+getFileName(p);
         
 
 				//메인 페이지용 사진일 경우
@@ -87,9 +87,9 @@ public class MovieAddController extends HttpServlet {
 					Path filePath = Paths.get(request.getServletContext().getRealPath(sep+ "resources"+sep+"image"+sep+"movie"+sep+"main"), fileName);
 					String mainImagePath = String.valueOf(filePath);
 
-					 try (InputStream input = p.getInputStream()) {
-			                Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
-			            }
+					try (InputStream input = p.getInputStream()) {
+			                	Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
+			            	}
 					 mainImage = mainImagePath.substring(mainImagePath.indexOf("resources"));
 				} 
 				// 스틸이미지용일 경우
@@ -98,12 +98,12 @@ public class MovieAddController extends HttpServlet {
 					String stillImagePath = String.valueOf(filePath);
 
 
-	                try (InputStream input = p.getInputStream()) {
-	                         Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
-	                     }
-	                stillImageUrl.add(stillImagePath.substring(stillImagePath.indexOf("resources")));
-	            }
-	         }
+	                		try (InputStream input = p.getInputStream()) {
+	                         		Files.copy(input, filePath , StandardCopyOption.REPLACE_EXISTING);
+	                     		}
+	                		stillImageUrl.add(stillImagePath.substring(stillImagePath.indexOf("resources")));
+	            		}
+	         	}
 			
 			MovieVo newMovie = new MovieVo(null, title, actor, story, rate, director, screenGrade, poster, runningTime, releaseDate, null, null, genre, nation, mainImage);
 			int result = movieService.addMovie(newMovie, stillImageUrl);	
